@@ -29,11 +29,30 @@ class Solution(object):
         #     return 'no solution exists!'
 
         # O(n) time | O(n) space
-         dic = {}
-        for i in range(len(nums)):
-            potentialvalue = target - nums[i]
-            if potentialvalue in dic:
-                return [dic[potentialvalue], i]
-            else:
-                dic[nums[i]] = i
+        #  dic = {}
+        # for i in range(len(nums)):
+        #     potentialvalue = target - nums[i]
+        #     if potentialvalue in dic:
+        #         return [dic[potentialvalue], i]
+        #     else:
+        #         dic[nums[i]] = i
+        # return []
+
+        # ???O(nlog(n)) time | O(1) space
+        # critical case, nums = [3, 3], target = 6
+        # not a good solution, it needs to be improved
+        array = nums[:]
+        array.sort()
+        left = 0
+        right = len(array) - 1
+        while left < right:
+            currentSum = array[left] + array[right]
+            if currentSum == target:
+                a = nums.index(array[left])
+                b = len(nums) -1 - nums[::-1].index(array[right])
+                return [a, b]
+            elif currentSum < target:
+                left += 1
+            elif currentSum > target:
+                right -= 1
         return []
