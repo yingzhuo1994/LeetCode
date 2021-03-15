@@ -50,7 +50,7 @@ class Solution(object):
         }
 
         num = 0
-        if len(s == 1:
+        if len(s) == 1:
             return dic[s[0]]
         for i in range(len(s) - 1):
             a, b = dic[s[i]], dic[s[i + 1]]
