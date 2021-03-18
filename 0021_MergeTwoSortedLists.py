@@ -33,7 +33,7 @@ class Solution(object):
         #     result_tail = result_tail.next
         # return result.next
 
-        # 2nd solution
+        # 2nd solution iteratively
         if None in (l1, l2):
             return l1 or l2
         result = ListNode(0)
