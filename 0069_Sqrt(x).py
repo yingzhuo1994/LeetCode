@@ -5,12 +5,10 @@ class Solution:
         a, b = 0, x
         c = (a + b) / 2
         while a <= b:
-            # print(a, b, c)
-            # print(f(a), f(b), f(c))
-            if f(a) * f(c) <= 0:
-                b = c
+            if f(c) <= 0 and f(c + 1) > 0:
+                return c
+            if f(c) < 0:
+                a = c + 1
             else:
-                a = c
-            if f(int(c)) <= 0 and f(int(c) + 1) > 0:
-                return int(c)
-            c = (a + b) / 2
+                b = c - 1
+            c = (a + b) // 2
