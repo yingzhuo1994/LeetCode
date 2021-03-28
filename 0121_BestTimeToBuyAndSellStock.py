@@ -22,13 +22,22 @@ class Solution:
     #     return maxProfit
 
     # 3rd solution
+    # def maxProfit(self, prices: List[int]) -> int:
+    #     low = prices[0]
+    #     maxProfit = 0
+    #     for price in prices:
+    #         if price < low:
+    #             low = price
+    #         profit = price - low
+    #         if profit > maxProfit:
+    #             maxProfit = profit
+    #     return maxProfit
+
+    # 4th solution
     def maxProfit(self, prices: List[int]) -> int:
-        low = prices[0]
-        maxProfit = 0
-        for price in prices:
-            if price < low:
-                low = price
-            profit = price - low
-            if profit > maxProfit:
-                maxProfit = profit
-        return maxProfit
+        profit = [0]
+        for i in range(len(prices) - 1):
+            profit.append(prices[i + 1] - prices[i])
+            if profit[i] > 0:
+                profit[i + 1] = profit[i] + profit[i + 1]
+        return max(profit)
