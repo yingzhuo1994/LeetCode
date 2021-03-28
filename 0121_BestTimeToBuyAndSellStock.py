@@ -33,11 +33,36 @@ class Solution:
     #             maxProfit = profit
     #     return maxProfit
 
-    # 4th solution
+    # 4th solution Kadane's Algorithm
+    # def maxProfit(self, prices: List[int]) -> int:
+    #     profit = [0]
+    #     for i in range(len(prices) - 1):
+    #         profit.append(prices[i + 1] - prices[i])
+    #         if profit[i] > 0:
+    #             profit[i + 1] = profit[i] + profit[i + 1]
+    #     return max(profit)
+
+    # 5th solution Kadane's Algorithm
+    # def maxProfit(self, prices: List[int]) -> int:
+    #     curProfit = 0
+    #     maxProfit = 0
+    #     for i in range(len(prices) - 1):
+    #         singleProfit = prices[i + 1] - prices[i]
+    #         if curProfit > 0:
+    #              curProfit += singleProfit
+    #         else:
+    #             curProfit = singleProfit
+    #         if curProfit > maxProfit:
+    #             maxProfit = curProfit
+    #     return maxProfit
+
+    # 6thi final simplified solution
     def maxProfit(self, prices: List[int]) -> int:
-        profit = [0]
-        for i in range(len(prices) - 1):
-            profit.append(prices[i + 1] - prices[i])
-            if profit[i] > 0:
-                profit[i + 1] = profit[i] + profit[i + 1]
-        return max(profit)
+        low = prices[0]
+        maxProfit = 0
+        for price in prices:
+            if price < low:
+                low = price
+            if price - low > maxProfit:
+                maxProfit = price - low
+        return maxProfit
