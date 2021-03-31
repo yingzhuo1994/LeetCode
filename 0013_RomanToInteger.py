@@ -50,13 +50,10 @@ class Solution(object):
         }
 
         num = 0
-        if len(s) == 1:
-            return dic[s[0]]
         for i in range(len(s) - 1):
-            a, b = dic[s[i]], dic[s[i + 1]]
-            if a >= b:
-                num += a
+            if dic[s[i]] >= dic[s[i + 1]]:
+                num += dic[s[i]]
             else:
-                num -= a
-        num += b
+                num -= dic[s[i]]
+        num += dic[s[-1]]
         return num
