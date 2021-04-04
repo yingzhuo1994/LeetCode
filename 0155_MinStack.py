@@ -17,13 +17,10 @@ class MinStack:
             while start < end:
                 mid = (start + end) // 2
                 midVal = self.min_stack[mid]
-                if val == midVal:
+                if val <= midVal:
                     end = mid
-                    break
-                elif val > midVal:
-                    start = mid + 1
                 else:
-                    end = mid
+                    start = mid + 1
             self.min_stack.insert(end, val)
 
     def pop(self) -> None:
