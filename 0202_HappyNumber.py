@@ -12,4 +12,3 @@ class Solution:
                 n = newN
             else:
                 return False
-        return False
