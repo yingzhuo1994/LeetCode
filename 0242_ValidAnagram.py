@@ -14,3 +14,6 @@ class Solution:
             else:
                 dic[ch] -= 1
         return True
+
+        # 2n one-line solution
+        return sorted(s) == sorted(t)
