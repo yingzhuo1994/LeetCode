@@ -1,5 +1,6 @@
 class Solution:
     def hammingWeight(self, n: int) -> int:
+        # O(1) time | O(1) space
         count = 0
         while n:
             if (n & 1) == 1:
