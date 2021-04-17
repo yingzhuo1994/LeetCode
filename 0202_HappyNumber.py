@@ -1,6 +1,7 @@
 class Solution:
     def isHappy(self, n: int) -> bool:
         # 1st solution
+        # O(log n) time | O(log n) space
         # dic = []
         # while True:
         #     if n == 1:
@@ -15,6 +16,7 @@ class Solution:
         #         return False
 
         # 2nd solution
+        # O(log n) time | O(1) space
         def digitSquareSum(n):
             squareSum = 0
             for num in str(n):
