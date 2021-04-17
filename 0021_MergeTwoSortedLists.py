@@ -34,6 +34,7 @@ class Solution(object):
         # return result.next
 
         # 2nd solution iteratively
+        # O(n) time | O(1) space
         if None in (l1, l2):
             return l1 or l2
         result = ListNode(0)
