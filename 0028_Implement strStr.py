@@ -1,10 +1,7 @@
-class Solution(object):
-    def strStr(self, haystack, needle):
-        """
-        :type haystack: str
-        :type needle: str
-        :rtype: int
-        """
+class Solution:
+    def strStr(self, haystack: str, needle: str) -> int:
+        # 1st brute-force solution
+        # O(kn) time |  O(k) space
         if needle == "":
             return 0
         k = len(needle)
