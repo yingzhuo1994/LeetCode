@@ -1,5 +1,6 @@
 class Solution:
     def myAtoi(self, s: str) -> int:
+        # O(n) time | O(1) space
         sign = 1
         k = 0
         num = 0
@@ -24,12 +25,6 @@ class Solution:
                 break
             k += 1
         if sign > 0:
-            if num <= 2**31 -1:
-                return num
-            else:
-                return 2**31 -1
+            return min(num, 2**31 - 1)
         elif sign < 0:
-            if num <= 2**31:
-                return sign * num
-            else:
-                return sign * 2**31
+            return sign * min(num, 2**31)
