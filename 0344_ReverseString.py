@@ -3,6 +3,7 @@ class Solution:
         """
         Do not return anything, modify s in-place instead.
         """
+        # O(n) time | O(1) space
         start = 0
         end = len(s) - 1
         while start < end:
