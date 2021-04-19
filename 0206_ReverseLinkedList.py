@@ -5,6 +5,7 @@
 #         self.next = next
 class Solution:
     def reverseList(self, head: ListNode) -> ListNode:
+        # O(n) time | O(1) space
         prev = None
         while head:
             curr = head
