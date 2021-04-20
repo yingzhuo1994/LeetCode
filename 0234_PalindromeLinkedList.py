@@ -42,6 +42,7 @@ class Solution:
     #     return prev
 
         #3rd solution
+        # O(n) time | O(1) space
     def isPalindrome(self, head):
         rev = None
         slow = fast = head
