@@ -1,7 +1,7 @@
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
         # 1st hash table solution
-        # O(n) time | O(n) space
+        # O(n) time | O(1) space
         if len(s) != len(t):
             return False
         dic = {}
