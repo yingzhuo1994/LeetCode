@@ -1,21 +1,25 @@
 class Solution:
     def plusOne(self, digits: List[int]) -> List[int]:
-        # n = len(digits)
-        # i = 1
-        # carry = 1
-        # while i <= n:
-        #     if digits[-i] < 9:
-        #         digits[-i] += carry
-        #         return digits
-        #     else:
-        #         if carry == 1:
-        #             digits[-i] = 0
-        #         else:
-        #             carry = 0
-        #     i += 1
-        # if carry == 1:
-        #     return [1] + digits
+        # 1st iterative solution
+        # O(n) time | O(1) space
+        n = len(digits)
+        carry = 1
+        i = 1
+        while i <= n and carry > 0:
+            if digits[-i] < 9:
+                digits[-i] += carry
+                carry = 0
+            else:
+                if carry == 1:
+                    digits[-i] = 0
+            i += 1
+        if carry == 1:
+            return [1] + digits
+        else:
+            return digits
 
+        # 2nd recrusive solution
+        # O(n) time | O(n) space
         if len(digits) == 1 and digits[0] == 9:
             return [1, 0]
 
