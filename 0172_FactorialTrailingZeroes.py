@@ -36,8 +36,12 @@ class Solution:
 
         # 4th iterative solution
         # O(logN) time | O(1) space
+<<<<<<< HEAD
         count = 0
         while n // 5:
             n = n // 5
             count += n
         return count
+=======
+        
+>>>>>>> bd7370613d85392963378a7278ddfbbc29ce1edf
