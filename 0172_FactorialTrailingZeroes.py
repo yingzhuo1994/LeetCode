@@ -30,5 +30,14 @@ class Solution:
         #         factorial = r
         # return count
 
-        # 3rd solution
+        # 3rd recursive solution
+        # O(logN) time | O(logN) space
         return 0 if n == 0 else n // 5 + self.trailingZeroes(n // 5)
+
+        # 4th iterative solution
+        # O(logN) time | O(1) space
+        count = 0
+        while n // 5:
+            n = n // 5
+            count += n
+        return count
