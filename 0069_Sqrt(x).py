@@ -1,6 +1,7 @@
 class Solution:
     def mySqrt(self, x: int) -> int:
         # 1st solution
+        # O(logN) time | O(1) space
         # def f(k):
         #     return k * k - x
         # a, b = 0, x
@@ -14,6 +15,7 @@ class Solution:
         #         b = c - 1
 
         # 2nd Newton Iteration method
+        # O(logN) time | O(1) space
         r = x
         while r*r > x:
             r = (r + x//r) // 2
