@@ -1,5 +1,6 @@
 class Solution:
     def intersect(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        # 1st solution
         # O(nlogn) time | O(n) space
         nums1.sort()
         nums2.sort()
@@ -14,4 +15,16 @@ class Solution:
                 p1 += 1
             else:
                 p2 += 1
+        return lst
+
+        # 2nd solution
+        # O(n) time | O(n) space
+        dic = {}
+        lst = []
+        for num in nums1:
+            dic[num] = dic.get(num, 0) + 1
+        for num in nums2:
+            if num in dic and dic[num] > 0:
+                lst.append(num)
+                dic[num] -= 1
         return lst
