@@ -1,5 +1,6 @@
 class Solution:
     def divide(self, dividend: int, divisor: int) -> int:
+        # O(logN) time | O(logN) space 
         sign1 = 1 if dividend >= 0 else -1
         sign2 = 1 if divisor >= 0 else -1
         dividend = abs(dividend)
