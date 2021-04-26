@@ -6,6 +6,7 @@
 #         self.right = right
 class Solution:
     def sortedArrayToBST(self, nums: List[int]) -> TreeNode:
+        # O(N) time | O(logN) space
         if not nums:
             return None
 
