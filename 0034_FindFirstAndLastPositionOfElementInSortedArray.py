@@ -1,7 +1,7 @@
 class Solution:
     def searchRange(self, nums: List[int], target: int) -> List[int]:
         # 1st solution
-        # O(lonN + k) time | O(1) space
+        # O(logN + k) time | O(1) space
         a, b = 0, len(nums) - 1
         m = (a + b) // 2
         while a <= b:
@@ -23,12 +23,14 @@ class Solution:
         return [a, b] if len(nums) > 0 and nums[m] == target else [-1, -1]
 
         # 2nd solution
+        # O(logN) time | O(1) space
         if not nums:
             return [-1, -1]
 
         def bisect_left(nums, target):
             l, r = 0, len(nums) - 1
             while l < r:
+                # get the lower mid
                 m = (l + r) // 2
                 if nums[m] < target:
                     l = m + 1
@@ -39,6 +41,7 @@ class Solution:
         def bisect_right(nums, target):
             l, r = 0, len(nums) - 1
             while l < r:
+                # get the upper mid
                 m = (l + r) // 2 + 1
                 if nums[m] > target:
                     r = m - 1
