@@ -1,5 +1,6 @@
 class Solution:
     def isValidSudoku(self, board: List[List[str]]) -> bool:
+        # O(1) time | O(1) space
         rowDic = [{} for _ in range(9)]
         columnDic = [{} for _ in range(9)]
         boxDic = [[{}, {}, {}] for _ in range(3)]
