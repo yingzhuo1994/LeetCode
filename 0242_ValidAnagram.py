@@ -6,10 +6,8 @@ class Solution:
             return False
         dic = {}
         for ch in s:
-            if ch not in dic:
-                dic[ch] = 1
-            else:
-                dic[ch] += 1
+            dic[ch] = dic.get(ch, 0) + 1
+
         for ch in t:
             if ch not in dic or dic[ch] == 0:
                 return False
