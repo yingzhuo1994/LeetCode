@@ -3,6 +3,8 @@ class Solution:
         """
         Do not return anything, modify matrix in-place instead.
         """
+        # O(M) time | O(1) space
+        # M is the number of cells in the matrix.
         n = len(matrix)
         for i in range(n // 2):
             for j in range(i, n - 1 - i):
