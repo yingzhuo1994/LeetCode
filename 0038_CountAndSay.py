@@ -1,5 +1,6 @@
 class Solution:
     def countAndSay(self, n: int) -> str:
+        # O(2^n) time | O(2^(n-1)) space
         if n == 1:
             return "1"
         s = self.countAndSay(n - 1)
