@@ -14,10 +14,10 @@ class Solution:
         if n < 0:
             x = 1 / x
             n = -n
-        pow = 1
+        result = 1
         while n:
             if n % 2 == 1:
-                pow *= x
+                result *= x
             x *= x
             n = n // 2
-        return pow
+        return result
