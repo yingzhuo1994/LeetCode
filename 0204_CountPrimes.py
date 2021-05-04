@@ -1,5 +1,8 @@
 class Solution:
     def countPrimes(self, n: int) -> int:
+        # 1st solution
+        # linear prime sieve
+        # O(nloglogn) time | O(n) space
         if n < 3:
             return 0
         primes = [True] * n
