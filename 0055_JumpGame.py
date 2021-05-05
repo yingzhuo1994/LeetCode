@@ -1,7 +1,7 @@
 class Solution:
     def canJump(self, nums: List[int]) -> bool:
-        if len(nums) == 1:
-            return True
+        # 1st solution
+        # O(n^2) time | O(1) space
         pointer = 0
         steps = nums[pointer]
         while pointer + steps < len(nums):
@@ -16,3 +16,12 @@ class Solution:
             pointer = nextPlace
             steps = nums[pointer]
         return pointer + steps >= len(nums) - 1
+
+        # 2nd solution
+        # O(n) time | O(1) space
+        m = 0
+        for i, n in enumerate(nums):
+            if i > m:
+                return False
+            m = max(m, i + n)
+        return True
