@@ -1,5 +1,6 @@
 class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
+        # O(n!) time | O(n) space
         if len(nums) == 1:
             return [nums]
         lst = []
