@@ -6,3 +6,11 @@ class Solution:
         toRight = self.uniquePaths(m, n - 1)
         toBottom = self.uniquePaths(m - 1, n)
         return toRight + toBottom
+
+        # 2nd iterative solution
+        ways = [1 for _ in range(n)]
+        for i in range(m - 1):
+            for j in reversed(range(n - 1)):
+                ways[j] = ways[j] + ways[j + 1]
+        return ways[0]
+
