@@ -4,6 +4,9 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+from typing import Counter
+
+
 class Solution:
     def inorderTraversal(self, root: TreeNode) -> List[int]:
         # 1st recursive solution
@@ -13,3 +16,17 @@ class Solution:
         leftTree = self.inorderTraversal(root.left)
         rightTree = self.inorderTraversal(root.right)
         return leftTree + [root.val] + rightTree
+
+        # 2nd Iterative solution
+        # O(n) time | O(n) space
+        res = []
+        stack = []
+        cur = root
+        while cur or stack:
+            while cur:
+                stack.append(cur)
+                cur = cur.left
+            cur = stack.pop()
+            res.append(cur.val)
+            cur = cur.right
+        return res
