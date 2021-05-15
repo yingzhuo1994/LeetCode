@@ -16,3 +16,15 @@ class Solution:
                 ways[j] = ways[j] + ways[j + 1]
         return ways[0]
 
+        # 3nd math solution
+        # O(mn) time | O(1) space
+        def factorial(n):
+            result = 1
+            for i in range(2, n + 1):
+                result *= i
+            return result
+        
+        a = m - 1
+        b = n - 1
+        return factorial(a + b) // (factorial(a) * factorial(b))
+
