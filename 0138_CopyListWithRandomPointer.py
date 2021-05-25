@@ -10,28 +10,19 @@ class Node:
 class Solution:
     def copyRandomList(self, head: 'Node') -> 'Node':
         sentinel = Node(0)
-        start = sentinel
+        newHead = sentinel
         p = head
-        lst = []
+        originalNodeLst = []
+        newNodeLst = []
         while p:
-            start.next = Node(p.val)
-            lst.append(start.next)
+            newHead.next = Node(p.val)
+            newHead = newHead.next
+            newNodeLst.append(newHead)
+            originalNodeLst.append(p)
             p = p.next
-            start = start.next
-        p = head
-        start = sentinel.next
-        while p:
-            if p.random is None:
-                p = p.next
-                start = start.next
-                continue
-            index = 0
-            searchNode = head
-            while searchNode != p.random:
-                searchNode = searchNode.next
-                index += 1
-            start.random = lst[index]
-            start = start.next
-            p = p.next
+        for i, node in enumerate(originalNodeLst):
+            if node.random:
+                index = originalNodeLst.index(node.random)
+                newNodeLst[i].random = newNodeLst[index]
         return sentinel.next
         
