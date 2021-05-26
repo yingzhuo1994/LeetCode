@@ -21,7 +21,7 @@ class Solution:
 
         # 2nd merge sort solution
         # O(nlogn) time | O(1) space
-                if not head or not head.next:
+        if not head or not head.next:
             return head
         mid = self.getMid(head)
         left = self.sortList(head)
@@ -35,18 +35,17 @@ class Solution:
                 if list1.val < list2.val:
                     tail.next = list1
                     list1 = list1.next
-                    tail = tail.next
                 else:
                     tail.next = list2
                     list2 = list2.next
-                    tail = tail.next
+                tail = tail.next
 
             tail.next = list1 if list1 != None else list2
             return dummyHead.next
 
         def getMid(self, head):
             midPrev = None
-            while head != None and head.next != None:
+            while head and head.next:
                 midPrev = head if midPrev == None else midPrev.next
                 head = head.next.next
             mid = midPrev.next
