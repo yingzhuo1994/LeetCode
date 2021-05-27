@@ -3,19 +3,15 @@ class Solution:
         def lookNeighbor(board, word, i, j, lst = []):
             if not word:
                 return True
-            top = (i - 1, j)
-            bottom = (i + 1, j)
-            left = (i, j - 1)
-            right = (i, j + 1)
             result = False
-            if 0 <= top[0] < len(board) and top not in lst and board[top[0]][top[1]] == word[0]:
-                result = lookNeighbor(board, word[1:], top[0], top[1], lst + [top])
-            if not result and 0 <= bottom[0] < len(board) and bottom not in lst and board[bottom[0]][bottom[1]] == word[0]:
-                result = lookNeighbor(board, word[1:], bottom[0], bottom[1], lst + [bottom])
-            if not result and 0 <= left[1] < len(board[0]) and left not in lst and board[left[0]][left[1]] == word[0]:
-                result = lookNeighbor(board, word[1:], left[0], left[1], lst + [left])
-            if not result and 0 <= right[1] < len(board[0]) and right not in lst and board[right[0]][right[1]] == word[0]:
-                result = lookNeighbor(board, word[1:], right[0], right[1], lst + [right])
+            if 0 <= i - 1 < len(board) and (i - 1, j) not in lst and board[i - 1][j] == word[0]:
+                result = lookNeighbor(board, word[1:], i - 1, j, lst + [(i - 1, j)])
+            if not result and 0 <= i + 1 < len(board) and (i + 1, j) not in lst and board[i + 1][j] == word[0]:
+                result = lookNeighbor(board, word[1:], i + 1, j, lst + [(i + 1, j)])
+            if not result and 0 <= j - 1 < len(board[0]) and (i, j - 1) not in lst and board[i][j - 1] == word[0]:
+                result = lookNeighbor(board, word[1:], i, j - 1, lst + [(i, j - 1)])
+            if not result and 0 <= j + 1 < len(board[0]) and (i, j + 1) not in lst and board[i][j + 1] == word[0]:
+                result = lookNeighbor(board, word[1:], i, j + 1, lst + [(i, j + 1)])
             return result
 
         for i in range(len(board)):
