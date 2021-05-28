@@ -16,3 +16,16 @@ class Solution:
             if nums[i] > nums[i + 1]:
                 return i
         return len(nums) - 1
+
+        # 3rd solution
+        # O(logn) time | O(logn) space
+        left = 0
+        right = len(nums) - 1
+        while left <= right:
+            if left == right:
+                return left
+            m = (left + right) // 2
+            if nums[m] > nums[m + 1]:
+                right = m
+            else:
+                left = m + 1
