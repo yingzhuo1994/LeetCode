@@ -9,3 +9,10 @@ class Solution:
                 return i
         if nums[-1] > nums[-2]:
             return len(nums) - 1
+        
+        # 2nd solution
+        # O(n) time | O(1) space
+        for i in range(len(nums) - 1):
+            if nums[i] > nums[i + 1]:
+                return i
+        return len(nums) - 1
