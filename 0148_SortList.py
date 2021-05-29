@@ -51,4 +51,20 @@ class Solution:
             mid = midPrev.next
             midPrev.next = None
             return mid
+        
+        # 3rd solution
+        # O(nlogn) time | O(n) space
+        if head is None:
+            return
+        temp = head
+        data = []
+        while temp is not None:
+            data.append(temp.val)
+            temp = temp.next
+        temp = head
+        data = sorted(data)
+        for num in data:
+            temp.val = num
+            temp = temp.next
+        return head        
 
