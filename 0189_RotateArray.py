@@ -18,3 +18,21 @@ class Solution:
         k = k % len(nums)
         lst = nums[-k:] + nums[:-k]
         nums[:] = lst
+
+        # 3rd solution
+        # O(n) time | O(1) space
+        n = len(nums)
+        k %= n
+        
+        start = count = 0
+        while count < n:
+            current, prev = start, nums[start]
+            while True:
+                next_idx = (current + k) % n
+                nums[next_idx], prev = prev, nums[next_idx]
+                current = next_idx
+                count += 1
+                
+                if start == current:
+                    break
+            start += 1
