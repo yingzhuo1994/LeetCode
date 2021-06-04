@@ -67,5 +67,44 @@ class Solution(object):
 
         inStack[node] = False
         return False
+    
+    # 3rd solution
+        WHITE, GREY, BLACK = 0, 1, 2
+        graph = [[] for _ in range(numCourses)]
+        colors = [WHITE for _ in range(numCourses)]
+        # create graph
+        for pair in prerequisites:
+            x, y = pair
+            graph[x].append(y)   
+        
+        for node in range(numCourses):
+            if colors[node] != WHITE:
+                continue
 
+            containsCycle = self.traverseAndColorNodes(graph, colors, node)
+            if containsCycle:
+                return False
+            
+        return True
+    
+    def traverseAndColorNodes(self, graph, colors, node):
+        WHITE, GREY, BLACK = 0, 1, 2
+        colors[node] = GREY
+
+        neighbours = graph[node]
+        for neighbour in neighbours:
+            neighbourColor = colors[neighbour]
+
+            if neighbourColor == GREY:
+                return True
+            
+            if neighbourColor != WHITE:
+                continue
+
+            containsCycle = self.traverseAndColorNodes(graph, colors, neighbour)
+            if containsCycle:
+                return True
+        
+        colors[node] = BLACK
+        return False
 
