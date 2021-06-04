@@ -33,3 +33,39 @@ class Solution(object):
         # after visit all the neighbours, mark it as done visited
         visited[i] = 1
         return True
+    
+    # 2nd solution
+        graph = [[] for _ in range(numCourses)]
+        visited = [False for _ in range(numCourses)]
+        inStack = [False for _ in range(numCourses)]
+        # create graph
+        for pair in prerequisites:
+            x, y = pair
+            graph[x].append(y)
+        
+        for node in range(numCourses):
+            if visited[node]:
+                continue
+
+            containsCycle = self.isNodeInCycle(graph, node, visited, inStack)
+            if containsCycle:
+                return False
+        return True
+        
+    def isNodeInCycle(self, graph, node, visited, inStack):
+        visited[node] = True
+        inStack[node] = True
+
+        neighbours = graph[node]
+        for neighbour in neighbours:
+            if not visited[neighbour]:
+                containsCycle = self.isNodeInCycle(graph, neighbour, visited, inStack)
+                if containsCycle:
+                    return True
+            elif inStack[neighbour]:
+                return True
+
+        inStack[node] = False
+        return False
+
+
