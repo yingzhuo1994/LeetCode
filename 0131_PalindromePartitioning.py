@@ -10,7 +10,8 @@ class Solution:
 
         # def dfs(start, result, currentList, s):
         #     if start >= len(s):
-        #         result.append(currentList)
+        #         # Pay attention to currentList, must use currentList[:]
+        #         result.append(currentList[:])
         #     end = start
         #     while end < len(s):
         #         if (isPalindrome(s, start, end)):
