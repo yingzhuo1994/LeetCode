@@ -39,9 +39,8 @@ class Solution(object):
         visited = [False for _ in range(numCourses)]
         inStack = [False for _ in range(numCourses)]
         # create graph
-        for pair in prerequisites:
-            x, y = pair
-            graph[x].append(y)
+        for a, b in prerequisites:
+            graph[b].append(a)
         
         for node in range(numCourses):
             if visited[node]:
@@ -73,9 +72,8 @@ class Solution(object):
         graph = [[] for _ in range(numCourses)]
         colors = [WHITE for _ in range(numCourses)]
         # create graph
-        for pair in prerequisites:
-            x, y = pair
-            graph[x].append(y)   
+        for a, b in prerequisites:
+            graph[b].append(a) 
         
         for node in range(numCourses):
             if colors[node] != WHITE:
