@@ -1,30 +1,32 @@
 class Solution:
     def partition(self, s: str) -> List[List[str]]:
-        # def isPalindrome(s, low, high):
-        #     while low < high:
-        #         if s[low] != s[high]: 
-        #             return False
-        #         low += 1
-        #         high -= 1
-        #     return True
+        # 1st backtracking solution
+        # O(n * 2^n) time | O(n) space
+        def isPalindrome(s, low, high):
+            while low < high:
+                if s[low] != s[high]: 
+                    return False
+                low += 1
+                high -= 1
+            return True
 
-        # def dfs(start, result, currentList, s):
-        #     if start >= len(s):
-        #         # Pay attention to currentList, must use currentList[:]
-        #         result.append(currentList[:])
-        #     end = start
-        #     while end < len(s):
-        #         if (isPalindrome(s, start, end)):
-        #             #  add current substring in the currentList
-        #             currentList.append(s[start: end + 1])
-        #             dfs(end + 1, result, currentList, s)
-        #             #  backtrack and remove the current substring from currentList
-        #             currentList.pop()
-        #         end += 1
+        def dfs(start, result, currentList, s):
+            if start >= len(s):
+                # Pay attention to currentList, must use currentList[:]
+                result.append(currentList[:])
+            end = start
+            while end < len(s):
+                if (isPalindrome(s, start, end)):
+                    #  add current substring in the currentList
+                    currentList.append(s[start: end + 1])
+                    dfs(end + 1, result, currentList, s)
+                    #  backtrack and remove the current substring from currentList
+                    currentList.pop()
+                end += 1
         
-        # result = []
-        # dfs(0, result, [], s)
-        # return result
+        result = []
+        dfs(0, result, [], s)
+        return result
         
         ret = []
         for i in range(1, len(s)+1):
