@@ -28,6 +28,28 @@ class Solution:
         dfs(0, result, [], s)
         return result
         
+        # 2nd solution, backtracing with dynamic programming
+        # O(n * 2^n) time | O(N^2) space
+        def partition(self, s: str) -> List[List[str]]:
+            n = len(s)
+            dp = [[False for _ in range(n)] for _ in range(n)]
+            result = []
+            self.dfs(result, s, 0, [], dp)
+            return result
+    
+        def dfs(self, result, s, start, curLst, dp):
+            if start >= len(s):
+                result.append(curLst[:])
+            end = start
+            while end < len(s):
+                if s[start] == s[end] and (end - start <= 2 or dp[start + 1][end- 1]):
+                    dp[start][end] = True
+                    curLst.append(s[start:end+1])
+                    self.dfs(result, s, end + 1, curLst, dp)
+                    curLst.pop()
+                end += 1
+        
+        # 3rd solution
         ret = []
         for i in range(1, len(s)+1):
             if s[:i] == s[i-1::-1]:
