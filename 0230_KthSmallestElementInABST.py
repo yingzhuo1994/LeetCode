@@ -5,9 +5,9 @@
 #         self.left = left
 #         self.right = right
 class Solution:
+    # 1st solution
+    # O(nlogn) time | O(n) space 
     def kthSmallest(self, root: TreeNode, k: int) -> int:
-        # 1st solution
-        # O(nlogn) time | O(n) space 
         lst = []
         level = [root]
         while level:
@@ -22,8 +22,8 @@ class Solution:
         lst.sort()
         return lst[k - 1]
 
-        # 2nd solution
-        # O(h + k) time | O(h) space
+    # 2nd solution
+    # O(h + k) time | O(h) space
     def kthSmallest(self, root: TreeNode, k: int) -> int:
         treeInfo = TreeInfo(0, -1)
         self.inOrderTraverse(root, treeInfo, k)
@@ -43,4 +43,10 @@ class TreeInfo:
         self.numOfVisitedNode = numOfVisitedNode
         self.value = value
 
+    # 3rd solution
+     def kthSmallest(self, root: TreeNode, k: int) -> int:
+        def inorder(r):
+            return inorder(r.left) + [r.val] + inorder(r.right) if r else []
+    
+        return inorder(root)[k - 1]   
 
