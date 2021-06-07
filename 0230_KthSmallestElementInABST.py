@@ -22,8 +22,25 @@ class Solution:
         lst.sort()
         return lst[k - 1]
 
-class treeInfo:
-    def __init__(self, numOfVisitedNode):
-        self.numOfVisistedNode = numOfVisitedNode
+        # 2nd solution
+        # O(h + k) time | O(h) space
+    def kthSmallest(self, root: TreeNode, k: int) -> int:
+        treeInfo = TreeInfo(0, -1)
+        self.inOrderTraverse(root, treeInfo, k)
+        return treeInfo.value
+    
+    def inOrderTraverse(self, node, treeInfo, k):
+        if not node or treeInfo.numOfVisitedNode >= k:
+            return
+        self.inOrderTraverse(node.left, treeInfo, k)
+        if treeInfo.numOfVisitedNode < k:
+            treeInfo.numOfVisitedNode += 1
+            treeInfo.value = node.val
+            self.inOrderTraverse(node.right, treeInfo, k)
+
+class TreeInfo:
+    def __init__(self, numOfVisitedNode, value):
+        self.numOfVisitedNode = numOfVisitedNode
+        self.value = value
 
 
