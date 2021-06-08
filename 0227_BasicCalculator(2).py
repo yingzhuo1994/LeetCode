@@ -29,18 +29,13 @@ class Solution:
 
         # 2nd solution
         # O(n) time | O(1) space
-        n = len(s)
-        if n == 0:
-            return 0
         front, back = 0, 0
         curNum = 0
         operation = '+'
-        for i in range(n):
-            ch = s[i]
-            print(ch, curNum, operation, front, back)
+        for i, ch in enumerate(s):
             if ch.isdigit():
                 curNum = (curNum * 10) + int(ch)
-            if ch in '+-*/' or i == n-1:
+            if ch in '+-*/' or i == len(s) - 1:
                 if operation == '-':
                     front, back = front + back, -curNum
                 elif operation == '+':
