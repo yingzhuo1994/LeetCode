@@ -6,6 +6,9 @@
 #         self.right = None
 
 class Solution:
+
+    # 1st solution
+    # O(n) time | O(n) space
     def __init__(self):
         # Variable to store LCA node.
         self.ans = None
