@@ -48,5 +48,19 @@ class TreeInfo:
         def inorder(r):
             return inorder(r.left) + [r.val] + inorder(r.right) if r else []
     
-        return inorder(root)[k - 1]   
+        return inorder(root)[k - 1]
 
+    # 4th solution, iterative inorder traversal
+    # O(h + k) time | O(h) space
+     def kthSmallest(self, root: TreeNode, k: int) -> int:   
+        stack = []
+        
+        while True:
+            while root:
+                stack.append(root)
+                root = root.left
+            root = stack.pop()
+            k -= 1
+            if not k:
+                return root.val
+            root = root.right
