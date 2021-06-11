@@ -3,17 +3,17 @@ class Solution:
         # 1st solution
         # O(n) time | O(1) space
         stack = []
-        for t in tokens:
-            if t not in "+-*/":
-                stack.append(int(t))
+        for ch in tokens:
+            if ch not in '+-*/':
+                stack.append(int(ch))
             else:
-                r, l = stack.pop(), stack.pop()
-                if t == "+":
-                    stack.append(l + r)
-                elif t == "-":
-                    stack.append(l - r)
-                elif t == "*":
-                    stack.append(l * r)
-                else:
-                    stack.append(int(l / r))
+                lastNum = stack.pop()
+                if ch == '+':
+                    stack[-1] += lastNum
+                elif ch == '-':
+                    stack[-1] -= lastNum
+                elif ch == '*':
+                    stack[-1] *= lastNum
+                elif ch == '/':
+                    stack[-1] = int(stack[-1] / lastNum)
         return stack.pop()
