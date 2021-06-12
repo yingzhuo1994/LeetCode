@@ -21,11 +21,9 @@ class Solution:
 
         # 2nd solution
         # O(n) time | O(1) space
-        front = 1
-        if int(s[0]) > 0:
-            back = 1
-        else:
+        if s[0] == '0':
             return 0
+        front, back = 1, 1
         for i in range(1, len(s)):
             single, double = 0, 0
             if int(s[i]) > 0:

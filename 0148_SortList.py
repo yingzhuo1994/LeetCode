@@ -29,8 +29,8 @@ class Solution:
         return self.merge(left, right)
 
         def merge(self, list1, list2):
-            dummyHead = ListNode(0)
-            tail = dummyHead
+            sentinel = ListNode(0)
+            tail = sentinel
             while list1 and list2:
                 if list1.val < list2.val:
                     tail.next = list1
@@ -40,8 +40,8 @@ class Solution:
                     list2 = list2.next
                 tail = tail.next
 
-            tail.next = list1 if list1 != None else list2
-            return dummyHead.next
+            tail.next = list1 or list2
+            return sentinel.next
 
         def getMid(self, head):
             midPrev = None
