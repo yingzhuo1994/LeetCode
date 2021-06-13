@@ -18,7 +18,7 @@ class Solution:
         return len(nums) - 1
 
         # 3rd solution
-        # O(logn) time | O(logn) space
+        # O(logn) time | O(1) space
         left = 0
         right = len(nums) - 1
         while left <= right:
