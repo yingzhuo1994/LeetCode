@@ -1,17 +1,18 @@
 class Solution:
+    # 0,2 are "dead", and "dead->live"
+    # 1,3 are "live", and "live->dead"
     def gameOfLife(self, board: List[List[int]]) -> None:
         """
         Do not return anything, modify board in-place instead.
         """
-
-        m,n = len(board), len(board[0])
+        m, n = len(board), len(board[0])
         for i in range(m):
             for j in range(n):
                 if board[i][j] == 0 or board[i][j] == 2:
-                    if self.nnb(board,i,j) == 3:
+                    if self.nnb(board, i, j) == 3:
                         board[i][j] = 2
                 else:
-                    if self.nnb(board,i,j) < 2 or self.nnb(board,i,j) >3:
+                    if self.nnb(board, i, j) < 2 or self.nnb(board,i,j) > 3:
                         board[i][j] = 3
         for i in range(m):
             for j in range(n):
