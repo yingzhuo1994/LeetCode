@@ -32,5 +32,3 @@ class Solution:
                         break
                     temp.add(x-y)
             toCheck = temp
-
-        return cnt
