@@ -29,11 +29,11 @@ class Solution:
         # O(n) time | O(1) space
         head = root
         while root and root.left:
-            next = root.left 
+            nextLevelNode = root.left 
             while root:
                 root.left.next = root.right 
                 # root.right.next = root.next and root.next.left
                 root.right.next = None if not root.next else root.next.left 
                 root = root.next
-            root = next
+            root = nextLevelNode
         return head
