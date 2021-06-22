@@ -54,13 +54,13 @@ class TreeInfo:
     # O(h + k) time | O(h) space
      def kthSmallest(self, root: TreeNode, k: int) -> int:   
         stack = []
-        
+        node = root
         while True:
-            while root:
-                stack.append(root)
-                root = root.left
-            root = stack.pop()
+            while node:
+                stack.append(node)
+                node = node.left
+            node = stack.pop()
             k -= 1
             if not k:
-                return root.val
-            root = root.right
+                return node.val
+            node = node.right
