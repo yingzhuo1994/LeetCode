@@ -32,3 +32,20 @@ class Solution:
             hare = nums[hare]
         
         return hare
+    
+    # 3rd sorting solution
+    # O(nlogn) time | O(1) space
+    def findDuplicate(self, nums):
+        nums.sort()
+        for i in range(1, len(nums)):
+            if nums[i] == nums[i-1]:
+                return nums[i]
+    
+    # 4th set solution
+    # O(n) time | O(n) space
+    def findDuplicate(self, nums):
+        seen = set()
+        for num in nums:
+            if num in seen:
+                return num
+            seen.add(num) 
