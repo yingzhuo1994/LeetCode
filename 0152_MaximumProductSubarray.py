@@ -10,6 +10,7 @@ class Solution:
         return largest
 
         # 2nd solution
+        # o(n) time | O(1) space
         r = nums[0]
         imax = r
         imin = r
