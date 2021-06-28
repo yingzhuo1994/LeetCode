@@ -37,6 +37,7 @@ class RandomizedSet:
 
 
     # 2nd solution
+    # O(1) time | O(n) space
     def __init__(self):
         self.dic_direct = {}
         self.dic_invert = {}
@@ -55,11 +56,11 @@ class RandomizedSet:
         if val not in self.dic_invert:
             return False
         else:
-            ind = self.dic_invert.pop(val)
-            self.dic_direct.pop(ind)
-            if ind != self.num_elem - 1:
-                self.dic_direct[ind] = self.dic_direct[self.num_elem - 1]
-                self.dic_invert[self.dic_direct[self.num_elem - 1]] = ind
+            idx = self.dic_invert.pop(val)
+            self.dic_direct.pop(idx)
+            if idx != self.num_elem - 1:
+                self.dic_direct[idx] = self.dic_direct[self.num_elem - 1]
+                self.dic_invert[self.dic_direct[self.num_elem - 1]] = idx
                 self.dic_direct.pop(self.num_elem - 1)
             self.num_elem -= 1
             return True
