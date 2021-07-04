@@ -53,3 +53,39 @@ class Solution:
                 dfs(vertex)
 
         return topological_sorted_order[::-1] if is_possible else []
+
+    # 2nd solution
+    def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
+        graph = [[] for _ in range(numCourses)]
+        colors = [0 for _ in range(numCourses)]
+        stack = []
+        
+        for a, b in prerequisites:
+            graph[b].append(a)
+        
+        for node in range(numCourses):
+            if colors[node] != 0:
+                continue
+            
+            containsCycle = self.dfs(graph, colors, stack, node)
+            if containsCycle:
+                return []
+        
+        return stack[::-1]
+    
+    def dfs(self, graph, colors, stack, node):
+        colors[node] = 1
+        
+        neighbours = graph[node]
+        for neighbour in neighbours:
+            if colors[neighbour] == 1:
+                return True
+            elif colors[neighbour] == 2:
+                continue
+            else:
+                containsCycle = self.dfs(graph, colors, stack, neighbour)
+                if containsCycle:
+                    return True            
+        colors[node] = 2
+        stack.append(node)
+        return False
