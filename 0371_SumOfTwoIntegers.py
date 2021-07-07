@@ -18,3 +18,18 @@ class Solution:
             return ~(a ^ mask)
         else:
             return a
+
+    # 2nd solution
+    def getSum(self, a: int, b: int) -> int:
+        mask = 0xffffffff
+        a &= mask
+        b &= mask
+        while b:
+            carry = (a & b) << 1
+            a ^= b
+            b = carry & mask
+            # print((a, b))
+        if (a >> 31) & 1:
+            return ~(a ^ mask)
+        else:
+            return a
