@@ -25,3 +25,50 @@ class Solution:
             return max(self.longestSubstringUtil(s, start, mid, k), \
                        self.longestSubstringUtil(s, midNext, end, k))
         return end - start
+
+    # 3rd solution, Sliding Window
+    # O(n) time | O(1) space
+    def longestSubstring(self, s: str, k: int) -> int:
+        maxUnique = self.getMaxUniqueLetters(s)
+        result = 0
+        for currUnique in range(1, maxUnique + 1):
+            countMap = [0 for _ in range(26)]
+            windowStart = 0
+            windowEnd = 0
+            idx = 0
+            unique = 0
+            countAtLeastK = 0
+            while windowEnd < len(s):
+                # expand the sliding window
+                if unique <= currUnique:
+                    idx = ord(s[windowEnd]) - ord('a')
+                    if countMap[idx] == 0:
+                        unique += 1
+                    countMap[idx] += 1
+                    if (countMap[idx] == k):
+                        countAtLeastK += 1
+                    windowEnd += 1
+                # shrink the sliding window
+                else:
+                    idx = ord(s[windowStart]) - ord('a')
+                    if countMap[idx] == k:
+                        countAtLeastK -= 1
+                    countMap[idx] -= 1
+                    if countMap[idx] == 0:
+                        unique -= 1
+                    windowStart += 1
+
+                if unique == currUnique and unique == countAtLeastK:
+                    result = max(windowEnd - windowStart, result)
+        return result
+
+    # get the maximum number of unique letters in the string s
+    def getMaxUniqueLetters(self, s: str):
+        table = [False for _ in range(26)]
+        maxUnique = 0
+        for i in range(len(s)):
+            if not table[ord(s[i]) - ord('a')]:
+                maxUnique += 1
+                table[ord(s[i]) - ord('a')] = True
+        return maxUnique
+
