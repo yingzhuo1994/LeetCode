@@ -33,8 +33,7 @@ class Solution:
         result = 0
         for currUnique in range(1, maxUnique + 1):
             countMap = [0 for _ in range(26)]
-            windowStart = 0
-            windowEnd = 0
+            windowStart, windowEnd = 0, 0
             idx = 0
             unique = 0
             countAtLeastK = 0
@@ -45,7 +44,7 @@ class Solution:
                     if countMap[idx] == 0:
                         unique += 1
                     countMap[idx] += 1
-                    if (countMap[idx] == k):
+                    if countMap[idx] == k:
                         countAtLeastK += 1
                     windowEnd += 1
                 # shrink the sliding window
