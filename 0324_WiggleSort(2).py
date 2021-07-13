@@ -12,7 +12,7 @@ class Solution:
     # 2nd solution
     # O(n) time | O(1) space
     def wiggleSort(self, nums: List[int]) -> None:
-        def nsmallest(nums,n):            
+        def nsmallest(nums, mid):            
             start, end = 0, len(nums)-1
             while True:
                 pivot = nums[random.randint(start,end)]
@@ -27,15 +27,17 @@ class Solution:
                         j -= 1
                     else:
                         k += 1
-                if i <= n - 1 <= j:
+                if i <= mid - 1 <= j:
                     return pivot
-                elif n - 1 < i:
+                elif mid - 1 < i:
                     end = i - 1
                 else:
                     start = i + 1
         n = len(nums)
-        mid = nsmallest(nums, (n+1) // 2)
-        mapIdx = lambda i:(1 + 2 * i) % (n | 1)
+        mid = nsmallest(nums, (n + 1) // 2)
+        # (n | 1) calculates the nearest odd that is not less than n
+        mapIdx = lambda i: (1 + 2 * i) % (n | 1)
+        # Three Color Sort
         i, j, k = 0, n - 1, 0
         while k <= j:
             if nums[mapIdx(k)] > mid:
