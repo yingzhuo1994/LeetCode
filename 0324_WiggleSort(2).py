@@ -12,7 +12,7 @@ class Solution:
     # 2nd solution
     # O(n) time | O(1) space
     def wiggleSort(self, nums: List[int]) -> None:
-        def nsmallest(nums, mid):            
+        def nsmallest(nums, n):            
             start, end = 0, len(nums)-1
             while True:
                 pivot = nums[random.randint(start,end)]
@@ -27,9 +27,9 @@ class Solution:
                         j -= 1
                     else:
                         k += 1
-                if i <= mid - 1 <= j:
+                if i <= n - 1 <= j:
                     return pivot
-                elif mid - 1 < i:
+                elif n - 1 < i:
                     end = i - 1
                 else:
                     start = i + 1
