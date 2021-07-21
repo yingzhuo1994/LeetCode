@@ -28,7 +28,7 @@ class Solution:
                         ans = dp(i, j + 2) or first_match and dp(i + 1, j)
                     else:
                         ans = first_match and dp(i + 1, j + 1)
-                memo[i, j]= ans
+                memo[i, j] = ans
             return memo[i, j]
         return dp(0, 0)
 
