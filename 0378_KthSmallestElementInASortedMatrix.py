@@ -1,6 +1,7 @@
 class Solution:
     # 1st solution
-    # O(nlogn) time | O(n) space
+    # O(Nlog(N)) time | O(N) space
+    # where N is the total number of the elements
     def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
         lst = []
         for line in matrix:
@@ -16,8 +17,8 @@ class Solution:
             if k == 1:
                 return min(a)
             groups = (a[i:i+5] for i in range(0, len(a), 5))
-            medians = [sorted(group)[len(group) / 2] for group in groups]
-            pivot = pick(medians, len(medians) / 2 + 1)
+            medians = [sorted(group)[len(group) // 2] for group in groups]
+            pivot = pick(medians, len(medians) // 2 + 1)
             smaller = [x for x in a if x < pivot]
             if k <= len(smaller):
                 return pick(smaller, k)
@@ -38,9 +39,9 @@ class Solution:
                 return nums[k1-1], nums[k2-1]
 
             # Solve the subproblem.
-            index_ = index[::2] + index[n-1+n%2:]
-            k1_ = (k1 + 2*n) / 4 + 1 if n % 2 else n + 1 + (k1 + 3) / 4
-            k2_ = (k2 + 3) / 4
+            index_ = list(index[::2]) + list(index[n-1+n%2:])
+            k1_ = (k1 + 2*n) // 4 + 1 if n % 2 else n + 1 + (k1 + 3) // 4
+            k2_ = (k2 + 3) // 4
             a, b = biselect(index_, k1_, k2_)
 
             # Prepare ra_less, rb_more and L with saddleback search variants.
