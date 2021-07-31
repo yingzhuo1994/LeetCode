@@ -4,6 +4,25 @@
 #         self.val = val
 #         self.next = next
 class Solution:
+    # 1st soltuion, brute force
+    # O(N log(N)) time | O(N) space
+    # where k is the number of linked lists and N is the total number of nodes.
+    def mergeKLists(self, lists: List[ListNode]) -> ListNode:
+        self.nodes = []
+        head = point = ListNode(0)
+        for p in lists:
+            while p:
+                self.nodes.append(p.val)
+                p = p.next
+        
+        for v in sorted(self.nodes):
+            point.next = ListNode(v)
+            point = point.next
+        return head.next
+
+    # 2nd soltuion, Merge lists one by one
+    # O(kN) time | O(1) space
+    # where k is the number of linked lists and N is the total number of nodes.
     def mergeKLists(self, lists: List[ListNode]) -> ListNode:
         sentinel = ListNode(0)
         sentinel.next = lists[0]
