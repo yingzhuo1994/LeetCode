@@ -79,7 +79,6 @@ class Solution:
         for currUnique in range(1, maxUnique + 1):
             countMap = {}
             windowStart, windowEnd = 0, 0
-            idx = 0
             unique = 0
             countAtLeastK = 0
             while windowEnd < len(s):
