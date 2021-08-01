@@ -11,12 +11,12 @@ class Solution:
     # 2nd solution
     # O(n) time | O(1) space
     def firstMissingPositive(self, nums: List[int]) -> int:
-    """"
-    1. for any array whose length is l, the first missing positive must be in range [1,...,l+1], 
-        so we only have to care about those elements in this range and remove the rest.
-    2. we can use the array index as the hash to restore the frequency of each number within 
-         the range [1,...,l+1] 
-    """
+        """"
+        1. for any array whose length is l, the first missing positive must be in range [1,...,l+1], 
+            so we only have to care about those elements in this range and remove the rest.
+        2. we can use the array index as the hash to restore the frequency of each number within 
+            the range [1,...,l+1] 
+        """
         nums.append(0)
         n = len(nums)
         for i in range(len(nums)): #delete those useless elements
