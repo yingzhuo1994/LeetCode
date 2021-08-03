@@ -39,3 +39,27 @@ class Solution:
             if q:
                 p.next = q
         return sentinel.next
+
+    # 3rd solution, Merge with Divide And Conquer
+    # O(Nlog(k)) time | O(1) space
+    def mergeKLists(self, lists: List[ListNode]) -> ListNode:
+        amount = len(lists)
+        interval = 1
+        while interval < amount:
+            for i in range(0, amount - interval, interval * 2):
+                lists[i] = self.mergeTwoLists(lists[i], lists[i + interval])
+            interval *= 2
+        return lists[0] if amount > 0 else None
+    
+    def mergeTwoLists(self, p1, p2):
+        head = point = ListNode(0)
+        while p1 and p2:
+            if p1.val < p2.val:
+                point.next = p1
+                p1 = p1.next
+            else:
+                point.next = p2
+                p2 = p2.next
+            point = point.next
+        point.next = p1 or p2
+        return head.next
