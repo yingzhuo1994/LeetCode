@@ -35,3 +35,44 @@ class Solution:
             ans += min(left_max[i], right_max[i]) - height[i]
 
         return ans
+    
+    # 3rd solution, using stacks
+    # O(n) time | O(n) space
+    def trap(self, height: List[int]) -> int:
+        ans = 0
+        current = 0
+        stack = []
+        while current < len(height):
+            while stack and height[current] > height[stack[-1]]:
+                top = stack.pop()
+                if not stack:
+                    break
+                distance = current - stack[-1] - 1
+                bounded_height = min(height[current], height[stack[-1]]) - height[top]
+                ans += distance * bounded_height
+            stack.append(current)
+            current += 1
+        return ans
+
+    # 4th solution, using two pointers
+    # O(n) time | O(1) space
+    def trap(self, height: List[int]) -> int:
+        left = 0
+        right = len(height) - 1
+        ans = 0
+        left_max = 0
+        right_max = 0
+        while left < right:
+            if height[left] < height[right]:
+                if height[left] >= left_max:
+                    left_max = height[left]
+                else:
+                    ans += left_max - height[left]
+                left += 1
+            else:
+                if height[right] >= right_max:
+                    right_max = height[right]
+                else:
+                    ans += right_max - height[right]
+                right -= 1  
+        return ans
