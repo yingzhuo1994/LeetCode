@@ -38,7 +38,7 @@ class Solution(object):
         #         dic[nums[i]] = i
         # return []
 
-        # ???O(nlog(n)) time | O(1) space
+        # O(nlog(n)) time | O(1) space
         # critical case, nums = [3, 3], target = 6
         # not a good solution, it needs to be improved
         array = nums[:]
