@@ -20,7 +20,7 @@ class Solution:
         return (right - left - 1) * heights[i]
 
     # 2nd solution
-    # O(n) time | O(n) space
+    # O(n) time | O(1) space
     def largestRectangleArea(self, heights: List[int]) -> int:
         heights.append(0)
         stack = [-1]
