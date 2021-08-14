@@ -5,7 +5,6 @@ class Solution:
         largest_area = 0
         for i in range(len(heights)):
             current_area = self.get_area(heights, i)
-            print(i, current_area)
             if current_area > largest_area:
                 largest_area = current_area
         return largest_area
