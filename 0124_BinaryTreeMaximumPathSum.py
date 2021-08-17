@@ -5,7 +5,7 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    # O(n) time | O(1) space
+    # O(n) time | O(log(n)) space
     def maxPathSum(self, root: Optional[TreeNode]) -> int:
         _, maxSum = self.getMaxPathSum(root)
         return maxSum
