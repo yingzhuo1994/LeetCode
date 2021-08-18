@@ -21,4 +21,4 @@ class Solution:
                     for sol in dp_solution[j-1]:
                         dp_solution[k].append(sol + " " + s[j: k + 1])
                         
-        return [s[1:] for s in dp_solution[-2]]
+        return [seq[1:] for seq in dp_solution[-2]]
