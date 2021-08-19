@@ -8,6 +8,12 @@ class Solution:
         for i in range(len(points)):
             for j in range(i + 1, len(points)):
                 lineParameters = self.getLineParameters(points[i], points[j])
+                A, B, C = lineParameters
+                if A < 0:
+                    A, B, C = -A, -B, -C
+                g = reduce(self.gcd, [A, B, C])
+                A, B, C = A // g, B // g, C// g
+                lineParameters = (A, B, C)
                 dic[lineParameters] = dic.get(lineParameters, 0)
         
         for i in range(len(points)):
@@ -29,3 +35,8 @@ class Solution:
         A, B, C = lineParameters
         x, y = point[0], point[1]
         return A * x + B * y + C == 0
+
+    def gcd(self, a, b):
+        while a != 0:
+            a, b = b % a, a
+        return b
