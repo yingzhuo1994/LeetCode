@@ -1,6 +1,7 @@
 class Solution:
     # 1st solution
     # O(n^2) time | O(1) space
+    # Time Limit Exceeded
     def largestRectangleArea(self, heights: List[int]) -> int:
         largest_area = 0
         for i in range(len(heights)):
