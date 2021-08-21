@@ -64,10 +64,10 @@ class Solution:
     def getLineParameters(self, pointOne, pointTwo):
         x0, y0 = pointOne[0], pointOne[1]
         x1, y1 = pointTwo[0], pointTwo[1]
-        if x0 == x1:
-            return (1, 0, -x0)
-        if y0 == y1:
-            return (0, 1, -y0)
+        # if x0 == x1:
+        #     return (1, 0, -x0)
+        # if y0 == y1:
+        #     return (0, 1, -y0)
         return (y1 - y0, x0 - x1, x1 * y0 - x0 * y1)
     
     def gcd(self, a, b):
