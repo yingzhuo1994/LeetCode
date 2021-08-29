@@ -48,6 +48,6 @@ class Solution(object):
             
             # 如果当前的最高轮廓发生了变化，则记录一个关键点
             if res[-1][1] != -live[0][0]:
-                res += [ [L, -live[0][0]] ]
+                res.append([L, -live[0][0]])
         return res[1:]
         
