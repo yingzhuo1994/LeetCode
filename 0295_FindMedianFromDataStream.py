@@ -36,3 +36,26 @@ class MedianFinder:
                 return float(self.array[n // 2])
             else:
                 return float(self.array[n // 2] + self.array[n // 2 - 1]) / 2.0
+
+
+# 2nd solution
+from heapq import *
+
+class MedianFinder:
+
+    def __init__(self):
+        self.heaps = [], []
+
+    # O(log n) time
+    def addNum(self, num: int) -> None:
+        small, large = self.heaps
+        heappush(small, -heappushpop(large, num))
+        if len(large) < len(small):
+            heappush(large, -heappop(small))
+
+    # O(1) time
+    def findMedian(self) -> float:
+        small, large = self.heaps
+        if len(large) > len(small):
+            return float(large[0])
+        return (large[0] - small[0]) / 2.0
