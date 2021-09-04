@@ -22,6 +22,7 @@ class Codec:
                 vals.append('#')
         vals = []
         doit(root)
+        # there should be a whitespace between each number
         return ' '.join(vals)
         
 
