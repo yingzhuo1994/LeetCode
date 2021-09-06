@@ -18,6 +18,7 @@ class Solution:
     # where m and n are sizes of our board and T is the length fo the longest word in words
     # k is sum of length of all words.
     def findWords(self, board: List[List[str]], words: List[str]) -> List[str]:
+        # to prvent TLE
         self.num_words = len(words)
         res, trie = [], Trie()
         for word in words: trie.insert(word) 
