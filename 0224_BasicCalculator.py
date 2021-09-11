@@ -1,0 +1,23 @@
+class Solution:
+    # O(n) time
+    def calculate(self, s: str) -> int:
+        res, num, sign, stack = 0, 0, 1, []
+        for ch in s:
+            if ch.isdigit():
+                num = 10 * num + int(ch)
+            elif ch in "+-":
+                res += sign * num
+                num = 0
+                sign = 1 if ch == "+" else -1
+            elif ch == "(":
+                stack.append(res)
+                stack.append(sign)
+                sign, res = 1, 0
+            elif ch == ")":
+                res += sign * num
+                res *= stack.pop()
+                res += stack.pop()
+                num = 0
+        return res + num * sign
+
+
