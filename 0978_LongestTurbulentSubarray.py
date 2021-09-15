@@ -29,3 +29,33 @@ class Solution:
             else:
                 res.append(0)
         return res
+
+    # 2nd solution
+    # O(n) time | O(1) space
+    def maxTurbulenceSize(self, arr: List[int]) -> int:
+        if len(arr) == 1:
+            return 1
+            
+        lastState = self.getState(arr, 0, 1)
+        count = 0
+        start = 0
+        k = 1
+        
+        while k < len(arr):
+            curState = self.getState(arr, k - 1, k)
+            if curState == 0:
+                start = k + 1
+            elif curState + lastState != 0:
+                start = k
+            count = max(count, k - start + 1)
+            lastState = curState
+            k += 1
+        return count + 1
+
+    def getState(self, arr, i, j):
+        if arr[i] > arr[j]:
+            return 1
+        elif arr[i] < arr[j]:
+            return -1
+        else:
+            return 0
