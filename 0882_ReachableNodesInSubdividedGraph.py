@@ -44,8 +44,8 @@ class Solution:
     # 2nd solution
     # O(ElogN) time | O(E) space
     def reachableNodes(self, edges: List[List[int]], maxMoves: int, n: int) -> int:
-        G = defaultdict(set)
-        dist = [float('inf')] * N
+        G = collections.defaultdict(set)
+        dist = [float('inf')] * n
         dist[0] = 0
         
         for i, j, w in edges:
@@ -62,10 +62,10 @@ class Solution:
                     dist[neibh] = cand
                     heappush(heap, (cand, neibh)) 
                     
-        ans = sum(dist[i] <= M for i in range(N))
+        ans = sum(dist[i] <= maxMoves for i in range(n))
  
         for i, j, w in edges:
-            w1, w2 = M - dist[i], M - dist[j]
+            w1, w2 = maxMoves - dist[i], maxMoves - dist[j]
             ans += (max(0, w1) + max(0, w2))
             if w1 >= 0 and w2 >= 0: ans -= max(w1 + w2 - w, 0)
                 
