@@ -1,12 +1,13 @@
 class Solution:
+    # 1st solution
+    # O(nlogn) time | O(1) space
     def findKthLargest(self, nums: List[int], k: int) -> int:
-        # 1st solution
-        # O(nlogn) time | O(1) space
         nums.sort()
         return nums[-k]
     
-        # 2nd solution, bubble sort idea
-        # O(nk) time | O(1) space
+    # 2nd solution, bubble sort idea
+    # O(nk) time | O(1) space
+    def findKthLargest(self, nums: List[int], k: int) -> int:
         for i in range(k):
             for j in range(len(nums)-i-1):
                 if nums[j] > nums[j+1]:
@@ -14,8 +15,9 @@ class Solution:
                     nums[j], nums[j+1] = nums[j+1], nums[j]
         return nums[-k]
     
-        # 3rd solution, selection sort idea
-        # O(nk) time | o(1) space
+    # 3rd solution, selection sort idea
+    # O(nk) time | o(1) space
+    def findKthLargest(self, nums: List[int], k: int) -> int:
         for i in range(len(nums), len(nums)-k, -1):
             tmp = 0
             for j in range(i):
@@ -24,8 +26,9 @@ class Solution:
             nums[tmp], nums[i-1] = nums[i-1], nums[tmp]
         return nums[-k]
 
-        # 4th solution, quick select
-        # O(n) time | O(n) space
+    # 4th solution, quick select
+    # O(n) time | O(n) space
+    def findKthLargest(self, nums: List[int], k: int) -> int:
         if not nums: return
         pivot = random.choice(nums)
         left =  [x for x in nums if x > pivot]
