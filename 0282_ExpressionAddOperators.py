@@ -27,7 +27,7 @@ class Solution:
                 if i > start and path[start] == '0':
                     return False
                 num = num * 10 + int(ch)
-            else:
+            if not ch.isdigit() or i == len(path) - 1:
                 if operator == '+':
                     stack.append(num)
                 elif operator == '-':
@@ -38,10 +38,4 @@ class Solution:
                 start = i + 1
                 operator = ch
 
-        if operator == '+':
-            stack.append(num)
-        elif operator == '-':
-            stack.append(-num)
-        elif operator == '*':
-            stack[-1] *= num
         return target == sum(stack)
