@@ -23,6 +23,7 @@ class Solution:
         dfs(0, nums, cur)
         return self.ans   
 
+    # 2nd solution
     def numberOfArithmeticSlices(self, nums: List[int]) -> int:
         total, n = 0, len(nums)
         dp = [Counter() for item in nums]
@@ -32,3 +33,19 @@ class Solution:
             total += sum(dp[i].values())
           
         return total - (n - 1) * n // 2  
+
+    # 3rd solution
+    # O(n^2) time | O(n^2) space
+    def numberOfArithmeticSlices(self, nums: List[int]) -> int:
+        n = len(nums)
+        ans = 0
+        cnt = {}
+        for i in range(n):
+            cnt[i] = {}
+            for j in range(i):
+                diff = nums[i] - nums[j]
+                total = cnt[j].get(diff, 0)
+                origin = cnt[i].get(diff, 0)
+                cnt[i][diff] = origin + total + 1
+                ans += total
+        return ans  
