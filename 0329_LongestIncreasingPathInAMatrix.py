@@ -1,6 +1,6 @@
 class Solution:
     # 1st solution, brute-force, TLE
-    # O(mn * 4 ^ (mn)) time | O(1) space
+    # O(mn * 4 ^ (mn)) time | O(mn) space
     def longestIncreasingPath(self, matrix: List[List[int]]) -> int:
         max_path = [0]
         for i in range(len(matrix)):
@@ -20,13 +20,13 @@ class Solution:
             matrix[i][j] = num
 
     # 2nd solution
+    # O(mn) time | O(mn) space
     def longestIncreasingPath(self, matrix: List[List[int]]) -> int:
         max_path = [0]
         dp = [[0 for j in range(len(matrix[0]))] for i in range(len(matrix))]
         for i in range(len(matrix)):
             for j in range(len(matrix[0])):
                 self.dfs(matrix, i, j, float('-inf'), dp, max_path)
-        # print(dp)
         return max_path[0]
     
     def dfs(self, matrix, i, j, last_num, dp, max_path):
