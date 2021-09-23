@@ -1,4 +1,5 @@
 class Solution:
+    # 1st solution
     def findLadders(self, beginWord: str, endWord: str, wordList: List[str]) -> List[List[str]]:
         if endWord not in wordList:
             return []
@@ -19,5 +20,30 @@ class Solution:
                             newlayer[newWord] += [j + [newWord] for j in layer[word]] # add new word to all sequences and form new layer element
             wordSet -= set(newlayer.keys()) # remove from dictionary to prevent loops
             layer = newlayer # move down to new layer
+
+        return []
+
+    # 2nd solution
+    def findLadders(self, beginWord: str, endWord: str, wordList: List[str]) -> List[List[str]]:
+        if endWord not in wordList:
+            return []
+    
+        wordSet = set(wordList) 
+        layer = {}
+        layer[beginWord] = [[beginWord]] 
+        alpha = string.ascii_lowercase 
+
+        while layer:
+            newlayer = collections.defaultdict(list) 
+            for word in layer:
+                if word == endWord: 
+                    return layer[word] 
+                for i in range(len(word)): 
+                    for c in alpha:
+                        newWord =  word[:i] + c + word[i+1:]
+                        if newWord in wordSet:
+                            newlayer[newWord] += [lst + [newWord] for lst in layer[word]] 
+            wordSet -= set(newlayer.keys())
+            layer = newlayer 
 
         return []
