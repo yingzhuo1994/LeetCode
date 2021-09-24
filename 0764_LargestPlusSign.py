@@ -17,6 +17,7 @@ class Solution:
         return ans
 
     # 2nd solution
+    # O(n^2) time | O(n^2) space 
     def orderOfLargestPlusSign(self, n: int, mines: List[List[int]]) -> int:
         baned = {tuple(mine) for mine in mines}
         dp = [[0] * n for _ in range(n)]
