@@ -2,10 +2,10 @@ class Solution:
     # 1st solution, TLE
     def shortestPath(self, grid: List[List[int]], k: int) -> int:
         ans = [float("inf")]
-        self.dfs(grid, 0, 0, 0, k, ans)
+        self.bfs(grid, 0, 0, 0, k, ans)
         return ans[0] if ans[0] != float("inf") else -1
     
-    def dfs(self, grid, i, j, steps, k, ans):
+    def bfs(self, grid, i, j, steps, k, ans):
         if k < 0:
             return 
         m = len(grid)
@@ -21,15 +21,12 @@ class Solution:
         for x, y in [(1, 0), (0, 1), (-1, 0), (0, -1)]:
             tmp = grid[i][j]
             grid[i][j] = "#"
-            if tmp == 1:
-                self.dfs(grid, i + x, j + y, steps + 1, k - 1, ans)
-            else:
-                self.dfs(grid, i + x, j + y, steps + 1, k, ans)
+            self.bfs(grid, i + x, j + y, steps + 1, k - tmp, ans)
             grid[i][j] = tmp
 
 
     # 2nd solution
-    # O(m * n * (m + n))
+    # O(m * n * k) time | O(m * n * k) space
     def shortestPath(self, grid: List[List[int]], k: int) -> int:
         m, n = len(grid), len(grid[0])
         Q, v = deque([(0, 0, 0, k)]), set()
