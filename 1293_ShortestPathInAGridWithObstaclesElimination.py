@@ -35,12 +35,13 @@ class Solution:
             return m + n - 2
         
         while Q:
-            steps, x, y, k = Q.popleft()
-            if (x, y) == (n-1, m-1): return steps
+            steps, i, j, k = Q.popleft()
+            if (i, j) == (m-1, n-1): return steps
             
-            for dx, dy in (x, y-1), (x, y+1), (x-1, y), (x+1, y):
-                if 0 <= dx < n and 0 <= dy < m and k - grid[dy][dx] >= 0:
-                    new = (dx, dy, k - grid[dy][dx])
+            for x, y in [(0, -1), (0, 1), (-1, 0), (1, 0)]:
+                row, col = i + x, j + y
+                if 0 <= row < m and 0 <= col < n and k - grid[row][col] >= 0:
+                    new = (row, col, k - grid[row][col])
                     if new not in v:
                         v.add(new)
                         Q.append((steps + 1,) + new)
