@@ -1,4 +1,6 @@
 class Solution:
+    # 1st solution
+    # O(nlg(n)) time | O(n) space
     def getSkyline(self, buildings: List[List[int]]) -> List[List[int]]:
         events = sorted([(L, -H, R) for L, R, H in buildings] + list({(R, 0, None) for _, R, _ in buildings}))
         res, hp = [[0, 0]], [(0, float("inf"))]
