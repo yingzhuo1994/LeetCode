@@ -14,3 +14,17 @@ class Solution:
                 result[odd] = nums[i]
                 odd += 2
         return result
+
+    # 2nd solution
+    # O(n) time | O(1) space
+    def sortArrayByParityII(self, nums: List[int]) -> List[int]:
+        n = len(nums)
+        even = 0
+        odd = 1
+        while even < n:
+            if nums[even] % 2 != 0:
+                nums[odd], nums[even] = nums[even], nums[odd]
+                odd += 2
+            else:
+                even += 2
+        return nums
