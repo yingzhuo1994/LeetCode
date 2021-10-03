@@ -1,7 +1,8 @@
 class Solution:
+    # O(k*2^n) time | O(n) space
     def canPartitionKSubsets(self, nums: List[int], k: int) -> bool:
         total = sum(nums)
-        if total % k != 0:
+        if len(nums) < k or total % k != 0:
             return False
         goal = total // k
         
