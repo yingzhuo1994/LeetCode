@@ -2,6 +2,7 @@ from typing import Collection, Counter
 
 
 class Solution:
+    # 1st solution
     # O(km) time | O(m) space
     # m, n are the length of s1 and s2, and k = n - m 
     def checkInclusion(self, s1: str, s2: str) -> bool:
@@ -14,7 +15,6 @@ class Solution:
         
         for i in range(n2 - n1 + 1):
             dict_test = Counter(s2[i:n1 + i])
-            # print(dict_test)
             check = True
             for k, v in dict_s1.items():
                 if k not in dict_test or dict_test[k] != v:
