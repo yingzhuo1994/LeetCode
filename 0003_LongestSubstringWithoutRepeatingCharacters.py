@@ -1,7 +1,7 @@
 class Solution:
+    # 1st solution
+    # O(n) time | O(1) space
     def lengthOfLongestSubstring(self, s: str) -> int:
-        # 1st solution
-        # O(n) time | O(1) space
         if not s:
             return 0
         p1, p2 = 0, 0
@@ -16,8 +16,9 @@ class Solution:
                 p2 += 1
         return pair[1] - pair[0] + 1
 
-        # 2nd solution
-        # O(n) time | O(1) space
+    # 2nd solution
+    # O(n) time | O(1) space
+    def lengthOfLongestSubstring(self, s: str) -> int:
         used = {}
         max_length = start = 0
         for i, c in enumerate(s):
