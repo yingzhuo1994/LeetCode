@@ -3,7 +3,7 @@ from typing import Collection, Counter
 
 class Solution:
     # 1st solution
-    # O(km) time | O(m) space
+    # O(km) time | O(1) space
     # m, n are the length of s1 and s2, and k = n - m 
     def checkInclusion(self, s1: str, s2: str) -> bool:
         if len(s1) > len(s2):
