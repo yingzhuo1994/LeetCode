@@ -4,9 +4,10 @@ class Solution:
         ch = keysPressed[0]
         time = releaseTimes[0]
         for i in range(1, len(releaseTimes)):
-            if releaseTimes[i] - releaseTimes[i - 1] > time:
+            deltaTime = releaseTimes[i] - releaseTimes[i - 1]
+            if deltaTime > time:
                 ch = keysPressed[i]
-                time = releaseTimes[i] - releaseTimes[i - 1]
-            elif releaseTimes[i] - releaseTimes[i - 1] == time:
+                time = deltaTime
+            elif deltaTime == time:
                 ch = max(ch, keysPressed[i])
         return ch
