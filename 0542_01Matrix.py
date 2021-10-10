@@ -1,4 +1,6 @@
 class Solution:
+    # 1st solution
+    # O(r * c) time | O(1) space
     def updateMatrix(self, mat: List[List[int]]) -> List[List[int]]:
         m, n = len(mat), len(mat and mat[0])
         for i in range(m):
