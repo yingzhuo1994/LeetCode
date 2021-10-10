@@ -15,12 +15,7 @@ class Solution:
         
         for i in range(n2 - n1 + 1):
             dict_test = Counter(s2[i:n1 + i])
-            check = True
-            for k, v in dict_s1.items():
-                if k not in dict_test or dict_test[k] != v:
-                    check = False
-                    break
-            if check:
+            if dict_s1 == dict_test:
                 return True
         return False
             
