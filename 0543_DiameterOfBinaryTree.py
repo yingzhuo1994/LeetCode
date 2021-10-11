@@ -5,6 +5,8 @@
 #         self.left = left
 #         self.right = right
 class Solution:
+    # 1st solution
+    # O(n) time | O(log(n)) space
     def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
         _, longest = self.diameter(root)
         return longest - 1
