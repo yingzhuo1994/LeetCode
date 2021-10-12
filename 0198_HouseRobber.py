@@ -1,7 +1,7 @@
 class Solution:
+    # 1st solution
+    # O(n) time | O(n) space
     def rob(self, nums: List[int]) -> int:
-        # 1st solution
-        # O(n) time | O(n) space
         if len(nums) == 1:
             return nums[0]
         lst = [0] * len(nums)
@@ -11,8 +11,9 @@ class Solution:
             lst[i] = max(lst[i-1], nums[i] + lst[i-2])
         return lst[-1]
 
-        # 2nd solution
-        # O(n) time | O(1) sapce
+    # 2nd solution
+    # O(n) time | O(1) sapce
+    def rob(self, nums: List[int]) -> int:
         if len(nums) == 1:
             return nums[0]
         front = nums[0]
