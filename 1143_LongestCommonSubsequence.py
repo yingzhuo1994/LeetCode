@@ -67,7 +67,7 @@ class Solution:
                 visited.add((x, y))
         return ans
 
-    # 4th solution
+    # 4th solution, dynamic programming
     # O(mn) time | O(mn) space
     def longestCommonSubsequence(self, text1: str, text2: str) -> int:
         dp = [[0 for _ in range(len(text2) + 1)] for _ in range(len(text1) + 1)]
