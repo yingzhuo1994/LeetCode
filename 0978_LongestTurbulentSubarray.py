@@ -68,10 +68,10 @@ class Solution:
         anchor = 0
 
         for i in range(1, n):
-            c = self.getState(arr, i-1, i)
-            if c == 0:
+            currentState = self.getState(arr, i-1, i)
+            if currentState == 0:
                 anchor = i
-            elif i == n -1  or c * self.getState(arr, i, i + 1) != -1:
+            elif i == n -1  or currentState * self.getState(arr, i, i + 1) != -1:
                 ans = max(ans, i - anchor + 1)
                 anchor = i
         return ans
