@@ -1,10 +1,10 @@
 class Solution:
+    # 1st solution
+    # O(kn) time | O(1) space
     def rotate(self, nums: List[int], k: int) -> None:
         """
         Do not return anything, modify nums in-place instead.
         """
-        # 1st solution
-        # O(kn) time | O(1) space
         k = k % len(nums)
         while k > 0:
             lastValue = nums[-1]
@@ -13,14 +13,16 @@ class Solution:
             nums[0] = lastValue
             k -= 1
         
-        # 2nd solution
-        # O(n) time | O(n) space
+    # 2nd solution
+    # O(n) time | O(n) space
+    def rotate(self, nums: List[int], k: int) -> None:
         k = k % len(nums)
         lst = nums[-k:] + nums[:-k]
         nums[:] = lst
 
-        # 3rd solution
-        # O(n) time | O(1) space
+    # 3rd solution
+    # O(n) time | O(1) space
+    def rotate(self, nums: List[int], k: int) -> None:
         n = len(nums)
         k %= n
         
@@ -37,8 +39,9 @@ class Solution:
                     break
             start += 1
         
-        # 4th solution
-        # o(n) time | O(1) sapce 
+    # 4th solution
+    # o(n) time | O(1) sapce 
+    def rotate(self, nums: List[int], k: int) -> None:
         n = len(nums)
         k %= n
 
