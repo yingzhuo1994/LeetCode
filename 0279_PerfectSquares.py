@@ -12,7 +12,7 @@ class Solution:
         return 3
 
     # 2nd solution
-    # O(n^2) time | O(n) space
+    # O(n^2) time | O(n^2) space
     def numSquares(self, n: int) -> int:
         squareSet = set()
         k = 1
