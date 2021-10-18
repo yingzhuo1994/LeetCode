@@ -5,6 +5,8 @@
 #         self.left = left
 #         self.right = right
 class Solution:
+    # 1st solution
+    # O(n) time | O(n) space
     def isCousins(self, root: Optional[TreeNode], x: int, y: int) -> bool:
         nodes = collections.defaultdict(list)
         queue = deque([(root,0,0)])
@@ -29,3 +31,25 @@ class Solution:
 
         return False
 
+    # 2nd solution
+    # O(n) time | O(log(n)) space
+    def isCousins(self, root: Optional[TreeNode], x: int, y: int) -> bool:
+        self.findX = False
+        self.findY = False
+        dic = {}
+        self.findParent(root, x, y, 0, None, dic)
+        return dic[x][0] == dic[y][0] and dic[x][1] != dic[y][1]
+
+    def findParent(self, node, x, y, depth, parent, dic):
+        if not node:
+            return 
+        if self.findX and self.findY:
+            return
+        if node.val == x:
+            dic[x] =  [depth, parent]
+            self.findX = True
+        if node.val == y:
+            dic[y] = [depth, parent]
+            self.findY = True
+        self.findParent(node.left, x, y, depth + 1, node, dic)
+        self.findParent(node.right, x, y, depth + 1, node, dic)
