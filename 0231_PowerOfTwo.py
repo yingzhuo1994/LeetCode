@@ -3,11 +3,9 @@ class Solution:
     # O(1) time | O(1) space  
     def isPowerOfTwo(self, n: int) -> bool:
         x = 1
-        while x <= n:
-            if x == n:
-                return True
+        while x < n:
             x *= 2
-        return False
+        return x == n
 
     # 2nd solution
     # O(1) time | O(1) space
