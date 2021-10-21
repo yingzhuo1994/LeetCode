@@ -1,7 +1,7 @@
 class Solution:
+    # 1st solution
+    # O(n^2) time | O(1) space
     def longestPalindrome(self, s: str) -> str:
-        # 1st solution
-        # O(n^2) time | O(1) space
         def helper(s, start, end):
             while start >= 0 and end < len(s) and s[start] == s[end]:
                 start -= 1
