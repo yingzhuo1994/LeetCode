@@ -1,6 +1,6 @@
 class Solution:
+    # O(n) time | O(1) space
     def myAtoi(self, s: str) -> int:
-        # O(n) time | O(1) space
         sign = 1
         k = 0
         num = 0
