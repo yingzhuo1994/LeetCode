@@ -2,8 +2,6 @@ class Solution:
     # 1st solution
     # O(log(n)) time | O(1) space
     def findMin(self, nums: List[int]) -> int:
-        if len(nums) == 1:
-            return nums[0]
         left, right = 0, len(nums) - 1
         while left < right:
             mid = left + (right - left) // 2
