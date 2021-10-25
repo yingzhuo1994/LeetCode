@@ -29,21 +29,21 @@ class Solution:
     # O(m * n * k) time | O(m * n * k) space
     def shortestPath(self, grid: List[List[int]], k: int) -> int:
         m, n = len(grid), len(grid[0])
-        Q, v = deque([(0, 0, 0, k)]), set()
+        stack, visited = deque([(0, 0, 0, k)]), set()
         
         if k >= m + n - 2: 
             return m + n - 2
         
-        while Q:
-            steps, i, j, k = Q.popleft()
+        while stack:
+            steps, i, j, k = stack.popleft()
             if (i, j) == (m-1, n-1): return steps
             
             for x, y in [(0, -1), (0, 1), (-1, 0), (1, 0)]:
                 row, col = i + x, j + y
                 if 0 <= row < m and 0 <= col < n and k - grid[row][col] >= 0:
                     new = (row, col, k - grid[row][col])
-                    if new not in v:
-                        v.add(new)
-                        Q.append((steps + 1,) + new)
+                    if new not in visited:
+                        visited.add(new)
+                        stack.append((steps + 1,) + new)
             
         return -1
