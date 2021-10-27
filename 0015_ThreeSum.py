@@ -1,7 +1,7 @@
 class Solution:
+    # 1st solution
+    # O(n^2) time | O(n) space
     def threeSum(self, nums: List[int]) -> List[List[int]]:
-        # 1st solution
-        # O(n^2) time | O(n) space
         n = len(nums)
         if n < 3:
             return []
