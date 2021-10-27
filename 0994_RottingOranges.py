@@ -1,13 +1,12 @@
 class Solution:
+    # O(mn) time | O(1) space
     def orangesRotting(self, grid: List[List[int]]) -> int:
-        rotten = []
         m, n = len(grid), len(grid[0])
-        for i in range(m):
-            for j in range(n):
-                if grid[i][j] == 2:
-                    rotten.append((i, j))
+
         if self.isAllRotten(grid):
             return 0
+        
+        rotten = self.getRotten(grid)
         steps = 0
         while rotten:
             steps += 1
@@ -32,3 +31,10 @@ class Solution:
                     return False
         return True
 
+    def getRotten(self, grid):
+        rotten = []
+        for i in range(len(grid)):
+            for j in range(len(grid[0])):
+                if grid[i][j] == 2:
+                    rotten.append((i, j))
+        return rotten
