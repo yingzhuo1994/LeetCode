@@ -5,6 +5,7 @@
 #         self.left = left
 #         self.right = right
 class Solution:
+    # 1st solution
     def pathSum(self, root: Optional[TreeNode], targetSum: int) -> List[List[int]]:
         def helper(node, target):
             if not node:
@@ -16,3 +17,20 @@ class Solution:
             return [lst + [node.val] for lst in left + right]
         result = helper(root, targetSum)
         return [lst[::-1] for lst in result]
+
+    # 2nd solution
+    def pathSum(self, root: Optional[TreeNode], targetSum: int) -> List[List[int]]:
+        result = []
+        self.dfs(root, targetSum, result)
+        return result
+    
+    def dfs(self, node, target, result, path = []):
+        if not node:
+            return
+        value = node.val
+        if target == value and not node.left and not node.right:
+            path.append(value)
+            result.append(path)
+            return 
+        self.dfs(node.left, target - node.val, result, path + [value])
+        self.dfs(node.right, target - node.val, result, path + [value])
