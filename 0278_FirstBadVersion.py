@@ -10,11 +10,10 @@ class Solution:
         :type n: int
         :rtype: int
         """
-        left = 1
-        right = n
+        left, right = 1, n
         while left < right:
             # (left + right) may excedd the range of int
-            mid = left + (right - left) / 2
+            mid = left + (right - left) // 2
             if isBadVersion(mid):
                 right = mid
             else:
