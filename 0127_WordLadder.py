@@ -35,7 +35,7 @@ class Solution:
             for i in range(len(word)):
                 for ch in alpha:
                     new_word = word[:i] + ch + word[i + 1:]
-                    if new_word in  word_set:
+                    if new_word in word_set:
                         q.append((new_word, length + 1))
                         word_set.remove(new_word)
         return 0
