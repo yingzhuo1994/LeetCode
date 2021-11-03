@@ -1,3 +1,4 @@
+# 1st solution
 class Solution:
     def accountsMerge(self, accounts: List[List[str]]) -> List[List[str]]:
         uf = UF(len(accounts))
@@ -26,3 +27,61 @@ class UF:
         if x != self.parents[x]:
             self.parents[x] = self.find(self.parents[x])
         return self.parents[x]
+
+# 2nd solution
+# O(nk*log(nk)) time | O(nk) sapce
+# where n is the number of accounts and k is the maximum length of an account
+class Solution:
+    def accountsMerge(self, accounts: List[List[str]]) -> List[List[str]]:
+        visited = set()
+        adjacent = {}
+
+        for account in accounts:
+            accountSize = len(account)
+            
+            # Building adjacency list
+            # Adding edge between first email to all other emails in the account
+            accountFirstEmail = account[1]
+            for j in range(2, accountSize):
+                accountEmail = account[j]
+                
+                if accountFirstEmail not in adjacent:
+                    adjacent.setdefault(accountFirstEmail, [])
+
+                adjacent[accountFirstEmail].append(accountEmail)
+                
+                if accountEmail not in adjacent:
+                    adjacent.setdefault(accountEmail, [])
+
+                adjacent[accountEmail].append(accountFirstEmail)
+        
+        # Traverse over all th accounts to store components
+        mergedAccounts = []
+        for account in accounts:
+            accountName = account[0]
+            accountFirstEmail = account[1]
+            
+            # If email is visited, then it's a part of different component
+            # Hence perform DFS only if email is not visited yet
+            if accountFirstEmail not in visited:
+                mergedAccount = []
+                # Adding account name at the 0th index
+                mergedAccount.append(accountName)
+                
+                self.DFS(mergedAccount, accountFirstEmail, adjacent, visited)
+                mergedAccount[1:] = sorted(mergedAccount[1:])
+                mergedAccounts.append(mergedAccount)
+            
+        return mergedAccounts
+    
+    def DFS(self, mergedAccount, email, adjacent, visited):
+        visited.add(email)
+        # Add the email vector that contains the current component's emails
+        mergedAccount.append(email)
+        
+        if email not in adjacent:
+            return
+        
+        for neighbor in adjacent[email]:
+            if neighbor not in visited:
+                self.DFS(mergedAccount, neighbor, adjacent, visited)
