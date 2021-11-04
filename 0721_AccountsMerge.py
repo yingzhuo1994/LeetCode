@@ -79,9 +79,84 @@ class Solution:
         # Add the email vector that contains the current component's emails
         mergedAccount.append(email)
         
-        if email not in adjacent:
-            return
-        
         for neighbor in adjacent[email]:
             if neighbor not in visited:
                 self.DFS(mergedAccount, neighbor, adjacent, visited)
+
+# 3rd solution
+# O(nk*log(nk)) time | O(nk) sapce
+# where n is the number of accounts and k is the maximum length of an account
+class DSU:    
+    def __init__(self, sz):
+        self.representative = [i for i in range(sz)]
+        self.size = [1] * sz
+    
+    # Finds the representative of group x
+    def findRepresentative(self, x):
+        if x == self.representative[x]:
+            return x
+        
+        # This is path compression
+        self.representative[x] = self.findRepresentative(self.representative[x])
+        return self.representative[x]
+    
+    # Unite the group that contains "a" with the group that contains "b"
+    def unionBySize(self, a, b):
+        representativeA = self.findRepresentative(a)
+        representativeB = self.findRepresentative(b)
+        
+        # If nodes a and b already belong to the same group, do nothing.
+        if representativeA == representativeB:
+            return
+        
+        # Union by size: point the representative of the smaller
+        # group to the representative of the larger group.
+        if self.size[representativeA] >= self.size[representativeB]:
+            self.size[representativeA] += self.size[representativeB]
+            self.representative[representativeB] = representativeA
+        else:
+            self.size[representativeB] += self.size[representativeA]
+            self.representative[representativeA] = representativeB
+
+class Solution:
+    def accountsMerge(self, accounts: List[List[str]]) -> List[List[str]]:
+        accountListSize = len(accounts)
+        dsu = DSU(accountListSize)
+        
+        # Maps email to their component index
+        emailGroup = {}
+        
+        for i in range(accountListSize):
+            accountSize = len(accounts[i])
+            
+            for j in range(1, accountSize):
+                email = accounts[i][j]
+                accountName = accounts[i][0]
+                
+                # If this is the first time seeing this email then
+                # assign component group as the account index
+                if email not in emailGroup:
+                    emailGroup[email] = i
+                else:
+                    # If we have seen this email before then union this
+                    # group with the previous group of the email
+                    dsu.unionBySize(i, emailGroup[email])
+        
+        # Store emails corresponding to the component's representative
+        components = {}
+        for email, group in emailGroup.items():
+            groupRep = dsu.findRepresentative(group)
+            
+            if groupRep not in components:
+                components.setdefault(groupRep, [])
+            
+            components[groupRep].append(email)
+        
+        # Sort the components and add the account name
+        mergedAccounts = []
+        for group, component in components.items():
+            component.sort() 
+            component.insert(0, accounts[group][0])
+            mergedAccounts.append(component)
+        
+        return mergedAccounts
