@@ -19,6 +19,7 @@ class Solution:
         return [lst[::-1] for lst in result]
 
     # 2nd solution
+    # O(n^2) time | O(n^2) space
     def pathSum(self, root: Optional[TreeNode], targetSum: int) -> List[List[int]]:
         result = []
         self.dfs(root, targetSum, result)
