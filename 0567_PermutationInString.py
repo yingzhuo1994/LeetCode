@@ -22,20 +22,18 @@ class Solution:
     # 2nd solution, moving window
     # O(km) time | O(1) space
     def checkInclusion(self, s1: str, s2: str) -> bool:
-        if len(s1) > len(s2):
+        n1, n2 = len(s1), len(s2)
+        if n1 > n2:
             return False
-        
-        n1 = len(s1)
-        n2 = len(s2)
         dict_s1 = Counter(s1)
         dict_s2 = Counter(s2[:n1])
-        for i in range(n1, n2 + 1):
-            if dict_s1 == dict_s2:
-                return True
-            if i == n2:
-                return False
+        if dict_s1 == dict_s2:
+            return True
+        for i in range(n1, n2):
             dict_s2[s2[i - n1]] -= 1
             if dict_s2[s2[i - n1]] <= 0:
-                del dict_s2[s2[i - n1]]
+                dict_s2.pop(s2[i - n1])
             dict_s2[s2[i]] = dict_s2.get(s2[i], 0) + 1
+            if dict_s1 == dict_s2:
+                return True
         return False
