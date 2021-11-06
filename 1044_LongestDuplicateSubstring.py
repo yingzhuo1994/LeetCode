@@ -43,6 +43,7 @@ class Trie:
         return path
 
 # 3rd solution
+# O（n*log(n))
 class Solution:
     def longestDupSubstring(self, s: str) -> str:
         beg, end = 0, len(S)
