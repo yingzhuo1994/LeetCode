@@ -31,7 +31,7 @@ class Solution:
         self.numDic[diff] = count
         return count
 
-# 3rd solution
+# 3rd solution, Catalan Numbers
 # O(n) time | O(1) space
 class Solution:
     def numTrees(self, n: int) -> int:
