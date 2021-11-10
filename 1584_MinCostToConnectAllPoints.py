@@ -47,8 +47,6 @@ class DisjointSet:
     # find the representative of the 
     # path compression optimization
     def find(self, a):
-        if self.parent[a] == a:
-            return a
-        
-        self.parent[a] = self.find(self.parent[a])
+        if self.parent[a] != a:
+            self.parent[a] = self.find(self.parent[a])
         return self.parent[a]
