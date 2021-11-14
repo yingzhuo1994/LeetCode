@@ -1,26 +1,21 @@
 class CombinationIterator:
 
     def __init__(self, characters: str, combinationLength: int):
-        self.string = characters
-        self.combinationLength = combinationLength
-        self.indexList = [i for i in range(combinationLength)]
+        self.c = characters
+        self.len = combinationLength
+        self.state = ""
         
     def next(self) -> str:
-        if self.hasNext():
-            result = []
-            for idx in self.indexList:
-                result.append(self.string[idx])
-            return "".join(result)
+        if self.state == "":
+            self.state = self.c[:self.len]
+        else:
+            end = len(commonprefix([self.c[::-1], self.state[::-1]]))
+            place = self.c.index(self.state[-end-1])
+            self.state = self.state[:-end-1] + self.c[place + 1: place + 2 + end]
+        return self.state
 
     def hasNext(self) -> bool:
-    
-    def moveIndex(self):
-        carry = 1
-        for i in reversed(range(self.combinationLength)):
-            curCount = self.indexList[i] + carry
-            carry = curCount // self.combinationLength
-            if carry > 0:
-                self.indexList[i] = self.indexList[i]
+        return self.state != self.c[-self.len:]
         
 
 
