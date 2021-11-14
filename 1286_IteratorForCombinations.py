@@ -9,7 +9,7 @@ class CombinationIterator:
         if self.state == "":
             self.state = self.c[:self.len]
         else:
-            end = len(commonprefix([self.c[::-1], self.state[::-1]]))
+            end = len(os.path.commonprefix([self.c[::-1], self.state[::-1]]))
             place = self.c.index(self.state[-end-1])
             self.state = self.state[:-end-1] + self.c[place + 1: place + 2 + end]
         return self.state
