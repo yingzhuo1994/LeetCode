@@ -36,7 +36,12 @@ class DisjointSet:
     def __init__(self):
         self.parents = {}
         self.rank = {}
-    
+
+    def add(self, a):
+        if a not in self.parents:
+            self.parents[a] = (a, 1.0)
+            self.rank[a] = 1
+
     def find(self, x):
         px, v = self.parents[x]
         if x != px:
@@ -81,8 +86,3 @@ class DisjointSet:
         # a/b = (a/x) * (y/b) * (x/y)
         # x == y
         return vx / vy 
-    
-    def add(self, a):
-        if a not in self.parents:
-            self.parents[a] = (a, 1.0)
-            self.rank[a] = 0
