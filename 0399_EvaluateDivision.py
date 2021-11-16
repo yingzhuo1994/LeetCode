@@ -1,9 +1,11 @@
 # 1st solution, Floyd-Warshall solution
+# O（V^3) time | O(V^3) space
 class Solution:
     def calcEquation(self, equations: List[List[str]], values: List[float], queries: List[List[str]]) -> List[float]:
         quot = collections.defaultdict(dict)
         for (num, den), val in zip(equations, values):
-            quot[num][num] = quot[den][den] = 1.0
+            quot[num][num] = 1.0
+            quot[den][den] = 1.0
             quot[num][den] = val
             quot[den][num] = 1 / val
         for k in quot:
