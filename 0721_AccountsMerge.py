@@ -93,11 +93,8 @@ class DSU:
     
     # Finds the representative of group x
     def findRepresentative(self, x):
-        if x == self.representative[x]:
-            return x
-        
-        # This is path compression
-        self.representative[x] = self.findRepresentative(self.representative[x])
+        if x != self.representative[x]:
+            self.representative[x] = self.findRepresentative(self.representative[x])
         return self.representative[x]
     
     # Unite the group that contains "a" with the group that contains "b"
