@@ -1,5 +1,6 @@
+# 1st solution
+# O(3^mn) time | O(mn) space
 class Solution:
-    # 1st solution
     def uniquePathsIII(self, grid: List[List[int]]) -> int:
         start = (0, 0)
         end = (0, 0)
