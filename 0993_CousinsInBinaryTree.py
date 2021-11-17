@@ -4,9 +4,10 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+
+# 1st solution
+# O(n) time | O(n) space
 class Solution:
-    # 1st solution
-    # O(n) time | O(n) space
     def isCousins(self, root: Optional[TreeNode], x: int, y: int) -> bool:
         nodes = collections.defaultdict(list)
         queue = deque([(root,0,0)])
@@ -31,25 +32,23 @@ class Solution:
 
         return False
 
-    # 2nd solution
-    # O(n) time | O(log(n)) space
+# 2nd solution
+# O(n) time | O(log(n)) space
+class Solution:
     def isCousins(self, root: Optional[TreeNode], x: int, y: int) -> bool:
-        self.findX = False
-        self.findY = False
-        dic = {}
-        self.findParent(root, x, y, 0, None, dic)
-        return dic[x][0] == dic[y][0] and dic[x][1] != dic[y][1]
+        self.x = None
+        self.y = None
+        self.findParent(root, x, y, 0, None)
+        return self.x[0] == self.y[0] and self.x[1] != self.y[1]
 
-    def findParent(self, node, x, y, depth, parent, dic):
+    def findParent(self, node, x, y, depth, parent):
         if not node:
             return 
-        if self.findX and self.findY:
+        if self.x and self.y:
             return
         if node.val == x:
-            dic[x] =  [depth, parent]
-            self.findX = True
+            self.x =  [depth, parent]
         if node.val == y:
-            dic[y] = [depth, parent]
-            self.findY = True
-        self.findParent(node.left, x, y, depth + 1, node, dic)
-        self.findParent(node.right, x, y, depth + 1, node, dic)
+            self.y = [depth, parent]
+        self.findParent(node.left, x, y, depth + 1, node)
+        self.findParent(node.right, x, y, depth + 1, node)
