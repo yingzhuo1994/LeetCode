@@ -1,6 +1,6 @@
 class Solution:
     # 1st solution
-    # O(n*26^k) time | O(n) space
+    # O(n*26*k) time | O(n) space
     # where k is the length of beginword, and n is the length of wordList
     def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
         arr = set(wordList) #avoid TLE
@@ -21,7 +21,7 @@ class Solution:
         return 0
 
     # 2nd solution
-    # O(n*26^k) time | O(n) space
+    # O(n*26*k) time | O(n) space
     # where k is the length of beginword, and n is the length of wordList
     def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
         word_set = set(wordList) #avoid TLE
