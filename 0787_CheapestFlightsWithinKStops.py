@@ -23,7 +23,7 @@ class Solution:
 class Solution:
     def findCheapestPrice(self, n: int, flights: List[List[int]], src: int, dst: int, k: int) -> int:
         dist = [float("inf") for i in range(n)]
-        dist[src] = 0;
+        dist[src] = 0
         
         # Run only K+1 times since we want shortest distance in K hops
         for i in range(k + 1):
