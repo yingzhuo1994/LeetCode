@@ -1,4 +1,5 @@
-# 1st solution
+# 1st solution, Kruskal's algorithm
+# O(n^2) time | O(n^2) space
 class Solution:
     def minCostConnectPoints(self, points: List[List[int]]) -> int:
         n = len(points)
