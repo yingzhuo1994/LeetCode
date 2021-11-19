@@ -51,3 +51,27 @@ class DisjointSet:
         if self.parent[a] != a:
             self.parent[a] = self.find(self.parent[a])
         return self.parent[a]
+
+# 2nd solution, Prim's algorithm
+# O(n^2) time | O(n^2) space
+class Solution:
+    def minCostConnectPoints(self, points: List[List[int]]) -> int:
+        manhattan = lambda p1, p2: abs(p1[0] - p2[0]) + abs(p1[1] - p2[1])
+        n, c = len(points), collections.defaultdict(list)
+        for i in range(n):
+            for j in range(i + 1, n):
+                dist = manhattan(points[i], points[j])
+                c[i].append((dist, j))
+                c[j].append((dist, i))
+        cnt, ans, visited, heap = 1, 0, [0] * n, c[0]
+        visited[0] = 1
+        heapq.heapify(heap)
+        while heap:
+            dist, j = heapq.heappop(heap)
+            if not visited[j]:
+                visited[j], cnt= 1, cnt + 1
+                ans += dist
+                for record in c[j]: 
+                    heapq.heappush(heap, record)
+            if cnt >= n: break        
+        return ans
