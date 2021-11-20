@@ -16,3 +16,19 @@ class Solution:
                 else:
                     right = mid
         return nums[left]
+
+# 2nd solution, simplified
+# O(log(n)) time | O(1) space
+class Solution:
+    def singleNonDuplicate(self, nums: List[int]) -> int:
+        left, right = 0, len(nums) - 1
+        while left < right:
+            mid = left + (right - left) // 2
+            # odd xor 1 = odd-1
+            # even xor 1 = even+1
+            if nums[mid] == nums[mid ^ 1]:
+                left = mid + 1
+            else:
+                right = mid
+
+        return nums[left]
