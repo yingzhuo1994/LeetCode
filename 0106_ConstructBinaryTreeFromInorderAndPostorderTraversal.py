@@ -30,3 +30,21 @@ class Solution:
         
         dic = {elem: it for it, elem in enumerate(inorder)}  
         return helper(0, len(postorder), 0, len(inorder))
+
+# 3rd solution, included index
+# O(n) time | O(n) space
+class Solution:
+    def buildTree(self, inorder: List[int], postorder: List[int]) -> Optional[TreeNode]:
+        indexDic = {num: i for i, num in enumerate(inorder)}
+        def helper(inLeft, inRight, postLeft, postRight):
+            if inLeft > inRight or postLeft > postRight:
+                return None
+            value = postorder[postRight]
+            root = TreeNode(value)
+            index = indexDic[value]
+            leftLength = index - inLeft
+            rightLength = inRight - index
+            root.left = helper(inLeft, index - 1, postLeft, postLeft + leftLength-1)
+            root.right = helper(index + 1, inRight, postRight - rightLength, postRight - 1)
+            return root
+        return helper(0, len(inorder) - 1, 0, len(postorder) -1)
