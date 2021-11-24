@@ -55,6 +55,8 @@ class DisjointSet:
         return self.maxSize
 
 # 2nd solution
+# O(n*log(m)) time | O(n*log(m)) space
+# where n is the length of nums and m is the biggest number in nums.
 class DSU:
     def __init__(self, N):
         self.p = list(range(N))
@@ -72,9 +74,10 @@ class DSU:
 class Solution:
 	# Function to generate primes set for number n
     def primes_set(self,n):
-        for i in range(2, int(math.sqrt(n))+1):
+        for i in range(2, int(math.sqrt(n)) + 1):
             if n % i == 0:
-                return self.primes_set(n//i) | set([i])
+                # 'A U B =', A | B
+                return self.primes_set(n // i) | set([i])
         return set([n])
         
     def largestComponentSize(self, nums: List[int]) -> int:
