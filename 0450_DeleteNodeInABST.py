@@ -42,11 +42,10 @@ class Solution:
             parent = root
             while node.left:
                 node, parent = node.left, node
+            root.val = node.val
             if node != root.right:
-                root.val = node.val
                 parent.left = node.right
             else:
-                root.val = node.val
                 root.right = node.right
         elif root.val > key:
             root.left = self.deleteNode(root.left, key)
