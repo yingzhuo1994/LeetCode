@@ -1,6 +1,6 @@
+# 1st solution
+# O(n) time | O(n) space
 class Solution:
-    # 1st solution
-    # O(n) time | O(n) space
     def productExceptSelf(self, nums: List[int]) -> List[int]:
         leftProduct = [1 for _ in range(len(nums))]
         rightProduct = [1 for _ in range(len(nums))]
@@ -17,8 +17,9 @@ class Solution:
         
         return result
 
-    # 2nd solution
-    # O(n) time | O(n) space
+# 2nd solution
+# O(n) time | O(n) space
+class Solution:
     def productExceptSelf(self, nums: List[int]) -> List[int]:
         result = [1 for _ in range(len(nums))]
 
