@@ -1,5 +1,5 @@
+# 1st solution
 class Solution:
-    # 1st solution
     def findLadders(self, beginWord: str, endWord: str, wordList: List[str]) -> List[List[str]]:
         if endWord not in wordList:
             return []
@@ -23,7 +23,11 @@ class Solution:
 
         return []
 
-    # 2nd solution
+# 2nd solution
+# O(n*26^l) time | O(n + k * p) space
+# where n is the length of wordList, l is the longest length of words
+# k is number of paths, p is path length.
+class Solution:
     def findLadders(self, beginWord: str, endWord: str, wordList: List[str]) -> List[List[str]]:
         if endWord not in wordList:
             return []
