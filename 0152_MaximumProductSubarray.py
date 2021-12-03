@@ -1,6 +1,6 @@
+# 1st brute-force solution
 class Solution:
     def maxProduct(self, nums: List[int]) -> int:
-        # 1st brute-force solution
         largest = nums[0]
         for i in range(len(nums)):
             curProduct = 1
@@ -9,8 +9,10 @@ class Solution:
                 largest = max(largest, curProduct)
         return largest
 
-        # 2nd solution
-        # o(n) time | O(1) space
+# 2nd solution
+# o(n) time | O(1) space
+class Solution:
+    def maxProduct(self, nums: List[int]) -> int:
         r = nums[0]
         imax = r
         imin = r
