@@ -4,16 +4,17 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+
+# O(n) time | O(h) space
 class Solution:
     def rob(self, root: Optional[TreeNode]) -> int:
-        withRoot, withoutRoot = self.maxSum(root)
+        withRoot, _ = self.maxSum(root)
         return withRoot
     
     def maxSum(self, node):
         if not node:
-            return (0, 0)
-        if not node.left and not node.right:
-            return (node.val, 0)
+            return 0, 0
+
         leftWithNode, leftWithoutNode = self.maxSum(node.left)
         rightWithNode, rightWithoutNode = self.maxSum(node.right)
 

@@ -20,6 +20,7 @@ class Solution:
 
     # 2nd solution
     # O(n^2) time | O(n^2) space
+class Solution:
     def movesToChessboard(self, board: List[List[int]]) -> int:
         if len(board) <= 1:
             return 0
