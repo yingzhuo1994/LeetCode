@@ -19,3 +19,19 @@ class Solution:
         if not root:
             return 0
         return root.val + self.treeSum(root.left) + self.treeSum(root.right)
+
+# 2nd solution
+# O(n) time | O(h) space
+class Solution:
+    def findTilt(self, root: Optional[TreeNode]) -> int:
+        nodeSum, nodeTiltSum = self.sumAndTiltSum(root)
+        return nodeTiltSum
+
+    def sumAndTiltSum(self, root):
+        if not root:
+            return 0, 0
+        leftSum, leftTilt = self.sumAndTiltSum(root.left)
+        rightSum, rightTilt = self.sumAndTiltSum(root.right)
+        nodeSum = root.val + leftSum + rightSum
+        nodeTiltSum = abs(leftSum - rightSum) + leftTilt + rightTilt
+        return nodeSum, nodeTiltSum
