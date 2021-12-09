@@ -3,16 +3,16 @@
 class Solution:
     def canReach(self, arr: List[int], start: int) -> bool:
         stack = collections.deque([start])
-        visited = [False for _ in arr]
+        visited = set()
         while stack:
             node = stack.popleft()
+            if arr[node] == 0:
+                return True
             nextNodes = [node + arr[node], node - arr[node]]
             for nextNode in nextNodes:
                 if nextNode < 0 or nextNode >= len(arr):
                     continue
-                if arr[nextNode] == 0:
-                    return True
-                if not visited[nextNode]:
+                if nextNode not in visited:
                     stack.append(nextNode)
-                    visited[nextNode] = True
+                    visited.add(nextNode)
         return False
