@@ -57,3 +57,31 @@ class Solution:
         while a:
             a, b = b % a, a
         return b
+
+# 3rd solution, mathematical
+# O(a + b) time | O(1) space
+class Solution:
+    def nthMagicalNumber(self, n: int, a: int, b: int) -> int:
+        mod = 10**9 + 7
+        g = self.gcd(a, b)
+        largest = a // g * b
+
+        m = largest // a + largest // b - 1
+        q, r = divmod(n, m)
+        
+        if r == 0:
+            return q * largest % mod
+        
+        heads = [a, b]
+        for _ in range(r - 1):
+            if heads[0] <= heads[1]:
+                heads[0] += a
+            else:
+                heads[1] += b
+        
+        return (q * largest + min(heads)) % mod
+    
+    def gcd(self, a, b):
+        while a:
+            a, b = b % a, a
+        return b
