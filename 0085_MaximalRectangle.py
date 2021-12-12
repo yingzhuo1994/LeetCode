@@ -31,6 +31,8 @@ class Solution:
         return maxArea
 
 # 2nd solution
+# O(mn) time | O(n) space
+# where m, n are the row number and the column number separately
 class Solution:
     def maximalRectangle(self, matrix: List[List[str]]) -> int:
         if len(matrix) == 0: return 0
