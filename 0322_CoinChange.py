@@ -1,3 +1,6 @@
+# 1st solution
+# O(mn) time | O(n) space
+# where m, n are the coin number and the amount value separately.
 class Solution:
     def coinChange(self, coins: List[int], amount: int) -> int:
         table = [float('inf') for _ in range(amount + 1)]
