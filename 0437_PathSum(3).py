@@ -4,9 +4,10 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+
+# 1st solution
+# O(n^2) time | O(log(n)) space
 class Solution:
-    # 1st solution
-    # O(n^2) time | O(log(n)) space
     def pathSum(self, root: Optional[TreeNode], targetSum: int) -> int:
         stack = [root]
         count = 0
@@ -28,8 +29,9 @@ class Solution:
         count += self.pathSumHelper(node.right, targetSum - node.val)
         return count
 
-    # 2nd solution
-    # O(n) time | O(n) space
+# 2nd solution
+# O(n) time | O(n) space
+class Solution:
     def pathSum(self, root: Optional[TreeNode], targetSum: int) -> int:
         self.result = 0
         cache = {0:1}
