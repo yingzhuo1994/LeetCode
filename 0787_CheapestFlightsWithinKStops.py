@@ -25,7 +25,7 @@ class Solution:
         dist = [float("inf") for i in range(n)]
         dist[src] = 0
         
-        # Run only K+1 times since we want shortest distance in K hops
+        # Run only K+1 times since we want shortest distance in K stops
         for i in range(k + 1):
             tmp = dist[:]
             for flight in flights:
