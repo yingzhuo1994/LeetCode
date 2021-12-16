@@ -16,6 +16,8 @@ class Solution:
             self.dfs(coins, goal - coins[i], i, path + [coins[i]], ans)
 
 # 2nd solution
+# O(kn) time | O(n) space
+# where k is the number of coins, and n is amount.
 class Solution:
     def change(self, amount: int, coins: List[int]) -> int:
         dp = [0] * (amount + 1)
