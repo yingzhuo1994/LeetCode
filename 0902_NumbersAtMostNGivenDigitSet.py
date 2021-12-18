@@ -8,22 +8,35 @@ class Solution:
             length += 1
         
         k = len(digits)
-
-        rest = k * (1 - k**(length - 1)) // (1 - k)
+        
+        if k != 1:
+            rest = k * (1 - k**(length - 1)) // (1 - k)
+        else:
+            rest = length - 1
 
         digitSet = set([int(digit) for digit in digits])
 
-        firstDigit = n // 10**(length - 1)
+        front = self.fullDigit(digitSet, n, k, length)
+        
+        return front + rest
 
+    def fullDigit(self, digitSet, n, k, length):
+        if length == 1:
+            count = 0
+            for i in range(1, n + 1):
+                if i in digitSet:
+                    count += 1
+            return count
         count = 0
+        firstDigit = n // 10**(length - 1)
         for i in range(1, firstDigit):
             if i in digitSet:
                 count += 1
-        
+
         if firstDigit in digitSet:
-            return self.atMostNGivenDigitSet(digits, n % 10**(length-1)) + (count * k**(length - 1)) + rest
+            return self.fullDigit(digitSet, n % 10**(length - 1), k, length - 1) + count * k**(length - 1)
         else:
-            return (count * k**(length - 1)) + rest
+            return count * k**(length - 1)
 
 class Solution:
     def atMostNGivenDigitSet(self, digits: List[str], n: int) -> int:
