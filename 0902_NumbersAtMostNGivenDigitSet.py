@@ -38,6 +38,8 @@ class Solution:
         else:
             return count * k**(length - 1)
 
+# 2nd solution
+#  O(log(n)) time | O(log(n)) space
 class Solution:
     def atMostNGivenDigitSet(self, digits: List[str], n: int) -> int:
         S = str(n)
@@ -45,7 +47,7 @@ class Solution:
         dp = [0] * K + [1]
         # dp[i] = total number of valid integers if n was "n[i:]"
 
-        for i in range(K-1, -1, -1):
+        for i in reversed(range(K)):
             # Compute dp[i]
 
             for d in digits:
