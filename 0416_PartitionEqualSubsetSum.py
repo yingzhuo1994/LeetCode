@@ -30,7 +30,27 @@ class Solution:
         
         return dp[n - 1][target]
 
-# 2nd solution
+# 2nd solution, dynamic programming
+# O(n*target) time | O(target) space
+class Solution:
+    def canPartition(self, nums: List[int]) -> bool:
+        n = len(nums)
+        if n < 2:
+            return False
+        
+        total = sum(nums)
+        if total % 2 != 0:
+            return False
+        
+        target = total // 2
+        dp = [True] + [False] * target
+        for i, num in enumerate(nums):
+            for j in range(target, num - 1, -1):
+                dp[j] |= dp[j - num]
+        
+        return dp[target]
+
+# 3rd solution
 class Solution:
     def canPartition(self, nums: List[int]) -> bool:
         target, n = sum(nums), len(nums)
@@ -42,7 +62,7 @@ class Solution:
             if dp[target]: return True
         return False
 
-# 3rd solution
+# 4th solution
 class Solution:
     def canPartition(self, nums: List[int]) -> bool:
         s, n, memo = sum(nums), len(nums), {0: True}
