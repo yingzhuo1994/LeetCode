@@ -1,24 +1,34 @@
-# 1st solution, TLE
+# 1st solution, dynamic programming
+# O(n*target) time | O(n*target) space
 class Solution:
     def canPartition(self, nums: List[int]) -> bool:
-        if len(nums) == 1:
-            return False
-        total = sum(nums)
-        if total % 2 == 1:
+        n = len(nums)
+        if n < 2:
             return False
         
-        goal = total // 2
-        nums.sort()
-        return self.dfs(nums, 0, goal)
-    
-    def dfs(self, nums, idx, goal):
-        for i in range(idx, len(nums)):
-            if nums[i] == goal:
-                return True
-            if nums[i] < goal:
-                if self.dfs(nums, i + 1, goal - nums[i]):
-                    return True
-        return False
+        total = sum(nums)
+        maxNum = max(nums)
+        if total & 1:
+            return False
+        
+        target = total // 2
+        if maxNum > target:
+            return False
+        
+        dp = [[False] * (target + 1) for _ in range(n)]
+        for i in range(n):
+            dp[i][0] = True
+        
+        dp[0][nums[0]] = True
+        for i in range(1, n):
+            num = nums[i]
+            for j in range(1, target + 1):
+                if j >= num:
+                    dp[i][j] = dp[i - 1][j] | dp[i - 1][j - num]
+                else:
+                    dp[i][j] = dp[i - 1][j]
+        
+        return dp[n - 1][target]
 
 # 2nd solution
 class Solution:
