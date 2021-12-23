@@ -89,7 +89,7 @@ class Solution:
             pr_set = self.primes_set(num)
             for q in pr_set: primes[q].append(i)
 		# union disjoint set based on same primes
-        for _, indexes in primes.items():
+        for indexes in primes.values():
             for i in range(len(indexes)-1):
                 UF.union(indexes[i], indexes[i+1])
 		# Count the apperance of parents, return the maxium one
