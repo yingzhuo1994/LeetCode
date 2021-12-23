@@ -54,7 +54,8 @@ class Solution:
 
         return topological_sorted_order[::-1] if is_possible else []
 
-    # 2nd solution
+# 2nd solution
+class Solution:
     def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
         graph = [[] for _ in range(numCourses)]
         colors = [0 for _ in range(numCourses)]
