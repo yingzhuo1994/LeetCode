@@ -1,5 +1,5 @@
+# O(n) time | O(1) space
 class Solution:
-    # O(n) time | O(1) space
     def tribonacci(self, n: int) -> int:
         if n == 0:
             return 0
