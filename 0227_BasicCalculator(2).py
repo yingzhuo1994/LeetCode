@@ -1,7 +1,7 @@
+# 1st solution
+# O(n) time | O(n) space
 class Solution:
     def calculate(self, s: str) -> int:
-        # 1st solution
-        # O(n) time | O(n) space
         n = len(s)
         if n == 0:
             return 0
@@ -27,8 +27,10 @@ class Solution:
                 curNum = 0
         return sum(stack)     
 
-        # 2nd solution
-        # O(n) time | O(1) space
+# 2nd solution
+# O(n) time | O(1) space
+class Solution:
+    def calculate(self, s: str) -> int:
         front, back = 0, 0
         curNum = 0
         operation = '+'
