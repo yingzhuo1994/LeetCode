@@ -1,6 +1,6 @@
+# 1st solution
+# O(n) time | O(1) space
 class Solution:
-    # 1st solution
-    # O(n) time | O(1) space
     def moveZeroes(self, nums: List[int]) -> None:
         """
         Do not return anything, modify nums in-place instead.
