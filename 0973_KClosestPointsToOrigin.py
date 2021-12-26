@@ -107,3 +107,40 @@ class Solution:
     def squared_distance(self, point: List[int]) -> int:
         """Calculate and return the squared Euclidean distance."""
         return point[0] ** 2 + point[1] ** 2
+
+# 4th soltuion, Binary Seach + Quick Select
+# O(n) time | O(n) space
+class Solution:
+    def kClosest(self, points: List[List[int]], k: int) -> List[List[int]]:
+        distance = [self.getDistance(point) for point in points]
+
+        low, high = 0, max(distance)
+        L, R = 0, len(points) - 1
+        while low < high:
+            mid = low + (high - low) // 2
+            left, right = L, R
+            while left <= right:
+                if distance[left] <= mid:
+                    left += 1
+                else:
+                    self.swap(distance, left, right)
+                    self.swap(points, left, right)
+                    right -= 1
+            if left < k :
+                low = mid + 1
+                L = left
+            elif left > k :
+                high = mid
+                R = left
+            else:
+                break
+              
+        return points[:k]
+                   
+    
+    def swap(self, arr, a, b):
+        arr[a], arr[b] = arr[b], arr[a]
+    
+    def getDistance(self, point):
+        x, y = point[0], point[1]
+        return x**2 + y**2
