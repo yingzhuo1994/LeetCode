@@ -16,3 +16,12 @@ class Solution:
         for i in range(len(result)):
             ans += result[i] * 2**i
         return ans
+
+# 2nd solution
+# O(1) time | O(1) space
+class Solution:
+    def findComplement(self, num: int) -> int:
+        n = 0
+        while n < num:
+            n = (n << 1) | 1
+        return n - num
