@@ -1,6 +1,6 @@
+# 1st solution
+# O(2^n) time | O(n) space
 class Solution:
-    # 1st solution
-    # O(2^n) time | O(n) space
     def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
         # Sorting is really helpful, se we can avoid over counting easily
         candidates.sort()                      
