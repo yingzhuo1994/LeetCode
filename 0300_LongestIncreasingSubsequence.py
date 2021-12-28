@@ -1,6 +1,6 @@
+# 1st solution, dynamic programming
+# O(n^2) time | O(n) space
 class Solution:
-    # 1st solution, dynamic programming
-    # O(n^2) time | O(n) space
     def lengthOfLIS(self, nums: List[int]) -> int:
         countLst = [1 for _ in range(len(nums))]
         for i in range(1, len(nums)):
@@ -9,8 +9,9 @@ class Solution:
                     countLst[i] = max(countLst[j] + 1, countLst[i])
         return max(countLst)
 
-    # 2nd solution, intelligently build a subsequence
-    # O(n^2) time | O(n) space
+# 2nd solution, intelligently build a subsequence
+# O(n^2) time | O(n) space
+class Solution:
     def lengthOfLIS(self, nums: List[int]) -> int:
         sub = [nums[0]]
         
@@ -26,9 +27,10 @@ class Solution:
 
         return len(sub)
 
-    # 3rd solution, imporve with binary search
-    # O(nlogn) time | O(n) space
-    # In Python, the bisect module provides super handy functions that does binary search for us.
+# 3rd solution, imporve with binary search
+# O(nlogn) time | O(n) space
+# In Python, the bisect module provides super handy functions that does binary search for us.
+class Solution:
     def lengthOfLIS(self, nums: List[int]) -> int:
         sub = []
         for num in nums:
