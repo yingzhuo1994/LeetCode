@@ -27,3 +27,22 @@ class Solution:
             prev.next = node
             node.next = curNode
         return sentinel.next
+
+# 2nd solution, simplified
+# O(n^2) time | O(1) space
+class Solution:
+    def insertionSortList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        sentinel = ListNode(0)
+        
+        node = head
+        while node:
+            nextNode = node.next
+            prev = sentinel
+            p = sentinel.next
+            while p and node.val > p.val:
+                prev = p
+                p = p.next
+            prev.next = node
+            node.next = p
+            node = nextNode
+        return sentinel.next
