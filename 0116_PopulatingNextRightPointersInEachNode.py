@@ -8,9 +8,9 @@ class Node:
         self.next = next
 """
 
+# 1st stack solution
+# O(n) time | O(n) space
 class Solution:
-    # 1st stack solution
-    # O(n) time | O(n) space
     def connect(self, root: 'Node') -> 'Node':
         level = [root] if root else []
         while level:
@@ -25,8 +25,9 @@ class Solution:
             level = curLevel
         return root
 
-    # 2nd solution
-    # O(n) time | O(1) space
+# 2nd solution
+# O(n) time | O(1) space
+class Solution:
     def connect(self, root: 'Node') -> 'Node':
         head = root
         while root and root.left:
@@ -34,7 +35,8 @@ class Solution:
             while root:
                 root.left.next = root.right 
                 # root.right.next = root.next and root.next.left
-                root.right.next = None if not root.next else root.next.left 
+                if root.next:
+                    root.right.next = root.next.left 
                 root = root.next
             root = nextLevelNode
         return head
