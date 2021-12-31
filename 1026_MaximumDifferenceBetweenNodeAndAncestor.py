@@ -15,10 +15,9 @@ class Solution:
     
     def searchWithMaxMin(self, node, greatest, smallest):
         if not node:
+            diff = greatest - smallest
+            self.ans = max(self.ans, diff)
             return 
-        diffOne = abs(greatest - node.val)
-        diffTwo = abs(smallest - node.val)
-        self.ans = max(self.ans, diffOne, diffTwo)
 
         greatest = max(greatest, node.val)
         smallest = min(smallest, node.val)
