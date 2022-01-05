@@ -1,7 +1,7 @@
+# 1st backtracking solution
+# O(n * 2^n) time | O(n) space
 class Solution:
     def partition(self, s: str) -> List[List[str]]:
-        # 1st backtracking solution
-        # O(n * 2^n) time | O(n) space
         def isPalindrome(s, low, high):
             while low < high:
                 if s[low] != s[high]: 
@@ -27,10 +27,11 @@ class Solution:
         result = []
         dfs(0, result, [], s)
         return result
-        
-    # 2nd solution, backtracing with dynamic programming
-    # O(n * 2^n) time | O(N^2) space
-    def partition(self, s: str) -> List[List[str]]:
+
+# 2nd solution, backtracing with dynamic programming
+# O(n * 2^n) time | O(n^2) space
+class Solution:
+    def partition(self, s: str) -> List[List[str]]:        
         n = len(s)
         dp = [[False for _ in range(n)] for _ in range(n)]
         result = []
@@ -49,14 +50,14 @@ class Solution:
                 curLst.pop()
             end += 1
         
-    # 3rd solution
-    ret = []
-    for i in range(1, len(s)+1):
-        if s[:i] == s[i-1::-1]:
-            for rest in self.partition(s[i:]):
-                ret.append([s[:i]]+rest)
-    if not ret:
-        return [[]]
-    return ret
-
-
+# 3rd solution
+class Solution:
+    def partition(self, s: str) -> List[List[str]]:
+        ret = []
+        for i in range(1, len(s)+1):
+            if s[:i] == s[i-1::-1]:
+                for rest in self.partition(s[i:]):
+                    ret.append([s[:i]]+rest)
+        if not ret:
+            return [[]]
+        return ret
