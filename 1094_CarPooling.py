@@ -14,3 +14,15 @@ class Solution:
             if capacity < 0:
                 return False
         return True
+
+# 2nd solution
+# O(m) time | O(m) space
+# where m is the maximum distance
+class Solution:
+    def carPooling(self, trips: List[List[int]], capacity: int) -> bool:
+        m = max([i for _,_,i in trips])
+        times = [0]*(m+2)
+        for i,j,k in trips:
+            times[j+1] += i
+            times[k+1] -= i
+        return all(num <= capacity for num in accumulate(times))
