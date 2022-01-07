@@ -26,7 +26,40 @@ class Solution:
             p = p.next
         return n
         
+# 2nd solution
+class Solution:
+    # O(n) time | O(n) space
+    def __init__(self, head: Optional[ListNode]):
+        self.stack = []
+        while head:
+            self.stack.append(head.val)
+            head = head.next
 
+    # O(1) time | O(1) space
+    def getRandom(self) -> int:
+        idx = random.randint(0, len(self.stack) - 1)
+        return self.stack[idx]
+
+# 3rd solution, Reservoir Sampling
+class Solution:
+    # O(1) time | O(1) space
+    def __init__(self, head: Optional[ListNode]):
+        self.head = head
+
+    # O(n) time | O(1) space
+    def getRandom(self) -> int:
+        scope = 1
+        chosen_value = 0
+        curr = self.head
+
+        while curr:
+            # decide whether to include the element in reservoir
+            if random.random() < 1 / scope:
+                chosen_value = curr.val
+            # move on to the next node
+            curr = curr.next
+            scope += 1
+        return chosen_value
 
 # Your Solution object will be instantiated and called as such:
 # obj = Solution(head)
