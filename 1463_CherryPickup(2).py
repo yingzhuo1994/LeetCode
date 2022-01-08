@@ -1,3 +1,5 @@
+# 1st solution, bottom-up dp solution
+# O(m*n^2) time | O(m*n^2) space
 class Solution:
     def cherryPickup(self, grid: List[List[int]]) -> int:
         m = len(grid)
