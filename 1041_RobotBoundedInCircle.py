@@ -2,28 +2,18 @@
 # O(n) time | O(1) space
 class Solution:
     def isRobotBounded(self, instructions: str) -> bool:
-        place = [0, 0]
-        direction = (0, 1)
-        turnLeft ={(0, 1): (-1, 0),
-                   (-1, 0): (0, -1),
-                   (0, -1): (1, 0),
-                   (1, 0): (0, 1)
-                   }
-        turnRight = {(0, 1): (1, 0),
-                     (1, 0): (0, -1),
-                     (0, -1): (-1, 0),
-                     (-1, 0): (0, 1)
-                    }
+        x, y = 0, 0 # location
+        dx, dy = 0, 1 # direction
         for ch in instructions:
             if ch == "G":
-                place[0] += direction[0]
-                place[1] += direction[1]
+                x += dx
+                y += dy
             elif ch == "L":
-                direction = turnLeft[direction]
+                dx, dy = -dy, dx
             elif ch == "R":
-                direction = turnRight[direction]
+                dx, dy = dy, -dx
 
-        if direction == (0, 1):
-            return place == [0, 0]
+        if (dx, dy) == (0, 1):
+            return (x, y) == (0 , 0)
         else:
             return True
