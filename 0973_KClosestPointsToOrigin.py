@@ -144,3 +144,42 @@ class Solution:
     def getDistance(self, point):
         x, y = point[0], point[1]
         return x**2 + y**2
+
+# 5th solution, recursive quick-selection
+# O(n) time | O(n) space
+class Solution:
+    def kClosest(self, points: List[List[int]], k: int) -> List[List[int]]:
+        distances = [self.getDistance(point) for point in points]
+        self.quickSelect(distances, points, 0, len(points) - 1, k)
+        return points[:k]
+            
+    
+    def getDistance(self, point):
+        x, y = point[0], point[1]
+        return x**2 + y**2
+    
+    def swap(self, array, i, j):
+        array[i], array[j] = array[j], array[i]
+    
+    def quickSelect(self, distances, points, left, right, k):
+        pivot = distances[left]
+        L, R = left, right
+        idx = L
+        while idx <= R:
+            if distances[idx] < pivot:
+                self.swap(distances, idx, L)
+                self.swap(points, idx, L)
+                idx += 1
+                L += 1
+            elif distances[idx] > pivot:
+                self.swap(distances, idx, R)
+                self.swap(points, idx, R)
+                R -= 1
+            else:
+                idx += 1
+        if k <= L:
+            self.quickSelect(distances, points, left, L - 1, k)
+        elif k > idx:
+            self.quickSelect(distances, points, idx, right, k)
+        else:
+            return
