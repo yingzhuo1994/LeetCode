@@ -44,3 +44,50 @@ class Solution:
                 sub[i] = num
         
         return len(sub)
+
+    # def binarySearch(self, sub, num):
+    #     left, right = 0, len(sub)
+    #     while left < right:
+    #         mid = left + (right - left) // 2
+    #         if sub[mid] >= num:
+    #             right = mid
+    #         else:
+    #             left = mid + 1
+    #     return left
+
+# 4th solution, binary search with sequece building
+# O(nlogn) time | O(n) space
+# In Python, the bisect module provides super handy functions that does binary search for us.
+class Solution:
+    def lengthOfLIS(self, nums: List[int]) -> int:
+        indices = [None]
+        sequences = [None for _ in nums]
+        length = 0
+
+        for i, num in enumerate(nums):
+            idx = self.getIndex(nums, indices, num)
+            if idx == len(indices):
+                indices.append(i)
+            else:
+                indices[idx] = i
+            sequences[i] = indices[idx - 1]
+            length = max(length, idx)
+        # result = self.buildSequence(nums, sequences, indices[length])
+        return length
+    
+    def getIndex(self, nums, indices, num):
+        left, right = 1, len(indices)
+        while left < right:
+            mid = left + (right - left) // 2
+            if nums[indices[mid]] >= num:
+                right = mid
+            else:
+                left = mid + 1
+        return left
+    
+    def buildSequence(self, nums, sequences, idx):
+        result = []
+        while idx is not None:
+            result.append(nums[idx])
+            idx = sequences[idx]
+        return result[::-1]
