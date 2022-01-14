@@ -1,5 +1,6 @@
+# 1st solution
+# O(n) time | O(1) space
 class Solution:
-    # O(n) time | O(1) space
     def myAtoi(self, s: str) -> int:
         sign = 1
         k = 0
@@ -26,5 +27,5 @@ class Solution:
             k += 1
         if sign > 0:
             return min(num, 2**31 - 1)
-        elif sign < 0:
+        else:
             return sign * min(num, 2**31)
