@@ -37,12 +37,9 @@ class Solution:
         if n <= 1:
             return 0
 
-        graph = {}
+        graph = collections.defaultdict(list)
         for i in range(n):
-            if arr[i] in graph:
-                graph[arr[i]].append(i)
-            else:
-                graph[arr[i]] = [i]
+            graph[arr[i]].append(i)
 
         curs = set([0])  # store layers from start
         visited = {0, n-1}
