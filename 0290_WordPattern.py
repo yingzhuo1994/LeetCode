@@ -12,10 +12,9 @@ class Solution:
             if pattern[i] in patternToWord:
                 if patternToWord[pattern[i]] != words[i]:
                     return False
-            elif words[i] in wordToPattern:
-                if wordToPattern[words[i]] != pattern[i]:
-                    return False
             else:
+                if words[i] in wordToPattern:
+                    return False
                 patternToWord[pattern[i]] = words[i]
                 wordToPattern[words[i]] = pattern[i]
         return True
