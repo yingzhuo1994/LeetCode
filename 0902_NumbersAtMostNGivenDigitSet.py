@@ -17,7 +17,3 @@ class Solution:
                     dp[i] += dp[i+1]
 
         return dp[0] + sum(len(digits) ** i for i in range(1, K))
-
-
-
-        
