@@ -27,7 +27,7 @@ class Solution:
                 dic[arr[k]].clear()
             level = newLevel
             step += 1
-        return step
+        return -1
 
 # 2nd solution
 # O(n) time | O(n) space
