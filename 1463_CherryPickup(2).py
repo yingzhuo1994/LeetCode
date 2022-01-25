@@ -4,7 +4,7 @@ class Solution:
     def cherryPickup(self, grid: List[List[int]]) -> int:
         m = len(grid)
         n = len(grid[0])
-        dp = [[[0]*n for _ in range(n)] for __ in range(m)]
+        dp = [[[0]*n for _ in range(n)] for _ in range(m)]
 
         for row in reversed(range(m)):
             for col1 in range(n):
