@@ -6,11 +6,12 @@
 #         self.right = right
 
 # 1st solution
-# O(n) time | O(n) space
+# O(m + n) time | O(m + n) space
 class Solution:
     def getAllElements(self, root1: TreeNode, root2: TreeNode) -> List[int]:
-        arrayOne = self.getElements(root1)
-        arrayTwo = self.getElements(root2)
+        arrayOne, arrayTwo = [], []
+        self.getElements(root1, arrayOne)
+        self.getElements(root2, arrayTwo)
         res = []
         i, j = 0, 0
         while i < len(arrayOne) and j < len(arrayTwo):
@@ -23,7 +24,9 @@ class Solution:
         res.extend(arrayOne[i:] or arrayTwo[j:])
         return res
   
-    def getElements(self, root):
+    def getElements(self, root, lst):
         if not root:
-            return []
-        return self.getElements(root.left) + [root.val] + self.getElements(root.right)
+            return
+        self.getElements(root.left, lst)
+        lst.append(root.val) 
+        self.getElements(root.right, lst)
