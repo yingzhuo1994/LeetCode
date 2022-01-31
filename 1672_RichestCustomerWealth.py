@@ -1,5 +1,6 @@
 # 1st solution
-# O(n) time | O(1) space
+# O(m * n) time | O(1) space
+# where m is the customer number and n is the bank number
 class Solution:
     def maximumWealth(self, accounts: List[List[int]]) -> int:
         ans = 0
