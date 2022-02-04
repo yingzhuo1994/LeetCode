@@ -10,7 +10,7 @@ class Solution:
                     ans = max(ans, count * 2)
         return ans
 
-# 2nd solution, TLE
+# 2nd solution
 # O(n) time | O(n) space 
 class Solution:
     def findMaxLength(self, nums: List[int]) -> int:
@@ -25,3 +25,23 @@ class Solution:
             else:
                 arr[count + len(nums)] = i
         return maxlen
+
+# 3rd solution
+# O(n) time | O(n) space 
+class Solution:
+    def findMaxLength(self, nums: List[int]) -> int:
+        count = 0
+        max_length=0
+        table = {0: 0}
+        for index, num in enumerate(nums, 1):
+            if num == 0:
+                count -= 1
+            else:
+                count += 1
+            
+            if count in table:
+                max_length = max(max_length, index - table[count])
+            else:
+                table[count] = index
+        
+        return max_length
