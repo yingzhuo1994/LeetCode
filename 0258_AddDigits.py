@@ -1,3 +1,4 @@
+# 1st solution
 # O(1) time | O(1) space
 class Solution:
     def addDigits(self, num: int) -> int:
@@ -8,3 +9,13 @@ class Solution:
                 num = num // 10
             num = cur
         return num
+
+# 2nd solution
+# O(1) time | O(1) space
+class Solution:
+    def addDigits(self, num: int) -> int:
+        if num == 0:
+            return 0
+        if num % 9 == 0:
+            return 9
+        return num % 9
