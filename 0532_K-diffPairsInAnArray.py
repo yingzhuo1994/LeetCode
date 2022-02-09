@@ -17,3 +17,14 @@ class Solution:
                 if lastIdx > curIdx and (num + k, num) not in lst:
                     lst.add((num, num + k))
         return len(lst)
+
+# 2nd solution
+# O(n) time | O(n) space
+class Solution:
+    def findPairs(self, nums: List[int], k: int) -> int:
+        dic = Counter(nums)
+        if k > 0:
+            count = sum([num + k in dic for num in dic])
+        else:
+            count = sum([dic[num] > 1 for num in dic])
+        return count
