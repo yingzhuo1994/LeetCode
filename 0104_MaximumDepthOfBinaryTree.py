@@ -4,16 +4,19 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+
+# 1st recursive solution
+# O(n) time | O(h) space
 class Solution:
     def maxDepth(self, root: TreeNode) -> int:
-    # 1st recursive solution
-    # O(n) time | O(h) space
         if not root:
             return 0
         return 1 + max(self.maxDepth(root.left), self.maxDepth(root.right))
 
-    # 2nd iterative solution
-    # O(n) time | O(n) space
+# 2nd iterative solution
+# O(n) time | O(n) space
+class Solution:
+    def maxDepth(self, root: TreeNode) -> int:
         depth = 0
         level = [root] if root else []
         while level:
