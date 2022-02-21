@@ -1,21 +1,18 @@
+# 1st brute-force solution
+# Time complexity: O(n) & Space complexity: O(n)
 class Solution:
     def majorityElement(self, nums: List[int]) -> int:
-        # 1st brute-force solution
-        # Time complexity: O(n) & Space complexity: O(n)
-        # threshold = len(nums) // 2
-        # dic = {}
-        # for elem in nums:
-        #     if elem not in dic:
-        #         dic[elem] = 1
-        #     else:
-        #         dic[elem] += 1
-        # for elem in dic:
-        #     if dic[elem] > threshold:
-        #         return elem
-        # return None
+        threshold = len(nums) // 2
+        dic = Counter(nums)
+        for elem in dic:
+            if dic[elem] > threshold:
+                return elem
+        return None
 
-        # 2nd Boyer-Moore Voting Algorithm
-        # Time complexity: O(n) & Space complexity: O(1)
+# 2nd Boyer-Moore Voting Algorithm
+# Time complexity: O(n) & Space complexity: O(1)
+class Solution:
+    def majorityElement(self, nums: List[int]) -> int:
         count = 0
         candidate = None
 
