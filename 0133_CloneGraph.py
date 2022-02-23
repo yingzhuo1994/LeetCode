@@ -35,3 +35,18 @@ class Solution:
                 createdList[value].neighbors.append(createdList[neighbor.val])
                 stack.append(neighbor)
         return createdList[headValue]
+
+# 2nd solution
+# O(E) time | O(V + E) space
+class Solution:
+    def cloneGraph(self, node: 'Node') -> 'Node':
+        def dfs(node):
+            mapping[node] = Node(node.val)
+            for neigh in node.neighbors:
+                if neigh not in mapping: dfs(neigh)
+                mapping[node].neighbors += [mapping[neigh]]
+        
+        if not node: return node
+        mapping  = {}
+        dfs(node)
+        return mapping[node]
