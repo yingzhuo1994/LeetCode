@@ -1,5 +1,5 @@
 # 1st solution
-# O(n) time | O(n) space
+# O(n + m) time | O(n + m) space
 class Solution:
     def compareVersion(self, version1: str, version2: str) -> int:
         stackOne = self.getStack(version1)
