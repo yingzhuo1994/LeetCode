@@ -3,9 +3,10 @@
 #     def __init__(self, val=0, next=None):
 #         self.val = val
 #         self.next = next
+
+# 1st brute-force solution
+# O(n^2) time | O(1) space
 class Solution:
-    # 1st brute-force solution
-    # O(n^2) time | O(1) space
     def sortList(self, head: ListNode) -> ListNode:
         newHead = head
         while newHead:
@@ -19,8 +20,9 @@ class Solution:
             newHead = newHead.next
         return head
 
-    # 2nd merge sort solution
-    # O(nlogn) time | O(n) space
+# 2nd merge sort solution
+# O(nlogn) time | O(n) space
+class Solution:
     def sortList(self, head: ListNode) -> ListNode:
         if not head or not head.next:
             return head
@@ -53,8 +55,9 @@ class Solution:
         midPrev.next = None
         return mid
         
-    # 3rd solution
-    # O(nlogn) time | O(n) space
+# 3rd solution
+# O(nlogn) time | O(n) space
+class Solution:
     def sortList(self, head: ListNode) -> ListNode:
         if head is None:
             return
@@ -70,8 +73,9 @@ class Solution:
             temp = temp.next
         return head        
 
-    # 4th solution
-    # O(nlogn) time | O(1) space
+# 4th solution
+# O(nlogn) time | O(1) space
+class Solution:
     tail = ListNode()
     nextSublist = ListNode()
     
