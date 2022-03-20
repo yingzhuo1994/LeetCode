@@ -16,7 +16,8 @@ class Solution:
         return dp[sortedKeys[-1]]
 
 # 2nd solution
-# O(n*log(n)) time | O(n) space
+# O(n + k*log(k)) time | O(k) space
+# where n is the number of nums, and k is the unique number of nums
 class Solution:
     def deleteAndEarn(self, nums: List[int]) -> int:
         dic = {}
