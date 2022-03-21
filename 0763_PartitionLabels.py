@@ -5,13 +5,12 @@ class Solution:
         lastDic = {ch: i for i, ch in enumerate(s)}
         stack = []
         start = 0
-        lastIdx = lastDic[s[0]]
+        lastIdx = 0
 
         for i in range(len(s)):
-            if i > lastIdx:
-                stack.append(i - start)
-                start = i
             lastIdx = max(lastIdx, lastDic[s[i]])
-        if sum(stack) != len(s):
-            stack.append(len(s) - start)
+            if i == lastIdx:
+                stack.append(i - start + 1)
+                start = i + 1
+
         return stack
