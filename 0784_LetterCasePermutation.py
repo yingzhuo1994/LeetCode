@@ -1,5 +1,5 @@
+# 1st solution
 class Solution:
-    # 1st solution
     def letterCasePermutation(self, s: str) -> List[str]:
         index = []
         for i, ch in enumerate(s):
@@ -21,7 +21,8 @@ class Solution:
                 result = new
         return result
 
-    # 2nd solution
+# 2nd solution
+class Solution:
     def letterCasePermutation(self, s: str) -> List[str]:
         result = [s]
         for i in range(len(s)):
@@ -35,3 +36,20 @@ class Solution:
                     if string[i].islower():
                         result.append(upper)
         return result
+
+# 3rd solution
+# O(2^n * n) time | O(2^n * n) space
+# where n is the length of s
+class Solution:
+    def letterCasePermutation(self, s: str) -> List[str]:
+        stack = [""]
+        for ch in s:
+            if ch.isdigit():
+                stack = [t + ch for t in stack]
+            else:
+                newStack = []
+                for t in stack:
+                    newStack.append(t + ch.lower())
+                    newStack.append(t + ch.upper())
+                stack = newStack
+        return stack
