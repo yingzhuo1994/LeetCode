@@ -22,4 +22,12 @@ class Solution:
             x = (k - n) % 25 + 1
             xCh = chr(ord("a") + x - 1)
             aCount = n - zCount - 1
-        return "a" * aCount + xCh + "z" * zCount 
+        return "a" * aCount + xCh + "z" * zCount
+
+# 3rd solution, iteration
+# O(n) time | O(n) space
+class Solution:
+    def getSmallestString(self, n: int, k: int) -> str:
+        p = (26 * n - k) // 25
+        q = 25 * p + k - 26 * (n - 1)
+        return "a" * p + chr(ord("a") + q - 1) + "z" * (n - p - 1)
