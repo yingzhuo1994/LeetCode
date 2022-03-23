@@ -6,6 +6,7 @@ class Solution:
         while target > startValue:
             count += 1
             if target & 1: 
+                # if target is odd, then the last operation can not be multiplication by 2
                 target += 1
             else: 
                 target //= 2
