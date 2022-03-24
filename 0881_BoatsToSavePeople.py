@@ -1,5 +1,5 @@
 # 1st solution
-# O(n*log(n)) time | O(1) space
+# O(n*log(n)) time | O(n) space
 class Solution:
     def numRescueBoats(self, people: List[int], limit: int) -> int:
         people.sort()
