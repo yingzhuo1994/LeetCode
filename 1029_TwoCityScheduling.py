@@ -22,3 +22,17 @@ class Solution:
                 leftCount += 1
                 rightIdx -= 1
         return totalCost
+
+# 2nd solution
+# O(n * log(n)) time | O(n) space
+class Solution:
+    def twoCitySchedCost(self, costs: List[List[int]]) -> int:
+        totalCost = 0
+        diffStack = []
+        for a, b in costs:
+            totalCost += a
+            diffStack.append(b - a)
+        
+        diffStack.sort()
+        totalCost += sum(diffStack[:len(costs) // 2])
+        return totalCost
