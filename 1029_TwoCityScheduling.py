@@ -13,16 +13,7 @@ class Solution:
             leftDiff = abs(stack[leftIdx][0])
             rightDiff = abs(stack[rightIdx][0])
 
-            if leftCount == len(costs) // 2:
-                totalCost += costs[stack[leftIdx][1]][1]
-                leftIdx += 1
-                continue
-            elif rightCount == len(costs) // 2:
-                totalCost += costs[stack[leftIdx][1]][0]
-                leftIdx += 1
-                continue
-
-            if leftDiff >= rightDiff:
+            if leftCount == len(costs) // 2 or (rightCount < len(costs) // 2 and leftDiff >= rightDiff):
                 totalCost += costs[stack[leftIdx][1]][1]
                 rightCount += 1
                 leftIdx += 1
