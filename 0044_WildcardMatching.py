@@ -1,7 +1,7 @@
+# 1st solution
+# O(mn) time | O(mn) space
+# where m, n are the length of s and p, separately.
 class Solution:
-    # 1st solution
-    # O(mn) time | O(mn) space
-    # where m, n are the length of s and p, separately.
     def isMatch(self, s: str, p: str) -> bool:
         dp = [[False for _ in range(len(p)+1)] for i in range(len(s)+1)]
         dp[0][0] = True
@@ -18,9 +18,10 @@ class Solution:
                     dp[i][j] = dp[i-1][j] or dp[i][j-1]
         return dp[-1][-1]
 
-    # 2nd solution
-    # O(mn) time | O(n) space
-    # where m, n are the length of s and p, separately.
+# 2nd solution
+# O(mn) time | O(n) space
+# where m, n are the length of s and p, separately.
+class Solution:
     def isMatch(self, s: str, p: str) -> bool:
         dp = [False for j in range(len(p) + 1)]
         dp[0] = True
