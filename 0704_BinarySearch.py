@@ -1,5 +1,6 @@
+# 1st solution
+# O(log(n)) time | O(1) space
 class Solution:
-    # O(log(n)) time | O(1) space
     def search(self, nums: List[int], target: int) -> int:
         left = 0
         right = len(nums) - 1
