@@ -36,3 +36,41 @@ class Solution:
         diffStack.sort()
         totalCost += sum(diffStack[:len(costs) // 2])
         return totalCost
+
+# 3rd solution
+# O(n) time | O(n) space
+class Solution:
+    def twoCitySchedCost(self, costs: List[List[int]]) -> int:
+        totalCost = 0
+        diffStack = []
+        for a, b in costs:
+            totalCost += a
+            diffStack.append(b - a)
+        
+        self.quickSelect(diffStack, 0, len(diffStack) - 1, len(diffStack) // 2)
+        totalCost += sum(diffStack[:len(costs) // 2])
+        return totalCost
+    
+    def quickSelect(self, nums, left, right, k):
+        pivot = nums[left]
+        L, R = left, right
+        idx = L
+        while idx <= R:
+            if nums[idx] < pivot:
+                self.swap(nums, L, idx)
+                L += 1
+                idx += 1
+            elif nums[idx] > pivot:
+                self.swap(nums, idx, R)
+                R -= 1
+            else:
+                idx += 1
+        if k <= L:
+            return self.quickSelect(nums, left, L - 1, k)
+        elif k > idx:
+            return self.quickSelect(nums, idx, right, k)
+        else:
+            return pivot
+    
+    def swap(self, nums, i, j):
+        nums[i], nums[j] = nums[j], nums[i]
