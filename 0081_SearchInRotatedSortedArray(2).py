@@ -26,8 +26,6 @@ class Solution:
 class Solution:
     def search(self, nums: List[int], target: int) -> bool:
         n = len(nums)
-        if n == 0:
-            return False
 
         start, end = 0, n - 1
 
