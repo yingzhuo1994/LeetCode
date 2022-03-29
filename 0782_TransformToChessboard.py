@@ -1,6 +1,6 @@
+# 1st solution
+# O(n^2) time | O(n^2) space
 class Solution:
-    # 1st solution
-    # O(n^2) time | O(n^2) space
     def movesToChessboard(self, board: List[List[int]]) -> int:
         n = len(board)
         if n <= 1:
@@ -18,8 +18,8 @@ class Solution:
         coldiff = n - coldiff if coldiff %2 != 0 or (n % 2 == 0 and (n - coldiff) < coldiff) else coldiff
         return (rowdiff + coldiff) // 2
 
-    # 2nd solution
-    # O(n^2) time | O(n^2) space
+# 2nd solution
+# O(n^2) time | O(n^2) space
 class Solution:
     def movesToChessboard(self, board: List[List[int]]) -> int:
         if len(board) <= 1:
