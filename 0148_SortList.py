@@ -151,3 +151,75 @@ class Solution:
             cnt += 1
         return cnt
 
+# 5th solution
+# O(nlogn) time | O(1) space
+class Solution:   
+    def sortList(self, head: ListNode) -> ListNode:
+        if not head or not head.next:
+            return head
+        n = self.getCount(head)
+        start = head
+        dummyHead = ListNode()
+        size = 1
+        while size < n:
+            tail = dummyHead
+            while start != None:
+                if not start.next:
+                    tail.next = start
+                    break
+                mid, nextSubList = self.split(start, size)
+                newHead, newTail = self.merge(start, mid)
+                tail.next = newHead
+                tail = newTail
+                start = nextSubList
+            start = dummyHead.next
+            size = size * 2
+        return dummyHead.next
+
+    def split(self, start, size):
+
+        midPrev = start
+        end = start.next
+        # use fast and slow approach to find middle and end of second linked list
+        index = 1
+        while index < size and (midPrev.next or end.next):
+            if end.next:
+                end = end.next.next if end.next.next else end.next
+            if midPrev.next:
+                midPrev = midPrev.next
+            index += 1
+
+        mid = midPrev.next
+        midPrev.next = None
+        nextSubList = end.next
+        end.next = None
+        # return the start of second linked list
+        return mid, nextSubList
+
+    def merge(self, list1, list2):
+        dummyHead = ListNode()
+        newTail = dummyHead
+        while list1 and list2:
+            if list1.val < list2.val:
+                newTail.next = list1
+                list1 = list1.next
+            else:
+                newTail.next = list2
+                list2 = list2.next
+
+            newTail = newTail.next
+
+        newTail.next = list1 or list2
+        # traverse till the end of merged list to get the newTail
+        while newTail.next:
+            newTail = newTail.next
+        
+        return dummyHead.next, newTail
+
+    def getCount(self, head):
+        cnt = 0
+        ptr = head
+        while ptr:
+            ptr = ptr.next
+            cnt += 1
+        return cnt
