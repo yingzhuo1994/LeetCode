@@ -24,7 +24,7 @@ class Solution:
 # 2nd solution, Bitmask
 # O(n*N + m*2^M) time | O(n) space
 # where n, m are the length of words and puzzles, respectively,
-# and n, m are the average length of words[i] and puzzles[i] respectively.
+# and N, M are the average length of words[i] and puzzles[i] respectively.
 class Solution:
     def findNumOfValidWords(self, words: List[str], puzzles: List[str]) -> List[int]:
 
