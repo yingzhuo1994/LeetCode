@@ -46,12 +46,12 @@ class Trie:
 # O（n*log(n))
 class Solution:
     def longestDupSubstring(self, s: str) -> str:
-        beg, end = 0, len(S)
+        beg, end = 0, len(s)
         q = (1 << 31) - 1 
         Found = ""
         while beg + 1 < end:
             mid = (beg + end) // 2
-            isFound, candidate = self.RabinKarp(S, mid, q)
+            isFound, candidate = self.RabinKarp(s, mid, q)
             if isFound:
                 beg, Found = mid, candidate
             else:
