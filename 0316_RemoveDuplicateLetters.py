@@ -1,4 +1,5 @@
 # 1st solution
+# O(n) time | O(26) space
 class Solution:
     def removeDuplicateLetters(self, s: str) -> str:
         last_occ = {c: i for i, c in enumerate(s)}
