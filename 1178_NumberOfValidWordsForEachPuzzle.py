@@ -57,7 +57,7 @@ class Solution:
         return result
 
 # 3rd solution
-# O(n(N*log(N) + M)+ m*M) time | O(k*M!) space
+# O(n(N*log(N) + M)+ m*M!) time | O(k*M!) space
 # where n, m are the length of words and puzzles, respectively,
 # and N, M are the average length of words[i] and puzzles[i] respectively.
 # k = 26
