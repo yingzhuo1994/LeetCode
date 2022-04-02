@@ -1,9 +1,6 @@
-class Solution(object):
-    def isValid(self, s):
-        """
-        :type s: str
-        :rtype: bool
-        """
+# O(n) time | O(n) space
+class Solution:
+    def isValid(self, s: str) -> bool:
         dic ={'(': ')', '[': ']', '{': '}'}
         n = len(s)
 
