@@ -1,6 +1,6 @@
+# 1st solution
+# O(n) time | O(n) space
 class Solution:
-    # 1st solution
-    # O(n) time | O(n) space
     def sortArrayByParityII(self, nums: List[int]) -> List[int]:
         n = len(nums)
         result = [0] * n
@@ -15,16 +15,17 @@ class Solution:
                 odd += 2
         return result
 
-    # 2nd solution
-    # O(n) time | O(1) space
+# 2nd solution
+# O(n) time | O(1) space
+class Solution:
     def sortArrayByParityII(self, nums: List[int]) -> List[int]:
         n = len(nums)
-        even = 0
-        odd = 1
-        while even < n:
-            if nums[even] % 2 != 0:
-                nums[odd], nums[even] = nums[even], nums[odd]
-                odd += 2
+        evenIndex = 0
+        oddIndex = 1
+        while evenIndex < n:
+            if nums[evenIndex] & 1:
+                nums[oddIndex], nums[evenIndex] = nums[evenIndex], nums[oddIndex]
+                oddIndex += 2
             else:
-                even += 2
+                evenIndex += 2
         return nums
