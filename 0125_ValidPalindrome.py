@@ -1,16 +1,17 @@
+# O(n) time | O(1) space
 class Solution:
     def isPalindrome(self, s: str) -> bool:
-        p1 = 0
-        p2 = len(s) - 1
-        while p1 <= p2:
-            if not s[p1].isalnum():
-                p1 += 1
-            elif not s[p2].isalnum():
-                p2 -= 1
+        left = 0
+        right = len(s) - 1
+        while left <= right:
+            if not s[left].isalnum():
+                left += 1
+            elif not s[right].isalnum():
+                right -= 1
             else:
-                if s[p1].lower() != s[p2].lower():
+                if s[left].lower() != s[right].lower():
                     return False
                 else:
-                    p1 += 1
-                    p2 -= 1
+                    left += 1
+                    right -= 1
         return True
