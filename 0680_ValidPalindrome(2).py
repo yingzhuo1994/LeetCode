@@ -41,7 +41,7 @@ class Solution:
         return True
 
 # 3rd solution
-# O(n) time | O(n) space
+# O(n) time | O(1) space
 class Solution:
     def validPalindrome(self, s: str) -> bool:
         left, right = 0, len(s) - 1
@@ -56,6 +56,22 @@ class Solution:
         while left < right:
             if s[left] != s[right]:
                 return False
+            left += 1
+            right -= 1
+        return True
+
+# 4th solution
+# O(n) time | O(1) space
+class Solution:
+    def validPalindrome(self, s: str) -> bool:
+        return self.isPalindrome(s, 0, len(s) - 1, 1)
+    
+    def isPalindrome(self, s, left, right, deleteCount):
+        if deleteCount < 0:
+            return False
+        while left < right:
+            if s[left] != s[right]:
+                return self.isPalindrome(s, left + 1, right, deleteCount - 1) or self.isPalindrome(s, left, right - 1, deleteCount - 1)
             left += 1
             right -= 1
         return True
