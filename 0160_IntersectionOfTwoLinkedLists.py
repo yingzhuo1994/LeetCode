@@ -4,28 +4,33 @@
 #         self.val = x
 #         self.next = None
 
+# 1st solution
+# O(m + n) time | O(m + n) space
+# where m, n are the length of listA and listB, separately.
 class Solution:
     def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> ListNode:
-        # lstA = []
-        # lstB = []
-        # while headA is not None:
-        #     lstA.append(headA)
-        #     headA = headA.next
-        # while headB is not None:
-        #     lstB.append(headB)
-        #     headB = headB.next
-        # intersection = None
-        # for i in range(1, min(len(lstA), len(lstB)) + 1):
-        #     if lstA[-i] == lstB[-i]:
-        #         intersection = lstA[-i]
-        #     else:
-        #         break
-        # return intersection
+        lstA = []
+        lstB = []
+        while headA is not None:
+            lstA.append(headA)
+            headA = headA.next
+        while headB is not None:
+            lstB.append(headB)
+            headB = headB.next
+        intersection = None
+        for i in range(1, min(len(lstA), len(lstB)) + 1):
+            if lstA[-i] == lstB[-i]:
+                intersection = lstA[-i]
+            else:
+                break
+        return intersection
 
-        if headA is None or headB is None:
-            return None
-
-        pa = headA # 2 pointers
+# 2nd solution
+# O(m + n) time | O(1) space
+# where m, n are the length of listA and listB, separately.
+class Solution:
+    def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> ListNode:
+        pa = headA
         pb = headB
 
         while pa is not pb:
