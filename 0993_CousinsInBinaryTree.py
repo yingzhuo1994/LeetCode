@@ -33,7 +33,7 @@ class Solution:
         return False
 
 # 2nd solution
-# O(n) time | O(log(n)) space
+# O(n) time | O(h) space
 class Solution:
     def isCousins(self, root: Optional[TreeNode], x: int, y: int) -> bool:
         self.x = None
@@ -47,7 +47,7 @@ class Solution:
         if self.x and self.y:
             return
         if node.val == x:
-            self.x =  [depth, parent]
+            self.x = [depth, parent]
         if node.val == y:
             self.y = [depth, parent]
         self.findParent(node.left, x, y, depth + 1, node)
