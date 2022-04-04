@@ -155,14 +155,13 @@ class Solution:
 # O(nlogn) time | O(1) space
 class Solution:   
     def sortList(self, head: ListNode) -> ListNode:
-        if not head or not head.next:
-            return head
-        n = self.getCount(head)
-        start = head
+        length = self.getLength(head)
         dummyHead = ListNode()
+        dummyHead.next = head
         size = 1
-        while size < n:
+        while size < length:
             tail = dummyHead
+            start = dummyHead.next
             while start != None:
                 if not start.next:
                     tail.next = start
@@ -172,12 +171,10 @@ class Solution:
                 tail.next = newHead
                 tail = newTail
                 start = nextSubList
-            start = dummyHead.next
             size = size * 2
         return dummyHead.next
 
     def split(self, start, size):
-
         midPrev = start
         end = start.next
         # use fast and slow approach to find middle and end of second linked list
@@ -216,10 +213,10 @@ class Solution:
         
         return dummyHead.next, newTail
 
-    def getCount(self, head):
-        cnt = 0
-        ptr = head
-        while ptr:
-            ptr = ptr.next
-            cnt += 1
-        return cnt
+    def getLength(self, head):
+        length = 0
+        node = head
+        while node:
+            node = node.next
+            length += 1
+        return length
