@@ -20,16 +20,15 @@ class Solution:
 # where n is the number of nums, and k is the unique number of nums
 class Solution:
     def deleteAndEarn(self, nums: List[int]) -> int:
-        dic = {}
+        pointsDic = {}
         for num in nums:
-            dic[num] = dic.get(num, 0) + num
-        sortedKeys = sorted(dic.keys())
+            pointsDic[num] = pointsDic.get(num, 0) + num
+        sortedKeys = sorted(pointsDic.keys())
         frontTwo = 0
         frontOne = 0
         ans = 0
-        for i in range(len(sortedKeys)):
-            k = sortedKeys[i]
-            frontTwo = frontOne if k - 1 in dic else ans
+        for k in sortedKeys:
+            frontTwo = frontOne if k - 1 in pointsDic else ans
             frontOne = ans
-            ans = max(frontOne, frontTwo + dic[k])
+            ans = max(frontOne, frontTwo + pointsDic[k])
         return ans
