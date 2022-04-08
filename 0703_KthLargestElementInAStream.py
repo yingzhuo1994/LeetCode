@@ -1,24 +1,20 @@
 # 1st solution
-# O(n*log(n)) time | O(n) space
+# O(n*log(n) + m*log(k)) time | O(n) space
+# where n is the length of nums, and m is the number of calls to add()
 class KthLargest:
-
     def __init__(self, k: int, nums: List[int]):
-        self.minHeap = []
-        self.maxHeap = []
-        self.kIdx = k
-        for num in nums:
-            heapq.heappush(self.minHeap, num)
-            self.check()
+        self.k = k
+        self.heap = nums
+        heapq.heapify(self.heap)
         
-    def add(self, val: int) -> int:
-        heapq.heappush(self.minHeap, val)
-        self.check()
-        return -self.maxHeap[0]
+        while len(self.heap) > k:
+            heapq.heappop(self.heap)
 
-    def check(self):    
-        if len(self.minHeap) ==  self.kIdx:
-            value = heapq.heappop(self.minHeap)
-            heapq.heappush(self.maxHeap, -value)
+    def add(self, val: int) -> int:
+        heapq.heappush(self.heap, val)
+        if len(self.heap) > self.k:
+            heapq.heappop(self.heap)
+        return self.heap[0]
 # Your KthLargest object will be instantiated and called as such:
 # obj = KthLargest(k, nums)
 # param_1 = obj.add(val)
