@@ -1,6 +1,6 @@
+# 1st solution
+# O(nlogk) time | O(n+k) space
 class Solution:
-    # 1st solution
-    # O(nlogk) time | O(n+k) space
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
         # O(1) time 
         if k == len(nums):
@@ -14,7 +14,8 @@ class Solution:
         # O(N log k) time
         return heapq.nlargest(k, count.keys(), key=count.get) 
 
-    # 2nd solution
+# 2nd solution
+class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
         frq = defaultdict(list)
         for key, cnt in Counter(nums).items():
@@ -27,8 +28,9 @@ class Solution:
 
         return res[:k]
 
-    # 3rd solution
-    # O(n) time | O(n) space
+# 3rd solution
+# O(n) time | O(n) space
+class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
         count = Counter(nums)
         unique = list(count.keys())
