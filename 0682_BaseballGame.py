@@ -11,8 +11,5 @@ class Solution:
             elif op == "C":
                 stack.pop()
             else:
-                if op[0] == "-":
-                    stack.append(-int(op[1:]))
-                else:
-                    stack.append(int(op))
+                stack.append(int(op))
         return sum(stack)
