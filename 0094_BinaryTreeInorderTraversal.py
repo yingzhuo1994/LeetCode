@@ -37,16 +37,28 @@ class Solution:
     def inorderTraversal(self, root: TreeNode) -> List[int]:
         ans = []
         curNode = root
-        while curNode:
-            if curNode.left:
-                rightMost = curNode.left
-                while rightMost.right:
-                    rightMost = rightMost.right
-                rightMost.right = curNode
-                nextNode = curNode.left
-                curNode.left = None
-                curNode = nextNode
-            else:
+        while curNode is not None:
+            if curNode.left is None:
                 ans.append(curNode.val)
                 curNode = curNode.right
+            else:
+                # Find the inorder 
+                # predecessor of current
+                pre = curNode.left
+                while pre.right is not None and pre.right is not curNode:
+                    pre = pre.right
+
+                if pre.right is None:
+                    # Make current as right 
+                    # child of its inorder predecessor
+                    pre.right = curNode
+                    curNode = curNode.left
+                else:
+                    # Revert the changes made 
+                    # in the 'if' part to restore the
+                    # original tree. i.e., fix
+                    # the right child of predecessor
+                    pre.right = None
+                    ans.append(curNode.val)
+                    curNode = curNode.right
         return ans
