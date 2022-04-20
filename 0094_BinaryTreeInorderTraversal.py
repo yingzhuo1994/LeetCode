@@ -30,3 +30,23 @@ class Solution:
             res.append(cur.val)
             cur = cur.right
         return res
+
+# 3rd Morris Traversal
+# O(n) time | O(1) space
+class Solution:
+    def inorderTraversal(self, root: TreeNode) -> List[int]:
+        ans = []
+        curNode = root
+        while curNode:
+            if curNode.left:
+                rightMost = curNode.left
+                while rightMost.right:
+                    rightMost = rightMost.right
+                rightMost.right = curNode
+                nextNode = curNode.left
+                curNode.left = None
+                curNode = nextNode
+            else:
+                ans.append(curNode.val)
+                curNode = curNode.right
+        return ans
