@@ -93,14 +93,14 @@ class Solution:
                 cur = (cur * 26 + A[i] - A[i - L] * p) % mod
                 if cur in seen: return i - L + 1
                 seen.add(cur)
-        res, lo, hi = 0, 0, len(s)
+        res, low, high = 0, 0, len(s)
 
-        while lo < hi:
-            mi = (lo + hi + 1) // 2
+        while low < high:
+            mi = (low + high + 1) // 2
             pos = test(mi)
             if pos:
-                lo = mi
+                low = mi
                 res = pos
             else:
-                hi = mi - 1
-        return s[res:res + lo]
+                high = mi - 1
+        return s[res:res + low]
