@@ -82,7 +82,7 @@ class Solution:
 # O（n*log(n)) | O(n) space
 class Solution:
     def longestDupSubstring(self, s: str) -> str:
-        A = [ord(c) - ord('a') for c in s]
+        A = [ord(ch) - ord('a') for ch in s]
         mod = 2**63 - 1
 
         def test(L):
