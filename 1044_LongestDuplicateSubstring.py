@@ -96,11 +96,11 @@ class Solution:
         res, low, high = 0, 0, len(s)
 
         while low < high:
-            mi = (low + high + 1) // 2
-            pos = test(mi)
+            mid = (low + high + 1) // 2
+            pos = test(mid)
             if pos:
-                low = mi
+                low = mid
                 res = pos
             else:
-                high = mi - 1
+                high = mid - 1
         return s[res:res + low]
