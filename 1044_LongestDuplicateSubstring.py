@@ -87,18 +87,20 @@ class Solution:
 
         def test(L):
             p = pow(26, L, mod)
-            cur = reduce(lambda x, y: (x * 26 + y) % mod, A[:L], 0)
+            cur = reduce(lambda x, y: (x * 26 + y) % mod, A[:L])
             seen = {cur}
             for i in range(L, len(s)):
                 cur = (cur * 26 + A[i] - A[i - L] * p) % mod
-                if cur in seen: return i - L + 1
+                if cur in seen: 
+                    return i - L + 1
                 seen.add(cur)
+            return None
         res, low, high = 0, 0, len(s)
 
         while low < high:
             mid = (low + high + 1) // 2
             pos = test(mid)
-            if pos:
+            if pos is not None:
                 low = mid
                 res = pos
             else:
