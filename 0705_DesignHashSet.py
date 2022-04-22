@@ -53,10 +53,8 @@ class MyHashSet:
     def findKey(self, key):
         node = self.root
         k = self.digit
-        stack = []
         while k >= 0:
             d = (key >> k) & 1
-            stack.append(d)
             if d & 1:
                 if not node.right:
                     node.right = TreeNode(1)
