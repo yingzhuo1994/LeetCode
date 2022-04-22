@@ -1,4 +1,7 @@
 # 1st solution, TLE
+from collections import defaultdict
+
+
 class Solution:
     def longestDupSubstring(self, s: str) -> str:
         length = len(s)
@@ -43,42 +46,6 @@ class Trie:
         return path
 
 # 3rd solution
-# O（n*log(n))
-class Solution:
-    def longestDupSubstring(self, s: str) -> str:
-        beg, end = 0, len(s)
-        q = (1 << 31) - 1 
-        Found = ""
-        while beg + 1 < end:
-            mid = (beg + end) // 2
-            isFound, candidate = self.RabinKarp(s, mid, q)
-            if isFound:
-                beg, Found = mid, candidate
-            else:
-                end = mid
-
-        return Found
-
-    def RabinKarp(self, text, M, q):
-        if M == 0: return True
-        h, t, d = (1 << (8 * M - 8)) % q, 0, 256
-
-        dic = defaultdict(list)
-
-        for i in range(M): 
-            t = (d * t + ord(text[i]))% q
-
-        dic[t].append(i - M + 1)
-
-        for i in range(len(text) - M):
-            t = (d * (t - ord(text[i]) * h) + ord(text[i + M])) % q
-            for j in dic[t]:
-                if text[i + 1:i + M + 1] == text[j:j + M]:
-                    return (True, text[j:j + M])
-            dic[t].append(i + 1)
-        return (False, "")
-
-# 4th solution
 # O（n*log(n)) | O(n) space
 class Solution:
     def longestDupSubstring(self, s: str) -> str:
@@ -87,13 +54,16 @@ class Solution:
 
         def test(L):
             p = pow(26, L, mod)
-            cur = reduce(lambda x, y: (x * 26 + y) % mod, A[:L])
-            seen = {cur}
+            hashValue = reduce(lambda x, y: (x * 26 + y) % mod, A[:L])
+            seen = defaultdict(list)
+            seen[hashValue].append(0)
             for i in range(L, len(s)):
-                cur = (cur * 26 + A[i] - A[i - L] * p) % mod
-                if cur in seen: 
-                    return i - L + 1
-                seen.add(cur)
+                hashValue = (hashValue * 26 + A[i] - A[i - L] * p) % mod
+                if hashValue in seen:
+                    for start in seen[hashValue]:
+                        if A[start:start + L] == A[i - L + 1: i + 1]:
+                            return i - L + 1
+                seen[hashValue].append(i - L + 1)
             return None
         res, low, high = 0, 0, len(s)
 
