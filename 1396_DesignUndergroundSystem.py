@@ -2,28 +2,24 @@
 class UndergroundSystem:
 
     def __init__(self):
-        self.routes = {}
         self.records = {}
+        self.pairs = Counter()
+        self.freqs = Counter()
 
     def checkIn(self, id: int, stationName: str, t: int) -> None:
         self.records[id] = [stationName, t]
        
     def checkOut(self, id: int, stationName: str, t: int) -> None:
-        startStation = self.records[id][0]
-        startTime = self.records[id][1]
-        endStation = stationName
+        startStation, startTime = self.records.pop(id)
         deltaTime = t - startTime
-        if startStation not in self.routes:
-            self.routes[startStation] = {}
-        route = self.routes[startStation]
-        if endStation not in route:
-            route[endStation] = [0, 0]
-        route[endStation][0] += deltaTime
-        route[endStation][1] += 1
+        pair = (startStation, stationName)
+        self.pairs[pair] += deltaTime
+        self.freqs[pair] += 1
         
     def getAverageTime(self, startStation: str, endStation: str) -> float:
-        totalTime = self.routes[startStation][endStation][0]
-        count = self.routes[startStation][endStation][1]
+        pair = (startStation, endStation)
+        totalTime = self.pairs[pair]
+        count = self.freqs[pair]
         return totalTime / count
 
 
