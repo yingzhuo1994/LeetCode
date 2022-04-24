@@ -1,3 +1,4 @@
+# 1st solution, TLE
 class Solution:
     def countRectangles(self, rectangles: List[List[int]], points: List[List[int]]) -> List[int]:
         x_max = max(rectangles, key = lambda v: v[0])[0]
@@ -19,6 +20,10 @@ class Solution:
         
         return ans
 
+# 2nd solution, Dynamic Programming
+# O(mn + k * log(mn)) time | O(mn) space
+# where m and n are the unique numbers of x and y, separately
+# and k is the length of points
 class Solution:
     def countRectangles(self, rectangles: List[List[int]], points: List[List[int]]) -> List[int]:
         xValues = set()
@@ -74,3 +79,32 @@ class Solution:
             else:
                 return mid
         return left
+
+# 3rd solution, Binary Search
+# O(n*log(n) + k * h * log(l)) time | O(n) space
+# where n is the length of rectangles
+# h is the unique number of height, and l is the largest number in each height group
+# and k is the length of points
+from bisect import bisect
+class Solution:
+    def countRectangles(self, rectangles: List[List[int]], points: List[List[int]]) -> List[int]:
+        rectangles.sort()
+
+        rectangle_map = defaultdict(list)
+
+        for l, h in rectangles:
+            rectangle_map[h].append(l)
+        
+        ans = []
+        for point in points:
+            ans.append(self.getCount(rectangle_map, point))
+        
+        return ans
+        
+    def getCount(self, rectangles_map, point):
+        count = 0
+        x, y = point
+        for height, widths in rectangles_map.items():
+            if height >= y:
+                count += len(widths) - bisect(widths, x - 1)
+        return count
