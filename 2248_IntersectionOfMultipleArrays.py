@@ -1,3 +1,6 @@
+# 1st solution
+# O(mn) time | O(n)
+# where m is the length of nums, and n is the average length of nums[i]
 class Solution:
     def intersection(self, nums: List[List[int]]) -> List[int]:
         candidates = set(nums[0])
