@@ -1,3 +1,4 @@
+# 1st solution
 class Solution:
     def countLatticePoints(self, circles: List[List[int]]) -> int:
         points = set()
@@ -7,54 +8,48 @@ class Solution:
     
     def addPoints(self, points, circle):
         x, y, r = circle
-        for dx in range(-r, r+1):
-            for dy in range(-r, r+1):
-                a = x + dx
-                b = y + dy
-                if dx**2 + dy**2 <= r**2:
-                    points.add((a, b))
-        return points
-    
+        for cx in range(x + 1, x + r + 1):
+            for cy in range(y + 1, y + r + 1):
+                if math.sqrt((cx-x)**2 + (cy-y)**2) <= r:
+                    points.add((cx, cy))
+                    points.add((2*x-cx, cy))
+                    points.add((2*x-cx, 2*y-cy))
+                    points.add((cx, 2*y-cy))
+        for cy in range(y-r,y+r+1): points.add((x,cy))
+        for cx in range(x-r,x+r+1): points.add((cx,y))
 
+# 2nd solution
 class Solution:
     def countLatticePoints(self, circles: List[List[int]]) -> int:
         circles.sort(key = lambda v: v[2])
-        maxRidus = circles[-1][2]
         newCircles = defaultdict(set)
         for i in reversed(range(len(circles))):
             if self.isContained(newCircles, circles[i]):
                 continue
             elem = (circles[i][0], circles[i][1], circles[i][2])
             newCircles[circles[i][2]].add(elem)
-        print(newCircles)
+
         points = set()
-        ridius = sorted(newCircles.keys())
-        for r in ridius:
+        for r in newCircles:
             for circle in newCircles[r]:
                 self.addPoints(points, circle)
         return len(points)
     
     def addPoints(self, points, circle):
         x, y, r = circle
-        for dx in range(-r, r+1):
-            for dy in range(-r, r+1):
-                a = x + dx
-                b = y + dy
-                if dx**2 + dy**2 <= r**2:
-                    points.add((a, b))
-        return points
+        for cx in range(x + 1, x + r + 1):
+            for cy in range(y + 1, y + r + 1):
+                if math.sqrt((cx-x)**2 + (cy-y)**2) <= r:
+                    points.add((cx, cy))
+                    points.add((2*x-cx, cy))
+                    points.add((2*x-cx, 2*y-cy))
+                    points.add((cx, 2*y-cy))
+        for cy in range(y-r,y+r+1): points.add((x,cy))
+        for cx in range(x-r,x+r+1): points.add((cx,y))
     
     def isContained(self, newCircles, circle):
         x, y, r = circle
         ridius = sorted(newCircles.keys())
-        # left, right = 0, len(ridius) - 1
-        # while left <= right:
-        #     mid = left + (right - left) // 2
-        #     if ridius[mid] <= r:
-        #         left = mid + 1
-        #     else:
-        #         right = mid - 1
-
 
         for i in range(len(ridius)):
             if ridius[i] <= r:
