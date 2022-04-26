@@ -1,26 +1,13 @@
-class Solution(object):
-    def secondHighest(self, s):
-        """
-        :type s: str
-        :rtype: int
-        """
-        stack = []
-        for c in s:
-            if c.isdigit() :
-                num = int(c)
-                if len(stack) == 0:
-                    stack.append(num)
-                elif len(stack) == 1:
-                    if num > stack[0]:
-                        stack.append(stack[0])
-                        stack[0] = num
-                    elif num < stack[0]:
-                        stack.append(num)
-                else:
-                    if num > stack[0]:
-                        stack[0], stack[1] = num, stack[0]
-                    elif stack[0] > num > stack[1]:
-                        stack[1] = num
-        if len(stack) == 2:
-            return stack[-1]
-        return -1
+# 1st solution
+# O(n) time | O(1) space
+class Solution:
+    def secondHighest(self, s: str) -> int:
+        first = float("-inf")
+        second = first
+        for ch in s:
+            if ch.isdigit():
+                if int(ch) > first:
+                    first, second = int(ch), first
+                elif int(ch) > second and int(ch) != first:
+                    second = int(ch)
+        return second if second != float("-inf") else -1
