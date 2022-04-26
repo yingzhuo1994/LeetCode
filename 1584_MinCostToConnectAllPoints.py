@@ -75,3 +75,41 @@ class Solution:
                     heapq.heappush(heap, record)
             if cnt >= n: break        
         return ans
+
+# 3rd solution, Prim's algorithm (Optimized)
+# O(n^2) time | O(n) space
+class Solution:
+    def minCostConnectPoints(self, points: List[List[int]]) -> int:
+        n = len(points)
+        manhattan = lambda p1, p2: abs(p1[0] - p2[0]) + abs(p1[1] - p2[1])
+        mst_cost = 0
+        edges_used = 0
+        
+        # Track nodes which are visited.
+        in_mst = [False] * n
+        
+        min_dist = [float("inf")] * n
+        min_dist[0] = 0
+        
+        while edges_used < n:
+            curr_min_edge = float("inf")
+            curr_node = -1
+            
+            # Pick least weight node which is not in MST.
+            for node in range(n):
+                if not in_mst[node] and curr_min_edge > min_dist[node]:
+                    curr_min_edge = min_dist[node]
+                    curr_node = node
+            
+            mst_cost += curr_min_edge
+            edges_used += 1
+            in_mst[curr_node] = True
+            
+            # Update adjacent nodes of current node.
+            for next_node in range(n):
+                weight = manhattan(points[curr_node], points[next_node])
+                
+                if not in_mst[next_node] and min_dist[next_node] > weight:
+                    min_dist[next_node] = weight
+        
+        return mst_cost
