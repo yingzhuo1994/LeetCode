@@ -64,3 +64,49 @@ class DisjointSet:
     def getDataSet(self, a):
         parent = self.find(a)
         return self.dataSet[parent]
+
+# 2nd solution
+# O(E + V * log(V)) time | O(E + V) space
+# V represents the number of vertices (the length of the given string)
+# and E represents the number of edges (the number of pairs) 
+class Solution:
+    def smallestStringWithSwaps(self, s: str, pairs: List[List[int]]) -> str:
+        # Maximum number of vertices
+        N = len(s)
+        visited = [False for _ in range(N)];
+        adj = [[] for _ in range(N)]; 
+        
+        def DFS(s, vertex, characters, indices):
+            # Add the character and index to the list
+            characters.append(s[vertex])
+            indices.append(vertex)
+            
+            visited[vertex] = True
+            
+            # Traverse the adjacents
+            for adjacent in adj[vertex]:
+                if not visited[adjacent]:
+                    DFS(s, adjacent, characters, indices)
+        
+        # Build the adjacency list
+        for source, destination in pairs:
+            # Undirected edge
+            adj[source].append(destination)
+            adj[destination].append(source)
+        
+        answer = list(s)
+        for vertex in range(N):
+            # If not covered in the DFS yet
+            if not visited[vertex]:
+                characters = []
+                indices = []
+                
+                DFS(s, vertex, characters, indices)
+                # Sort the list of characters and indices
+                characters.sort()
+                indices.sort()
+
+                # Store the sorted characters corresponding to the index
+                for index in range(len(characters)):
+                    answer[indices[index]] = characters[index]
+        return "".join(answer)
