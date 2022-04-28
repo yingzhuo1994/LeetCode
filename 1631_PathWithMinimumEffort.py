@@ -2,11 +2,14 @@
 # O(mn*log(mn)) time | O(mn) space
 class Solution:
     def minimumEffortPath(self, heights: List[List[int]]) -> int:
-        efforts = [[float("inf") for _ in range(len(heights[0]))] for _ in range(len(heights))]
+        m, n = len(heights), len(heights[0])
+        efforts = [[float("inf") for _ in range(n)] for _ in range(m)]
         efforts[0][0] = 0
         minHeap = [(0, 0, 0)]
         while minHeap:
             curEffort, i, j = heappop(minHeap)
+            if (i, j) == (m - 1, n - 1):
+                break
             for dx, dy in [[-1, 0], [1, 0], [0, 1], [0, -1]]:
                 x = i + dx
                 y = j + dy
