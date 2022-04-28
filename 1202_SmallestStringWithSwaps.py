@@ -1,4 +1,7 @@
 # 1st solution
+# O((E + V) * aV + V * log(V)) time | O(V) space
+# V represents the number of vertices (the length of the given string)
+# and E represents the number of edges (the number of pairs) 
 class Solution:
     def smallestStringWithSwaps(self, s: str, pairs: List[List[int]]) -> str:
         disjointSet = DisjointSet()
