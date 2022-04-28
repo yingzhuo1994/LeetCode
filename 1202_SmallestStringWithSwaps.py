@@ -46,16 +46,13 @@ class DisjointSet:
         pa = self.find(a)
         pb = self.find(b)
         if pa == pb: return
-        if self.rank[pa] > self.rank[pb]:
-            self.parent[pb] = pa
-            self.rank[pa] += self.rank[pb]
-            for k, v in self.dataSet[pb].items():
-                self.dataSet[pa][k] += v
-        else:
-            self.parent[pa] = pb
-            self.rank[pb] += self.rank[pa]
-            for k, v in self.dataSet[pa].items():
-                self.dataSet[pb][k] += v
+        if self.rank[pa] < self.rank[pb]:
+            pa, pb = pb, pa
+        self.parent[pb] = pa
+        self.rank[pa] += self.rank[pb]
+        for k, v in self.dataSet[pb].items():
+            self.dataSet[pa][k] += v
+
 
     # find the representative of the 
     # path compression optimization
@@ -81,7 +78,7 @@ class Solution:
         
         def DFS(s, vertex, characters, indices):
             # Add the character and index to the list
-            characters.append(s[vertex])
+            characters[s[vertex]] += 1
             indices.append(vertex)
             
             visited[vertex] = True
@@ -101,15 +98,19 @@ class Solution:
         for vertex in range(N):
             # If not covered in the DFS yet
             if not visited[vertex]:
-                characters = []
+                characters = {ch: 0 for ch in string.ascii_lowercase}
                 indices = []
                 
                 DFS(s, vertex, characters, indices)
                 # Sort the list of characters and indices
-                characters.sort()
                 indices.sort()
 
                 # Store the sorted characters corresponding to the index
-                for index in range(len(characters)):
-                    answer[indices[index]] = characters[index]
+                index = 0
+                for ch in string.ascii_lowercase:
+                    while characters[ch] > 0:
+                        answer[indices[index]] = ch
+                        characters[ch] -= 1
+                        index += 1
+                        
         return "".join(answer)
