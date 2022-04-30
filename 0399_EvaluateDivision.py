@@ -67,7 +67,7 @@ class DisjointSet:
             v = 1.0/v
         
         # v*vy/vx is the value of  x/y
-        # x/y = (b/y) * (x/a) * (a/b) = vy * ( 1/vx) *v
+        # x/y = (b/y) * (x/a) * (a/b) = vy * (1/vx) * v
         
         self.parents[x] = (y, v * vy / vx) # sub-nodes of x are lazily updated via find later
         self.rank[y] += self.rank[x] # in case of tie
