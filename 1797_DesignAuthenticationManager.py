@@ -1,44 +1,25 @@
 class AuthenticationManager(object):
-    token = {}
-
     def __init__(self, timeToLive):
-        """
-        :type timeToLive: int
-        """
         self.timeToLive = timeToLive
-        self.token = {}
-
-
+        self.record = collections.OrderedDict()
 
     def generate(self, tokenId, currentTime):
-        """
-        :type tokenId: str
-        :type currentTime: int
-        :rtype: None
-        """
-        self.token[tokenId] = currentTime + self.timeToLive
-
+        self.removeExpire(currentTime)
+        self.record[tokenId] = currentTime + self.timeToLive
 
     def renew(self, tokenId, currentTime):
-        """
-        :type tokenId: str
-        :type currentTime: int
-        :rtype: None
-        """
-        if tokenId in self.token and self.token[tokenId] > currentTime:
-            self.token[tokenId] = currentTime + self.timeToLive
-
+        self.removeExpire(currentTime)
+        if tokenId in self.record and self.record[tokenId] > currentTime:
+            self.record[tokenId] = currentTime + self.timeToLive
+            self.record.move_to_end(tokenId)
 
     def countUnexpiredTokens(self, currentTime):
-        """
-        :type currentTime: int
-        :rtype: int
-        """
-        count = 0
-        for tok in self.token:
-            if self.token[tok] > currentTime:
-                count += 1
-        return count
+        self.removeExpire(currentTime)
+        return len(self.record)
+    
+    def removeExpire(self, currentTime):
+        while self.record and next(iter(self.record.values())) <= currentTime:
+            self.record.popitem(last=False)
 
 
 
