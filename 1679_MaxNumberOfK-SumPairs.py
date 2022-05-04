@@ -1,3 +1,4 @@
+# 1st solution
 # O(n*log(n)) time | O(n) space
 class Solution:
     def maxOperations(self, nums: List[int], k: int) -> int:
@@ -15,3 +16,12 @@ class Solution:
                 left += 1
                 right -= 1
         return count
+
+# 2nd solution
+# O(n) time | O(n) space
+class Solution:
+    def maxOperations(self, nums: List[int], k: int) -> int:
+        cnt, ans = Counter(nums), 0
+        for val in cnt:
+            ans += min(cnt[val], cnt[k - val])
+        return ans // 2
