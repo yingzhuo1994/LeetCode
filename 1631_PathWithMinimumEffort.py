@@ -13,7 +13,7 @@ class Solution:
             for dx, dy in [[-1, 0], [1, 0], [0, 1], [0, -1]]:
                 x = i + dx
                 y = j + dy
-                if 0 <= x < len(heights) and 0 <= y < len(heights[0]):
+                if 0 <= x < m and 0 <= y < n:
                     newEffort = abs(heights[x][y] - heights[i][j])
                     nextEffort = max(curEffort, newEffort)
                     if nextEffort < efforts[x][y]:
