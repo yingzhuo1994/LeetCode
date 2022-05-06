@@ -1,15 +1,16 @@
+# 1st brute force solution
+# O(n^2) time | O(1) space
+# 'in' operation for a list, the average time complexity is O(n)
 class Solution:
-    # 1st brute force solution
-    # O(n^2) time | O(1) space
-    # 'in' operation for a list, the average time complexity is O(n)
     def firstMissingPositive(self, nums: List[int]) -> int:
         k = 1
         while k in nums:
             k += 1
         return k
 
-    # 2nd solution
-    # O(n) time | O(1) space
+# 2nd solution
+# O(n) time | O(1) space
+class Solution:
     def firstMissingPositive(self, nums: List[int]) -> int:
         """"
         1. for any array whose length is l, the first missing positive must be in range [1,...,l+1], 
