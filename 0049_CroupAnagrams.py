@@ -1,13 +1,8 @@
+# O(n * k * log(k)) time | O(n) space
+# where n is the length of strs, and k is the average length of each str.
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-        # 1st soluton
-        ans = collections.defaultdict(list)
+        dic = collections.defaultdict(list)
         for s in strs:
-            ans[tuple(sorted(s))].append(s)
-        return ans.values()
-
-        d = {}
-        for w in strs:
-            key = tuple(sorted(w))
-            d[key] = d.get(key, []) + [w]
-        return d.values()
+            dic[tuple(sorted(s))].append(s)
+        return dic.values()
