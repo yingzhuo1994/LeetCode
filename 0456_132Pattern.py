@@ -18,7 +18,7 @@ class Solution:
         min_list = list(accumulate(nums, min))
         stack, n = [], len(nums)
         
-        for j in range(n-1, -1, -1):
+        for j in reversed(range(n)):
             if nums[j] > min_list[j]:
                 while stack and stack[-1] <= min_list[j]:
                     stack.pop()
