@@ -18,11 +18,14 @@ class Solution:
         min_list = list(accumulate(nums, min))
         stack, n = [], len(nums)
         
-        for j in reversed(range(n)):
-            if nums[j] > min_list[j]:
-                while stack and stack[-1] <= min_list[j]:
+        for i in reversed(range(n)):
+            # min_list[i] is S1
+            # nums[i] is S2
+            # stack[-1] is S3
+            if nums[i] > min_list[i]:
+                while stack and stack[-1] <= min_list[i]:
                     stack.pop()
-                if stack and stack[-1] < nums[j]:
+                if stack and stack[-1] < nums[i]:
                     return True
-                stack.append(nums[j])           
+                stack.append(nums[i])           
         return False
