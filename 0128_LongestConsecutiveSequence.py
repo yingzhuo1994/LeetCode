@@ -1,6 +1,6 @@
+# 1st solution, brute force
+# O(n^3) time | O(1) space
 class Solution:
-    # 1st solution, brute force
-    # O(n^3) time | O(1) space
     def longestConsecutive(self, nums: List[int]) -> int:
         longest_streak = 0
 
@@ -15,9 +15,10 @@ class Solution:
             longest_streak = max(longest_streak, current_streak)
 
         return longest_streak
-    
-    # 2nd solution, sorting
-    # O(nlogn) time | O(1 or n) space
+
+# 2nd solution, sorting
+# O(nlogn) time | O(1 or n) space
+class Solution:
     def longestConsecutive(self, nums: List[int]) -> int:
         if not nums:
             return 0
@@ -37,8 +38,9 @@ class Solution:
 
         return max(longest_streak, current_streak)
     
-    # 3rd solution, HashSet and Intelligent Sequence Building
-    # O(n) time | O(n) space
+# 3rd solution, HashSet and Intelligent Sequence Building
+# O(n) time | O(n) space
+class Solution:
     def longestConsecutive(self, nums: List[int]) -> int:
         longest_streak = 0
         num_set = set(nums)
