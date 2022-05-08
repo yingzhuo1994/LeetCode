@@ -4,9 +4,10 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+
+# 1st recursive solution
 class Solution:
     def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:
-        # 1st recursive solution
         if inorder:
             ind = inorder.index(preorder.pop(0))
             root = TreeNode(inorder[ind])
@@ -14,8 +15,9 @@ class Solution:
             root.right = self.buildTree(preorder, inorder[ind+1:])
             return root
 
-    # 2nd official solution
-    # O(n) time | O(n) space
+# 2nd official solution
+# O(n) time | O(n) space
+class Solution:
     def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:
 
         def array_to_tree(left, right):
