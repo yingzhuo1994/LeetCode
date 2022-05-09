@@ -31,17 +31,17 @@ class NestedIterator:
         return nestedList[i].getInteger()
             
     def hasNext(self):
-        s = self.stack
-        while s:
-            nestedList, i = s[-1]
+        stack = self.stack
+        while stack:
+            nestedList, i = stack[-1]
             if i == len(nestedList):
-                s.pop()
+                stack.pop()
             else:
                 x = nestedList[i]
                 if x.isInteger():
                     return True
-                s[-1][1] += 1
-                s.append([x.getList(), 0])
+                stack[-1][1] += 1
+                stack.append([x.getList(), 0])
         return False
          
 
