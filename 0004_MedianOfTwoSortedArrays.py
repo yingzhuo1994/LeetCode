@@ -35,7 +35,8 @@ class Solution:
         A, B = nums1, nums2
         m, n = len(A), len(B)
         if m > n:
-            A, B, m, n = B, A, n, m
+            A, B = B, A
+            m, n = n, m
         if n == 0:
             raise ValueError
         
@@ -70,8 +71,3 @@ class Solution:
                     min_of_right = min(A[i], B[j])
                 
                 return (max_of_left + min_of_right) / 2
-
-                
-
-
-                
