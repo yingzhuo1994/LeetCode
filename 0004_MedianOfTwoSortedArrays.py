@@ -1,6 +1,6 @@
+# 1st solution
+# O(m + n) time | O(1) space
 class Solution:
-    # 1st solution
-    # O(m + n) time | O(1) space
     def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
         m = len(nums1)
         n = len(nums2)
@@ -28,8 +28,9 @@ class Solution:
             return curVal / 2
         return curVal
 
-    # 2nd solution
-    # O(log(m + n)) time | O(1) space
+# 2nd solution
+# O(log(m + n)) time | O(1) space
+class Solution:
     def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
         A, B = nums1, nums2
         m, n = len(A), len(B)
