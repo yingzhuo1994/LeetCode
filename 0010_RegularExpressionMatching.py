@@ -49,3 +49,24 @@ class Solution:
                 else:
                     dp[i][j] = first_match and dp[i + 1][j + 1]
         return dp[0][0]
+
+# 4th solution, Bottom-Up
+# O(TP) time | O(TP) space
+# where T, P are the lengths of the s and p respectively.
+class Solution:
+    def isMatch(self, s: str, p: str) -> bool:
+        if p == "" or len(p) == 0: 
+            return s == "" or len(s) == 0
+        
+        dp = [[False] * (len(p) + 1) for _ in range(len(s) + 1)]
+        dp[0][0] = True
+        for j in range(2, len(p) + 1):
+            dp[0][j] = p[j-1] == '*' and dp[0][j-2]
+        
+        for j in range(1, len(p) + 1):
+            for i in range(1, len(s) + 1):
+                if p[j - 1] == s[i - 1] or p[j - 1] == '.': 
+                    dp[i][j] = dp[i-1][j-1]
+                elif p[j - 1] == '*':
+                    dp[i][j] = dp[i][j-2] or ((s[i - 1] == p[j - 2] or p[j - 2] == '.') and dp[i-1][j])
+        return dp[-1][-1]
