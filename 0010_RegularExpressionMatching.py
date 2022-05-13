@@ -1,5 +1,5 @@
+# 1st solution
 class Solution:
-    # 1st solution
     def isMatch(self, s: str, p: str) -> bool:
         if not p:
             return not s
@@ -13,9 +13,10 @@ class Solution:
         else:
             return first_match and self.isMatch(s[1:], p[1:])
 
-    # 2nd solution, Top-Down
-    # O(TP) time | O(TP) space
-    # where T, P are the lengths of the s and p respectively.
+# 2nd solution, Top-Down
+# O(TP) time | O(TP) space
+# where T, P are the lengths of the s and p respectively.
+class Solution:
     def isMatch(self, s: str, p: str) -> bool:
         memo = {}
         def dp(i, j):
@@ -32,9 +33,10 @@ class Solution:
             return memo[i, j]
         return dp(0, 0)
 
-    # 3rd solution, Bottom-Up
-    # O(TP) time | O(TP) space
-    # where T, P are the lengths of the s and p respectively.
+# 3rd solution, Bottom-Up
+# O(TP) time | O(TP) space
+# where T, P are the lengths of the s and p respectively.
+class Solution:
     def isMatch(self, s: str, p: str) -> bool:
         dp = [[False] * (len(p) + 1) for _ in range(len(s) + 1)]
 
