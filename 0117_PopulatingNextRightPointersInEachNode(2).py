@@ -27,4 +27,48 @@ class Solution:
                     nextLevel.append(node.right)
             level = nextLevel
         return root
+
+# 2nd solution
+# O(n) time | O(1) space
+class Solution:
+    def connect(self, root: 'Node') -> 'Node':
+        if not root:
+            return root
+        
+        curLevelStartNode = root
+        while curLevelStartNode:
+            nextLevelStartNode = None
             
+            curLevelNode = curLevelStartNode
+            while curLevelNode:
+                if curLevelNode.left:
+                    nextLevelStartNode = curLevelNode.left
+                    break
+                if curLevelNode.right:
+                    nextLevelStartNode = curLevelNode.right
+                    break
+                curLevelNode = curLevelNode.next
+            nextLevelNode = nextLevelStartNode
+
+            while curLevelNode and nextLevelNode:
+                if not curLevelNode.left and not curLevelNode.right:
+                    curLevelNode = curLevelNode.next
+                    continue
+                
+                if curLevelNode.left == nextLevelNode:
+                    if curLevelNode.right:
+                        nextLevelNode.next = curLevelNode.right
+                        nextLevelNode = nextLevelNode.next
+                    else:
+                        curLevelNode = curLevelNode.next
+                elif curLevelNode.right == nextLevelNode:
+                    curLevelNode = curLevelNode.next
+                else:
+                    if curLevelNode.left:
+                        nextLevelNode.next = curLevelNode.left
+                    else:
+                        nextLevelNode.next = curLevelNode.right
+                    nextLevelNode = nextLevelNode.next
+            
+            curLevelStartNode = nextLevelStartNode
+        return root
