@@ -11,14 +11,13 @@ class Solution:
     def deepestLeavesSum(self, root: Optional[TreeNode]) -> int:
         level = [root]
         while True:
-            ans = 0
             newLevel = []
             for node in level:
-                ans += node.val
                 if node.left:
                     newLevel.append(node.left)
                 if node.right:
                     newLevel.append(node.right)
             if len(newLevel) == 0:
-                return ans
+                break
             level = newLevel
+        return sum([node.val for node in level])
