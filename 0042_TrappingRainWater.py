@@ -1,6 +1,6 @@
+# 1st solution, brute force
+# O(n^2) time | O(1) space
 class Solution:
-    # 1st solution, brute force
-    # O(n^2) time | O(1) space
     def trap(self, height: List[int]) -> int:
         totalWater = 0
         for i in range(1, len(height) - 1):
@@ -14,8 +14,9 @@ class Solution:
             totalWater += minHeight - height[i] if minHeight - height[i] > 0 else 0
         return totalWater
 
-    # 2nd solution, dynamic programming
-    # O(n) time | O(n) space
+# 2nd solution, dynamic programming
+# O(n) time | O(n) space
+class Solution:
     def trap(self, height: List[int]) -> int:
         if not height:
             return 0
@@ -36,8 +37,9 @@ class Solution:
 
         return ans
     
-    # 3rd solution, using stacks
-    # O(n) time | O(n) space
+# 3rd solution, using stacks
+# O(n) time | O(n) space
+class Solution:
     def trap(self, height: List[int]) -> int:
         ans = 0
         current = 0
@@ -54,8 +56,9 @@ class Solution:
             current += 1
         return ans
 
-    # 4th solution, using two pointers
-    # O(n) time | O(1) space
+# 4th solution, using two pointers
+# O(n) time | O(1) space
+class Solution:
     def trap(self, height: List[int]) -> int:
         left = 0
         right = len(height) - 1
