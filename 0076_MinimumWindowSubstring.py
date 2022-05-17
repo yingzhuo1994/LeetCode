@@ -1,7 +1,7 @@
+# 1st solution, Sliding Window
+# O(m + n) time | O(m + n) space
+# where m and n represent the lengths of strings s and t
 class Solution:
-    # 1st solution, Sliding Window
-    # O(m + n) time | O(m + n) space
-    # where m and n represent the lengths of strings s and t
     def minWindow(self, s: str, t: str) -> str:
         if not t or not s:
             return ""
@@ -55,9 +55,10 @@ class Solution:
             r += 1    
         return "" if ans[0] == float("inf") else s[ans[1] : ans[2] + 1]
     
-    # 2nd solution, Optimized Sliding Window
-    # O(m + n) time | O(m + n) space
-    # where m and n represent the lengths of strings s and t
+# 2nd solution, Optimized Sliding Window
+# O(m + n) time | O(m + n) space
+# where m and n represent the lengths of strings s and t
+class Solution:
     def minWindow(self, s: str, t: str) -> str:
         if not t or not s:
             return ""
