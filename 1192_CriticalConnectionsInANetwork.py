@@ -3,17 +3,17 @@
 class Solution:
     def criticalConnections(self, n: int, connections: List[List[int]]) -> List[List[int]]:
         def dfs(rank, curr, prev):
-            low[curr], result = rank, []
+            ranks[curr], result = rank, []
             for neighbor in edges[curr]:
                 if neighbor == prev: continue
-                if not low[neighbor]:
+                if not ranks[neighbor]:
                     result += dfs(rank + 1, neighbor, curr)
-                low[curr] = min(low[curr], low[neighbor])
-                if low[neighbor] >= rank + 1:
+                ranks[curr] = min(ranks[curr], ranks[neighbor])
+                if ranks[neighbor] >= rank + 1:
                     result.append([curr, neighbor])
             return result
 
-        low, edges = [0] * n, [[] for _ in range(n)]
+        ranks, edges = [0] * n, [[] for _ in range(n)]
         for u, v in connections:
             edges[u].append(v)
             edges[v].append(u)
