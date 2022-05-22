@@ -5,8 +5,7 @@ class Solution:
         ans = 0
         for i in range(len(s)):
             ans += self.countPalindrome(s, i, i)
-            if i + 1 < len(s):
-                ans += self.countPalindrome(s, i, i + 1)
+            ans += self.countPalindrome(s, i, i + 1)
         return ans  
 
     def countPalindrome(self, s, left, right):
