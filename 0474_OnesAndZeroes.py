@@ -1,5 +1,5 @@
 # 1st solution
-# O(2^k) time | O(kmn) space
+# O(kmn) time | O(kmn) space
 # where k is the length of strs
 class Solution:
     def findMaxForm(self, strs: List[str], m: int, n: int) -> int:
@@ -10,11 +10,11 @@ class Solution:
         while level:
             newLevel = defaultdict(set)
             for i, pair in enumerate(countArray):
-                for k, v in level.items():
-                    if i not in v and pair[0] <= k[0] and pair[1] <= k[1]:
-                        newPair = (k[0] - pair[0], k[1] - pair[1])
+                for keyPair, vSet in level.items():
+                    if i not in vSet and pair[0] <= keyPair[0] and pair[1] <= keyPair[1]:
+                        newPair = (keyPair[0] - pair[0], keyPair[1] - pair[1])
                         if newPair not in newLevel:
-                            newLevel[newPair] = v.copy()
+                            newLevel[newPair] = vSet.copy()
                             newLevel[newPair].add(i)
             if len(newLevel) == 0:
                 return length
