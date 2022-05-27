@@ -10,3 +10,9 @@ class Solution:
                 num >>= 1
             steps += 1
         return steps
+
+# 2nd solution
+# O(1) time | O(1) space
+class Solution:
+    def numberOfSteps(self, num: int) -> int:
+        return len(bin(num)) + bin(num).count("1") - 3
