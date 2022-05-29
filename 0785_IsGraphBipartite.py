@@ -1,5 +1,5 @@
 # 1st solution, Depth First Search
-# O(E) time | O(V) space
+# O(E+V) time | O(V) space
 class Solution:
     def isBipartite(self, graph: List[List[int]]) -> bool:
         n = len(graph)
