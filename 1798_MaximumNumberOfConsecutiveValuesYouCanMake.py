@@ -1,9 +1,6 @@
-class Solution(object):
-    def getMaximumConsecutive(self, coins):
-        """
-        :type coins: List[int]
-        :rtype: int
-        """
+# O(nlog(n)) time | O(log(n)) space
+class Solution:
+    def getMaximumConsecutive(self, coins: List[int]) -> int:
         coins.sort()
         amount = 0
         for coin in coins:
