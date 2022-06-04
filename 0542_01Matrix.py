@@ -1,6 +1,6 @@
+# 1st solution, dp
+# O(r * c) time | O(1) space
 class Solution:
-    # 1st solution, dp
-    # O(r * c) time | O(1) space
     def updateMatrix(self, mat: List[List[int]]) -> List[List[int]]:
         m, n = len(mat), len(mat and mat[0])
         for i in range(m):
@@ -20,8 +20,9 @@ class Solution:
                         mat[i][j] = mat[i][j + 1] + 1
         return mat
 
-    # 2nd solution, back tracking
-    # O(r * c) time | O(r * c) space
+# 2nd solution, back tracking
+# O(r * c) time | O(r * c) space
+class Solution:
     def updateMatrix(self, mat: List[List[int]]) -> List[List[int]]:
         q, m, n = [], len(mat), len(mat[0])
         for i in range(m):
