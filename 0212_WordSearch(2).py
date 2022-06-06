@@ -115,26 +115,27 @@ class Solution:
             else:
                 allwords.add(w)
             
-        found = set()
-        def do_search(x, y, t, visited, s):
-            visited.add((x,y))
+        found = []
+        def do_search(x, y, t, s):
+            curCh = board[x][y]
+            board[x][y] = "#"
             if t.final:
-                found.add(s)
+                found.append(s)
                 allwords.remove(s)
             for nx, ny in ((x+1,y), (x-1,y), (x,y+1), (x,y-1)):
-                if 0 <= nx < m and 0 <= ny < n and (nx,ny) not in visited:
+                if 0 <= nx < m and 0 <= ny < n and board[nx][ny] != "#":
                     ch = board[nx][ny]
                     nt = t[ch]
                     if nt is not None:
-                        do_search(nx, ny, nt, visited, s + ch)
-            visited.remove((x,y))
+                        do_search(nx, ny, nt, s + ch)
+            board[x][y] = curCh
         
         for i in range(m):
             for j in range(n):
                 ch = board[i][j]
                 t = allwords[ch]
                 if t is not None:
-                    do_search(i, j, t, set(), ch)
+                    do_search(i, j, t, ch)
         return found
 
 class Trie:
