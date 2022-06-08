@@ -1,6 +1,6 @@
+# 1st brute-force solution
+# O(n^4) time | O(1) space
 class Solution:
-    # 1st brute-force solution
-    # O(n^4) time | O(1) space
     def fourSumCount(self, nums1: List[int], nums2: List[int], nums3: List[int], nums4: List[int]) -> int:
         count = 0
         n = len(nums1)
@@ -12,8 +12,9 @@ class Solution:
                             count += 1
         return count
     
-    # 2nd hashtable solution
-    # O(n^2) time | O(n^2) space
+# 2nd hashtable solution
+# O(n^2) time | O(n^2) space
+class Solution:
     def fourSumCount(self, nums1: List[int], nums2: List[int], nums3: List[int], nums4: List[int]) -> int:
         hashtable = {}
         for a in nums1:
