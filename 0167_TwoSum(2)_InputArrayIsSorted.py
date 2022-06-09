@@ -1,6 +1,6 @@
+# 1st solution
+# O(n) time | O(1) space
 class Solution:
-    # 1st solution
-    # O(n) time | O(1) space
     def twoSum(self, numbers: List[int], target: int) -> List[int]:
         left = 0
         right = len(numbers) - 1
