@@ -1,7 +1,7 @@
+# 1st solution
+# O(Nlog(N)) time | O(N) space
+# where N is the total number of the elements
 class Solution:
-    # 1st solution
-    # O(Nlog(N)) time | O(N) space
-    # where N is the total number of the elements
     def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
         lst = []
         for line in matrix:
@@ -9,8 +9,9 @@ class Solution:
         lst.sort()
         return lst[k - 1]
 
-    # 2nd solution
-    # O(n) time | O(n) space
+# 2nd solution
+# O(n) time | O(n) space
+class Solution:
     def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
         # The median-of-medians selection function.
         def pick(a, k):
@@ -73,9 +74,10 @@ class Solution:
         k -= n*n - (n - start)**2
         return biselect(range(start, min(n, start+k)), k, k)[0]
 
-    # 3rd solution
-    # O(nlog(A)) time | O(n) space
-    # where A is the difference between the maximum and minimum in the matrix.
+# 3rd solution
+# O(nlog(A)) time | O(n) space
+# where A is the difference between the maximum and minimum in the matrix.
+class Solution:
     def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
         n, beg, end = len(matrix), matrix[0][0], matrix[-1][-1]
         
