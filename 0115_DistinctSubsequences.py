@@ -1,7 +1,7 @@
+# 1st solution, TLE
+# O(2^m) time | O(m) space
+# where m is the length of s
 class Solution:
-    # 1st solution, TLE
-    # O(2^m) time | O(m) space
-    # where m is the length of s
     def numDistinct(self, s: str, t: str) -> int:
         if not t:
             return 1
@@ -12,8 +12,9 @@ class Solution:
                 count += self.numDistinct(s[i + 1:], t[1:])
         return count
     
-    # 2nd solution, Dynamic Programming
-    # O(m * n) time | O(m * n) space
+# 2nd solution, Dynamic Programming
+# O(m * n) time | O(m * n) space
+class Solution:
     def numDistinct(self, s: str, t: str) -> int:
         dp = [[0 for j in range(len(s) + 1)] for i in range(len(t) + 1)]
         for j in range(len(s) + 1):
