@@ -89,3 +89,26 @@ class Solution:
                 ans = max(ans, dic[num + goal] - dic[num])
 
         return len(nums) - ans if ans != -float("inf") else -1
+
+# 4th solution
+# O(n) time | O(1) space
+class Solution:
+    def minOperations(self, nums: List[int], x: int) -> int:
+        total = sum(nums)
+        target = total - x
+        if target < 0:
+            return -1
+        if target == 0:
+            return len(nums)
+        start = 0
+        curSum = 0
+        ans = -1
+        for end in range(len(nums)):
+            if curSum < target:
+                curSum += nums[end]
+            while curSum >= target:
+                if curSum == target:
+                    ans = max(ans, end - start + 1)
+                curSum -= nums[start]
+                start += 1
+        return -1 if ans == -1 else len(nums) - ans
