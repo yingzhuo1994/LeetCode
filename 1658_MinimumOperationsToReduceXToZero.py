@@ -104,8 +104,7 @@ class Solution:
         curSum = 0
         ans = -1
         for end in range(len(nums)):
-            if curSum < target:
-                curSum += nums[end]
+            curSum += nums[end]
             while curSum >= target:
                 if curSum == target:
                     ans = max(ans, end - start + 1)
