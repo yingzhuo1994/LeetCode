@@ -1,5 +1,5 @@
+# 1st brute force solution
 class Solution:
-    # 1st brute force solution
     def rangeBitwiseAnd(self, left: int, right: int) -> int:
         leftDigit = set([i for i in range(32)])
         for num in range(left, right + 1):
@@ -16,9 +16,12 @@ class Solution:
             result = result | (1 << kbit)
         return result
 
-    # 2nd solution
-    # O(1) time | O(1) space
+# 2nd solution
+# O(1) time | O(1) space
+class Solution:
     def rangeBitwiseAnd(self, left: int, right: int) -> int:
+        if left == 0 or len(bin(left)) != len(bin(right)):
+            return 0
         k = 0
         while left != right:
             left >>= 1
