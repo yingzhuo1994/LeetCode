@@ -1,10 +1,6 @@
-class Solution(object):
-    def canFinish(self, numCourses, prerequisites):
-        """
-        :type numCourses: int
-        :type prerequisites: List[List[int]]
-        :rtype: bool
-        """
+# 1st solution
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
         graph = [[] for _ in range(numCourses)]
         visited = [0 for _ in range(numCourses)]
         # create graph
@@ -34,7 +30,9 @@ class Solution(object):
         visited[i] = 1
         return True
     
-    # 2nd solution
+# 2nd solution
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
         graph = [[] for _ in range(numCourses)]
         visited = [False for _ in range(numCourses)]
         inStack = [False for _ in range(numCourses)]
@@ -68,6 +66,8 @@ class Solution(object):
         return False
     
     # 3rd solution
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
         WHITE, GREY, BLACK = 0, 1, 2
         graph = [[] for _ in range(numCourses)]
         colors = [WHITE for _ in range(numCourses)]
