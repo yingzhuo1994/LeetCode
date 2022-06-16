@@ -1,6 +1,6 @@
+# 1st solution
+# O(nlg(n)) time | O(n) space
 class Solution:
-    # 1st solution
-    # O(nlg(n)) time | O(n) space
     def getSkyline(self, buildings: List[List[int]]) -> List[List[int]]:
         events = sorted([(L, -H, R) for L, R, H in buildings] + list({(R, 0, None) for _, R, _ in buildings}))
         res, hp = [[0, 0]], [(0, float("inf"))]
@@ -24,7 +24,7 @@ class Solution(object):
         # 第一种是轮廓升高事件(L, -H)、第二种是轮廓降低事件(R, 0)
         # 轮廓升高事件(L, -H, R)中的R用于后面的最小堆
         events = [(L, -H, R) for L, R, H in buildings]
-        events += list({(R, 0, 0) for _, R, _ in buildings})
+        events += [(R, 0, 0) for _, R, _ in buildings]
 
         # 先根据L从小到大排序、再根据H从大到小排序(记录为-H的原因)
         # 这是因为我们要维护一个堆保存当前最高的轮廓
@@ -40,7 +40,7 @@ class Solution(object):
         for L, negH, R in events:
             
             # 如果是轮廓升高事件，记录到最小堆中
-            if negH: heappush(live, (negH, R))
+            if negH != 0: heappush(live, (negH, R))
             
             # 获取当前最高轮廓
             # 根据当前遍历的位置L，判断最高轮廓是否有效
