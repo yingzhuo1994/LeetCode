@@ -26,3 +26,24 @@ class Solution:
             return dp0, dp1, dp2
 
         return min(solve(root)[1:])
+
+# 2nd solution, Greedy
+# O(n) time | O(h) space
+# where n is the number of nodes, and h is the height of the tree
+class Solution:
+    def minCameraCover(self, root: Optional[TreeNode]) -> int:
+        self.ans = 0
+        covered = {None}
+
+        def dfs(node, par = None):
+            if node:
+                dfs(node.left, node)
+                dfs(node.right, node)
+
+                if (par is None and node not in covered or
+                        node.left not in covered or node.right not in covered):
+                    self.ans += 1
+                    covered.update({node, par, node.left, node.right})
+
+        dfs(root)
+        return self.ans
