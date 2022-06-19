@@ -1,4 +1,7 @@
 # 1st solution
+from bisect import bisect
+
+
 class Solution:
     def suggestedProducts(self, products: List[str], searchWord: str) -> List[List[str]]:
         products.sort()
@@ -33,4 +36,17 @@ class Trie:
                 lst = dic[self.end]
                 length = min(3, len(lst))
                 ans.append(lst[:length])
+        return ans
+
+# 2nd solution
+# O(N*log(N)) time | O(M) space
+# where N is the lenth of products, and M is the length of searchWord.
+class Solution:
+    def suggestedProducts(self, products: List[str], searchWord: str) -> List[List[str]]:
+        products.sort()
+        ans, prefix, i = [], '', 0
+        for ch in searchWord:
+            prefix += ch
+            i = bisect.bisect_left(products, prefix, i)
+            ans.append([w for w in products[i:i+3] if w.startswith(prefix)])
         return ans
