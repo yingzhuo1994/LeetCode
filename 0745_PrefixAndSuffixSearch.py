@@ -18,9 +18,9 @@ class WordFilter:
         return ans
     
     def addWords(self, words):
-        wordDic = defaultdict(list)
+        wordDic = {}
         for idx, word in enumerate(words):
-            wordDic[word] = max(wordDic.get(word, -1), idx)
+            wordDic[word] = idx
         
         for word, idx in wordDic.items():
             self.trie.addPrefix(word, idx)
@@ -39,9 +39,6 @@ class Trie:
                 dic[ch] = {self.end: set()}
             dic[ch][self.end].add(idx)
             dic = dic[ch]
-        # if self.end not in dic:
-        #     dic[self.end] = {'lst': []}
-        # dic[self.end]["lst"].append(idx)
     
     def addSuffix(self, word, idx):
         dic = self.suffix
@@ -51,32 +48,25 @@ class Trie:
                 dic[ch] = {self.end: set()}
             dic[ch][self.end].add(idx)
             dic = dic[ch]
-        # if self.end not in dic:
-        #     dic[self.end] = {'lst': []}
-        # dic[self.end]["lst"].append(idx)
 
     def searchPrefix(self, prefix):
         dic = self.prefix
         for ch in prefix:
             if ch not in dic:
-                return []
+                return set()
             dic = dic[ch]
-        if self.end in dic:
-            return dic[self.end]
-        else:
-            return []
+
+        return dic[self.end]
 
     def searchSuffix(self, suffix):
         dic = self.suffix
         for i in reversed(range(len(suffix))):
             ch = suffix[i]
             if ch not in dic:
-                return []
+                return set()
             dic = dic[ch]
-        if self.end in dic:
-            return dic[self.end]
-        else:
-            return []
+
+        return dic[self.end]
         
 
 # Your WordFilter object will be instantiated and called as such:
