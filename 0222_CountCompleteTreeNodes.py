@@ -4,9 +4,10 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+
+# 1st solution
+# O(n) time | O(n) space
 class Solution:
-    # 1st solution
-    # O(n) time | O(n) space
     def countNodes(self, root: Optional[TreeNode]) -> int:
         if not root:
             return 0
@@ -26,8 +27,9 @@ class Solution:
         return 2**(level - 1) - 1 + count
 
 
-    # 2nd solution
-    # O(log(n) * log(n)) time | O(log(n)) space
+# 2nd solution
+# O(log(n) * log(n)) time | O(log(n)) space
+class Solution:
     def countNodes(self, root: Optional[TreeNode]) -> int:
         if not root:
             return 0
