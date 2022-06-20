@@ -2,9 +2,7 @@
 # O(n*log(n)) time | O(n) space
 class Solution:
     def minimumLengthEncoding(self, words: List[str]) -> int:
-        wordsSet = set()
-        for word in words:
-            wordsSet.add(word)
+        wordsSet = set(words)
         
         wordsLst = sorted(list(wordsSet), key=len)
         trie = Trie()
@@ -41,3 +39,14 @@ class Trie:
                 return False
             dic = dic[ch]
         return True
+
+# 2nd solution
+# O(n*k^2) time | O(n) space
+# where k is the length of each word, less equal to 7
+class Solution:
+    def minimumLengthEncoding(self, words: List[str]) -> int:
+        s = set(words)
+        for w in words:
+            for i in range(1, len(w)):
+                s.discard(w[i:])
+        return sum(len(w) + 1 for w in s)
