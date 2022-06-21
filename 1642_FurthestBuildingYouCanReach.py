@@ -45,3 +45,20 @@ class Solution:
                         break
             distance += 1
         return distance
+
+# 3rd solution, min heap
+# O(n*log(k)) time | O(k) space
+class Solution:
+    def furthestBuilding(self, heights: List[int], bricks: int, ladders: int) -> int:
+        if ladders >= len(heights) - 1:
+            return len(heights) - 1
+        heap = []
+        for i in range(len(heights) - 1):
+            diff = heights[i + 1] - heights[i]
+            if diff > 0:
+                heapq.heappush(heap, diff)
+            if len(heap) > ladders:
+                bricks -= heapq.heappop(heap)
+            if bricks < 0:
+                return i
+        return len(heights) - 1
