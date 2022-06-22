@@ -5,10 +5,9 @@
 #         self.left = None
 #         self.right = None
 
+# 1st solution
+# O(n) time | O(n) space
 class Solution:
-
-    # 1st solution
-    # O(n) time | O(n) space
     def __init__(self):
         # Variable to store LCA node.
         self.ans = None
@@ -40,8 +39,9 @@ class Solution:
         recurse_tree(root)
         return self.ans
 
-    # 2nd solution, iterative using parent pointers
-    # O(n) time | O(n) space
+# 2nd solution, iterative using parent pointers
+# O(n) time | O(n) space
+class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
         # Stack for tree traversal
         stack = [root]
@@ -76,10 +76,10 @@ class Solution:
             q = parent[q]
         return q
 
-    # 3rd solution, iterative without parent pointers
-    # O(n) time | O(n) space
-    # Three static flags to keep track of post-order traversal.
-
+# 3rd solution, iterative without parent pointers
+# O(n) time | O(n) space
+# Three static flags to keep track of post-order traversal.
+class Solution:
     # Both left and right traversal pending for a node.
     # Indicates the nodes children are yet to be traversed.
     BOTH_PENDING = 2
@@ -89,14 +89,7 @@ class Solution:
     # Indicates the node can be popped off the stack.
     BOTH_DONE = 0
 
-    def lowestCommonAncestor(self, root, p, q):
-        """
-        :type root: TreeNode
-        :type p: TreeNode
-        :type q: TreeNode
-        :rtype: TreeNode
-        """
-
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
         # Initialize the stack with the root node.
         stack = [(root, Solution.BOTH_PENDING)]
 
