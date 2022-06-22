@@ -1,6 +1,6 @@
+# 1st solution
+# O(n) time | O(n) space
 class Solution:
-    # 1st solution
-    # O(n) time | O(n) space
     def calculate(self, s: str) -> int:
         res, num, sign, stack = 0, 0, 1, []
         for ch in s:
@@ -21,8 +21,9 @@ class Solution:
                 num = 0
         return res + num * sign
 
-    # 2nd solution
-    # O(n) time | O(n) space
+# 2nd solution
+# O(n) time | O(n) space
+class Solution:
     def calculate(self, s: str) -> int:
         def update(op, v):
             if op == "+": stack.append(v)
@@ -48,8 +49,9 @@ class Solution:
         update(sign, num)
         return sum(stack)
 
-    # 3rd solution
-    # O(n) time | O(n) space
+# 3rd solution
+# O(n) time | O(n) space
+class Solution:
     def calculate(self, s):    
         def calc(it):
             def update(op, v):
