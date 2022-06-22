@@ -65,7 +65,8 @@ class Solution:
         inStack[node] = False
         return False
     
-    # 3rd solution
+# 3rd solution
+# O（E + V) time | O(E) space
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
         WHITE, GREY, BLACK = 0, 1, 2
