@@ -1,3 +1,4 @@
+# 1st solution
 # O(n*logn) time | O(n) space
 class Solution:
     def scheduleCourse(self, courses: List[List[int]]) -> int:
@@ -18,3 +19,17 @@ class Solution:
                     heapq.heappush(stack, -duration)
 
         return courseNumber
+
+# 2nd solution
+# O(n*logn) time | O(n) space
+class Solution:
+    def scheduleCourse(self, courses: List[List[int]]) -> int:
+        heap = []
+        totalTime = 0
+        courses.sort(key = lambda v: v[1])
+        for duration, endTime in courses:
+            totalTime += duration
+            heapq.heappush(heap, -duration)
+            if totalTime > endTime:
+                totalTime += heapq.heappop(heap)
+        return len(heap)
