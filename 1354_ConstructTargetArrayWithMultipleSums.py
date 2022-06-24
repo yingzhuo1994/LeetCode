@@ -1,14 +1,15 @@
 # 1st solution
 class Solution:
     def isPossible(self, target: List[int]) -> bool:
-        heap = []
-        for num in target: heappush(heap, -num)
-        s = sum(target)
+        heap = [-num for num in target]
+        heapify(heap)
+        total = sum(target)
         while True:
-            elem = -heappop(heap)
-            if elem == 1: return True
-            if s == elem: return False
-            cand = (elem - 1) % (s - elem) + 1
-            if cand == elem: return False
-            s = s - elem + cand
+            largest = -heappop(heap)
+            if largest == 1: return True
+            if total == largest: return False
+            total -= largest
+            cand = (largest - 1) % total + 1
+            if cand == largest: return False
+            total += cand
             heappush(heap, -cand)
