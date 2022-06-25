@@ -83,6 +83,8 @@ class Solution:
             count = 0
             for row in matrix:
                 idx = bisect.bisect_right(row, value)
+                if idx == 0:
+                    break
                 count += idx
             return count < k
         
