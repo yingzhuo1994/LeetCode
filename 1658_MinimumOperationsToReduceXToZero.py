@@ -102,12 +102,12 @@ class Solution:
             return len(nums)
         start = 0
         curSum = 0
-        ans = -1
+        length = -1
         for end in range(len(nums)):
             curSum += nums[end]
             while curSum >= target:
                 if curSum == target:
-                    ans = max(ans, end - start + 1)
+                    length = max(length, end - start + 1)
                 curSum -= nums[start]
                 start += 1
-        return -1 if ans == -1 else len(nums) - ans
+        return -1 if length == -1 else len(nums) - length
