@@ -1,6 +1,6 @@
+# 1st solution, Lagrange's four square theorem
+# O(sqart(n)) time | O(1) space
 class Solution:
-    # 1st solution, Lagrange's four square theorem
-    # O(sqart(n)) time | O(1) space
     def numSquares(self, n: int) -> int:
         if int(sqrt(n))**2 == n: return 1
         for j in range(int(sqrt(n)) + 1):
@@ -11,8 +11,9 @@ class Solution:
         if n % 8 == 7: return 4
         return 3
 
-    # 2nd solution
-    # O(n^2) time | O(n^2) space
+# 2nd solution
+# O(n^2) time | O(n^2) space
+class Solution:
     def numSquares(self, n: int) -> int:
         squareSet = set()
         k = 1
