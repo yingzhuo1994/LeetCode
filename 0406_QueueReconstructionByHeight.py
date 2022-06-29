@@ -31,4 +31,22 @@ class Solution:
         result.extend(queue[j:])
         return result
 
+# 2nd solution
+# O(n*log(n) + n^2) time | O(n) space
+class Solution:
+    def reconstructQueue(self, people: List[List[int]]) -> List[List[int]]:
+        people.sort()
 
+        indices = [i for i in range(len(people))]
+        queue = [None for _ in range(len(people))]
+        dic = defaultdict(list)
+        for h, k in people:
+            dic[h].append(k)
+        heights = sorted(dic.keys())
+        for h in heights:
+            for i in range(len(dic[h])):
+                idx = dic[h][i] - i
+                queue[indices[idx]] = [h, dic[h][i]]
+                indices.pop(idx)
+        
+        return queue
