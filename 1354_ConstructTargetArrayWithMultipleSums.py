@@ -7,9 +7,8 @@ class Solution:
         while True:
             largest = -heappop(heap)
             if largest == 1: return True
-            if total == largest: return False
+            if total == largest or total == 0: return False
             total -= largest
             cand = (largest - 1) % total + 1
-            if cand == largest: return False
             total += cand
             heappush(heap, -cand)
