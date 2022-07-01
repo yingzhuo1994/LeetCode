@@ -38,11 +38,14 @@ class Solution:
 
         if not dp[-2]:
             return []
-        res = [[] for _ in range(len(s) + 1)]
-        res[-1] = ['']
+
+        dpWords = [[] for _ in range(len(s) + 1)]
+        dpWords[-1] = [[""]]
+        
         for i in range(len(s)):
             for j in range(i+1):
-                if s[j: i + 1] in wordSet:
-                    res[i].extend([w + ' ' + s[j:i + 1] for w in res[j - 1]])
-        return [w[1:] for w in res[-2]]
-                    
+                word = s[j:i+1]
+                if dp[j-1] and word in wordSet:
+                    dpWords[i].extend([lst + [word] for lst in dpWords[j-1]])
+        
+        return [" ".join(lst[1:]) for lst in dpWords[-2]]
