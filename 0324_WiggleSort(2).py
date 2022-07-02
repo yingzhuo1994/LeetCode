@@ -1,6 +1,6 @@
+# 1st solution
+# O(nlogn) time | O(n) space
 class Solution:
-    # 1st solution
-    # O(nlogn) time | O(n) space
     def wiggleSort(self, nums: List[int]) -> None:
         """
         Do not return anything, modify nums in-place instead.
@@ -9,13 +9,14 @@ class Solution:
         half = len(nums[::2])
         nums[::2], nums[1::2] = nums[:half][::-1], nums[half:][::-1]
     
-    # 2nd solution
-    # O(n) time | O(1) space
+# 2nd solution
+# O(n) time | O(1) space
+class Solution:
     def wiggleSort(self, nums: List[int]) -> None:
         def nsmallest(nums, n):            
             start, end = 0, len(nums)-1
             while True:
-                pivot = nums[random.randint(start,end)]
+                pivot = nums[random.randint(start, end)]
                 i, j, k = start, end, start
                 while k <= j:
                     if nums[k] < pivot:
@@ -38,14 +39,14 @@ class Solution:
         # (n | 1) calculates the nearest odd that is not less than n
         mapIdx = lambda i: (1 + 2 * i) % (n | 1)
         # Three Color Sort
-        i, j, k = 0, n - 1, 0
-        while k <= j:
+        left, right, k = 0, n - 1, 0
+        while k <= right:
             if nums[mapIdx(k)] > mid:
-                nums[mapIdx(k)], nums[mapIdx(i)] = nums[mapIdx(i)], nums[mapIdx(k)]
-                i += 1
+                nums[mapIdx(k)], nums[mapIdx(left)] = nums[mapIdx(left)], nums[mapIdx(k)]
+                left += 1
                 k += 1
             elif nums[mapIdx(k)] < mid:
-                nums[mapIdx(k)], nums[mapIdx(j)] = nums[mapIdx(j)], nums[mapIdx(k)]
-                j -= 1
+                nums[mapIdx(k)], nums[mapIdx(right)] = nums[mapIdx(right)], nums[mapIdx(k)]
+                right -= 1
             else:
                 k += 1
