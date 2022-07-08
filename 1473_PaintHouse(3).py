@@ -32,6 +32,7 @@ class Solution:
 
 # 2nd solution, dp
 # O(m * n^2 * k) time | O(mnk) space
+# where k = target
 class Solution:
     def minCost(self, houses: List[int], cost: List[List[int]], m: int, n: int, target: int) -> int:
         memo = [[[float("inf") for _ in range(target + 1)] for _ in range(n + 1)] for _ in range(m + 1)]
@@ -65,3 +66,18 @@ class Solution:
             ans = min(ans, memo[m-1][j][target])
 
         return ans if ans != float("inf") else - 1
+
+# 3rd solution, dp
+# O(m * n^2 * k) time | O(nk) space
+# where k = target
+class Solution:
+    def minCost(self, houses: List[int], cost: List[List[int]], m: int, n: int, target: int) -> int:
+        dp, dp2 = {(0, 0): 0}, {}
+        for i, a in enumerate(houses):
+            for cj in (range(1, n + 1) if a == 0 else [a]):
+                for ci, b in dp:
+                    b2 = b + (ci != cj)
+                    if b2 > target: continue
+                    dp2[cj, b2] = min(dp2.get((cj,b2), float('inf')), dp[ci, b] + (cost[i][cj - 1] if cj != a else 0))
+            dp, dp2 = dp2, {}
+        return min([dp[c, b] for c, b in dp if b == target] or [-1])
