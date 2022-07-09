@@ -1,5 +1,6 @@
+# 1st solution
+# O(n * log(k)) time | O(k) space
 class Solution:
-    # 1st solution
     def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
         res = []
         hp = []
@@ -13,8 +14,9 @@ class Solution:
             res.append(-hp[0][0])
         return res
 
-    # 2nd solution
-    # O(n) time | O(k) space
+# 2nd solution
+# O(n) time | O(k) space
+class Solution:
     def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
         deq, n, ans = deque([0]), len(nums), []
 
