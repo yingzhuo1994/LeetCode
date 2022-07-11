@@ -31,12 +31,7 @@ class Solution:
         oldSlope = 0
 
         for i in range(1, n):
-            if ratings[i] > ratings[i - 1]:
-                newSlope = 1
-            elif ratings[i] < ratings[i - 1]:
-                newSlope = -1
-            else:
-                newSlope = 0
+            newSlope = ratings[i] - ratings[i - 1]
 
             if (oldSlope > 0 and newSlope == 0) or (oldSlope < 0 and newSlope >= 0):
                 candies += count(up) + count(down) + max(up, down)
