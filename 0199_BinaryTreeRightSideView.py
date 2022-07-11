@@ -5,7 +5,7 @@
 #         self.left = left
 #         self.right = right
 
-# 1st solution
+# 1st solution, BFS
 # O(n) time | O(n) space
 class Solution:
     def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
@@ -23,3 +23,25 @@ class Solution:
                     newLevel.append(node.right)
             level = newLevel
         return ans
+
+# 2nd solution, DFS
+# O(n) time | O(h) space
+class Solution:
+    def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
+        if not root:
+            return []
+        self.ans = []
+        def dfs(node, depth):
+            if not node:
+                return 
+            if depth > len(self.ans):
+                self.ans.append(node.val)
+            
+            if node.right:
+                dfs(node.right, depth + 1)
+            
+            if node.left:
+                dfs(node.left, depth + 1)
+        
+        dfs(root, 1)
+        return self.ans
