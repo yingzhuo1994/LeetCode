@@ -13,6 +13,9 @@ class Solution:
 # O(n) time | O(1) space
 class Solution:
     def wiggleSort(self, nums: List[int]) -> None:
+        def swap(nums, i, j):
+            nums[i], nums[j] = nums[j], nums[i]
+
         def nsmallest(nums, n):            
             start, end = 0, len(nums)-1
             while True:
@@ -20,11 +23,11 @@ class Solution:
                 i, j, k = start, end, start
                 while k <= j:
                     if nums[k] < pivot:
-                        nums[i], nums[k] = nums[k], nums[i]
+                        swap(nums, i, k)
                         i += 1
                         k += 1
                     elif nums[k] > pivot:
-                        nums[j], nums[k] = nums[k], nums[j]
+                        swap(nums, j, k)
                         j -= 1
                     else:
                         k += 1
@@ -34,6 +37,7 @@ class Solution:
                     end = i - 1
                 else:
                     start = i + 1
+
         n = len(nums)
         mid = nsmallest(nums, (n + 1) // 2)
         # (n | 1) calculates the nearest odd that is not less than n
@@ -42,11 +46,11 @@ class Solution:
         left, right, k = 0, n - 1, 0
         while k <= right:
             if nums[mapIdx(k)] > mid:
-                nums[mapIdx(k)], nums[mapIdx(left)] = nums[mapIdx(left)], nums[mapIdx(k)]
+                swap(nums, mapIdx(k), mapIdx(left))
                 left += 1
                 k += 1
             elif nums[mapIdx(k)] < mid:
-                nums[mapIdx(k)], nums[mapIdx(right)] = nums[mapIdx(right)], nums[mapIdx(k)]
+                swap(nums, mapIdx(k), mapIdx(right))
                 right -= 1
             else:
                 k += 1
