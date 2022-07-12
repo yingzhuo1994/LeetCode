@@ -1,6 +1,6 @@
+# 1st solution
+# O(k*2^n) time | O(n) space
 class Solution:
-    # 1st solution
-    # O(k*2^n) time | O(n) space
     def canPartitionKSubsets(self, nums: List[int], k: int) -> bool:
         total = sum(nums)
         if len(nums) < k or total % k != 0:
@@ -27,8 +27,9 @@ class Solution:
         
         return can_partition(k)
 
-    # 2nd solution
-    # O(2^n*n) time | O(2^n) space
+# 2nd solution
+# O(2^n*n) time | O(2^n) space
+class Solution:
     def canPartitionKSubsets(self, nums: List[int], k: int) -> bool:
         N = len(nums)
         nums.sort(reverse = True)
