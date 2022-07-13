@@ -4,9 +4,11 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+
+# 1st solution, BFS
+# O(n) time | O(n) space
 class Solution:
     def levelOrder(self, root: TreeNode) -> List[List[int]]:
-        # O(n) time | O(n) space
         level = [root] if root else []
         lst = []
         while level:
