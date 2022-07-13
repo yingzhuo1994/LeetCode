@@ -1,6 +1,6 @@
+# 1st solution
+# O(n^3) time | O(1) space
 class Solution:
-    # 1st solution
-    # O(n^3) time | O(1) space
     def increasingTriplet(self, nums: List[int]) -> bool:
         n = len(nums)
         if n < 3:
@@ -12,8 +12,9 @@ class Solution:
                         return True
         return False
     
-    # 2nd solution
-    # O(n) time | O(1) space
+# 2nd solution
+# O(n) time | O(1) space
+class Solution:
     def increasingTriplet(self, nums: List[int]) -> bool:
         first = second = float('inf')
         for n in nums:
@@ -23,4 +24,24 @@ class Solution:
                 second = n
             else:
                 return True
+        return False
+
+# 3rd solution
+# O(n) time | O(n) space
+class Solution:
+    def increasingTriplet(self, nums: List[int]) -> bool:
+        left = nums[:]
+        right = nums[:]
+        
+        n = len(nums)
+        for i in range(1, n):
+            left[i] = min(left[i-1], left[i])
+        
+        for i in reversed(range(n-1)):
+            right[i] = max(right[i+1], right[i])
+        
+        for i in range(n):
+            if left[i] < nums[i] < right[i]:
+                return True
+        
         return False
