@@ -28,3 +28,15 @@ class Solution:
             node.right = right
             return helper(node.right)
         helper(root)
+
+# 2nd solution
+# O(n^2) time | O(1) space
+class Solution:
+    def flatten(self, root: Optional[TreeNode]) -> None:
+        curr = root
+        while curr:
+            if curr.left:
+                runner = curr.left
+                while runner.right: runner = runner.right
+                runner.right, curr.right, curr.left = curr.right, curr.left, None
+            curr = curr.right
