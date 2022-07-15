@@ -22,7 +22,9 @@ class Solution:
         else:
             return a
 
-    # 2nd solution
+# 2nd solution
+# O(1) time | O(1) space
+class Solution:
     def getSum(self, a: int, b: int) -> int:
         mask = 0xffffffff
         a &= mask
