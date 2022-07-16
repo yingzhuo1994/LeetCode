@@ -1,5 +1,6 @@
 # 1st solution
-# O((mn)^k) time | O(mn) space
+# O(kmn) time | O(mn) space
+# where k = maxMove
 class Solution:
     def findPaths(self, m: int, n: int, maxMove: int, startRow: int, startColumn: int) -> int:
         if maxMove == 0:
