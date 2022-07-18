@@ -4,37 +4,43 @@ class Solution:
     def numSubmatrixSumTarget(self, matrix: List[List[int]], target: int) -> int:
         m = len(matrix)
         n = len(matrix[0])
-        memo = {(1, 1): matrix}
-        for j in range(2, n + 1):
-            lastMatrix = memo[(1, j - 1)]
-            newMatrix = [[0 for _ in range(n - j + 1)] for _ in range(m)]
-            for x in range(m):
-                for y in range(n - j + 1):
-                    newMatrix[x][y] = lastMatrix[x][y] + matrix[x][j + y - 1]
-
-            memo[(1, j)] = newMatrix
-        
-        for i in range(2, m + 1):
-            for j in range(1, n + 1):
-                firstMatrix = memo[(1, j)]
-                lastMatrix = memo[(i - 1, j)]
-                newMatrix = [[0 for _ in range(n - j + 1)] for _ in range(m - i + 1)]
-                for x in range(m - i + 1):
-                    for y in range(n - j + 1):
-                        newMatrix[x][y] = lastMatrix[x][y] + firstMatrix[i + x -1][y]
-
-                memo[(i, j)] = newMatrix
+        memo = {}
         ans = 0
-        for i in range(1, m + 1):
-            for j in range(1, n + 1):
-                ans += self.checkMatrix(memo[(i, j)], target)
-        
+        for dx in range(m):
+            for dy in range(n):
+                for x1 in range(m):
+                    x2 = x1 + dx
+                    if x2 >= m:
+                        break 
+                    for y1 in range(n):
+                        y2 = y1 + dy
+                        if y2 >= n:
+                            break
+                        if dx == 0 and dy == 0:
+                            sumValue = matrix[x1][y1]
+                        else:
+                            sumValue = memo.get((x1, y1, x2 - 1, y2), 0) + memo.get((x1, y1, x2, y2 - 1), 0) - memo.get((x1, y1, x2 - 1, y2 - 1), 0) + matrix[x2][y2]
+                        memo[(x1, y1, x2, y2)] = sumValue
+                        if sumValue == target:
+                            ans += 1
         return ans
 
-    def checkMatrix(self, matrix, target):
-        count = 0
-        for i in range(len(matrix)):
-            for j in range(len(matrix[0])):
-                if matrix[i][j] == target:
-                    count += 1
-        return count
+# 2nd solution, TLE
+# O(m*n^2) time | O(m) space
+class Solution:
+    def numSubmatrixSumTarget(self, matrix: List[List[int]], target: int) -> int:
+        m = len(matrix)
+        n = len(matrix[0])
+        for row in matrix:
+            for j in range(n - 1):
+                row[j + 1] += row[j]
+        ans = 0
+        for y1 in range(n):
+            for y2 in range(y1, n):
+                count = collections.defaultdict(int)
+                curTotal, count[0] = 0, 1
+                for x in range(m):
+                    curTotal += matrix[x][y2] - (matrix[x][y1 - 1] if y1 > 0 else 0)
+                    ans += count[curTotal - target]
+                    count[curTotal] += 1
+        return ans
