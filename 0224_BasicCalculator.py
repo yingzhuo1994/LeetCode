@@ -53,7 +53,7 @@ class Solution:
 # O(n) time | O(n) space
 class Solution:
     def calculate(self, s):    
-        def calc(it):
+        def calc(idx):
             def update(op, v):
                 if op == "+": stack.append(v)
                 if op == "-": stack.append(-v)
@@ -62,19 +62,20 @@ class Solution:
         
             num, stack, sign = 0, [], "+"
             
-            while it < len(s):
-                if s[it].isdigit():
-                    num = num * 10 + int(s[it])
-                elif s[it] in "+-*/":
+            while idx < len(s):
+                ch = s[idx]
+                if ch.isdigit():
+                    num = num * 10 + int(ch)
+                elif ch in "+-*/":
                     update(sign, num)
-                    num, sign = 0, s[it]
-                elif s[it] == "(":
-                    num, j = calc(it + 1)
-                    it = j - 1
-                elif s[it] == ")":
+                    num, sign = 0, ch
+                elif ch == "(":
+                    num, j = calc(idx + 1)
+                    idx = j - 1
+                elif ch == ")":
                     update(sign, num)
-                    return sum(stack), it + 1
-                it += 1
+                    return sum(stack), idx + 1
+                idx += 1
             update(sign, num)
             return sum(stack)
 
