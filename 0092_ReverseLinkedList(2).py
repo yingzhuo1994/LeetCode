@@ -11,28 +11,24 @@ class Solution:
         sentinel = ListNode(0)
         sentinel.next = head
         p = sentinel
-        idx = 1
-        while idx < left:
+        idx = 0
+        while idx + 1 < left:
             p = p.next
             idx += 1
         
         newHead = p
-        leftNode = p.next
+        startNode = p.next
         p = p.next
         idx += 1
         
+        prev = None
         while idx <= right:
-            p = p.next
+            nextNode = p.next
+            p.next = prev
+            prev = p
+            p = nextNode
             idx += 1
-        newTail = p.next
-
-        curNode = leftNode
-        prev = newTail
-        while curNode != newTail:
-            nextNode = curNode.next
-            curNode.next = prev
-            prev = curNode
-            curNode = nextNode
         newHead.next = prev
+        startNode.next = p
         
         return sentinel.next
