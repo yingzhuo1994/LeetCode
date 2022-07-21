@@ -19,12 +19,11 @@ class Solution:
 # O(n) time | O(1) space
 class Solution:
     def candy(self, ratings: List[int]) -> int:
-        def count(k):
-            return (k * (k + 1)) // 2
-        
         n = len(ratings)
         if n <= 1:
             return n
+
+        calculate = lambda k: (k * (k + 1)) // 2
         
         candies = 0
         up, down = 0, 0
@@ -34,7 +33,7 @@ class Solution:
             newSlope = ratings[i] - ratings[i - 1]
 
             if (oldSlope > 0 and newSlope == 0) or (oldSlope < 0 and newSlope >= 0):
-                candies += count(up) + count(down) + max(up, down)
+                candies += calculate(up) + calculate(down) + max(up, down)
                 up = 0
                 down = 0
 
@@ -47,5 +46,5 @@ class Solution:
 
             oldSlope = newSlope
 
-        candies += count(up) + count(down) + max(up, down) + 1
+        candies += calculate(up) + calculate(down) + max(up, down) + 1
         return candies
