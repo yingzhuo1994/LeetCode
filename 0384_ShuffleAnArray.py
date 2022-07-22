@@ -1,23 +1,16 @@
+# 1st solution
+# O(n^2) time | O(n) space
 class Solution:
-
-    # 1st solution
-    # O(n^2) time | O(n) space
     def __init__(self, nums: List[int]):
         self.array = nums
         self.original = list(nums)
 
     def reset(self) -> List[int]:
-        """
-        Resets the array to its original configuration and return it.
-        """
         self.array = self.original
         self.original = list(self.original)
         return self.array
         
     def shuffle(self) -> List[int]:
-        """
-        Returns a random shuffling of the array.
-        """
         aux = list(self.array)
 
         for idx in range(len(self.array)):
@@ -25,24 +18,19 @@ class Solution:
             self.array[idx] = aux.pop(remove_idx)
         return self.array
 
-    # 2nd solution
-    # O(n) time | O(n) space
+# 2nd solution
+# O(n) time | O(n) space
+class Solution:
     def __init__(self, nums: List[int]):
         self.array = nums
         self.original = list(nums)
 
     def reset(self) -> List[int]:
-        """
-        Resets the array to its original configuration and return it.
-        """
         self.array = self.original
         self.original = list(self.original)
         return self.array
         
     def shuffle(self) -> List[int]:
-        """
-        Returns a random shuffling of the array.
-        """
         for idx in range(len(self.array)):
             swap_idx = random.randrange(idx, len(self.array))
             self.array[idx], self.array[swap_idx] = self.array[swap_idx], self.array[idx]
