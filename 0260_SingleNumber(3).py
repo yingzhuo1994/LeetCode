@@ -1,5 +1,5 @@
+# O(n) time | O(1) space
 class Solution:
-    # O(n) time | O(1) space
     def singleNumber(self, nums: List[int]) -> List[int]:
         s = reduce(xor, nums)
         # nz is non-zero bit
