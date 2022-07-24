@@ -1,5 +1,5 @@
 # 1st solution, TLE
-# O(4^(m + n)) time | O(m + n) space
+# O(3^(m + n)) time | O(m + n) space
 class Solution:
     def minDistance(self, word1: str, word2: str) -> int:
         def dfs(i, j, count):
@@ -47,3 +47,21 @@ class Solution:
                         newLevel[(i + 1, j)] = min(newLevel.get((i + 1, j), float("inf")), level[(i, j)] + 1)
             level = newLevel
         return ans
+
+# 3rd solution
+# O(mn) time | O(mn) space
+class Solution:
+    def minDistance(self, word1: str, word2: str) -> int:
+        m, n = len(word1), len(word2)
+        dp = [[-1] * (n+1) for _ in range(m+1)]
+        for i in range(m+1):
+            for j in range(n+1):
+                if i == 0:
+                    dp[i][j] = j  # Need to insert `j` chars to become s2[:j]
+                elif j == 0:
+                    dp[i][j] = i  # Need to delete `i` chars to become ""
+                elif word1[i-1] == word2[j-1]:
+                    dp[i][j] = dp[i-1][j-1]
+                else:
+                    dp[i][j] = min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1]) + 1
+        return dp[m][n]
