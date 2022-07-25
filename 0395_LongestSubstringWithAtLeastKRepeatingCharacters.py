@@ -1,3 +1,4 @@
+# 1st solution
 class Solution:
     def longestSubstring(self, s: str, k: int) -> int:
         if len(s) < k:
@@ -7,8 +8,9 @@ class Solution:
             return len(s)
         return max(self.longestSubstring(t, k) for t in s.split(c))
 
-    # 2nd solution, Divide And Conquer
-    # O(n^2) time | O(n) space
+# 2nd solution, Divide And Conquer
+# O(n^2) time | O(n) space
+class Solution:
     def longestSubstring(self, s: str, k: int) -> int:
         return self.longestSubstringUtil(s, 0, len(s), k)
     
@@ -26,8 +28,9 @@ class Solution:
                        self.longestSubstringUtil(s, midNext, end, k))
         return end - start
 
-    # 3rd solution, Sliding Window
-    # O(n) time | O(1) space
+# 3rd solution, Sliding Window
+# O(n) time | O(1) space
+class Solution:
     def longestSubstring(self, s: str, k: int) -> int:
         maxUnique = self.getMaxUniqueLetters(s)
         result = 0
@@ -71,8 +74,9 @@ class Solution:
                 table[ord(s[i]) - ord('a')] = True
         return maxUnique
 
-    # 4th solution, simplified the 3rd solution, Sliding Window
-    # O(n) time | O(1) space
+# 4th solution, simplified the 3rd solution, Sliding Window
+# O(n) time | O(1) space
+class Solution:
     def longestSubstring(self, s: str, k: int) -> int:
         maxUnique = len(set(s))
         result = 0
