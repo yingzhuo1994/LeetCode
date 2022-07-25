@@ -1,7 +1,7 @@
+# 1st solution
+# O(logN + k) time | O(1) space
 class Solution:
     def searchRange(self, nums: List[int], target: int) -> List[int]:
-        # 1st solution
-        # O(logN + k) time | O(1) space
         a, b = 0, len(nums) - 1
         m = (a + b) // 2
         while a <= b:
@@ -22,8 +22,10 @@ class Solution:
 
         return [a, b] if len(nums) > 0 and nums[m] == target else [-1, -1]
 
-        # 2nd solution
-        # O(logN) time | O(1) space
+# 2nd solution
+# O(logN) time | O(1) space
+class Solution:
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
         if not nums:
             return [-1, -1]
 
