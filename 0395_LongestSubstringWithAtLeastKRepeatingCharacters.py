@@ -108,3 +108,37 @@ class Solution:
                 if unique == currUnique and unique == countAtLeastK:
                     result = max(windowEnd - windowStart, result)
         return result
+
+# 5th solution
+# O(n^2) time | O(n) space
+class Solution:
+    def longestSubstring(self, s: str, k: int) -> int:
+        count = Counter(s)
+        lst = [0 for _ in range(26)]
+        dic = {-1: lst}
+        for i, ch in enumerate(s):
+            newLst = dic[i-1].copy()
+            idx = ord(ch) - ord('a')
+            newLst[idx] += 1
+            dic[i] = newLst
+        
+        start = -1
+        ans = 0
+
+        for i in range(len(s)):
+            if count[s[i]] < k:
+                start = i
+                continue
+            for j in range(start, i):
+                newLst = [dic[i][idx] - dic[j][idx] for idx in range(26)]
+                unique = 0
+                largerK = 0
+                for num in newLst:
+                    if num > 0:
+                        unique += 1
+                    if num >= k:
+                        largerK += 1
+                if unique == largerK:
+                    ans = max(ans, i - j)
+                    break
+        return ans
