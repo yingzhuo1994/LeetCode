@@ -78,3 +78,27 @@ class Solution:
                             break
             return memo[x]
         return dfs(0, s >> 1)
+
+# 5th solution
+class Solution:
+    def canPartition(self, nums: List[int]) -> bool:
+        k = 2
+        total = sum(nums)
+        if total & 1:
+            return False
+        target = total // k
+
+        if max(nums) > target:
+            return False
+        level = set([0])
+
+        for num in nums:
+            newLevel = level.copy()
+            for curSum in level:
+                if curSum + num < target:
+                    newLevel.add(curSum + num)
+                elif curSum + num == target:
+                    return True
+            level = newLevel
+        
+        return False
