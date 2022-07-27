@@ -30,7 +30,7 @@ class Solution:
         helper(root)
 
 # 2nd solution
-# O(n^2) time | O(1) space
+# O(n) time | O(1) space
 class Solution:
     def flatten(self, root: Optional[TreeNode]) -> None:
         curr = root
@@ -40,3 +40,27 @@ class Solution:
                 while runner.right: runner = runner.right
                 runner.right, curr.right, curr.left = curr.right, curr.left, None
             curr = curr.right
+
+# 3rd solution, Morris Traversal
+# O(n) time | O(1) space
+class Solution:
+    def flatten(self, root: Optional[TreeNode]) -> None:
+        curNode = root
+        while curNode:
+            if curNode.left:
+                node = curNode.left
+                while node.right and node.right != curNode:
+                    node = node.right
+                if not node.right:
+                    node.right = curNode
+                    # print(curNode.val)
+                    nextNode = curNode.left
+                else:
+                    node.right = curNode.right
+                    nextNode = curNode.right
+                    curNode.right = curNode.left
+                    curNode.left = None
+            else:
+                # print(curNode.val)
+                nextNode = curNode.right
+            curNode = nextNode
