@@ -1,7 +1,7 @@
+# 1st hash table solution
+# O(n) time | O(1) space
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
-        # 1st hash table solution
-        # O(n) time | O(1) space
         if len(s) != len(t):
             return False
         dic = {}
@@ -15,6 +15,8 @@ class Solution:
                 dic[ch] -= 1
         return True
 
-        # 2nd sorting solution
-        # O(nlogn) time | O(1) space
+# 2nd sorting solution
+# O(nlogn) time | O(1) space
+class Solution:
+    def isAnagram(self, s: str, t: str) -> bool:
         return sorted(s) == sorted(t)
