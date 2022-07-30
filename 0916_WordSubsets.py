@@ -11,11 +11,6 @@ class Solution:
         ans = []
         for word in words1:
             count = Counter(word)
-            isValid = True
-            for ch in subDic:
-                if count[ch] < subDic[ch]:
-                    isValid = False
-                    break
-            if isValid:
+            if all(count[ch] >= subDic[ch] for ch in subDic):
                 ans.append(word)
         return ans
