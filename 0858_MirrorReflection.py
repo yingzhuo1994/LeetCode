@@ -11,3 +11,9 @@ class Solution:
         while p % 2 == 0 and q % 2 == 0: 
             p, q = p // 2, q // 2
         return 1 - p % 2 + q % 2
+
+# 3rd solution
+# O(1) time | O(1) space
+class Solution:
+    def mirrorReflection(self, p: int, q: int) -> int:
+        return ((p & -p) >= (q & -q)) + ((p & -p) > (q & -q))
