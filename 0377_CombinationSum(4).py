@@ -24,7 +24,8 @@ class Solution:
         return self.ans
 
 # 2nd solution
-# O(2^n) time | O(n) space
+# O(n * T) time | O(T) space
+# where T = target
 class Solution:
     def combinationSum4(self, nums: List[int], target: int) -> int:
         self.ans = 0
