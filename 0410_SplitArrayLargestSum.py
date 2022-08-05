@@ -115,3 +115,36 @@ class Solution:
                 left = max_sum_allowed + 1
         
         return minimum_largest_split_sum
+
+# 4th solution, binary search
+# O(n + (log(n))^2 *log(s)) time | O(1) space
+# where n is the length of the array, and s is the sum of intergers in the array
+class Solution:
+    def splitArray(self, nums: List[int], m: int) -> int:
+        left = max(nums)
+        right = sum(nums)
+        
+        for i in range(len(nums) - 1):
+            nums[i+1] += nums[i]
+
+        ans = right
+        while left <= right:
+            value = left + (right - left) // 2
+            count = self.countArray(nums, value)
+            if count <= m:
+                right = value - 1
+                ans = min(ans, value)
+            else:
+                left = value + 1
+
+        return ans
+    
+    def countArray(self, nums, target):
+        count = 0
+        idx = 0
+        newTarget = target
+        while idx < len(nums):
+            idx = bisect.bisect_right(nums, newTarget, lo=idx)
+            count += 1
+            newTarget = nums[idx-1] + target
+        return count
