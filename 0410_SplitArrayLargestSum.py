@@ -117,7 +117,7 @@ class Solution:
         return minimum_largest_split_sum
 
 # 4th solution, binary search
-# O(n + (log(n))^2 *log(s)) time | O(1) space
+# O(n + n*log(n)) time | O(1) space
 # where n is the length of the array, and s is the sum of intergers in the array
 class Solution:
     def splitArray(self, nums: List[int], m: int) -> int:
