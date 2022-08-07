@@ -1,5 +1,5 @@
 # 1st solution, BFS
-# O(5^n) time | O(1) space
+# O(n) time | O(1) space
 class Solution:
     def countVowelPermutation(self, n: int) -> int:
         MOD = 10**9 + 7
@@ -23,3 +23,14 @@ class Solution:
         ans = sum(level.values())
         ans %= MOD
         return ans
+
+# 2nd solution, BFS
+# O(n) time | O(1) space
+class Solution:
+    def countVowelPermutation(self, n: int) -> int:
+        a, e, i, o, u= 1, 1, 1, 1, 1
+        MOD = 10**9 + 7
+        for _ in range(n-1):
+            a, e, i, o, u = (e + i + u)%MOD, (a + i)%MOD, (e + o)%MOD, i%MOD, (i + o)%MOD
+        
+        return (a + e + i + o + u)%MOD
