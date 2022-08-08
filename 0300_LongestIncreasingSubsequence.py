@@ -57,7 +57,6 @@ class Solution:
 
 # 4th solution, binary search with sequece building
 # O(nlogn) time | O(n) space
-# In Python, the bisect module provides super handy functions that does binary search for us.
 class Solution:
     def lengthOfLIS(self, nums: List[int]) -> int:
         indices = [None]
