@@ -22,7 +22,7 @@ class Solution:
         return ans
 
 # 2nd solution
-# O(n^(k-1)) time | O(kn) space
+# O(max(n^(max(k-1, 1))), n*log(n)) time | O(kn) space
 class Solution:
     def threeSumClosest(self, nums: List[int], target: int) -> int:
         nums.sort()
