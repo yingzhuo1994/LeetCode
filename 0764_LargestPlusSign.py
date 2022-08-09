@@ -1,6 +1,6 @@
+# 1st solution, brute-force method, TLE
+# O(n^3) time | O(1) space
 class Solution:
-    # 1st solution, brute-force method, TLE
-    # O(n^3) time | O(1) space
     def orderOfLargestPlusSign(self, n: int, mines: List[List[int]]) -> int:
         banned = {tuple(mine) for mine in mines}
         ans = 0
@@ -16,8 +16,9 @@ class Solution:
                 ans = max(ans, k)
         return ans
 
-    # 2nd solution
-    # O(n^2) time | O(n^2) space 
+# 2nd solution
+# O(n^2) time | O(n^2) space
+class Solution: 
     def orderOfLargestPlusSign(self, n: int, mines: List[List[int]]) -> int:
         baned = {tuple(mine) for mine in mines}
         dp = [[0] * n for _ in range(n)]
