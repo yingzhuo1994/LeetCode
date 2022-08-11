@@ -4,9 +4,11 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+
+# 1st recursive solution
+# O(n) time | O(h) space
 class Solution:
     def isValidBST(self, root: TreeNode) -> bool:
-        # 1st recursive solution
         def helper(node, lower = float('-inf'), upper = float('inf')):
             if not node:
                 return True
@@ -19,9 +21,12 @@ class Solution:
 
         return helper(root)
 
-        # 2nd iterative solution
+# 2nd iterative solution
+# O(n) time | O(h) space
+class Solution:
+    def isValidBST(self, root: TreeNode) -> bool:
         if not root:
-            return true
+            return True
         stack = []
         pre = None
         while root or stack:
