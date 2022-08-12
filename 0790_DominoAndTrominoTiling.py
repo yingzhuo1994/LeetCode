@@ -24,4 +24,23 @@ class Solution:
             partTiling[i] = (partTiling[i-1] + fullTiling[i-2]) % mod   
         return fullTiling[n]
 
-
+# 2nd solution
+# O(n) time | O(1) space
+class Solution:
+    def numTilings(self, n: int) -> int:
+        if n <= 2:
+            return n
+        MOD = 10**9 + 7
+        f1, f2 = 1, 2
+        g1, g2 = 1, 2
+        
+        k = 3
+        while k <= n:
+            f = f2 + f1 + 2 * g1
+            g = f2 + g2
+            f %= MOD
+            f1, f2 = f2, f
+            g1, g2 = g2, g
+            g %= MOD
+            k += 1
+        return f
