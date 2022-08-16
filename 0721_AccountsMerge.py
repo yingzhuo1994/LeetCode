@@ -34,7 +34,7 @@ class UF:
 class Solution:
     def accountsMerge(self, accounts: List[List[str]]) -> List[List[str]]:
         visited = set()
-        adjacent = {}
+        adjacent = defaultdict(list)
 
         for account in accounts:
             accountSize = len(account)
@@ -45,14 +45,7 @@ class Solution:
             for j in range(2, accountSize):
                 accountEmail = account[j]
                 
-                if accountFirstEmail not in adjacent:
-                    adjacent.setdefault(accountFirstEmail, [])
-
                 adjacent[accountFirstEmail].append(accountEmail)
-                
-                if accountEmail not in adjacent:
-                    adjacent.setdefault(accountEmail, [])
-
                 adjacent[accountEmail].append(accountFirstEmail)
         
         # Traverse over all th accounts to store components
