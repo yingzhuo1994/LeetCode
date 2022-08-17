@@ -25,7 +25,7 @@ class Solution:
                             ans += 1
         return ans
 
-# 2nd solution, TLE
+# 2nd solution
 # O(m*n^2) time | O(m) space
 class Solution:
     def numSubmatrixSumTarget(self, matrix: List[List[int]], target: int) -> int:
