@@ -20,6 +20,7 @@ class Solution:
 
 # 2nd solution
 # Bellman-Ford Algorithm
+# O(EK) time | O(E) space
 class Solution:
     def findCheapestPrice(self, n: int, flights: List[List[int]], src: int, dst: int, k: int) -> int:
         dist = [float("inf") for i in range(n)]
