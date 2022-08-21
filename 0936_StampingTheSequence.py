@@ -14,7 +14,7 @@ class Solution:
                     isPossible = True
                     for j in range(L):
                         stack[i+j] = "*"
-                    break
+
         if all(stack[i] == "*" for i in range(N)):
             ans.reverse()
             return ans
