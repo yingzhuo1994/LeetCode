@@ -49,7 +49,7 @@ class Solution:
             # enqueue letters from this window.
             if not todo:
                 ans.append(i)
-                for j in range(i, i + len(stamp)):
+                for j in range(i, i + L):
                     if not done[j]:
                         queue.append(j)
                         done[j] = True
@@ -71,3 +71,27 @@ class Solution:
                                 done[m] = True
 
         return ans[::-1] if all(done) else []
+
+# 3rd solution
+# O(n * (n - L)) time | O(n * (n - L)) space
+class Solution:
+    def movesToStamp(self, stamp: str, target: str) -> List[int]:
+        N, L, target, stamp, res = len(target), len(stamp), list(target), list(stamp), []
+
+        def check(i):
+            changed = False
+            for j in range(L):
+                if target[i + j] == '?': continue
+                if target[i + j] != stamp[j]: return False
+                changed = True
+            if changed:
+                target[i:i + L] = ['?'] * L
+                res.append(i)
+            return changed
+
+        changed = True
+        while changed:
+            changed = False
+            for i in range(N - L + 1):
+                changed |= check(i)
+        return res[::-1] if target == ['?'] * N else []
