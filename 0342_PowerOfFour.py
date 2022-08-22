@@ -13,3 +13,9 @@ class Solution:
 class Solution:
     def isPowerOfFour(self, n: int) -> bool:
         return n > 0 and n & (n-1) == 0 and 0b1010101010101010101010101010101 & n == n
+
+# 3rd solution
+# O(1) time | O(1) space
+class Solution:
+    def isPowerOfFour(self, n: int) -> bool:
+        return n > 0 and n & (n-1) == 0 and (n - 1) % 3 == 0
