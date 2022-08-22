@@ -23,23 +23,15 @@ class Solution:
 # O(n * log(n)) time | O(n) space
 class Solution:
     def minRefuelStops(self, target: int, startFuel: int, stations: List[List[int]]) -> int:
-        maxPosition = startFuel
-        stop = 0
+        maxDistance = startFuel
         minStack = []
-        i = 0
-        while maxPosition < target:
-            while i < len(stations) and stations[i][0] <= maxPosition:
-                heappush(minStack, -stations[i][1])
-                i += 1
-
-            if minStack:
-                gas = -heappop(minStack)
-                maxPosition += gas
-                stop += 1
-            else:
+        stops = 0
+        stations.append([target, 0])
+        for position, fuel in stations:
+            while minStack and maxDistance < position:
+                maxDistance -= heappop(minStack)
+                stops += 1
+            if maxDistance < position:
                 return -1
-        
-        if maxPosition >= target:
-            return stop
-        else:
-            return -1
+            heappush(minStack, -fuel)
+        return stops
