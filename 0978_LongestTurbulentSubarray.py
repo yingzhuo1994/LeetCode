@@ -85,3 +85,21 @@ class Solution:
             return -1
         else:
             return 0
+
+# 4th solution
+# O(n) time | O(1) space
+class Solution:
+    def maxTurbulenceSize(self, arr: List[int]) -> int:
+        n = len(arr)
+        ans = 1
+        state = [1, 1]
+        for i in range(1, n):
+            newState = [1, 1]
+            if arr[i] > arr[i - 1]:
+                newState[0] = max(newState[0], state[1] + 1)
+            if arr[i] < arr[i - 1]:
+                newState[1] = max(newState[1], state[0] + 1)
+            ans = max(ans, max(newState))
+            state = newState
+
+        return ans
