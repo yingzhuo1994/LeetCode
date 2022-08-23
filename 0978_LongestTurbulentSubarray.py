@@ -1,6 +1,6 @@
+# 1st solution
+# O(n) time | O(n) space
 class Solution:
-    # 1st solution
-    # O(n) time | O(n) space
     def maxTurbulenceSize(self, arr: List[int]) -> int:
         if len(arr) == 1:
             return 1
@@ -30,8 +30,9 @@ class Solution:
                 res.append(0)
         return res
 
-    # 2nd solution
-    # O(n) time | O(1) space
+# 2nd solution
+# O(n) time | O(1) space
+class Solution:
     def maxTurbulenceSize(self, arr: List[int]) -> int:
         if len(arr) == 1:
             return 1
@@ -60,8 +61,9 @@ class Solution:
         else:
             return 0
 
-    # 3rd solution
-    # O(n) time | O(1) space
+# 3rd solution
+# O(n) time | O(1) space
+class Solution:
     def maxTurbulenceSize(self, arr: List[int]) -> int:
         n = len(arr)
         ans = 1
