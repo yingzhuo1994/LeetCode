@@ -1,5 +1,6 @@
 # 1st solution
-# O(2^k) time | O(k) space
+# O(k!) time | O(k) space
+# where k is the length of n
 class Solution:
     def reorderedPowerOf2(self, n: int) -> bool:
         nums = []
