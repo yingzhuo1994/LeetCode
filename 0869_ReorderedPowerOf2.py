@@ -32,3 +32,10 @@ class Solution:
             visited[i] = False
         
         return False
+
+# 2nd solution
+# O((log(n))^2) time | O(log(n)) space
+class Solution:
+    def reorderedPowerOf2(self, n: int) -> bool:
+        count = collections.Counter(str(n))
+        return any(count == collections.Counter(str(1 << d)) for d in range(31))
