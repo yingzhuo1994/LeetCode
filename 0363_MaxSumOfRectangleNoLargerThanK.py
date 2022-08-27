@@ -13,20 +13,14 @@ class Solution:
         for y1 in range(n):
             for y2 in range(y1, n):
                 curSum = 0
-                dic = set([0])
+                array = [0]
                 for x in range(m):
-                    if y1 > 0:
-                        last = matrix[x][y1-1]
-                    else:
-                        last = 0
+                    last = matrix[x][y1-1] if y1 > 0 else 0
                     curSum += matrix[x][y2] - last
-                    if curSum - k in dic:
-                        return k
-                    for lastSum in dic:
-                        diff = curSum - lastSum
-                        if diff < k:
-                            ans = max(ans, diff)
-                    dic.add(curSum)
+                    idx = bisect.bisect_left(array, curSum - k)
+                    if idx < len(array):
+                        ans = max(ans, curSum - array[idx])
+                    bisect.insort(array, curSum)
         return ans
                     
 
