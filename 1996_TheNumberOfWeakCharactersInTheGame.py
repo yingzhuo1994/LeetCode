@@ -1,6 +1,5 @@
 # 1st solution, TLE
 # O(n^2) time | O(1) space
-from collections import defaultdict
 class Solution:
     def numberOfWeakCharacters(self, properties: List[List[int]]) -> int:
         n = len(properties)
@@ -14,7 +13,8 @@ class Solution:
         return len(visited)
 
 # 2nd solution
-# O(nlog(n)) time | O(1) space
+# O(nlog(n)) time | O(n) space
+from collections import defaultdict
 class Solution:
     def numberOfWeakCharacters(self, properties: List[List[int]]) -> int:
         attackDic = defaultdict(list)
@@ -33,3 +33,21 @@ class Solution:
             maxDefense = max(maxDefense, attackDic[attack][-1])
 
         return count
+
+
+# 2nd solution
+# O(nlog(n)) time | O(n) space
+class Solution:
+    def numberOfWeakCharacters(self, properties: List[List[int]]) -> int:
+        properties.sort(key=lambda x: (x[0], -x[1]))
+        
+        stack = []
+        ans = 0
+        
+        for attack, defense in properties:
+            while stack and stack[-1] < defense:
+                stack.pop()
+                ans += 1
+            stack.append(defense)
+
+        return ans
