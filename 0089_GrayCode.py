@@ -3,20 +3,23 @@
 class Solution:
     def grayCode(self, n: int) -> List[int]:
         lst = [0]
-        visited = set(0)
-        ans = []
+        visited = set([0])
         def dfs(lst, visited):
             if len(lst) == 2**n:
                 d = lst[-1]
                 one = ((d - 1) & d) ^ d
                 if d ^ one == 0:
-                    ans.append(lst[:])
-            if ans:
-                return True
+                    return True
+                else:
+                    return False
             
             addOneLst = self.addOne(lst[-1], n)
             removeOneLst = self.removeOne(lst[-1])
-            for num in addOneLst + removeOneLst:
+            if len(lst) == 1 or lst[-1] > lst[-2]:
+                candidates = addOneLst + removeOneLst
+            else:
+                candidates = removeOneLst + addOneLst
+            for num in candidates:
                 if num in visited:
                     continue
                 lst.append(num)
@@ -27,7 +30,7 @@ class Solution:
                 visited.remove(num)
             return False
         dfs(lst, visited)
-        return ans
+        return lst
             
     def addOne(self, num, n):
         lst = []
