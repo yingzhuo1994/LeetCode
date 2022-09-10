@@ -35,7 +35,7 @@ class Solution:
         return count
 
 
-# 2nd solution
+# 3rd solution
 # O(nlog(n)) time | O(n) space
 class Solution:
     def numberOfWeakCharacters(self, properties: List[List[int]]) -> int:
