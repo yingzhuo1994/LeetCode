@@ -6,7 +6,7 @@
 #         self.right = right
 
 # 1st solution
-# O(n) time | O(1) space
+# O(n) time | O(h) space
 class Solution:
     def pseudoPalindromicPaths (self, root: Optional[TreeNode]) -> int:
         self.ans = 0
