@@ -22,9 +22,8 @@ class Solution:
     def maximumScore(self, nums: List[int], multipliers: List[int]) -> int:
         m = len(nums)
         n = len(multipliers)
-        if len(set(multipliers)) == 1 and len(set(nums)) == 1:
-            return (nums[0] * multipliers[0]) * n
-        dp = [[0 for _ in range(n + 1)] for _ in range(n + 1)]
+
+        dp = [[0 for _ in range(k + 1)] for k in range(n + 1)]
         for k in reversed(range(n)):
             for left in range(k + 1):
                 right = left + m - 1 - k
