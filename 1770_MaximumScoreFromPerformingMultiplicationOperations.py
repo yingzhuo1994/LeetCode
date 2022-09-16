@@ -8,10 +8,26 @@ class Solution:
         k = n - 1
         for left in range(k + 1):
             right = left + m - 1 - k
-            memo[(left, right)] = max(multipliers[k] * nums[left], multipliers[k] * nums[right])
+            memo[(k, left)] = max(multipliers[k] * nums[left], multipliers[k] * nums[right])
         for k in reversed(range(n - 1)):
             for left in range(k + 1):
                 right = left + m - 1 - k
-                memo[(left, right)] = max(multipliers[k] * nums[left] + memo[(left + 1, right)], multipliers[k] * nums[right] + memo[(left, right - 1)])
+                memo[(k, left)] = max(multipliers[k] * nums[left] + memo[(k + 1, left + 1)], multipliers[k] * nums[right] + memo[(k + 1, left)])
         
-        return memo[(0, m - 1)]
+        return memo[(0, 0)]
+
+# 2nd solution
+# O(n^2) time | O(n^2) space
+class Solution:
+    def maximumScore(self, nums: List[int], multipliers: List[int]) -> int:
+        m = len(nums)
+        n = len(multipliers)
+        if len(set(multipliers)) == 1 and len(set(nums)) == 1:
+            return (nums[0] * multipliers[0]) * n
+        dp = [[0 for _ in range(n + 1)] for _ in range(n + 1)]
+        for k in reversed(range(n)):
+            for left in range(k + 1):
+                right = left + m - 1 - k
+                dp[k][left] = max(multipliers[k] * nums[left] + dp[k + 1][left + 1], multipliers[k] * nums[right] + dp[k + 1][left])
+        
+        return dp[0][0]
