@@ -29,7 +29,6 @@ class Solution:
 class Solution:
     def palindromePairs(self, words: List[str]) -> List[List[int]]:
         dic = {word: i for i, word in enumerate(words)}
-        sameLengthPalindrome = set()
         palindromLst = []
         possibleLength = set()
         for word in words:
@@ -45,12 +44,9 @@ class Solution:
                 hasEmpty = True
             elif self.isPalindrome(word):
                 palindromLst.append(word)
-            elif word not in sameLengthPalindrome and word[::-1] in dic:
+            elif word[::-1] in dic:
                 j = dic[word[::-1]]
                 ans.append([i, j])
-                ans.append([j, i])
-                sameLengthPalindrome.add(word)
-                sameLengthPalindrome.add(word[::-1])
             
             candidates = self.getCandidates(word, possibleLength)
             for candidate, place in candidates:
