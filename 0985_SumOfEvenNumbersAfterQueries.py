@@ -1,5 +1,6 @@
 # 1st solution
-# O(n) time | O(n) space
+# O(n + q) time | O(q) space
+# where n is the length of nums, and q is length of queries
 class Solution:
     def sumEvenAfterQueries(self, nums: List[int], queries: List[List[int]]) -> List[int]:
         evenSum = 0
