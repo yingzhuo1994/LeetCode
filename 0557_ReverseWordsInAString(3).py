@@ -1,6 +1,6 @@
+# 1st solution
+# O(n) time | O(n) space
 class Solution:
-    # 1st solution
-    # O(n) time | O(n) space
     def reverseWords(self, s: str) -> str:
         lst = []
         start = 0
@@ -17,3 +17,12 @@ class Solution:
             lst[start], lst[end] = lst[end], lst[start]
             start += 1
             end -= 1
+
+# 2nd solution
+# O(n) time | O(n) space
+class Solution:
+    def reverseWords(self, s: str) -> str:
+        words = s.split()
+        for i, word in enumerate(words):
+            words[i] = word[::-1]
+        return " ".join(words)
