@@ -11,7 +11,7 @@ class Solution:
                 return
             m = math.factorial(length - 1)
             i = (k - 1) // m
-            r = (k -1 ) % m + 1
+            r = (k - 1) % m + 1
             ans.append(lst.pop(i))
             permutationWithK(lst, ans, r)
         
