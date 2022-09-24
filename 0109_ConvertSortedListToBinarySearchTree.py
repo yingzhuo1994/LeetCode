@@ -54,3 +54,27 @@ class Solution:
         root.left = self.dfs(lst, start, mid - 1)
         root.right = self.dfs(lst, mid + 1, end)
         return root
+
+# 3rd solution
+# O(n) time | O(log(n)) space
+class Solution:
+    def sortedListToBST(self, head: Optional[ListNode]) -> Optional[TreeNode]:
+        length = 0
+        node = head
+        self.head = head
+        while node:
+            node = node.next
+            length += 1
+        return self.dfs(0, length - 1)
+
+    def dfs(self, left, right):
+        if left > right: return None
+        mid = (left + right) // 2
+        leftNode = self.dfs(left, mid - 1)
+        
+        root = TreeNode(self.head.val)
+        self.head = self.head.next
+        
+        root.left = leftNode
+        root.right = self.dfs(mid + 1, right)
+        return root
