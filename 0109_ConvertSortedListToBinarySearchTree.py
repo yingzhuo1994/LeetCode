@@ -34,3 +34,23 @@ class Solution:
         root.left = self.sortedListToBST(head)
         root.right = self.sortedListToBST(node.next)
         return root
+
+# 2nd solution
+# O(n) time | O(n) space
+class Solution:
+    def sortedListToBST(self, head: Optional[ListNode]) -> Optional[TreeNode]:
+        lst = []
+        node = head
+        while node:
+            lst.append(node.val)
+            node = node.next
+        return self.dfs(lst, 0, len(lst) - 1)
+
+    def dfs(self, lst, start, end):
+        if start > end:
+            return None
+        mid = start + (end - start) // 2
+        root = TreeNode(lst[mid])
+        root.left = self.dfs(lst, start, mid - 1)
+        root.right = self.dfs(lst, mid + 1, end)
+        return root
