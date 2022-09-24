@@ -4,8 +4,9 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+
+# 1st solution
 class Solution:
-    # 1st solution
     def pathSum(self, root: Optional[TreeNode], targetSum: int) -> List[List[int]]:
         def helper(node, target):
             if not node:
@@ -18,8 +19,9 @@ class Solution:
         result = helper(root, targetSum)
         return [lst[::-1] for lst in result]
 
-    # 2nd solution
-    # O(n^2) time | O(n^2) space
+# 2nd solution
+# O(n^2) time | O(n^2) space
+class Solution:
     def pathSum(self, root: Optional[TreeNode], targetSum: int) -> List[List[int]]:
         result = []
         self.dfs(root, targetSum, result)
