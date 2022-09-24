@@ -5,8 +5,8 @@
 #         self.left = left
 #         self.right = right
 
-# 1st solution
-# O(n) time | O(h) space
+# 1st solution, BFS
+# O(n) time | O(n) space
 class Solution:
     def levelOrderBottom(self, root: Optional[TreeNode]) -> List[List[int]]:
         if not root:
