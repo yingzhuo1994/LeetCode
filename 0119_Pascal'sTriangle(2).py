@@ -8,3 +8,14 @@ class Solution:
         left = last + [0]
         right = [0] + last
         return [a + b for a, b in zip(left, right)]
+
+# 2nd solution, iteration
+# O(n^2) time | O(n) space
+class Solution:
+    def getRow(self, rowIndex: int) -> List[int]:
+        level = [1]
+        for _ in range(rowIndex):
+            left = level + [0]
+            right = [0] + level
+            level = [a + b for a, b in zip(left, right)]
+        return level
