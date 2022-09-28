@@ -3,9 +3,10 @@
 #     def __init__(self, val=0, next=None):
 #         self.val = val
 #         self.next = next
+
+# 1st solution
+# O(n) time | O(1) space
 class Solution:
-    # 1st solution
-    # O(n) time | O(1) space
     def removeNthFromEnd(self, head: ListNode, n: int) -> ListNode:
         sentinel = ListNode(0, head)
         p = sentinel.next
