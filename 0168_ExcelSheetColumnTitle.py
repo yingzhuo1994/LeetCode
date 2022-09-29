@@ -5,9 +5,8 @@ class Solution:
         n, r = columnNumber, 0
         while n > 0:
             r = (n - 1) % 26 + 1
-            n = (n - r) // 26
+            n = (n - 1) // 26
             ch = chr(ord("A") - 1 + r)
             stack.append(ch)
         stack.reverse()
         return "".join(stack)
-
