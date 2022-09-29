@@ -56,7 +56,7 @@ class Solution:  # 156 ms, faster than 98.97%
         for i in range(n): hash2[i + 1] = (hash2[i] * BASE + nums2[i]) % MOD  # Compute hashing values of nums2
 
         def getHash(h, left, right):  # 0-based indexing, right inclusive
-            return (h[right + 1] - h[left] * POW[right - left + 1] % MOD + MOD) % MOD
+            return (h[right + 1] - h[left] * POW[right - left + 1] % MOD) % MOD
 
         def foundSubArray(size):
             seen = defaultdict(list)
