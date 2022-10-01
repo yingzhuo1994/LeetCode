@@ -7,13 +7,13 @@ insert into Employee (id, salary) values ('3', '300')
 # 1st solution
 SELECT
     (SELECT DISTINCT
-            Salary
+            salary
         FROM
             Employee
         ORDER BY Salary DESC
         LIMIT 1 OFFSET 1) AS SecondHighestSalary
 
 # 2nd solution
-SELECT MAX(Salary) AS SecondHighestSalary
+SELECT MAX(salary) AS SecondHighestSalary
 FROM Employee
-WHERE Salary < (SELECT MAX(Salary) FROM Employee)
+WHERE salary < (SELECT MAX(salary) FROM Employee)
