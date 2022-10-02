@@ -1,5 +1,5 @@
 # 1st solution, top-down
-# O(k^n) time | O(k^n) space
+# O(k * n * target) time | O(n * target) space
 class Solution:
     def numRollsToTarget(self, n: int, k: int, target: int) -> int:
         MOD = 10**9 + 7
