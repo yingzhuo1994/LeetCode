@@ -1,4 +1,5 @@
 # 1st solution
+# O(n*log(n)) time | O(n) space
 import sortedcontainers
 class MyCalendarThree:
 
@@ -14,6 +15,33 @@ class MyCalendarThree:
 
         return max(count)
 
+# 2nd solution, Segment Tree
+# O(n*log(C)) time | O(n*log(C)) space
+# where n is the number of events booked and C is the largest time
+from collections import Counter
+class MyCalendarThree:
+
+    def __init__(self):
+        self.vals = Counter()
+        self.lazy = Counter()
+
+    def update(self, start: int, end: int, left: int = 0, right: int = 10**9, idx: int = 1) -> None:
+        if start > right or end < left:
+            return
+
+        if start <= left <= right <= end:
+            self.vals[idx] += 1
+            self.lazy[idx] += 1
+        else:
+            mid = (left + right)//2
+            self.update(start, end, left, mid, idx*2)
+            self.update(start, end, mid+1, right, idx*2 + 1)
+            self.vals[idx] = self.lazy[idx] + \
+                max(self.vals[2*idx], self.vals[2*idx+1])
+
+    def book(self, start: int, end: int) -> int:
+        self.update(start, end-1)
+        return self.vals[1]
 
 # Your MyCalendarThree object will be instantiated and called as such:
 # obj = MyCalendarThree()
