@@ -27,6 +27,27 @@ class Solution:
             return dfs_check(node.left, target) or dfs_check(node.right, target)
         dfs(root)
         return dfs_check(root, k)
+
+# 2nd solution
+# O(n) time | O(n) space
+class Solution:
+    def findTarget(self, root: Optional[TreeNode], k: int) -> bool:
+        array = []
+        def dfs(node):
+            if not node:
+                return
+            dfs(node.left)
+            array.append(node.val)
+            dfs(node.right)
         
-        
-        
+        dfs(root)
+        left, right = 0, len(array) - 1
+        while left < right:
+            curSum = array[left] + array[right]
+            if curSum < k:
+                left += 1
+            elif curSum > k:
+                right -= 1
+            else:
+                return True
+        return False
