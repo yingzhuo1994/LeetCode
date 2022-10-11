@@ -34,17 +34,23 @@ class Solution:
             return sum(nums[:k])
 
         # target too small
-        current = sum(nums[:k])
-        if current >= target:
-            return current
+        smallSum = sum(nums[:k])
+        if smallSum >= target:
+            return smallSum
 
         # target too big
-        current = sum(nums[-k:])
-        if current <= target:
-            return current
+        largeSum = sum(nums[-k:])
+        if largeSum <= target:
+            return largeSum
         
         if k == 1:
-            return min([(x, abs(target - x)) for x in nums], key = lambda x: x[1])[0]
+            idx = bisect.bisect_left(nums, target)
+            if idx == N:
+                return nums[-1]
+            if abs(nums[idx - 1] - target) <= abs(nums[idx] - target):
+                return nums[idx - 1]
+            else:
+                return nums[idx]
         
         if k == 2:
             closest = float("inf")
