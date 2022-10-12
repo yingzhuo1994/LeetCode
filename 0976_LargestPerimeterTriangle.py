@@ -13,3 +13,16 @@ class Solution:
                     ans = max(ans, curSum + nums[k])
                     break
         return ans
+
+# 2nd solution
+# O(nlog(n)) time | O(n) space
+class Solution:
+    def largestPerimeter(self, nums: List[int]) -> int:
+        nums.sort()
+        ans = 0
+        n = len(nums)
+        for i in reversed(range(2, n)):
+            a, b, c = nums[i-2], nums[i-1], nums[i]
+            if a + b > c:
+                return a + b + c
+        return ans
