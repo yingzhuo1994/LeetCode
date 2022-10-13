@@ -30,3 +30,18 @@ class Solution:
                         dp[(start, end)] = [rightScores[0], rightScores[1] + nums[start]]
             player = player * -1
         return dp[(0, n - 1)][0] >= dp[(0, n - 1)][1]
+
+# 2nd solution
+# O(n^2) time | O(n) space
+class Solution:
+    def PredictTheWinner(self, nums: List[int]) -> bool:
+        # dp[i][j] the person's effective score when pick, facing nums[i..j]
+        dp = [[0] * len(nums) for _ in range(len(nums))]
+        for s in range(len(nums)):
+            for i in range(len(nums)-s):
+                j = i + s
+                if i == j:
+                    dp[i][i] = nums[i]
+                else:
+                    dp[i][j] = max(nums[j] - dp[i][j-1], nums[i] - dp[i+1][j])
+        return dp[0][-1] >= 0
