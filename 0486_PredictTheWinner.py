@@ -32,7 +32,7 @@ class Solution:
         return dp[(0, n - 1)][0] >= dp[(0, n - 1)][1]
 
 # 2nd solution
-# O(n^2) time | O(n) space
+# O(n^2) time | O(n^2) space
 class Solution:
     def PredictTheWinner(self, nums: List[int]) -> bool:
         # dp[i][j] the person's effective score when pick, facing nums[i..j]
@@ -45,3 +45,19 @@ class Solution:
                 else:
                     dp[i][j] = max(nums[j] - dp[i][j-1], nums[i] - dp[i+1][j])
         return dp[0][-1] >= 0
+
+# 3rd solution
+# O(n^2) time | O(n) space
+class Solution:
+    def PredictTheWinner(self, nums: List[int]) -> bool:
+        n = len(nums)
+        dp = nums[:]
+
+        for s in range(1, n):
+            for i in range(n - s):
+                j = i + s
+                left = -dp[i] + nums[j]
+                right = -dp[i+1] + nums[i]
+                dp[i] = max(left, right)
+
+        return dp[0] >= 0
