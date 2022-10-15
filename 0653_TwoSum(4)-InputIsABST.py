@@ -82,9 +82,10 @@ class Solution:
 
         left, right = nextLeft(stLeft), nextRight(stRight)
         while left < right:
-            if left + right == k: return True
             if left + right < k:
                 left = nextLeft(stLeft)
-            else:
+            elif left + right > k:
                 right = nextRight(stRight)
+            else:
+                return True
         return False
