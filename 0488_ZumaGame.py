@@ -1,3 +1,4 @@
+# 1st solution, BFS
 class Solution:
     def findMinStep(self, board: str, hand: str) -> int:
         # start from i and remove continues ball
@@ -56,5 +57,3 @@ class Solution:
                             visited.add((new_board, new_hand))
 
         return -1
-
-        
