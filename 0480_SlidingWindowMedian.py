@@ -19,14 +19,14 @@ class Solution:
             if num >= minHeap[0][0]:
                 heappush(minHeap,(num, i))        # minHeap +1
                 if nums[i - k] <= minHeap[0][0]:     # maxHeap-1, unbalanced
-                    heappush(maxHeap, (-minHeap[0][0], minHeap[0][1]))
-                    heappop(minHeap)
+                    val, idx = heappop(minHeap)
+                    heappush(maxHeap, (-val, idx))
                 # else: pass                # minHeap-1, balanced
             else:
                 heappush(maxHeap,(-num, i))        # maxHeap +1
                 if nums[i - k] >= minHeap[0][0]:     # minHeap-1, unbalanced
-                    heappush(minHeap, (-maxHeap[0][0], maxHeap[0][1]))
-                    heappop(maxHeap)
+                    val, idx = heappop(maxHeap)
+                    heappush(minHeap, (-val, idx))            
                 # else: pass                # maxHeap-1, balanced
             while(maxHeap and maxHeap[0][1] <= i - k): heappop(maxHeap)  # lazy-deletion
             while(minHeap and minHeap[0][1] <= i - k): heappop(minHeap)  # lazy-deletion
