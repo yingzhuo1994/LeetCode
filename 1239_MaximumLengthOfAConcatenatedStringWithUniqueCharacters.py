@@ -1,6 +1,6 @@
+# 1st solution
+# O(2^n) time | O(n) space
 class Solution:
-    # 1st solution
-    # O(2^n) time | O(n) space
     def maxLength(self, arr: List[str]) -> int:
         ans = [0]
         path = ''
