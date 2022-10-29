@@ -7,6 +7,6 @@ class Solution:
         ans = 0
         plants.sort(key = lambda v: [-v[1], v[0]])
         for t1, t2 in plants:
-            ans = max(ans, time + t1 + t2)
             time += t1
-        return ans + 1
+            ans = max(ans, time + t2)
+        return ans
