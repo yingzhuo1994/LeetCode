@@ -1,4 +1,4 @@
-# 1nd solution
+# 1st solution
 class Solution:
     def getLengthOfOptimalCompression(self, s: str, k: int) -> int:
         memo = {}
@@ -12,12 +12,13 @@ class Solution:
             if (i, k, last_char, last_len) not in memo:
                 if s[i] == last_char:
                     carry = last_len in {1, 9, 99}
-                    memo[i, k, last_char, last_len] = carry + \
+                    ans = carry + \
                         dp(i + 1, k, last_char, last_len + 1)
                 else:
-                    memo[i, k, last_char, last_len] = min(
+                    ans = min(
                         dp(i + 1, k, s[i], 1) + 1,
                         dp(i + 1, k - 1, last_char, last_len))
+                memo[i, k, last_char, last_len] = ans
             return memo[i, k, last_char, last_len]
 
         return dp(0, k, '', 0)
