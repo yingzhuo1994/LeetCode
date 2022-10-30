@@ -1,5 +1,5 @@
+# 1st solution, TLE
 class Solution:
-    # 1st solution, TLE
     def shortestPath(self, grid: List[List[int]], k: int) -> int:
         ans = [float("inf")]
         self.bfs(grid, 0, 0, 0, k, ans)
@@ -25,8 +25,9 @@ class Solution:
             grid[i][j] = tmp
 
 
-    # 2nd solution
-    # O(m * n * k) time | O(m * n * k) space
+# 2nd solution
+# O(m * n * k) time | O(m * n * k) space
+class Solution:
     def shortestPath(self, grid: List[List[int]], k: int) -> int:
         m, n = len(grid), len(grid[0])
         stack, visited = deque([(0, 0, 0, k)]), set()
@@ -38,8 +39,8 @@ class Solution:
             steps, i, j, k = stack.popleft()
             if (i, j) == (m-1, n-1): return steps
             
-            for x, y in [(0, -1), (0, 1), (-1, 0), (1, 0)]:
-                row, col = i + x, j + y
+            for dx, dy in [(0, -1), (0, 1), (-1, 0), (1, 0)]:
+                row, col = i + dx, j + dy
                 if 0 <= row < m and 0 <= col < n and k - grid[row][col] >= 0:
                     new = (row, col, k - grid[row][col])
                     if new not in visited:
