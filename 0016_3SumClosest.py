@@ -47,6 +47,9 @@ class Solution:
             idx = bisect.bisect_left(nums, target)
             if idx == N:
                 return nums[-1]
+            elif idx == 0:
+                return nums[0]
+            
             if abs(nums[idx - 1] - target) <= abs(nums[idx] - target):
                 return nums[idx - 1]
             else:
@@ -71,11 +74,13 @@ class Solution:
         for i, x in enumerate(nums[:-k+1]):
             if i > 0 and x == nums[i-1]:
                 continue
-            current = self.KSumClosest(nums[i+1:], k-1, target - x) + x
-            if abs(target - current) < abs(target - closest):
-                if current == target:
+            curSum = self.KSumClosest(nums[i+1:], k-1, target - x) + x
+            if curSum == target:
+                return target
+            if abs(target - curSum) < abs(target - closest):
+                if curSum == target:
                     return target
                 else:
-                    closest = current
+                    closest = curSum
 
         return closest
