@@ -33,7 +33,7 @@ class Solution:
         return len(memo)
 
 # 2nd solution
-# o(n) time | O(n) space
+# O(n) time | O(n) space
 class Solution:
     def findSubstringInWraproundString(self, p: str) -> int:
         res = {i: 1 for i in p}
