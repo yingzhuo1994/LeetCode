@@ -1,3 +1,4 @@
+# 1st solution
 class StockSpanner:
     def __init__(self):
         self.stock = [float("inf")]
@@ -17,9 +18,16 @@ class StockSpanner:
         self.span.append(count)
         return count
 
-        
+# 2nd solution
+class StockSpanner:
+    def __init__(self):
+        self.stock = [[float("inf"), 0]]
 
-
-# Your StockSpanner object will be instantiated and called as such:
-# obj = StockSpanner()
-# param_1 = obj.next(price)
+    # O(n) time | O(1) space
+    def next(self, price: int) -> int:
+        count = 1
+        while self.stock[-1][0] <= price:
+            num, v = self.stock.pop()
+            count += v
+        self.stock.append([price, count])
+        return count
