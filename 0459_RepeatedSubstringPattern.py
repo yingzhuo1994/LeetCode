@@ -11,3 +11,9 @@ class Solution:
             if sub * m == s:
                 return True
         return False
+
+# 2nd solution
+# O(n) time | O(n) space
+class Solution:
+    def repeatedSubstringPattern(self, s: str) -> bool:
+        return s in (s+s)[1:-1]
