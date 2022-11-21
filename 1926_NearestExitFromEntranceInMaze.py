@@ -42,3 +42,42 @@ class Solution:
                         visited.add((x, y))
                         level.append([x, y, step])
         return -1
+
+# 2nd solution
+# O(mn) time | O(m+n) space
+class Solution:
+    def nearestExit(self, maze: List[List[str]], entrance: List[int]) -> int:
+        m, n = len(maze), len(maze[0])
+        maze[entrance[0]][entrance[1]] = "x"
+
+        count = 0
+        for i in range(m):
+            if maze[i][0] == ".":
+                count += 1
+
+            if maze[i][n-1] == ".":
+                count += 1
+        
+        for j in range(n):
+            if maze[0][j] == ".":
+                count += 1
+
+            if maze[m - 1][j] == ".":
+                count += 1
+        if count == 0:
+            return -1
+    
+        level = deque([[entrance[0], entrance[1], 0]])
+
+        while level:
+            i, j, step = level.popleft()
+            step += 1
+            for dx, dy in [[0, -1], [0, 1], [-1, 0], [1, 0]]:
+                x = i + dx
+                y = j + dy
+                if 0 <= x < m and 0 <= y < n and maze[x][y] == ".":
+                    if x == 0 or x == m - 1 or y == 0 or y == n - 1:
+                        return step
+                    maze[x][y] = "x"
+                    level.append([x, y, step])
+        return -1
