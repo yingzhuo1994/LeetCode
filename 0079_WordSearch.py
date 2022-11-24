@@ -22,9 +22,11 @@ class Solution:
                         return True
         return False
 
-        # 2nd simplified solution
-        # O(m*n*4^l) time | O(m * n + l) space
-        # where m and n are the row number and column number of board, and l is the length of word        
+# 2nd simplified solution
+# O(m*n*4^l) time | O(m * n + l) space
+# where m and n are the row number and column number of board, and l is the length of word
+class Solution:
+    def exist(self, board: List[List[str]], word: str) -> bool:
         def lookNeighbor(board, word, i, j, k, lst = []):
             if k > len(word) - 1:
                 return True
@@ -43,7 +45,8 @@ class Solution:
                     return True
         return False
     
-    # 3rd solution
+# 3rd solution
+class Solution:
     def exist(self, board: List[List[str]], word: str) -> bool:
         for i in range(len(board)):
             for j in range(len(board[0])):
