@@ -1,6 +1,6 @@
+# 1st solution
+# O(2^n) time | O(n) space
 class Solution:
-    # 1st solution
-    # O(2^n) time | O(n) space
     def numberOfArithmeticSlices(self, nums: List[int]) -> int:
         def dfs(dep, A, cur):
             if dep == n:
@@ -23,7 +23,8 @@ class Solution:
         dfs(0, nums, cur)
         return self.ans   
 
-    # 2nd solution
+# 2nd solution
+class Solution:
     def numberOfArithmeticSlices(self, nums: List[int]) -> int:
         total, n = 0, len(nums)
         dp = [Counter() for item in nums]
@@ -34,8 +35,9 @@ class Solution:
           
         return total - (n - 1) * n // 2  
 
-    # 3rd solution
-    # O(n^2) time | O(n^2) space
+# 3rd solution
+# O(n^2) time | O(n^2) space
+class Solution:
     def numberOfArithmeticSlices(self, nums: List[int]) -> int:
         n = len(nums)
         ans = 0
