@@ -23,7 +23,7 @@ class Solution:
         MOD = 10 ** 9 + 7
         stack = [-1]
         arr.append(-1)
-        sum_of_minimums = 0;
+        sum_of_minimums = 0
 
         for i in range(len(arr) ):
             while arr[i] < arr[stack[-1]]:
