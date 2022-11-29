@@ -1,6 +1,5 @@
+# 1st solution
 class RandomizedSet:
-
-    # 1st solution
     def __init__(self):
         """
         Initialize your data structure here.
@@ -36,8 +35,9 @@ class RandomizedSet:
         return random.choice(self.stack)
 
 
-    # 2nd solution
-    # O(1) time | O(n) space
+# 2nd solution
+# O(1) time | O(n) space
+class RandomizedSet:
     def __init__(self):
         self.dic_direct = {}
         self.dic_invert = {}
