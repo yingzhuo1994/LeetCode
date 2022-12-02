@@ -17,3 +17,11 @@ class Solution:
         freq1 = sorted(count1.values())
         freq2 = sorted(count2.values())
         return freq1 == freq2
+
+# 2nd solution
+# O(n) time | O(n) space
+class Solution:
+    def closeStrings(self, word1: str, word2: str) -> bool:
+        count1 = Counter(word1)
+        count2 = Counter(word2)
+        return count1.keys() == count2.keys() and Counter(count1.values()) == Counter(count2.values())
