@@ -1,7 +1,7 @@
+# 1st solution
+# O(n) time | O(n) space
+# where n is the total number of the characters
 class Solution:
-    # 1st solution
-    # O(n) time | O(n) space
-    # where n is the total number of the characters
     def frequencySort(self, s: str) -> str:
         frequency = Counter(s)
         result = []
@@ -11,9 +11,10 @@ class Solution:
         return "".join(result)
 
 
-    # 2nd solution
-    # O(n) time | O(n) space
-    # where n is the total number of the characters
+# 2nd solution
+# O(n) time | O(n) space
+# where n is the total number of the characters
+class Solution:
     def frequencySort(self, s: str) -> str:
         result = ''
         bucket = [None for i in range(len(s) + 1)]
