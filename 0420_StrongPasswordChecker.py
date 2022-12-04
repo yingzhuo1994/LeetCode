@@ -1,5 +1,5 @@
+# 1st solution
 import itertools
-
 class Solution:
     lowercase = set('abcdefghijklmnopqrstuvwxyz')
     uppercase = set('ABCDEFGHIJKLMNOPQRSTUFVWXYZ')
@@ -56,3 +56,55 @@ class Solution:
                 num_required_inserts,
             )
         )
+
+# 2nd solution
+class Solution:
+    def strongPasswordChecker(self, password: str) -> int:
+        n = len(password)
+        
+        # character check (replace)
+        containsUpper, containsLower, containsDigit = 0, 0, 0
+        for c in password:
+            if not containsUpper and c.isupper():
+                containsUpper = 1
+            if not containsLower and c.islower():
+                containsLower = 1
+            if not containsDigit and c.isdigit():
+                containsDigit = 1
+        
+        c_swaps = (3 - (containsUpper + containsLower + containsDigit))
+        
+        # repeating check (replace)
+        i, j, reps = 0, 1, list()
+        while i < n:
+            while j < n and password[i] == password[j]:
+                j += 1
+            reps.append(j-i)
+            i, j = j, j+1
+            
+        # length (addition, subtraction)
+        if n < 6:
+            adds = 6 - n
+            return max(adds, c_swaps)
+        elif n <= 20:
+            r_swaps = sum([elem // 3 for elem in reps])
+            return max(c_swaps, r_swaps)
+        else:
+            subs = n - 20
+            r = len(reps)
+            for i in range(r):
+                if subs >= 1 and reps[i] % 3 == 0:
+                    reps[i] -= 1
+                    subs -= 1
+            for i in range(r):
+                if subs >= 2 and reps[i] % 3 == 1 and reps[i] > 3:
+                    reps[i] -= 2
+                    subs -= 2
+            for i in range(r):
+                if subs > 0 and reps[i] > 2:
+                    removed = min(subs, reps[i] - 2)
+                    reps[i] -= removed
+                    subs -= removed
+                    
+            r_swaps = sum([elem // 3 for elem in reps])
+            return max(c_swaps, r_swaps) + (n - 20)
