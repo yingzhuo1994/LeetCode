@@ -1,3 +1,4 @@
+# 1st solution
 class Solution:
     def largestPalindrome(self, n: int) -> int:
         if n == 1:
@@ -15,3 +16,22 @@ class Solution:
                 root_2 = (z - discriminant ** 0.5) / 2
                 if root_1.is_integer() or root_2.is_integer():
                     return (maxi * left + right) % 1337
+
+# 2nd solution
+class Solution:
+    def largestPalindrome(self, n: int) -> int:
+        if n == 1:
+            return 9
+        
+        hi, lo = 10**n -1, 10**(n-1)
+        top = (hi // 11) * 11
+        
+        for left in range(hi, lo-1, -1):
+            res = int(str(left) + str(left)[::-1])
+            
+            for d in range(top, left -1, -11):
+                if res % d == 0:
+                    q = res // d
+                    
+                    if lo <= q <= hi:
+                        return res % 1337
