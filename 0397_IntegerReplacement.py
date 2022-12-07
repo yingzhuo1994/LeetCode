@@ -24,3 +24,17 @@ class Solution:
                     stack.append([num // 2, step + 1])
                     visited.add(num // 2)
                 
+# 2nd solution
+# O(log(n)) time | O(log(1)) space
+class Solution:
+    def integerReplacement(self, n: int) -> int:
+        count = 0
+        while n > 1:
+            count += 1
+            if n % 2 == 0:
+                n //= 2
+            elif n % 4 == 1 or n == 3:
+                n -= 1
+            else:
+                n += 1
+        return count
