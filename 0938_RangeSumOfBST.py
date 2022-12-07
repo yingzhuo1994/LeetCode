@@ -17,6 +17,7 @@ class Solution:
             return 
         if low <= node.val <= high:
             self.ans += node.val
-        
-        self.dfs(node.left, low, high)
-        self.dfs(node.right, low, high)
+        if node.val > low:
+            self.dfs(node.left, low, high)
+        if node.val < high:
+            self.dfs(node.right, low, high)
