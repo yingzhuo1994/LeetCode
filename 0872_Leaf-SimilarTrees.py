@@ -21,3 +21,29 @@ class Solution:
         if not node.left and not node.right:
             leaves.append(node.val)
         return leaves
+
+# 2nd solution
+# O(n) time | O(log(n)) space
+class Solution:
+    def leafSimilar(self, root1: Optional[TreeNode], root2: Optional[TreeNode]) -> bool:
+        stack1, stack2 = deque([root1]), deque([root2])
+        
+        while stack1 and stack2:
+            while stack1[-1].left or stack1[-1].right:
+                node = stack1.pop()
+                if node.right:
+                    stack1.append(node.right)
+                if node.left:
+                    stack1.append(node.left)
+            v1 = stack1.pop().val
+
+            while stack2[-1].left or stack2[-1].right:
+                node = stack2.pop()
+                if node.right:
+                    stack2.append(node.right)
+                if node.left:
+                    stack2.append(node.left)
+            v2 = stack2.pop().val
+            if v1 != v2:
+                return False
+        return not stack1 and not stack2
