@@ -3,8 +3,7 @@
 class Solution:
     def isRectangleCover(self, rectangles: List[List[int]]) -> bool:
         s = set() # corners set
-        A = rectangles
-        for x1,y1,x2,y2 in A:
+        for x1,y1,x2,y2 in rectangles:
             # b-bottom, l-left, t-top, r-right
             bl,br,tl,tr=(x1,y1,'bl'),(x2,y1,'br'),(x1,y2,'tl'),(x2,y2,'tr')
             for corner in (bl,br,tl,tr):
