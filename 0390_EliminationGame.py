@@ -40,3 +40,19 @@ class Solution:
             direction *= -1
             stack = [start, end, newStep]
         return stack[0]
+
+# 3rd solution
+# O(log(n)) time | O(1) space
+class Solution:
+    def lastRemaining(self, n: int) -> int:
+        isLeft = True
+        remaining = n
+        step = 1
+        head = 1
+        while remaining > 1:
+            if isLeft or remaining & 1:
+                head = head + step
+            remaining >>= 1
+            step *= 2
+            isLeft = not isLeft
+        return head
