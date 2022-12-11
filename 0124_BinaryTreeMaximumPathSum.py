@@ -4,8 +4,9 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
-class Solution:
-    # O(n) time | O(log(n)) space
+
+# O(n) time | O(log(n)) space
+class Solution:    
     def maxPathSum(self, root: Optional[TreeNode]) -> int:
         _, maxSum = self.getMaxPathSum(root)
         return maxSum
