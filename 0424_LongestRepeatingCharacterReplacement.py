@@ -109,3 +109,23 @@ class Solution:
             longest_substring_length = end + 1 - start
 
         return longest_substring_length
+
+# 4th solution
+# O(n) time | O(1) space
+class Solution:
+    def characterReplacement(self, s: str, k: int) -> int:
+        dic = {}
+        maxFreq = 0
+        window = 0
+        start = 0
+        for i in range(len(s)):
+            ch = s[i]
+            dic[ch] = dic.get(ch, 0) + 1
+            maxFreq = max(maxFreq, dic[ch])
+            if maxFreq + k > window:
+                window += 1
+            else:
+                ch = s[start]
+                dic[ch] -= 1
+                start += 1
+        return window
