@@ -1,4 +1,4 @@
-# 1st solution, TLE
+# 1st solution
 class Solution:
     def getMoneyAmount(self, n: int) -> int:
         memo = {}
@@ -9,7 +9,7 @@ class Solution:
                 memo[(left, right)] = 0
                 return 0
             ans = float("inf")
-            for i in range(left, right + 1):
+            for i in range(left, right):
                 leftVal = helper(left, i - 1)
                 rightVal = helper(i + 1, right)
                 ans = min(ans, max(leftVal, rightVal) + i)
