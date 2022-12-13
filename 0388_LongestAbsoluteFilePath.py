@@ -11,6 +11,6 @@ class Solution:
                 dict[key] = value
             else: #是文件。
                 #　文件的长度：所有目录的长度＋文件的长度＋“\”的数量
-                length = sum([dict[j] for j in dict.keys() if j < key]) + len(i)
+                length = sum([dict[j] for j in range(key)]) + len(i)
                 longest = max(longest, length)
         return longest
