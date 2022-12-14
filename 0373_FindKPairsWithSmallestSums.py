@@ -17,7 +17,8 @@ class Solution:
         return ans
 
 # 2nd solution
-# O(m * log(n)) time | O(k) space
+# O(m * log(n) * log(T)) time | O(k) space
+# where m = len(nums1), n = len(nums2), and T is the largest sum
 class Solution:
     def kSmallestPairs(self, nums1: List[int], nums2: List[int], k: int) -> List[List[int]]:
         m = len(nums1)
@@ -59,3 +60,22 @@ class Solution:
                 if nums1[i] + nums2[j] == right and len(ans) < k:
                     ans.append([nums1[i], nums2[j]])
         return ans
+
+# 3rd solution
+# O(k * log(m + n)) time | O(k) space
+# where m = len(nums1), n = len(nums2)
+class Solution:
+    def kSmallestPairs(self, nums1: List[int], nums2: List[int], k: int) -> List[List[int]]:
+        queue = []
+        def push(i, j):
+            if i < len(nums1) and j < len(nums2):
+                heapq.heappush(queue, [nums1[i] + nums2[j], i, j])
+        push(0, 0)
+        pairs = []
+        while queue and len(pairs) < k:
+            _, i, j = heapq.heappop(queue)
+            pairs.append([nums1[i], nums2[j]])
+            push(i, j + 1)
+            if j == 0:
+                push(i + 1, 0)
+        return pairs
