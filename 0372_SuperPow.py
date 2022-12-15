@@ -14,3 +14,21 @@ class Solution:
             x2 = a**r % MOD
             return x1 * x2 % MOD
         return a**b[0] % MOD
+
+# 2nd solution
+# O(n) time | O(1) space
+# where n is the length of b
+class Solution:
+    def superPow(self, a: int, b: List[int]) -> int:
+        MOD = 1337
+        a %= MOD
+        if a <= 1:
+            return a
+        ans = 1
+        while len(b):
+            r = b.pop()
+            x = a**r % MOD
+            a = a**10 % MOD
+            ans *=  x
+            ans %= MOD
+        return ans 
