@@ -25,10 +25,9 @@ class Solution:
         if a <= 1:
             return a
         ans = 1
-        while len(b):
-            r = b.pop()
-            x = a**r % MOD
-            a = a**10 % MOD
+        for r in reversed(b):
+            x = pow(a, r, MOD)
+            a = pow(a, 10, MOD)
             ans *=  x
             ans %= MOD
         return ans 
