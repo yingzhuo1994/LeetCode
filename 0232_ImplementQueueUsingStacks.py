@@ -3,7 +3,6 @@ class MyQueue:
     def __init__(self):
         self.stack = []
         self.size = 0
-        self.k = 1
 
     def push(self, x: int) -> None:
         self.stack.append(x)
@@ -22,7 +21,26 @@ class MyQueue:
     def empty(self) -> bool:
         return self.size == 0
         
-
+# 2nd solution
+class MyQueue:
+    def __init__(self):
+        self.stack = []
+        self.start = 0
+        
+    def push(self, x: int) -> None:
+        self.stack.append(x)
+        
+    def pop(self) -> int:
+        val = self.stack[self.start]
+        self.start += 1
+        return val
+        
+    def peek(self) -> int:
+        return self.stack[self.start]
+        
+    def empty(self) -> bool:
+        return len(self.stack) == self.start
+        
 
 # Your MyQueue object will be instantiated and called as such:
 # obj = MyQueue()
