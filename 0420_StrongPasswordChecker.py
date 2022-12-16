@@ -79,7 +79,8 @@ class Solution:
         while i < n:
             while j < n and password[i] == password[j]:
                 j += 1
-            reps.append(j-i)
+            if j - i >= 3:
+                reps.append(j-i)
             i, j = j, j+1
             
         # length (addition, subtraction)
