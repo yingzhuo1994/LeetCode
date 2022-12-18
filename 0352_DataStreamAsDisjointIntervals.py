@@ -88,8 +88,29 @@ class DLinkedList:
             node = node.next
         return intervals
 
-        
+# 2nd solution, Heap method
+from heapq import heappush, heappop
+class SummaryRanges:
+    def __init__(self):
+        self.intervals = []
 
+    def addNum(self, val):
+        heappush(self.intervals, (val, [val, val]))
+
+    def getIntervals(self):
+        stack = []
+        while self.intervals:
+            idx, cur = heappop(self.intervals)
+            if not stack:
+                stack.append((idx, cur))
+            else:
+                _, prev = stack[-1]
+                if prev[1] + 1 >= cur[0]:
+                    prev[1] = max(prev[1], cur[1])
+                else:
+                    stack.append((idx, cur))
+        self.intervals = stack
+        return list(map(lambda x: x[1], stack))
 
 # Your SummaryRanges object will be instantiated and called as such:
 # obj = SummaryRanges()
