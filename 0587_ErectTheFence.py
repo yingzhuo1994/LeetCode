@@ -52,23 +52,44 @@ class Solution:
 # 2nd solution
 # O(n*log(n)) time | O(n) space
 class Solution:
-    def outerTrees(self, points):
-        def cross(p1, p2, p3):
-            return (p2[0]-p1[0])*(p3[1]-p1[1])-(p2[1]-p1[1])*(p3[0]-p1[0])
+    def outerTrees(self, trees: List[List[int]]) -> List[List[int]]:
+        def orientation(p, q, r):
+            return (q[1] - p[1]) * (r[0] - q[0]) - (q[0] - p[0]) * (r[1] - q[1])
 
-        start = min(points)
-        points.pop(points.index(start))
-        points.sort(key=lambda p: (atan2(p[1]-start[1], p[0]-start[0]), -p[1], p[0]))
-        
-        last = len(points) - 1
-        while last > 0 and cross(start, points[-1], points[last - 1]) == 0:
-            last -= 1
-            
-        points[last:] = sorted(points[last:], key = lambda p: (-p[0]))
+        def inBetween(p, i, q):
+            a = i[0] >= p[0] and i[0] <= q[0] or i[0] <= p[0] and i[0] >= q[0]
+            b = i[1] >= p[1] and i[1] <= q[1] or i[1] <= p[1] and i[1] >= q[1]
+            return a and b
 
-        ans = [start]
-        for p in points:
-            ans.append(p)
-            while len(ans) > 2 and cross(*ans[-3:]) < 0:
-                ans.pop(-2)
-        return ans
+
+        hull = set()
+        n = len(trees)
+        if n < 4:
+            for point in trees:
+                x, y = point
+                hull.add((x, y))
+            return [[x, y] for x, y in hull]
+
+        left_most = 0
+        for i in range(n):
+            if trees[i][0] < trees[left_most][0]:
+                left_most = i
+        p = left_most
+        while True:
+            q = (p + 1) % n
+            for i in range(n):
+                x, y = trees[i]
+                if (x, y) in hull:
+                    continue
+                if orientation(trees[p], trees[i], trees[q]) < 0:
+                    q = i
+            for i in range(n):
+                x, y = trees[i]
+                if i != p and i != q and orientation(trees[p], trees[i], trees[q]) == 0 and inBetween(trees[p], trees[i], trees[q]):
+                    hull.add((x, y))
+            x, y = trees[q]
+            hull.add((x, y))
+            p = q
+            if p == left_most:
+                break
+        return [[x, y] for x, y in hull]
