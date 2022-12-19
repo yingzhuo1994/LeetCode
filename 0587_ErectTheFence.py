@@ -49,8 +49,9 @@ class Solution:
         ans = [[x, y] for x, y in ans]
         return ans
 
-# 2nd solution
-# O(n*log(n)) time | O(n) space
+# 2nd solution, Jarvis Algorithm
+# O(mn) time | O(m) space
+# where m is the hull length, and n = len(trees)
 class Solution:
     def outerTrees(self, trees: List[List[int]]) -> List[List[int]]:
         def orientation(p, q, r):
