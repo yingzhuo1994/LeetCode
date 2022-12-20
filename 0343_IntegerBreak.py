@@ -22,3 +22,19 @@ class Solution:
             for left in range(1, k):
                 dp[k] = max(dp[k], left * (k - left), left * dp[k - left])
         return dp[n]
+
+# 3rd solution, Math
+# O(log(n)) time | O(1) space
+class Solution:
+    def integerBreak(self, n: int) -> int:
+        if n == 2:
+            return 1
+        if n == 3:
+            return 2
+        count, res = divmod(n, 3)
+        if res == 1:
+            res += 3
+            count -= 1
+        elif res == 0:
+            res = 1
+        return pow(3, count) * res
