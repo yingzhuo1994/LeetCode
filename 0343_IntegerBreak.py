@@ -12,3 +12,13 @@ class Solution:
             memo[target] = ans
             return ans
         return dfs(n)
+
+# 2nd solution, Bottom-up
+# O(n^2) time | O(n) space
+class Solution:
+    def integerBreak(self, n: int) -> int:
+        dp = [1 for _ in range(n + 1)]
+        for k in range(1, n + 1):
+            for left in range(1, k):
+                dp[k] = max(dp[k], left * (k - left), left * dp[k - left])
+        return dp[n]
