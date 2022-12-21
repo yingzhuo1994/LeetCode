@@ -1,5 +1,5 @@
 # 1st solution
-# O(E) time | O(E) space
+# O(E + V) time | O(E + V) space
 class Solution:
     def possibleBipartition(self, n: int, dislikes: List[List[int]]) -> bool:
         if len(dislikes) == 0:
