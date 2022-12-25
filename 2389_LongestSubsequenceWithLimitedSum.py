@@ -1,4 +1,5 @@
 # 1st solution
+# O((m + n) * log(n)) time | O(n) space
 class Solution:
     def answerQueries(self, nums: List[int], queries: List[int]) -> List[int]:
         nums.sort()
