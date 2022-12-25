@@ -35,3 +35,34 @@ class Solution:
             array[lo:hi] = sorted(array[lo:hi])
             return count
         return mergesort(0, len(array))
+
+# 3rd solution, mergesort
+# O(n * log(n)) time | O(n) space
+class Solution:
+    def countRangeSum(self, nums: List[int], lower: int, upper: int) -> int:
+        array = [0]
+        for num in nums:
+            array.append(array[-1] + num)
+        def mergesort(lo, hi):
+            mid = (lo + hi) // 2
+            if mid == lo:
+                return 0
+            count = mergesort(lo, mid) + mergesort(mid, hi)
+            i = j = mid
+            for val in array[lo:mid]:
+                i = bisect.bisect_left(array, val + lower, lo=mid, hi=hi)
+                j = bisect.bisect_right(array, val + upper, lo=mid, hi=hi)
+                count += j - i
+            lst = []
+            i, j = lo, mid
+            while i < mid and j < hi:
+                if array[i] <= array[j]:
+                    lst.append(array[i])
+                    i += 1
+                else:
+                    lst.append(array[j])
+                    j += 1
+            lst.extend(array[i:mid] or array[j:hi])
+            array[lo:hi] = lst
+            return count
+        return mergesort(0, len(array))
