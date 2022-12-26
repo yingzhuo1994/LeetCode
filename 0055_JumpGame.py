@@ -1,6 +1,6 @@
+# 1st solution
+# O(n^2) time | O(1) space
 class Solution:
-    # 1st solution
-    # O(n^2) time | O(1) space
     def canJump(self, nums: List[int]) -> bool:
         pointer = 0
         steps = nums[pointer]
@@ -17,8 +17,9 @@ class Solution:
             steps = nums[pointer]
         return pointer + steps >= len(nums) - 1
 
-    # 2nd solution
-    # O(n) time | O(1) space
+# 2nd solution
+# O(n) time | O(1) space
+class Solution:
     def canJump(self, nums: List[int]) -> bool:
         m = 0
         for i, n in enumerate(nums):
@@ -27,8 +28,9 @@ class Solution:
             m = max(m, i + n)
         return True
 
-    # 3rd solution
-    # O(n) time | O(1) space
+# 3rd solution
+# O(n) time | O(1) space
+class Solution:
     def canJump(self, nums: List[int]) -> bool:
         steps = 0
         i = 0
