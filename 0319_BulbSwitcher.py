@@ -12,3 +12,18 @@ class Solution:
         if n > 1:
             bulbs[-1] = not bulbs[-1]
         return sum(bulbs)
+
+# 2nd solution
+# # O(n) time | O(1) space
+class Solution:
+    def bulbSwitch(self, n: int) -> int:
+        i = 1
+        count = 0
+        d = 3
+        while i < n:
+            count += 1
+            i += d
+            d += 2
+        if i != n:
+            count += 1
+        return count
