@@ -54,3 +54,39 @@ class Solution:
         dfs2(0, -1, sum(depths))
         
         return ans
+
+# 3rd solution
+# O(n) time | O(n) space
+class Solution:
+    def sumOfDistancesInTree(self, n: int, edges: List[List[int]]) -> List[int]:
+        graph = defaultdict(set)
+        for i, j in edges:
+            graph[i].add(j)
+            graph[j].add(i)
+        
+        def dfs_depth(node, parent, depth):
+            depths[node] = depth
+            for neib in graph[node]:
+                if neib != parent:
+                    dfs_depth(neib, node, depth + 1)
+
+        def dfs_weight(node, parent):
+            ans = 1
+            for neib in graph[node]:
+                if neib != parent:
+                    ans += dfs_weight(neib, node)
+            weights[node] = ans
+            return ans
+        
+        def dfs_dist(node, parent, w):
+            ans[node] = w
+            for neib in graph[node]:
+                if neib != parent:
+                    dfs_dist(neib, node, w + n - 2*weights[neib])
+        
+        weights, depths, ans = [0]*n, [0]*n, [0]*n
+        dfs_depth(0, -1, 0)
+        dfs_weight(0, -1)
+        dfs_dist(0, -1, sum(depths))
+        
+        return ans

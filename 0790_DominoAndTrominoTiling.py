@@ -39,8 +39,8 @@ class Solution:
             f = f2 + f1 + 2 * g1
             g = f2 + g2
             f %= MOD
+            g %= MOD
             f1, f2 = f2, f
             g1, g2 = g2, g
-            g %= MOD
             k += 1
         return f
