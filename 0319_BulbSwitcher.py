@@ -27,3 +27,9 @@ class Solution:
         if i != n:
             count += 1
         return count
+
+# 3rd solution
+# # O(n) time | O(1) space
+class Solution:
+    def bulbSwitch(self, n: int) -> int:
+        return int(math.sqrt(n))
