@@ -1,5 +1,5 @@
 # 1st solution
-# O(n * log(n)) time | O(n) space
+# O(n + k * log(n)) time | O(n) space
 class Solution:
     def minStoneSum(self, piles: List[int], k: int) -> int:
         stack = []
