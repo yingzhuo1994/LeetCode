@@ -6,7 +6,7 @@ class Solution:
         tasks = sorted([(t[0], t[1], i) for i, t in enumerate(tasks)])
         i = 0
         stack = []
-        lastTime = tasks[0][0]
+        lastTime = 0
         while len(ans) < len(tasks):
             while i < len(tasks) and tasks[i][0] <= lastTime:
                 heapq.heappush(stack, (tasks[i][1], tasks[i][2])) # (processing_time, original_index)
