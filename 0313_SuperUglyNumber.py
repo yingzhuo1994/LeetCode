@@ -18,8 +18,8 @@ class Solution:
 # 2nd solution
 # O(kn) time | O(k + n) space
 # where k = len(primes)
-class Solution(object):
-    def nthSuperUglyNumber(self, n, primes):
+class Solution:
+    def nthSuperUglyNumber(self, n: int, primes: List[int]) -> int:
         size = len(primes)
         ugly, dp, index, ugly_nums = 1, [1], [0] * size, [1] * size
         for i in range(1, n):
