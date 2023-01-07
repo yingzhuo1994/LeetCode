@@ -16,7 +16,7 @@ class Solution:
                 high = mid
         return low
 
-# 2nd solution
+# 2nd solution, Count sort
 # O(n) time | O(1) space
 class Solution:
     def hIndex(self, citations: List[int]) -> int:
