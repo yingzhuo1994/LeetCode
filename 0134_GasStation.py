@@ -1,7 +1,7 @@
+# 1st solution
+# O(n^2) | O(1) space
 class Solution:
     def canCompleteCircuit(self, gas: List[int], cost: List[int]) -> int:
-        # 1st solution
-        # O(n^2) | O(1) space
         start = 0
         while start < len(gas):
             i = start
@@ -18,8 +18,10 @@ class Solution:
             start += 1
         return -1
 
-        # 2nd solution
-        # O(n) time | O(1) space
+# 2nd solution
+# O(n) time | O(1) space
+class Solution:
+    def canCompleteCircuit(self, gas: List[int], cost: List[int]) -> int:
         # If sum of gas is less than sum of cost, then there is no way to get through all stations.
         # So while we loop through the stations we sum up, so that at the end we can check the sum.
         # Otherwise, there must be one unique solution, so the first one I find is the right one. 
