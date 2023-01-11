@@ -24,4 +24,3 @@ class Solution:
         
         dfs(root, [])
         return ["->".join(lst) for lst in ans]
-            
