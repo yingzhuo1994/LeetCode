@@ -31,8 +31,8 @@ class Solution:
         return False
 
 # 3rd solution
-# O(n) time | O(k) space
-# where n = len(nums), and d = indexDiff
+# O(n) time | O(t) space
+# where n = len(nums), where t = valueDiff
 class Solution:
     def containsNearbyAlmostDuplicate(self, nums: List[int], indexDiff: int, valueDiff: int) -> bool:
         k = indexDiff
