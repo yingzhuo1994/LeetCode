@@ -3,7 +3,7 @@
 class Solution:
     def smallestEquivalentString(self, s1: str, s2: str, baseStr: str) -> str:
         DS = DisjointSet()
-        for ch in s1 + s2 + baseStr:
+        for ch in string.ascii_lowercase:
             DS.add(ch)
         
         for ch1, ch2 in zip(s1, s2):
