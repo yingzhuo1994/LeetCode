@@ -13,3 +13,13 @@ class Solution:
             if nums[i] == nums[i + 1]:
                 return True
         return False
+
+# 3rd solution
+# O(n) time | O(n) space
+class Solution:
+    def containsDuplicate(self, nums: List[int]) -> bool:
+        seen = set()
+        for x in nums:
+            if x in seen: return True 
+            seen.add(x)
+        return False
