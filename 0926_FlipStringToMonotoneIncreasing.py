@@ -42,3 +42,18 @@ class Solution:
 
             ans = min(ans, count)
         return ans
+
+# 3rd solution
+# O(n) time | O(1) space
+class Solution:
+    def minFlipsMonoIncr(self, s: str) -> int:
+        zero = s.count("0")
+
+        ans = zero
+        for ch in s:
+            if ch == "0":
+                zero -= 1
+                ans = min(ans, zero)
+            else:
+                zero += 1
+        return ans
