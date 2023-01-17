@@ -18,3 +18,27 @@ class Solution:
             count = front + back
             ans = min(ans, count)
         return ans
+
+# 2nd solution
+# O(n) time | O(1) space
+class Solution:
+    def minFlipsMonoIncr(self, s: str) -> int:
+        n = len(s)
+        zeros_total = s.count("0")
+        ones_total = n - zeros_total
+
+        zero = 0
+        one = 0
+        ans = min(zeros_total, ones_total)
+        for i, ch in enumerate(s):
+            if ch == "0":
+                zero += 1
+            else:
+                one += 1
+
+            front = one
+            back = zeros_total - zero
+            count = front + back
+
+            ans = min(ans, count)
+        return ans
