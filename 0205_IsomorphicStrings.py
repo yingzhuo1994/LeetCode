@@ -14,3 +14,9 @@ class Solution:
             else:
                 return False
         return True
+
+# 2nd solution
+# O(n) time | O(1) space
+class Solution:
+    def isIsomorphic(self, s: str, t: str) -> bool:
+        return len(set(zip(s, t))) == len(set(s)) == len(set(t))
