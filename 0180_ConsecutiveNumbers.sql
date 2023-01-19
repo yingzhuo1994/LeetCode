@@ -27,3 +27,14 @@ WHERE
 select distinct Num as ConsecutiveNums
 from Logs
 where (Id + 1, Num) in (select * from Logs) and (Id + 2, Num) in (select * from Logs)
+;
+
+# 3rd solution
+select distinct num consecutivenums
+from ( select num, case 
+		when @record=num then @count:=@count+1
+		when @record:=num then @count:=1 end as n
+       from logs , (select @count:=0, @record:=null) r
+         ) a
+where a.n >= 3
+;
