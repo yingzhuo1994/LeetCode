@@ -6,6 +6,16 @@ insert into Employee (id, name, salary, managerId) values ('3', 'Sam', '60000', 
 insert into Employee (id, name, salary, managerId) values ('4', 'Max', '90000', 'None')
 
 # Write your MySQL query statement below
+# 1st solution
 Select E1.name as "Employee"
 FROM Employee E1, Employee E2
 WHERE E1.salary > E2.salary and E1.managerId = E2.id
+;
+
+# 2nd solution
+SELECT
+     a.NAME AS Employee
+FROM Employee AS a JOIN Employee AS b
+     ON a.ManagerId = b.Id
+     AND a.Salary > b.Salary
+;
