@@ -38,3 +38,18 @@ class Solution:
         elif res == 0:
             res = 1
         return pow(3, count) * res
+
+
+# 4th solution, Improved DP
+# O(n) time | O(n) space
+class Solution:
+    def integerBreak(self, n: int) -> int:
+        if n <= 3:
+            return n - 1
+        
+        dp = [0] * (n + 1)
+        dp[2] = 1
+        for i in range(3, n + 1):
+            dp[i] = max(2 * (i - 2), 2 * dp[i - 2], 3 * (i - 3), 3 * dp[i - 3])
+        
+        return dp[n]
