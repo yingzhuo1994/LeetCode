@@ -94,3 +94,64 @@ class Solution:
             if p == left_most:
                 break
         return [[x, y] for x, y in hull]
+
+# 3rd solution, Graham Scan
+# O(n * log(n)) time | O(n) space
+# where n = len(trees)
+from functools import cmp_to_key
+class Solution:
+    def outerTrees(self, trees: List[List[int]]) -> List[List[int]]:
+        def orientation(p, q, r):
+            return (q[1] - p[1]) * (r[0] - q[0]) - (q[0] - p[0]) * (r[1] - q[1])
+        
+        def distance(p, q):
+            return (p[0] - q[0]) * (p[0] - q[0]) + (p[1] - q[1]) * (p[1] - q[1])
+        
+        def bottomLeft(points):
+            bottomLeft = points[0]
+            for p in points:
+                if p[1] < bottomLeft[1]:
+                    bottomLeft = p
+            return bottomLeft
+        
+        def compare(p, q):
+            diff = orientation(bm, p, q) - orientation(bm, q, p)
+            if diff == 0:
+                return distance(bm, p) - distance(bm, q)
+            else:
+                if diff > 0:
+                    return 1
+                else:
+                    return -1
+        
+        n = len(trees)
+        if  n <= 1:
+            return trees
+        bm = bottomLeft(trees)
+
+        trees.sort(key = cmp_to_key(compare))
+
+        i = n - 1
+
+        while i >= 0 and orientation(bm, trees[n - 1], trees[i]) == 0:
+            i -= 1
+        l = i + 1
+        h = n - 1
+        while l < h:
+            temp = trees[l]
+            trees[l] = trees[h]
+            trees[h] = temp
+            l += 1
+            h -= 1
+
+        stack = []
+        stack.append(trees[0])
+        stack.append(trees[1])
+        for j in range(2, n):
+            top = stack.pop()
+            while orientation(stack[-1], top, trees[j]) > 0:
+                top = stack.pop()
+            stack.append(top)
+            stack.append(trees[j])
+
+        return stack
