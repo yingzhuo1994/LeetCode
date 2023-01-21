@@ -27,3 +27,23 @@ class Solution:
             else:
                 left = mid + 1
         return ans
+
+# 2nd solution
+# O(n * log(n)) time | O(1) space
+class Solution:
+    def minSubArrayLen(self, target: int, nums: List[int]) -> int:
+        if sum(nums) < target:
+            return 0
+        if max(nums) >= target:
+            return 1
+        n = len(nums)
+        for i in range(n-1):
+            nums[i+1] += nums[i]
+        nums.append(0)
+        ans = n
+        for start in range(n):
+            i = bisect.bisect_left(nums, nums[start-1] + target, lo=start, hi=n)
+            if i == start or i == n:
+                continue
+            ans = min(ans, i - start+1)
+        return ans
