@@ -64,8 +64,7 @@ class Solution:
             curSum += nums[i]
 
             while curSum >= target:
-                if curSum >= target:
-                    ans = min(ans, i - start + 1)
+                ans = min(ans, i - start + 1)
                 curSum -= nums[start]
                 start += 1
         return ans
