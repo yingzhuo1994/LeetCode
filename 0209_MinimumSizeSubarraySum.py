@@ -47,3 +47,25 @@ class Solution:
                 continue
             ans = min(ans, i - start+1)
         return ans
+
+# 3rd solution
+# O(n) time | O(1) space
+class Solution:
+    def minSubArrayLen(self, target: int, nums: List[int]) -> int:
+        if sum(nums) < target:
+            return 0
+        if max(nums) >= target:
+            return 1
+        n = len(nums)
+        curSum = 0
+        ans = n
+        start = 0
+        for i in range(n):
+            curSum += nums[i]
+
+            while curSum >= target:
+                if curSum >= target:
+                    ans = min(ans, i - start + 1)
+                curSum -= nums[start]
+                start += 1
+        return ans
