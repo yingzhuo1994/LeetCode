@@ -1,4 +1,4 @@
-# 1st solution, BFS
+# 1st solution, DFS
 # O(n) time | O(n) space
 class Solution:
     def closestMeetingNode(self, edges: List[int], node1: int, node2: int) -> int:
@@ -30,29 +30,36 @@ class Solution:
                 ans = node
         return ans
 
-# 2nd solution, DFS
+# 2nd solution, BFS
 # O(n) time | O(n) space
 class Solution:
     def closestMeetingNode(self, edges: List[int], node1: int, node2: int) -> int:
-        def dfs(node, edges, dist, visit):
-            visit[node] = True
-            neighbor = edges[node]
-            if neighbor != -1 and not visit[neighbor]:
-                dist[neighbor] = 1 + dist[node]
-                dfs(neighbor, edges, dist, visit)
+        def bfs(startNode, edges, dist):
+            n = len(edges)
+            q = deque()
+            q.append(startNode)
+
+            visit = [False for _ in range(n)]
+            dist[startNode] = 0
+
+            while q:
+                node = q.popleft()
+
+                if visit[node]:
+                    continue
+
+                visit[node] = True
+                neighbor = edges[node]
+                if neighbor != -1 and not visit[neighbor]:
+                    dist[neighbor] = 1 + dist[node]
+                    q.append(neighbor)
 
         n = len(edges)
         dist1 = [float("inf") for _ in range(n)]
         dist2 = [float("inf") for _ in range(n)]
 
-        dist1[node1] = 0
-        dist2[node2] = 0
-
-        visit1 = [False for _ in range(n)]
-        visit2 = [False for _ in range(n)]
-
-        dfs(node1, edges, dist1, visit1)
-        dfs(node2, edges, dist2, visit2)
+        bfs(node1, edges, dist1)
+        bfs(node2, edges, dist2)
 
         minDistNode = -1
         minDistTillNow = float("inf")
