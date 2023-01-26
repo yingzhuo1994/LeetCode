@@ -2,16 +2,10 @@
 # O(n^2) time | O(n) space
 class Solution:
     def shortestPalindrome(self, s: str) -> str:
-        def isPalindrome(s):
-            return s == s[::-1]
-        
-        n = len(s)
-        if n <= 1:
-            return s
-        i = n
-        while not isPalindrome(s[:i]):
-            i -= 1
-        return s[i:][::-1] + s
+        r = s[::-1]
+        for i in range(len(s) + 1):
+            if s.startswith(r[i:]):
+                return r[:i] + s
 
 # 2nd solution
 # O(n^2) time | O(n) space
