@@ -59,3 +59,22 @@ class Solution:
         for i in range(n):
             ans[i] = nums[index[i]] if index[i] is not None else -1
         return ans
+
+# 3rd solution
+# O(n) time | O(n) space
+class Solution:
+    def nextGreaterElements(self, nums: List[int]) -> List[int]:
+        n = len(nums)
+        result = [-1] * n
+        stack = []
+
+        for idx in range(2 * n):
+            circularIdx = idx % n
+
+            while len(stack) > 0 and nums[stack[-1]] < nums[circularIdx]:
+                top = stack.pop()
+                result[top] = nums[circularIdx]
+            
+            stack.append(circularIdx)
+
+        return result
