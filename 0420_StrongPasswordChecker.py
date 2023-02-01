@@ -65,11 +65,11 @@ class Solution:
         # character check (replace)
         containsUpper, containsLower, containsDigit = 0, 0, 0
         for c in password:
-            if not containsUpper and c.isupper():
+            if c.isupper():
                 containsUpper = 1
-            if not containsLower and c.islower():
+            elif c.islower():
                 containsLower = 1
-            if not containsDigit and c.isdigit():
+            elif c.isdigit():
                 containsDigit = 1
         
         c_swaps = (3 - (containsUpper + containsLower + containsDigit))
