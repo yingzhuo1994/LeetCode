@@ -17,3 +17,18 @@ class Solution:
             if str1[:i] * x == str1 and str1[:i] * y == str2:
                 return str1[:i]
         return ""
+
+# 2nd solution
+# O(m + n) time | O(m + n) space
+class Solution:
+    def gcdOfStrings(self, str1: str, str2: str) -> str:
+        def gcd(a, b):
+            while a > 0:
+                a, b = b % a, a
+            return b
+        if str1 + str2 != str2 + str1:
+            return ""
+        m, n = len(str1), len(str2)
+        k = gcd(m, n)
+
+        return str1[:k]
