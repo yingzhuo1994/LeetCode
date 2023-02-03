@@ -41,3 +41,25 @@ class Solution:
         for row in range(numRows):
             ans.extend(stack[row])
         return "".join(ans)
+
+# 3rd solution
+# O(n) time | O(n) space
+class Solution:
+    def convert(self, s: str, numRows: int) -> str:
+        n = len(s)
+        if n <= numRows or numRows == 1:
+            return s
+        stack =[[] for _ in range(numRows)]
+        j = 0
+        d = 1
+        for ch in s:
+            stack[j].append(ch)
+            j += d
+            if j == numRows:
+                j = numRows - 2
+                d = - 1
+            elif j == -1:
+                j = 1
+                d = 1
+        ans = ["".join(line) for line in stack]
+        return "".join(ans)
