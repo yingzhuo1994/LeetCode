@@ -11,4 +11,6 @@ class Solution:
                     ans += i + (num // i)
                 else:
                     ans += i
+            if ans > num:
+                return False
         return ans == num
