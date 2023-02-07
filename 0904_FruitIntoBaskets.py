@@ -90,3 +90,17 @@ class Solution:
                 l += 1
             res = max(res, r - l + 1)
         return res
+
+# 4th solution
+# O(n) time | O(1) space
+class Solution:
+    def totalFruit(self, fruits: List[int]) -> int:
+        count, i = {}, 0
+        for j, v in enumerate(fruits):
+            count[v] = count.get(v, 0) + 1
+            if len(count) > 2:
+                count[fruits[i]] -= 1
+                if count[fruits[i]] == 0: del count[fruits[i]]
+                # always keep the longest length
+                i += 1
+        return j - i + 1
