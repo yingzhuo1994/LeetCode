@@ -41,6 +41,39 @@ class Solution:
             self.ans = min(self.ans, diff)
             self.lastVal = node.val
             dfs(node.right)
-            
+
+        dfs(root)
+        return self.ans
+
+# 3rd solution, Morris Traversal
+# O(n) time | O(1) space
+# where n is number of nodes
+class Solution:
+    def minDiffInBST(self, root: Optional[TreeNode]) -> int:
+        self.ans = float("inf")
+        self.lastVal = float("-inf")
+
+        def dfs(node):
+            while node:
+                if not node.left:
+                    diff = node.val - self.lastVal
+                    self.ans = min(self.ans, diff)
+                    self.lastVal = node.val
+                    node = node.right
+                else:
+                    curNode = node.left
+                    while curNode.right and curNode.right != node:
+                        curNode = curNode.right
+                    
+                    if curNode.right != node:
+                        curNode.right = node
+                        node = node.left
+                    else:
+                        diff = node.val - self.lastVal
+                        self.ans = min(self.ans, diff)
+                        self.lastVal = node.val
+                        curNode.right = None
+                        node = node.right
+
         dfs(root)
         return self.ans
