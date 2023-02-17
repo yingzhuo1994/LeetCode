@@ -24,3 +24,23 @@ class Solution:
             diff = values[i + 1]  - values[i]
             self.ans = min(self.ans, diff)
         return self.ans
+
+# 2nd solution
+# O(n) time | O(h) space
+# where n is number of nodes and h is the height of the tree
+class Solution:
+    def minDiffInBST(self, root: Optional[TreeNode]) -> int:
+        self.ans = float("inf")
+        self.lastVal = float("-inf")
+
+        def dfs(node):
+            if not node:
+                return
+            dfs(node.left)
+            diff = node.val - self.lastVal
+            self.ans = min(self.ans, diff)
+            self.lastVal = node.val
+            dfs(node.right)
+            
+        dfs(root)
+        return self.ans
