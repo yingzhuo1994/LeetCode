@@ -4,8 +4,9 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+
+# O(n) time | O(log(n)) space
 class Solution:
-    # O(n) time | O(log(n)) space
     def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
         if not root:
             return root
