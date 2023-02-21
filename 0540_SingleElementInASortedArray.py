@@ -32,3 +32,22 @@ class Solution:
                 right = mid
 
         return nums[left]
+
+# 3rd solution
+# O(log(n)) time | O(1) space
+class Solution:
+    def singleNonDuplicate(self, nums: List[int]) -> int:
+        n = len(nums)
+        k = (n - 1) // 2
+        left, right = 0, k
+        while left < right:
+            mid = left + (right - left) // 2
+            idx = mid * 2
+            if idx + 1 < n:
+                if nums[idx + 1] == nums[idx]:
+                    left = mid + 1
+                else:
+                    right = mid
+            else:
+                return nums[idx]
+        return nums[left * 2]
