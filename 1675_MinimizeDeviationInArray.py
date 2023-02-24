@@ -22,3 +22,25 @@ class Solution:
                 Max = max(Max, num*2)
             
         return ans
+
+# 2nd solution
+# O(m*log(n)) time | O(n) space
+# where n is the length of nums and m is total number of candidates,
+# we can estimate m = O(n*log(K)), where K is the biggest number.
+class Solution:
+    def minimumDeviation(self, nums: List[int]) -> int:
+        stack = []
+        low = float("inf")
+        for num in nums:
+            if num & 1:
+                num *= 2
+            heappush(stack, -num)
+            low = min(low, num)
+        ans = -stack[0] - low
+        while (-stack[0]) % 2 == 0:
+            num = -heappop(stack)
+            heappush(stack, -(num // 2))
+            low = min(low, num // 2)
+            ans = min(ans, -stack[0] - low)
+        
+        return ans
