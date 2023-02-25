@@ -39,8 +39,9 @@ class Solution:
         ans = -stack[0] - low
         while (-stack[0]) % 2 == 0:
             num = -heappop(stack)
-            heappush(stack, -(num // 2))
-            low = min(low, num // 2)
+            num //= 2
+            low = min(low, num)
+            heappush(stack, -num)
             ans = min(ans, -stack[0] - low)
         
         return ans
