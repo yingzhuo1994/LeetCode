@@ -14,13 +14,14 @@ class Solution:
         heapify(heap)
         ans = float("inf")
 
-        while len(heap) == len(nums):
+        while True:
             num, limit = heappop(heap)
             ans = min(ans, Max - num)
             if num < limit:
                 heappush(heap, (num*2, limit))
                 Max = max(Max, num*2)
-            
+            else:
+                break
         return ans
 
 # 2nd solution
