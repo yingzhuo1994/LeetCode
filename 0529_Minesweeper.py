@@ -12,10 +12,10 @@ class Solution:
 
         def countMine(i, j):
             count = 0
-            for x in range(i - 1, i + 2):
-                for y in range(j - 1, j + 2):
-                    if 0 <= x < len(board) and 0 <= y < len(board[0]) and board[x][y] == "M":
-                        count += 1
+            neighbors = getNeighbors(i, j)
+            for x, y in neighbors:
+                if board[x][y] == "M":
+                    count += 1
             return count
 
         x, y = click
@@ -26,7 +26,7 @@ class Solution:
             while level:
                 newLevel = set()
                 for x, y in level:
-                    if board[x][y] in ("M", "B") or board[x][y].isdgit():
+                    if board[x][y] in ("M", "B") or board[x][y].isdigit():
                         continue
                     count = countMine(x, y)
                     if count == 0:
