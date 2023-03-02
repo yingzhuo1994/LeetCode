@@ -29,3 +29,28 @@ class Solution:
         chars[length:] = []
 
         return length
+
+# 2nd solution
+# O(n) time | O(1) space
+class Solution:
+    def compress(self, chars: List[str]) -> int:
+        lastCh = ""
+        count = 0
+        stack = []
+        ans = 0
+        chars.append(" ")
+        for ch in chars:
+            if ch == lastCh:
+                count += 1
+            else:
+                if count > 1:
+                    stack.append(lastCh)
+                    stack.extend(list(str(count)))
+                    ans += 1 + len(str(count))
+                elif count == 1:
+                    stack.append(lastCh)
+                    ans += 1
+                lastCh = ch
+                count = 1
+        chars[:] = stack
+        return ans
