@@ -15,8 +15,8 @@ class Solution:
 # O(n + m) time | O(m) space
 class Solution:
     def strStr(self, haystack: str, needle: str) -> int:
-        if len(needle) == 0:
-            return 0
+        if len(needle) > len(haystack):
+            return -1
         pattern = self.buildPattern(needle)
         return self.doesMatch(haystack, needle, pattern)
 
@@ -48,4 +48,40 @@ class Solution:
                 j = pattern[j - 1] + 1
             else:
                 i += 1
+        return -1
+
+# 3rd, KMP solution
+# O(n + m) time | O(m) space
+class Solution:
+    def strStr(self, haystack: str, needle: str) -> int:
+        if len(needle) > len(haystack):
+            return -1
+        pattern = self.buildPattern(needle)
+        return self.doesMatch(haystack, needle, pattern)
+
+    def buildPattern(self, needle):
+        pattern = [0 for _ in needle]
+        for i in range(1, len(needle)):
+            j = pattern[i - 1]
+            while j > 0 and needle[i] != needle[j]:
+                j = pattern[j - 1]
+
+            if needle[i] == needle[j]:
+                j += 1
+            pattern[i] = j
+
+        return pattern
+
+    def doesMatch(self, haystack, needle, pattern):
+        j = 0
+        for i in range(len(haystack)):
+            while j > 0 and haystack[i] != needle[j]:
+                j = pattern[j - 1]
+
+            if haystack[i] == needle[j]:
+                j += 1
+            
+            if j == len(needle):
+                return i - len(needle) + 1
+
         return -1
