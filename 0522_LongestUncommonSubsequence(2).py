@@ -36,13 +36,13 @@ class Solution:
 # 3rd solution
 class Solution:
     def findLUSlength(self, strs: List[str]) -> int:
-        def isSub(w1, w2, count):
-            for i in w2:
-                if i == w1[count]:
-                     count += 1
-                if count == len(w1): 
+        def isSub(w1, w2, idx):
+            for ch in w2:
+                if ch == w1[idx]:
+                     idx += 1
+                if idx == len(w1): 
                     return True 
-            return count == len(w2)
+            return idx == len(w2)
         
         d = collections.Counter(strs)
         strs.sort(key = len, reverse = True)
