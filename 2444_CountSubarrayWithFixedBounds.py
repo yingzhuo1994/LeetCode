@@ -73,3 +73,21 @@ class Solution:
             ans += countSubarray(nums, start, n)
         
         return ans
+
+# 3rd solution
+# O(n) time | O(1) space
+class Solution:
+    def countSubarrays(self, nums: List[int], minK: int, maxK: int) -> int:
+        ans = 0
+        minIdx = -1
+        maxIdx = -1
+        start = -1
+        for i, num in enumerate(nums):
+            if num < minK or num > maxK:
+                start = i
+            if num == minK:
+                minIdx = i
+            if num == maxK:
+                maxIdx = i
+            ans += max(0, min(minIdx, maxIdx) - start)
+        return ans
