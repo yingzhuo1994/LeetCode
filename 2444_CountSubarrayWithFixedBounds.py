@@ -44,20 +44,21 @@ class Solution:
 # O(n) time | O(1) space
 class Solution:
     def countSubarrays(self, nums: List[int], minK: int, maxK: int) -> int:
-        def countSubarray(array):
+        def countSubarray(array, start, end):
             if not array:
                 return 0
             count = 0
             minIdx = -1
             maxIdx = -1
-            for i, num in enumerate(array):
+            for i in range(start, end):
+                num = nums[i]
                 if num == minK:
                     minIdx = max(minIdx, i)
                 if num == maxK:
                     maxIdx = max(maxIdx, i)
                 if minIdx >= 0 and maxIdx >= 0:
                     frontIdx = min(minIdx, maxIdx)
-                    count += frontIdx + 1
+                    count += frontIdx - start + 1
             return count
 
         n = len(nums)
@@ -65,10 +66,10 @@ class Solution:
         ans = 0
         for i, num in enumerate(nums):
             if num < minK or num > maxK:
-                ans += countSubarray(nums[start:i])
+                ans += countSubarray(nums, start, i)
                 start = i + 1
 
         if nums[n-1] >= minK and nums[n-1] <= maxK:
-            ans += countSubarray(nums[start:n])
+            ans += countSubarray(nums, start, n)
         
         return ans
