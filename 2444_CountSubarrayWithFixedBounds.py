@@ -85,9 +85,10 @@ class Solution:
         for i, num in enumerate(nums):
             if num < minK or num > maxK:
                 start = i
-            if num == minK:
-                minIdx = i
-            if num == maxK:
-                maxIdx = i
-            ans += max(0, min(minIdx, maxIdx) - start)
+            else:
+                if num == minK:
+                    minIdx = i
+                if num == maxK:
+                    maxIdx = i
+                ans += max(0, min(minIdx, maxIdx) - start)
         return ans
