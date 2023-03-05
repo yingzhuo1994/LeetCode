@@ -80,3 +80,36 @@ class Solution:
             step += 1
 
         return -1
+
+# 3rd solution
+# O(n) time | O(n) space
+class Solution:
+    def minJumps(self, arr: List[int]) -> int:
+        dic = collections.defaultdict(list)
+        for i, num in enumerate(arr):
+            dic[num].append(i)
+        
+        level = [0]
+        visited = set([0])
+        step = 0
+        n = len(arr)
+        while level:
+            newLevel = []
+            for idx in level:
+                if idx == n - 1:
+                    return step
+                if idx + 1 < n and (idx + 1) not in visited:
+                    newLevel.append(idx + 1)
+                    visited.add(idx + 1)
+                if idx - 1 >= 0 and (idx - 1) not in visited:
+                    newLevel.append(idx - 1)
+                    visited.add(idx - 1)
+                num = arr[idx]
+                while dic[num]:
+                    j = dic[num].pop()
+                    if j not in visited:
+                        newLevel.append(j)
+                        visited.add(j)
+            step += 1
+            level = newLevel
+        return -1
