@@ -68,7 +68,9 @@ class Solution:
         return self.dfs(0, length - 1)
 
     def dfs(self, left, right):
-        if left > right: return None
+        if left > right: 
+            return None
+        
         mid = (left + right) // 2
         leftNode = self.dfs(left, mid - 1)
         
