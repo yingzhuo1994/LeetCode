@@ -46,3 +46,22 @@ class DisjointSet:
             p = self.getParent(node)
             ans.add(p)
         return len(ans)
+
+# 2nd solution
+# O(n^2) time | O(n) space
+class Solution:
+    def findCircleNum(self, isConnected: List[List[int]]) -> int:
+        n = len(isConnected)
+        visited = [0 for _ in range(n)]
+        count = 0
+        for i in range(n):
+            if visited[i] == 0:
+                self.dfs(isConnected, visited, i)
+                count += 1
+        return count
+    
+    def dfs(self, matrix, visited, i):
+        visited[i] = 1
+        for j in range(len(matrix)):
+            if matrix[i][j] == 1 and visited[j] == 0:
+                self.dfs(matrix, visited, j)
