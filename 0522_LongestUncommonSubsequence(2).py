@@ -42,12 +42,13 @@ class Solution:
                      idx += 1
                 if idx == len(w1): 
                     return True 
-            return idx == len(w2)
+            return False
         
         d = collections.Counter(strs)
         strs.sort(key = len, reverse = True)
         for i in range(len(strs)):
             if d[strs[i]] == 1:
                 res = any(isSub(strs[i], strs[j], 0) for j in range(i))        
-                if res == False: return len(strs[i])
+                if res == False: 
+                    return len(strs[i])
         return -1
