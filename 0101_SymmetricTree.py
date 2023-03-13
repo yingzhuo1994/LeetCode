@@ -4,29 +4,37 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+
+# 1st recursive solution
+# O(n) time | O(h) time (worst O(n) time)
 class Solution:
     def isSymmetric(self, root: TreeNode) -> bool:
         if not root:
             return True
         else:
-            return self.helper(root.left, root.right)
+            return self.checkMirror(root.left, root.right)
 
-    # 1st recursive solution
-    # O(n) time | O(h) time (worst O(n) time)
-    def helper(self, L, R):
+    def checkMirror(self, L, R):
         if L is not None and R is not None:
             if L.val != R.val:
                 return False
             else:
-                return self.helper(L.left, R.right) and self.helper(L.right, R.left)
+                return self.checkMirror(L.left, R.right) and self.checkMirror(L.right, R.left)
         elif (L and not R) or (not L and R):
             return False
         else:
             return True
 
-    # 2nd iterative solution
-    # O(n) time | O(n) time
-    def helper(self, L, R):
+# 2nd iterative solution
+# O(n) time | O(n) time
+class Solution:
+    def isSymmetric(self, root: TreeNode) -> bool:
+        if not root:
+            return True
+        else:
+            return self.checkMirror(root.left, root.right)
+        
+    def checkMirror(self, L, R):
         stack = [L, R]
         while len(stack) > 0:
             curStack = []
