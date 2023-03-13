@@ -57,9 +57,9 @@ class Solution:
             for k in range(j + 1):
                 dp[j][j][k] = (k + 1) * (k + 1)
         
-        for l in range(1, n):
-            for j in range(l, n):
-                i = j - l
+        for length in range(1, n):
+            for j in range(length, n):
+                i = j - length
 
                 for k in range(i + 1):
                     ans = (k + 1) * (k + 1) + dp[i + 1][j][0]
