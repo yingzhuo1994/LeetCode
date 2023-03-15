@@ -52,3 +52,15 @@ class Solution:
             if node.left or node.right:
                 return False
         return True
+
+# 2nd solution, bfs
+# O(n) time | O(n) space
+class Solution:
+    def isCompleteTree(self, root: Optional[TreeNode]) -> bool:
+        bfs = [root]
+        i = 0
+        while bfs[i]:
+            bfs.append(bfs[i].left)
+            bfs.append(bfs[i].right)
+            i += 1
+        return not any(bfs[i:])
