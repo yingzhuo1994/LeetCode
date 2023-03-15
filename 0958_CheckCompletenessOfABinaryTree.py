@@ -64,3 +64,18 @@ class Solution:
             bfs.append(bfs[i].right)
             i += 1
         return not any(bfs[i:])
+    
+# 3rd solution, dfs
+# O(n) time | O(n) space
+class Solution:
+    def isCompleteTree(self, root: Optional[TreeNode]) -> bool:
+        def dfs(node):
+            if not node: 
+                return 0
+            l, r = dfs(node.left), dfs(node.right)
+            if l & (l + 1) == 0 and l // 2 <= r <= l:
+                return l + r + 1
+            if r & (r + 1) == 0 and r <= l <= r * 2 + 1:
+                return l + r + 1
+            return -1
+        return dfs(root) > 0
