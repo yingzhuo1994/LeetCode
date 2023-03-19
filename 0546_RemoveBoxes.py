@@ -28,7 +28,7 @@ class Solution:
     def removeBoxes(self, boxes: List[int]) -> int:
         @lru_cache(None)
         def dp(l, r, k):
-            # dp(i,j,k) means the max points you can earn between boxes "i" and "j", with "k" boxes before i that has the same color as "i".
+            # dp(l, r, k) means the max points you can earn between boxes "l" and "r", with "k" boxes before l that has the same color as "l".
             if l > r: 
                 return 0
             

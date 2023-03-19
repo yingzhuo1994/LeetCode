@@ -4,9 +4,10 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+
+# 1st solution
+# O(n) time | O(log(n)) space
 class Solution:
-    # 1st solution
-    # O(n) time | O(log(n)) space
     def sumNumbers(self, root: Optional[TreeNode]) -> int:
         if not root:
             return 0
@@ -14,11 +15,12 @@ class Solution:
         self.dfs(root, 0)
         return self.result
     
-    def dfs(self, node, path):
+    def dfs(self, node, num):
         if not node:
             return
+        num = num * 10 + node.val
         if not node.left and not node.right:
-            self.result += path * 10 + node.val
+            self.result += num
             return
-        self.dfs(node.left, path * 10 + node.val)
-        self.dfs(node.right, path * 10 + node.val)
+        self.dfs(node.left, num)
+        self.dfs(node.right, num)
