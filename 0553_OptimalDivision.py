@@ -31,10 +31,10 @@ class Solution:
             for i in range(start, end):
                 r1 = self.getMax(nums, start, i)
                 r2 = self.getMin(nums, i + 1, end)
-                if r1. val / r2.val > r.val:
+                quo = r1. val / r2.val
+                if quo > r.val:
                     r.str = r1.str + "/" + ("(" + r2.str + ")" if end - i >= 2 else r2.str)
-                    r.val = r1.val / r2.val
-        
+                    r.val = quo
         return r
 
     def getMin(self, nums, start, end):
@@ -51,10 +51,10 @@ class Solution:
             for i in range(start, end):
                 r1 = self.getMin(nums, start, i)
                 r2 = self.getMax(nums, i + 1, end)
-                if r1. val / r2.val < r.val:
+                quo = r1. val / r2.val
+                if quo < r.val:
                     r.str = r1.str + "/" + ("(" + r2.str + ")" if end - i >= 2 else r2.str)
-                    r.val = r1.val / r2.val
-        
+                    r.val = quo
         return r
 
 class Result:
