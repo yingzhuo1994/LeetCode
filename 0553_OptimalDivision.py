@@ -60,4 +60,4 @@ class Solution:
 class Result:
     def __init__(self):
         self.val = 0
-        self.str = 0
+        self.str = ""
