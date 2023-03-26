@@ -36,17 +36,17 @@ class Solution:
         self.max_length = -1
         seen = [False] * n
         visiting = {}
-        stack = []
+        self.count = 0
             
         def dfs(node):
             if not seen[node]:
                 if node in visiting:
-                    self.max_length = max(self.max_length, len(stack) - visiting[node])
+                    self.max_length = max(self.max_length, self.count - visiting[node])
                 elif edges[node] != -1: 
-                    visiting[node] = len(stack) 
-                    stack.append(node)
+                    visiting[node] = self.count 
+                    self.count += 1
                     dfs(edges[node])
-                    stack.pop()
+                    self.count -= 1
                     visiting.pop(node)
                 seen[node] = True
     
