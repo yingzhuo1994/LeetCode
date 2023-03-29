@@ -24,3 +24,17 @@ class Solution:
             else:
                 break
         return curSum
+
+# 2nd solution
+# O(n * log(n)) time | O(n) space
+class Solution:
+    def maxSatisfaction(self, satisfaction: List[int]) -> int:
+        res, total = 0, 0
+        satisfaction.sort()
+        for i in reversed(range(len(satisfaction))):
+            total += satisfaction[i]
+            if total > 0:
+                res += total
+            else:
+                break
+        return res
