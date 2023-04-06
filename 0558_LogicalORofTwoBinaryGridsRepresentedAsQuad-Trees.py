@@ -29,7 +29,7 @@ class Solution:
         leaves = [child.isLeaf for child in children]
 
         if all(leaves) and (sum(values) == 0 or sum(values) == 4):
-            return Node(topLeft.val, True, None, None, None, None)
+            return Node(values[0], True, None, None, None, None)
 
         # non-leaf must have False val
         return Node(False, False, topLeft, topRight, bottomLeft, bottomRight)
