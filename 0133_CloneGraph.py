@@ -41,12 +41,14 @@ class Solution:
 class Solution:
     def cloneGraph(self, node: 'Node') -> 'Node':
         def dfs(node):
+            if not node: 
+                return None
             mapping[node] = Node(node.val)
             for neigh in node.neighbors:
-                if neigh not in mapping: dfs(neigh)
-                mapping[node].neighbors += [mapping[neigh]]
-        
-        if not node: return node
+                if neigh not in mapping: 
+                    dfs(neigh)
+                mapping[node].neighbors.append(mapping[neigh])
+            return mapping[node]
+
         mapping  = {}
-        dfs(node)
-        return mapping[node]
+        return dfs(node)
