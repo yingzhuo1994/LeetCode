@@ -15,7 +15,7 @@ class Solution:
         return ans
 
 # 2nd solution
-# O(n) time | O(1) space
+# O(n) time | O(n) space
 class Solution:
     def arrayNesting(self, nums: List[int]) -> int:
         n = len(nums)
@@ -29,4 +29,21 @@ class Solution:
         for i in range(len(nums)):
             length = dfs(i)
             ans = max(ans, length)
+        return ans
+
+# 3rd solution
+# O(n) time | O(1) space
+class Solution:
+    def arrayNesting(self, nums: List[int]) -> int:
+        n = len(nums)
+        ans = 0
+        for i in range(len(nums)):
+            idx = i
+            length = 0
+            while nums[idx] < n:
+                nums[idx] += n
+                idx = nums[idx] % n
+                length += 1
+            ans = max(ans, length)
+
         return ans
