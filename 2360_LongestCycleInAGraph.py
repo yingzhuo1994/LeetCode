@@ -35,19 +35,14 @@ class Solution:
         n = len(edges)
         self.max_length = -1
         seen = [False] * n
-        visiting = {}
-        self.count = 0
-            
-        def dfs(node):
+
+        def dfs(node, depth=0, visiting={}):
             if not seen[node]:
                 if node in visiting:
-                    self.max_length = max(self.max_length, self.count - visiting[node])
+                    self.max_length = max(self.max_length, depth - visiting[node])
                 elif edges[node] != -1: 
-                    visiting[node] = self.count 
-                    self.count += 1
-                    dfs(edges[node])
-                    self.count -= 1
-                    visiting.pop(node)
+                    visiting[node] = depth
+                    dfs(edges[node], depth + 1, visiting)
                 seen[node] = True
     
         for i in range(n):            
