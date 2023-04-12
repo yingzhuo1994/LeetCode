@@ -16,3 +16,19 @@ class Solution:
     
     def isImportantCharacter(self, ch):
         return len(ch) > 0 and ch != "."
+
+# 2nd solution
+# O(n) time | O(n) space
+class Solution:
+    def simplifyPath(self, path: str) -> str:
+        path = path.split("/")
+        stack = []
+        for ch in path:
+            if ch == "" or ch == ".":
+                continue
+            elif ch == "..":
+                if stack:
+                    stack.pop()
+            else:
+                stack.append(ch)
+        return "/" + "/".join(stack)
