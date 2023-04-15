@@ -43,3 +43,18 @@ class Solution:
             return ans
         
         return dfs(0, k)
+
+# 3rd solution
+# O(Mk) time | O(k) space
+class Solution:
+    def maxValueOfCoins(self, piles: List[List[int]], k: int) -> int:
+        dp = [0] * (k + 1)
+        dp1 = [0] * (k + 1)
+        for lt in piles:
+            take = 0
+            for i, x in enumerate(lt):
+                take += x
+                for j in range(k, i, -1):
+                    dp[j] = max(dp[j], dp1[j - i - 1] + take)
+            dp1 = dp[:]
+        return dp[-1]
