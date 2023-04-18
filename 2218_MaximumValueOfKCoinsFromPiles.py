@@ -54,7 +54,7 @@ class Solution:
             take = 0
             for i, x in enumerate(lt):
                 take += x
-                for j in range(k, i, -1):
-                    dp[j] = max(dp[j], dp1[j - i - 1] + take)
+                for j in reversed(range(i + 1, k + 1)):
+                    dp[j] = max(dp[j], dp1[j - (i + 1)] + take)
             dp1 = dp[:]
         return dp[-1]
