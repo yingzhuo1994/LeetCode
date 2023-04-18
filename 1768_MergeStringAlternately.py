@@ -2,13 +2,12 @@
 # O(m + n) time | O(m + n) space
 class Solution:
     def mergeAlternately(self, word1: str, word2: str) -> str:
-        i, j = 0, 0
+        i = 0
         stack = []
-        while i < len(word1) and j < len(word2):
+        while i < len(word1) and i < len(word2):
             stack.append(word1[i])
+            stack.append(word2[i])
             i += 1
-            stack.append(word2[j])
-            j += 1
-        stack.append(word1[i:] or word2[j:])
+        stack.append(word1[i:] or word2[i:])
         ans = "".join(stack)
         return ans
