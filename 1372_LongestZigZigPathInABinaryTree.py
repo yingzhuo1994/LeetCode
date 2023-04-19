@@ -35,5 +35,4 @@ class Solution:
             right = rightLeft + 1
             ans = max(left, right, leftMax, rightMax)
             return left, right, ans
-        ans = max(dfs(root))
-        return ans
+        return dfs(root)[-1]
