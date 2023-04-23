@@ -1,29 +1,20 @@
-# 1st solution, TLE
+# 1st solution
+# O(n^2) time | O(n) space
 class Solution:
     def numberOfArrays(self, s: str, k: int) -> int:
         MOD = 10**9 + 7
-
-        @cache
-        def dfs(t):
-            if len(t) == 1:
-                num = int(t)
-                if 0 < num <= k:
-                    return 1
-                return 0
-            if t[0] == "0":
-                return 0
-            num = int(t)
-            if num <= k:
-                count = 1
-            else:
-                count = 0
-            
-            for i in range(1, len(t)):
-                left = t[:i]
-                right = t[i:]
-                if left[0] == "0" or int(left) > k:
-                    continue
-                count += dfs(right)
-                count %= MOD
-            return count
-        return dfs(s)
+        n = len(s)
+        dp = [0] * (n + 1)
+        dp[-1] = 1
+        for i in reversed(range(n)):
+            if s[i] == "0":
+                continue
+            for j in range(i, n):
+                left = s[i:j+1]
+                left_num = int(left)
+                if left_num <= k:
+                    dp[i] += dp[j + 1]
+                    dp[i] %= MOD
+                else:
+                    break
+        return dp[0]
