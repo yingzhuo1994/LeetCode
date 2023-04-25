@@ -37,13 +37,15 @@ class Solution:
         seen = [False] * n
 
         def dfs(node, depth=0, visiting={}):
-            if not seen[node]:
-                if node in visiting:
-                    self.max_length = max(self.max_length, depth - visiting[node])
-                elif edges[node] != -1: 
-                    visiting[node] = depth
-                    dfs(edges[node], depth + 1, visiting)
-                seen[node] = True
+            if seen[node]:
+                return None
+            
+            if node in visiting:
+                self.max_length = max(self.max_length, depth - visiting[node])
+            elif edges[node] != -1: 
+                visiting[node] = depth
+                dfs(edges[node], depth + 1, visiting)
+            seen[node] = True
     
         for i in range(n):            
             dfs(i)
