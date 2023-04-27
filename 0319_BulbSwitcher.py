@@ -29,7 +29,7 @@ class Solution:
         return count
 
 # 3rd solution
-# # O(n) time | O(1) space
+# # O(1) time | O(1) space
 class Solution:
     def bulbSwitch(self, n: int) -> int:
         return int(math.sqrt(n))
