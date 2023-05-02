@@ -6,8 +6,7 @@ class Solution:
         for num in nums:
             if num == 0:
                 return 0
-            ans *= num
-        if ans > 0:
-            return 1
-        else:
-            return -1
+            elif num < 0:
+                ans *= -1
+        
+        return ans
