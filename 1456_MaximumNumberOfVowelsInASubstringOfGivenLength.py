@@ -24,7 +24,7 @@ class Solution:
         for i in range(len(s)):
             if s[i] in vowels:
                 count += 1
-            while start < i - k + 1:
+            if start < i - k + 1:
                 if s[start] in vowels:
                     count -= 1
                 start += 1
