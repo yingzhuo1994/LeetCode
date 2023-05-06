@@ -1,5 +1,8 @@
 # 1st solution, TLE
 # O(n * log(n)) time | O(n) space
+import bisect
+
+
 class Solution:
     def numSubseq(self, nums: List[int], target: int) -> int:
         MOD = 10**9 + 7
@@ -22,3 +25,19 @@ class Solution:
             ans %= MOD
         
         return ans
+
+# 2nd solution
+# O(n * log(n)) time | O(n) space
+class Solution:
+    def numSubseq(self, nums: List[int], target: int) -> int:
+        nums.sort()
+        l, r = 0, len(nums) - 1
+        res = 0
+        MOD = 10**9 + 7
+        while l <= r:
+            if nums[l] + nums[r] > target:
+                r -= 1
+            else:
+                res += pow(2, r - l, MOD)
+                l += 1
+        return res % MOD
