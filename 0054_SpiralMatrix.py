@@ -1,6 +1,7 @@
+# 1st solution
+# O(n) time | O(n) space
 class Solution:
     def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
-        # O(n) time | O(n) space
         lst = []
         startRow, endRow = 0, len(matrix) - 1
         startColumn, endColumn = 0, len(matrix[0]) - 1
