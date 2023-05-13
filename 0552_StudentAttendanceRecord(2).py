@@ -23,3 +23,36 @@ class Solution:
             temp[5] = res[4] % MOD
             res = temp
         return sum(res) % MOD
+
+# 2nd solution
+# O(n) time | O(n) space
+class Solution:
+    def checkRecord(self, n: int) -> int:
+        MOD = 10**9 + 7
+        valid_late_present = [0] * (n+1)
+        valid_late_present[1] = 2 
+            
+        end_with_L = 1
+        end_with_LL = 0
+        end_with_P = 1
+            
+        for i in range(2,n+1):
+            new_end_with_L = end_with_P
+            new_end_with_LL = end_with_L
+            new_end_with_P = end_with_L + end_with_LL + end_with_P
+            valid_late_present[i] = new_end_with_L + new_end_with_LL + new_end_with_P
+            # update the old variables with the new variables' values
+            end_with_P = new_end_with_P % MOD
+            end_with_L = new_end_with_L % MOD
+            end_with_LL = new_end_with_LL % MOD
+        
+        # calucalte absents
+        valid_late_present[0] = 1 
+        strings_with_a = 0
+        for i in range(n):
+            strings_with_a += (valid_late_present[i] * valid_late_present[n - i - 1])
+            strings_with_a %= MOD
+
+        ans = strings_with_a + valid_late_present[n]
+        
+        return ans % MOD
