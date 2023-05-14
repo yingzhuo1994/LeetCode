@@ -20,3 +20,18 @@ class Solution:
         
         dfs(root, lst)
         return lst
+
+# 2nd solution, bfs
+# O(n) time | O(n) space
+class Solution:
+    def preorder(self, root: 'Node') -> List[int]:
+        lst = []
+        level = [root]
+        while level:
+            node = level.pop()
+            if node is None:
+                continue
+            lst.append(node.val)
+            for child in reversed(node.children):
+                level.append(child)
+        return lst
