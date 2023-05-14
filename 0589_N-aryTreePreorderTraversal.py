@@ -32,6 +32,5 @@ class Solution:
             if node is None:
                 continue
             lst.append(node.val)
-            for child in reversed(node.children):
-                level.append(child)
+            level.extend(node.children[::-1])
         return lst
