@@ -46,3 +46,30 @@ class Solution:
         nextNode = p.next
         p.next = node
         node.next = nextNode
+
+# 2nd solution
+# O(n) time | O(1) space
+class Solution:
+    def swapNodes(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
+        length = 0
+        node = head
+        while node:
+            node = node.next
+            length += 1
+        
+        s = length + 1 - k
+        first = min(k, s)
+        second = max(k, s)
+
+        node = head
+        idx = 1
+        while idx <= second:
+            if idx == first:
+                firstNode = node
+            if idx == second:
+                secondNode = node
+            node = node.next
+            idx += 1
+
+        firstNode.val, secondNode.val = secondNode.val, firstNode.val
+        return head
