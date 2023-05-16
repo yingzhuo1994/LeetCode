@@ -6,7 +6,6 @@
 
 # 1st solution, recursion
 # O(n) time | O(n) space
-
 class Solution:
     def swapPairs(self, head: Optional[ListNode]) -> Optional[ListNode]:
         if not head or not head.next:
