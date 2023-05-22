@@ -15,6 +15,7 @@ class Solution:
         return heapq.nlargest(k, count.keys(), key=count.get) 
 
 # 2nd solution
+# O(n) time | O(n) space
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
         frq = defaultdict(list)
