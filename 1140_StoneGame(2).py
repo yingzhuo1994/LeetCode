@@ -38,3 +38,19 @@ class Solution:
         
         ans = dfs(0, 1, 1)[0]
         return ans
+
+# 2nd solution
+# O(n^2) time | O(n^2) space
+class Solution:
+    def stoneGameII(self, piles: List[int]) -> int:
+        n = len(piles)
+        for i in reversed(range(n - 1)):
+            piles[i] += piles[i + 1]
+        
+        @cache
+        def dfs(idx, M):
+            if idx + 2 * M >= n:
+                return piles[idx]
+            return piles[idx] - min([dfs(idx + X, max(M, X)) for X in range(1, 2 * M + 1)])
+        
+        return dfs(0, 1)
