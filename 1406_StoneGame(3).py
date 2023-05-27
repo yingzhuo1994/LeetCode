@@ -24,3 +24,19 @@ class Solution:
             return "Bob"
         else:
             return "Tie"
+
+# 2nd solution
+# O(n) time | O(1) space
+class Solution:
+    def stoneGameIII(self, stoneValue: List[int]) -> str:
+        dp = [0] * 3
+        n = len(stoneValue)
+        for i in reversed(range(n)):
+            dp[i % 3] = max(sum(stoneValue[i:i + k]) - dp[(i + k) % 3] for k in (1, 2, 3))
+
+        if dp[0] > 0:
+            return "Alice"
+        elif dp[0] < 0:
+            return "Bob"
+        else:
+            return "Tie"
