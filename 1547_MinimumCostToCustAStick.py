@@ -1,5 +1,5 @@
 # 1st solution
-# O(k^2) time | O(k^2) space
+# O(k^3) time | O(k^2) space
 class Solution:
     def minCost(self, n: int, cuts: List[int]) -> int:
         @cache
@@ -17,7 +17,7 @@ class Solution:
         return dfs(0, len(cuts) - 1, 0, n)
 
 # 2nd solution
-# O(k^2) time | O(k^2) space
+# O(k^3) time | O(k^2) space
 class Solution:
     def minCost(self, n: int, cuts: List[int]) -> int:
         @cache
