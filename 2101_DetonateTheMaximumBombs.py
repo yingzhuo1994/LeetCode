@@ -26,3 +26,29 @@ class Solution:
             ans = max(ans, len(visited))
                           
         return ans
+
+# 2nd solution, bfs
+class Solution:
+    def maximumDetonation(self, bombs: List[List[int]]) -> int:
+        n = len(bombs)
+        
+        def bfs(node, visited):
+
+            stack = [node]
+            visited.add(node)
+            while stack:
+                idx = stack.pop()
+                x1, y1, r1 = bombs[idx]
+                for i in range(n):
+                    if i in visited:
+                        continue
+                    x2, y2, r2 = bombs[i]
+                    if r1**2 >= (x2 - x1)**2 + (y2 - y1)**2:
+                        visited.add(i)
+                        stack.append(i)
+            return len(visited)
+        ans = 1
+        for i in range(n):
+            visited = set()
+            ans = max(ans, bfs(i, visited))
+        return ans
