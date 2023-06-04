@@ -65,3 +65,24 @@ class Solution:
         for j in range(len(matrix)):
             if matrix[i][j] == 1 and visited[j] == 0:
                 self.dfs(matrix, visited, j)
+
+# 3rd solution
+# O(n^2) time | O(n) space
+class Solution:
+    def findCircleNum(self, isConnected: List[List[int]]) -> int:
+        ans = 0
+        n = len(isConnected)
+        def dfs(node):
+            if isConnected[node][node] == -1:
+                return -1
+            count = 1
+            isConnected[node][node] = -1
+            for neig in range(n):
+                if isConnected[node][neig]:
+                    count += max(dfs(neig), 0)
+            return count
+        
+        for i in range(n):
+            if dfs(i) > 0:
+                ans += 1
+        return ans
