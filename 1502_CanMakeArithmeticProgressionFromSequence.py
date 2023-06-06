@@ -40,3 +40,35 @@ class Solution:
                 return False
             arr[idx] += mark
         return True
+
+# 3rd solution
+# O(n) time | O(1) space
+class Solution:
+    def canMakeArithmeticProgression(self, arr: List[int]) -> bool:
+        a1 = min(arr)
+        an = max(arr)
+        total = sum(arr)
+        n = len(arr)
+        if (a1 + an) * n != total * 2:
+            return False
+        diff = an - a1
+        if diff % (n - 1) != 0:
+            return False
+        d = diff // (n - 1)
+
+        if d == 0:
+            return True
+
+        i = 0
+        while i < len(arr):
+            if arr[i] == a1 + i * d:
+                i += 1
+            else:
+                dis = arr[i] - a1
+                if dis % d != 0:
+                    return False
+                pos = dis // d
+                if arr[pos] == arr[i]:
+                    return False
+                arr[pos], arr[i] = arr[i], arr[pos]
+        return True
