@@ -8,3 +8,35 @@ class Solution:
             if arr[i] - arr[i-1] != diff:
                 return False
         return True
+
+# 2nd solution
+# O(n) time | O(1) space
+class Solution:
+    def canMakeArithmeticProgression(self, arr: List[int]) -> bool:
+        a1 = min(arr)
+        an = max(arr)
+        total = sum(arr)
+        n = len(arr)
+        if (a1 + an) * n != total * 2:
+            return False
+        diff = an - a1
+        if diff % (n - 1) != 0:
+            return False
+        d = diff // (n - 1)
+
+        if d == 0:
+            return True
+
+        mark = pow(10, 7)
+        for i, num in enumerate(arr):
+            if abs(num) > pow(10, 6):
+                value = num - mark
+            else:
+                value = num
+            idx, r = divmod(value - a1, d)
+            if r != 0:
+                return False
+            if abs(arr[idx]) > pow(10, 6):
+                return False
+            arr[idx] += mark
+        return True
