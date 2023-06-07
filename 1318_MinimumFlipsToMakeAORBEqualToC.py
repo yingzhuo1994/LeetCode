@@ -1,5 +1,5 @@
 # 1st solution
-# O(n) time | O(1) space
+# O(1) time | O(1) space
 class Solution:
     def minFlips(self, a: int, b: int, c: int) -> int:
         count = 0
