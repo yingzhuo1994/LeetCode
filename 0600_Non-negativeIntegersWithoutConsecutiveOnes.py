@@ -43,6 +43,22 @@ class Solution:
                 break
             if i > 0 and s[i-1] == "1":
                 flag = 1
-            ans += dp[-i-1]
+            ans += dp[n-1-i]
         
         return ans
+
+# 3rd solution
+# O(log(n)) time | O(1) space
+# n = log(num)
+class Solution:
+    def findIntegers(self, num):
+        x, y = 1, 2
+        res = 0
+        num += 1
+        while num:
+            if num & 1 and num & 2:
+                res = 0
+            res += x * (num & 1)
+            num >>= 1
+            x, y = y, x + y
+        return res
