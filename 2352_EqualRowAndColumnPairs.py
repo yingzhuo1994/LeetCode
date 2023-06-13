@@ -10,3 +10,13 @@ class Solution:
                 if valid:
                     count += 1
         return count
+
+# 2nd solution
+# O(n^2) time | O(n^2) space
+class Solution:
+    def equalPairs(self, grid: List[List[int]]) -> int:
+        pairs = 0
+        cnt = Counter(tuple(row) for row in grid)
+        for tpl in zip(*grid):
+            pairs += cnt[tpl]
+        return pairs
