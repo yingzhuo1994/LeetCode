@@ -1,5 +1,5 @@
 # 1st solution
-# O(m * (m + n) * log(n)) time | O(m * (m + n)) space
+# O(mn * log(n)) time | O(mn) space
 # where m = len(arr1), n = len(arr2)
 class Solution:
     def makeArrayIncreasing(self, arr1: List[int], arr2: List[int]) -> int:
