@@ -1,4 +1,6 @@
-# 1st solution, TLE
+# 1st solution
+# O(m * (m + n) * log(n)) time | O(m * (m + n)) space
+# where m = len(arr1), n = len(arr2)
 class Solution:
     def makeArrayIncreasing(self, arr1: List[int], arr2: List[int]) -> int:
         arr2.sort()
@@ -14,9 +16,9 @@ class Solution:
             i = bisect.bisect_right(arr2, prev)
             if i >= len(arr2):
                 return ans
-            for j in range(i, len(arr2)):
-                new = dfs(idx + 1, arr2[j]) + 1
-                ans = min(ans, new)
+
+            new = dfs(idx + 1, arr2[i]) + 1
+            ans = min(ans, new)
             return ans
         
         ans = dfs(0, -1)
