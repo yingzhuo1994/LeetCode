@@ -50,10 +50,10 @@ class Solution:
 class Solution:
     def tallestBillboard(self, rods: List[int]) -> int:        
         dp = {0: 0}
-        for x in rods:
-            for d, y in list(dp.items()):
-                dp[d + x] = max(dp.get(x + d, 0), y)
-                dp[abs(d - x)] = max(dp.get(abs(d - x), 0), y + min(d, x))
+        for rod in rods:
+            for d, v in list(dp.items()):
+                dp[d + rod] = max(dp.get(rod + d, 0), v)
+                dp[abs(d - rod)] = max(dp.get(abs(d - rod), 0), v + min(d, rod))
         return dp[0]
 
 # 3rd solution
@@ -62,11 +62,11 @@ class Solution:
         dp = dict()
         dp[0] = 0
         
-        for i in rods:
+        for rod in rods:
             cur = collections.defaultdict(int)
             for s in dp:
-                cur[s+i] = max(dp[s] + i, cur[s+i])
+                cur[s+rod] = max(dp[s] + rod, cur[s+rod])
                 cur[s] = max(dp[s], cur[s])
-                cur[s-i] = max(dp[s], cur[s-i])
+                cur[s-rod] = max(dp[s], cur[s-rod])
             dp = cur
         return dp[0]
