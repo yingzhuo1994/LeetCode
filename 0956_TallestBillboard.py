@@ -55,3 +55,18 @@ class Solution:
                 dp[d + x] = max(dp.get(x + d, 0), y)
                 dp[abs(d - x)] = max(dp.get(abs(d - x), 0), y + min(d, x))
         return dp[0]
+
+# 3rd solution
+class Solution:
+    def tallestBillboard(self, rods: List[int]) -> int:
+        dp = dict()
+        dp[0] = 0
+        
+        for i in rods:
+            cur = collections.defaultdict(int)
+            for s in dp:
+                cur[s+i] = max(dp[s] + i, cur[s+i])
+                cur[s] = max(dp[s], cur[s])
+                cur[s-i] = max(dp[s], cur[s-i])
+            dp = cur
+        return dp[0]
