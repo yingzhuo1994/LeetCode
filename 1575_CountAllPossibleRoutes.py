@@ -7,22 +7,18 @@ class Solution:
 
         @cache
         def dfs(idx, gas):
-            if gas <= 0:
+            if gas < 0:
                 return 0
             count = 0
+            if idx == finish:
+                count += 1
             for i in range(len(locations)):
                 if i == idx:
                     continue
                 cost = abs(locations[i] - locations[idx])
-                if gas >= cost:
-                    count += dfs(i, gas - cost)
-                    if i == finish:
-                        count += 1
-                    count %= MOD
+                count += dfs(i, gas - cost)
+                count %= MOD
 
             return count
         
-        count = dfs(start, fuel)
-        if start == finish:
-            count += 1
-        return count % MOD
+        return dfs(start, fuel)
