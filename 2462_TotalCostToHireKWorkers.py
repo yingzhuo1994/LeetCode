@@ -71,3 +71,30 @@ class Solution:
             k -= 1
         
         return ans
+
+# 3rd solution
+# O((k + m)* log(m) + n) time | O(n) space
+# n = len(costs), m = candidates
+class Solution:
+    def totalCost(self, costs: List[int], k: int, candidates: int) -> int:
+        n = len(costs)
+        ans = 0
+
+        pairs = [(value, i) for i, value in enumerate(costs)]
+        left, right = min(candidates, n // 2), max(n - candidates, n // 2)
+        pq = pairs[:left] + pairs[right:]
+
+        heapify(pq)
+
+        for _ in range(k):
+            cost, idx = heappop(pq)
+            if idx < left:
+                idx, left = left, left + 1
+            if idx >= right:
+                idx, right = right - 1, right - 1
+            if left <= right:
+                heappush(pq, pairs[idx])
+            
+            ans += cost
+        
+        return ans
