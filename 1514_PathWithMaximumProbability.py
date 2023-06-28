@@ -27,8 +27,8 @@ class Solution:
         
         return dp[end]
 
-# 2nd solution
-# O(n * log(n)) time | O(n) space
+# 2nd solution, Bellman Ford
+# O(V * E) time | O(V + E) space
 class Solution:
     def maxProbability(self, n: int, edges: List[List[int]], succProb: List[float], start: int, end: int) -> float:
         graph = [[] for _ in range(n)]
@@ -40,15 +40,15 @@ class Solution:
         
         dp = [0] * n
         dp[start] = 1.0
-        stack = [[start, 1.0]]
+        stack = [start]
         while stack:
             newStack = []
-            for node, p in stack:
+            for node in stack:
                 for neig, edgeP in graph[node]:
-                    newP = p * edgeP
+                    newP = dp[node] * edgeP
                     if newP > dp[neig]:
                         dp[neig] = newP
-                        newStack.append([neig, newP])
+                        newStack.append(neig)
             
             stack = newStack
 
