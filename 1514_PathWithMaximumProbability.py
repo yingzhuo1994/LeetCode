@@ -26,3 +26,30 @@ class Solution:
                 dp[neig] = max(dp[neig], p * nextP)
         
         return dp[end]
+
+# 2nd solution
+# O(n * log(n)) time | O(n) space
+class Solution:
+    def maxProbability(self, n: int, edges: List[List[int]], succProb: List[float], start: int, end: int) -> float:
+        graph = [[] for _ in range(n)]
+        for i in range(len(edges)):
+            a, b = edges[i]
+            p = succProb[i]
+            graph[a].append([b, p])
+            graph[b].append([a, p])
+        
+        dp = [0] * n
+        dp[start] = 1.0
+        stack = [[start, 1.0]]
+        while stack:
+            newStack = []
+            for node, p in stack:
+                for neig, edgeP in graph[node]:
+                    newP = p * edgeP
+                    if newP > dp[neig]:
+                        dp[neig] = newP
+                        newStack.append([neig, newP])
+            
+            stack = newStack
+
+        return dp[end]
