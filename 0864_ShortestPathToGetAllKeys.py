@@ -1,3 +1,5 @@
+# 1st solution
+# O(mn) time | O(mn) space
 class Solution:
     def shortestPathAllKeys(self, grid: List[str]) -> int:
         if not grid or not grid[0]:
