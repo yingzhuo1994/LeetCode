@@ -1,6 +1,10 @@
 # 1st solution
+# O(mn + C*alpha(mn)) time | O(mn) space
+# where alpha is inverse Ackermann function.
 class Solution:
     def latestDayToCross(self, row: int, col: int, cells: List[List[int]]) -> int:
+        # 0 means the start point
+        # col * row + 1 means the end point
         dsu = DSU(col*row + 2)
 
         grid = [[1] * col for _ in range(row)]
@@ -20,8 +24,12 @@ class Solution:
                 ind = index(a, b)
                 if 0 <= a < row and 0 <= b < col and grid[a][b] == 0:
                     dsu.union(ind, index(x, y))
+            
+            # connect to the start point
             if x == 0:
                 dsu.union(0, index(x, y))
+
+            # connect to the end point
             if x == row - 1:
                 dsu.union(col*row + 1, index(x, y))
 
@@ -43,8 +51,7 @@ class DSU:
         self.p[xr] = yr
 
 # 2nd solution, Binary Search + BFS
-# O(mn * log(k)) time | O(mn) space
-# k = len(cells)
+# O(mn * log(mn)) time | O(mn) space
 class Solution:
     def latestDayToCross(self, row: int, col: int, cells: List[List[int]]) -> int:
         DIR = [0, 1, 0, -1, 0]
