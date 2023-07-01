@@ -17,15 +17,17 @@ class Solution:
         return ans
 
 # 2nd solution
+# O(n^k) time | O(n) space
 class Solution:
     def distributeCookies(self, cookies: List[int], k: int) -> int:
         stack = [0 for _ in range(k)]
-        # visited = [False for _ in range(k)]
         n = len(cookies)
         self.ans = float("inf")
         def dfs(idx):
             if idx >= n:
                 self.ans = min(self.ans, max(stack))
+                return
+            if max(stack) >= self.ans:
                 return
             for i in range(k):
                 stack[i] += cookies[idx]
