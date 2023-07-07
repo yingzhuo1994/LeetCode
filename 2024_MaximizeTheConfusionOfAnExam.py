@@ -43,3 +43,19 @@ class Solution:
         T, _ = dfs(n - 1, k, "T")
         F, _ = dfs(n - 1, k, "F")
         return max(T, F)
+
+# 2nd solution
+# O(n) time | O(n) space
+class Solution:
+    def maxConsecutiveAnswers(self, answerKey: str, k: int) -> int:
+        s = answerKey
+        maxf = res = 0
+        count = collections.Counter()
+        for i in range(len(s)):
+            count[s[i]] += 1
+            maxf = max(maxf, count[s[i]])
+            if res - maxf < k:
+                res += 1
+            else:
+                count[s[i - res]] -= 1
+        return res
