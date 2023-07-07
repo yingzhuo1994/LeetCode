@@ -5,7 +5,8 @@ class Solution:
     def latestDayToCross(self, row: int, col: int, cells: List[List[int]]) -> int:
         # 0 means the start point
         # col * row + 1 means the end point
-        dsu = DSU(col*row + 2)
+        N = col * row + 2
+        dsu = DSU(N)
 
         grid = [[1] * col for _ in range(row)]
         neibs = [[0,1],[0,-1],[1,0],[-1,0]]
@@ -15,25 +16,26 @@ class Solution:
             return x * col + y + 1
 
         for i in reversed(range(len(cells))):
-            x, y = cells[i][0], cells[i][1]
+            x, y = cells[i]
 
             grid[x][y] = 0
+            u = index(x, y)
             for dx, dy in neibs:
                 a = x + dx
                 b = y + dy
-                ind = index(a, b)
+                v = index(a, b)
                 if 0 <= a < row and 0 <= b < col and grid[a][b] == 0:
-                    dsu.union(ind, index(x, y))
+                    dsu.union(u, v)
             
             # connect to the start point
             if x == 0:
-                dsu.union(0, index(x, y))
+                dsu.union(0, u)
 
             # connect to the end point
             if x == row - 1:
-                dsu.union(col*row + 1, index(x, y))
+                dsu.union(N - 1, u)
 
-            if dsu.find(0) == dsu.find(col*row + 1):
+            if dsu.find(0) == dsu.find(N - 1):
                 return i
 
 class DSU:
