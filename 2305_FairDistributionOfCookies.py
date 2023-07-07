@@ -21,13 +21,14 @@ class Solution:
 class Solution:
     def distributeCookies(self, cookies: List[int], k: int) -> int:
         stack = [0 for _ in range(k)]
+        max_elem = max(stack)
         n = len(cookies)
         self.ans = float("inf")
         def dfs(idx):
             if idx >= n:
                 self.ans = min(self.ans, max(stack))
                 return
-            if max(stack) >= self.ans:
+            if max_elem >= self.ans:
                 return
             for i in range(k):
                 stack[i] += cookies[idx]
