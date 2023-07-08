@@ -21,19 +21,19 @@ class Solution:
 class Solution:
     def distributeCookies(self, cookies: List[int], k: int) -> int:
         stack = [0 for _ in range(k)]
-        max_elem = max(stack)
         n = len(cookies)
         self.ans = float("inf")
-        def dfs(idx):
+        def dfs(idx, max_elem=0):
             if idx >= n:
-                self.ans = min(self.ans, max(stack))
+                self.ans = min(self.ans, max_elem)
                 return
             if max_elem >= self.ans:
                 return
             for i in range(k):
                 stack[i] += cookies[idx]
-                dfs(idx + 1)
+                dfs(idx + 1, max(max_elem, stack[i]))
                 stack[i] -= cookies[idx]
+                # all children are the same, so there is no difference to distribute the cookie to the current child or the next child
                 if stack[i] == 0:
                     break
         dfs(0)                
