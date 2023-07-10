@@ -29,7 +29,9 @@ class Solution:
     def minDepth(self, root: Optional[TreeNode]) -> int:
         if not root:
             return 0
+        leftDepth = self.minDepth(root.left)
+        rightDepth = self.minDepth(root.right)
         if root.left and root.right:
-            return min(self.minDepth(root.left), self.minDepth(root.right)) + 1
+            return min(leftDepth, rightDepth) + 1
         else:
-            return max(self.minDepth(root.left), self.minDepth(root.right)) + 1
+            return max(leftDepth, rightDepth) + 1
