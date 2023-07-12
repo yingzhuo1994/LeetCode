@@ -35,22 +35,21 @@ class Solution:
             for neig in graph[node]:
                 revGraph[neig].append(node)
         level = [i for i in range(n) if len(graph[i]) == 0]
-        visited = set(level)
-        ans = set(level)
+        ans = [False for _ in range(n)]
+        for node in level:
+            ans[node] = True
         while level:
             newLevel = []
             for node in level:
                 for neig in revGraph[node]:
-                    if neig in visited:
+                    if ans[neig]:
                         continue
                     outCount[neig] -= 1
                     if outCount[neig] == 0:
-                        visited.add(neig)
-                        ans.add(neig)
+                        ans[neig] = True
                         newLevel.append(neig)
             level = newLevel
         
-        ans = list(ans)
-        ans.sort()
+        ans = [node for node in range(n) if ans[node]]
 
         return ans
