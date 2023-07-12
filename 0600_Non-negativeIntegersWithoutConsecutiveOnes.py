@@ -28,22 +28,22 @@ class Solution:
 # O(log(n)) time | O(log(n)) space
 # n = log(num)
 class Solution:
-    def findIntegers(self, num):
-        s = bin(num + 1)[2:]
-        n = len(s)
-        dp = [1, 2] + [0]*(n-2)
-        for i in range(2, n):
+    def findIntegers(self, n):
+        s = bin(n + 1)[2:]
+        k = len(s)
+        dp = [1, 2] + [0]*(k-2)
+        for i in range(2, k):
             dp[i] = dp[i-1] + dp[i-2]
 
         flag, ans = 0, 0
-        for i in range(n):
+        for i in range(k):
             if s[i] == "0":
                 continue
             if flag == 1:
                 break
             if i > 0 and s[i-1] == "1":
                 flag = 1
-            ans += dp[n-1-i]
+            ans += dp[k-1-i]
         
         return ans
 
@@ -51,14 +51,14 @@ class Solution:
 # O(log(n)) time | O(1) space
 # n = log(num)
 class Solution:
-    def findIntegers(self, num):
+    def findIntegers(self, n):
         x, y = 1, 2
         res = 0
-        num += 1
-        while num:
-            if num & 1 and num & 2:
+        n += 1
+        while n:
+            if n & 1 and n & 2:
                 res = 0
-            res += x * (num & 1)
-            num >>= 1
+            res += x * (n & 1)
+            n >>= 1
             x, y = y, x + y
         return res
