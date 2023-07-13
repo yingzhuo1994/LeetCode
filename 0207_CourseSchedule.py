@@ -4,8 +4,7 @@ class Solution:
         graph = [[] for _ in range(numCourses)]
         visited = [0 for _ in range(numCourses)]
         # create graph
-        for pair in prerequisites:
-            x, y = pair
+        for x, y in prerequisites:
             graph[x].append(y)
         # visit each node
         for i in range(numCourses):
