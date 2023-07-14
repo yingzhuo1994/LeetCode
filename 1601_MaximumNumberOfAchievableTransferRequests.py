@@ -10,7 +10,7 @@ class Solution:
                 for idx in c:
                     net[requests[idx][0]] -= 1
                     net[requests[idx][1]] += 1
-                if net == [0 for j in range(n)]:
+                if all(val == 0 for val in net):
                     return i
         return 0
 
