@@ -51,9 +51,12 @@ class Solution:
             for skill in p:
                 if skill in skill_index:
                     cur_skill |= 1 << skill_index[skill]
+            if cur_skill == 0:
+                continue
             for prev, need in dict(dp).items():
                 comb = prev | cur_skill
-                if comb == prev: continue
+                if comb == prev: 
+                    continue
                 if comb not in dp or len(dp[comb]) > len(need) + 1:
                     dp[comb] = need + [i]
         return dp[(1 << n) - 1]
