@@ -53,7 +53,7 @@ class Solution:
                     cur_skill |= 1 << skill_index[skill]
             if cur_skill == 0:
                 continue
-            for prev, need in dict(dp).items():
+            for prev, need in list(dp.items()):
                 comb = prev | cur_skill
                 if comb == prev: 
                     continue
