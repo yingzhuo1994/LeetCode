@@ -40,3 +40,30 @@ class Solution:
             prev = node
             node = nextNode
         return prev
+    
+# 2nd solution
+# O(n) time | O(n) space
+class Solution:
+    def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+        x1, x2 = 0, 0
+        while l1:
+            x1 = x1 * 10 + l1.val
+            l1 = l1.next
+        while l2:
+            x2 = x2 * 10 + l2.val
+            l2 = l2.next
+        x = x1 + x2
+        
+        head = ListNode(0)
+        if x == 0: 
+            return head
+        
+        while x:
+            x, v = divmod(x, 10)
+            nextNode = ListNode(v)
+            curNode = head.next
+            head.next = nextNode
+            nextNode.next = curNode
+            # head.next, head.next.next = ListNode(v), head.next
+
+        return head.next
