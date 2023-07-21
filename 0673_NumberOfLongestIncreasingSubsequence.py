@@ -74,3 +74,60 @@ class Solution:
             else:
                 l = mid + 1
         return l
+
+# 4th solution
+# O(n * log(n)) time | O(n) space 
+class Solution:
+    def findNumberOfLIS(self, nums: List[int]) -> int:
+        if not nums:
+            return 0
+
+        # Discretization and using Fenwick tree
+        numsort = sorted(nums)
+        nodes = [Node() for _ in range(len(nums) + 1)]
+        res = Node()
+
+        for num in nums:
+            # Discretization: finding the rank of the current number - 1
+            rk = bisect.bisect_left(numsort, num)
+
+            # Finding the length and count of the longest increasing subsequence
+            cur = self.query(nodes, rk)
+            cur.m += 1
+            cur.c = max(cur.c, 1)
+
+            # Updating the global longest increasing subsequence
+            res += cur
+
+            # Updating the Fenwick tree
+            self.add(nodes, rk + 1, cur, len(nums))
+
+        return res.c
+
+    def add(self, nodes, rk, val, N):
+        while rk <= N:
+            nodes[rk] += val
+            rk += rk & -rk
+
+    def query(self, nodes, rk):
+        res = Node()
+        while rk:
+            res += nodes[rk]
+            rk -= rk & -rk
+        return res
+
+class Node:
+    def __init__(self):
+        # max value
+        self.m = 0
+        # count
+        self.c = 0
+
+    def __iadd__(self, b):
+        if b.m > self.m:
+            self.m = b.m
+            self.c = b.c
+        elif b.m == self.m:
+            self.c += b.c
+        return self
+
