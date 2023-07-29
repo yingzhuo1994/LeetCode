@@ -24,3 +24,27 @@ class Solution:
             state = newState
         
         return ans
+
+# 2nd solution
+class Solution:
+    def soupServings(self, n: int) -> float:
+        memo = {}
+        if n > 4800: 
+            return 1
+        def f(a, b):
+            if (a, b) in memo: 
+                return memo[a, b]
+            if a <= 0 and b <= 0: 
+                return 0.5
+            if a <= 0: 
+                return 1
+            if b <= 0: 
+                return 0
+            
+            memo[(a, b)] = 0.25 * (f(a - 4, b) + f(a - 3, b - 1) + f(a - 2, b - 2) + f(a - 1, b - 3))
+
+            return memo[(a, b)]
+        
+        N = math.ceil(n / 25.0)
+        
+        return f(N, N)
