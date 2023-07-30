@@ -16,9 +16,9 @@ class Solution:
         for i in reversed(range(n)):
             for dist in range(1, n - i):
                 j = i + dist
-                if dist == 1:
-                    state[i][j] = 1 if s[i] == s[j] else 2
-                    continue
+                # if dist == 1:
+                #     state[i][j] = 1 if s[i] == s[j] else 2
+                #     continue
 
                 state[i][j] = float("inf")
                 for k in range(i, j):
