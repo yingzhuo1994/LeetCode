@@ -31,3 +31,5 @@ class Solution:
                 memo[(start, end)] = ans
             return memo[(start, end)]
         return buildTree(1, n)
+
+# 2nd solution
