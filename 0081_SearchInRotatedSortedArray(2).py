@@ -2,9 +2,10 @@
 class Solution:
     def search(self, nums: List[int], target: int) -> bool:
         def dfs(beg, end):
-            if end - beg <= 1: return target in nums[beg: end+1]
+            if end - beg <= 1: 
+                return target in nums[beg: end + 1]
             
-            mid = (beg + end)//2
+            mid = (beg + end) // 2
             if nums[mid] > nums[end]:   # eg. 3,4,5,6,7,1,2
                 if nums[end] < target <= nums[mid]:
                     return dfs(beg, mid)
