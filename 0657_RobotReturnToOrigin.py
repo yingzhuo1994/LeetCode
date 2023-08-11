@@ -1,3 +1,5 @@
+# 1st solution
+# O(n) time | O(n) space
 class Solution:
     def judgeCircle(self, moves: str) -> bool:
         x, y = 0, 0
