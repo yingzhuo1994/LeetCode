@@ -48,3 +48,27 @@ class Solution:
                 else:
                     dp[i][j] = dp[i][j-1] and s2[j-1] == s3[i+j-1] or dp[i-1][j] and s1[i-1] == s3[i+j-1]
         return dp[-1][-1]
+
+# 3rd solution, DP
+# O(mn) time | O(n) space
+# where m and n are the length of s1 and s2, separately
+class Solution:
+    def isInterleave(self, s1: str, s2: str, s3: str) -> bool:
+        if len(s1) + len(s2) != len(s3):
+            return False
+        dp = [False for _ in range(len(s2) + 1)]
+        
+        for i in range(len(s1) + 1):
+            newDp = [False for _ in range(len(s2) + 1)]
+            for j in range(len(s2) + 1):
+                if i == 0 and j == 0:
+                    newDp[j] = True
+                elif i == 0:
+                    newDp[j] = newDp[j-1] and s2[j-1] == s3[i+j-1]
+                elif j == 0:
+                    newDp[j] = dp[j] and s1[i-1] == s3[i+j-1]
+                else:
+                    newDp[j] = newDp[j-1] and s2[j-1] == s3[i+j-1] or dp[j] and s1[i-1] == s3[i+j-1]
+            dp = newDp
+        
+        return dp[-1]
