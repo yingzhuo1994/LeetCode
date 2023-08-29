@@ -28,3 +28,20 @@ class Solution:
             return root
         
         return buildTree(0, len(nums) - 1)
+
+# 2nd solution
+# O(n) time | O(n) space
+class Solution:
+    def constructMaximumBinaryTree(self, nums: List[int]) -> Optional[TreeNode]:
+        stack = []
+
+        for num in nums:
+            node = TreeNode(num)
+            while stack and num > stack[-1].val:
+                node.left = stack.pop()
+
+            if stack:
+                stack[-1].right = node               
+            stack.append(node)
+
+        return stack[0]
