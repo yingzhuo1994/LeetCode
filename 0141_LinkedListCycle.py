@@ -4,18 +4,24 @@
 #         self.val = x
 #         self.next = None
 
+# 1st solution
+# O(n) time | O(n) space
 class Solution:
     def hasCycle(self, head: ListNode) -> bool:
-        # lst = []
-        # p = head
-        # while p is not None:
-        #     if p not in lst:
-        #         lst.append(p)
-        #         p = p.next
-        #     else:
-        #         return True
-        # return False
+        lst = set()
+        p = head
+        while p is not None:
+            if p not in lst:
+                lst.add(p)
+                p = p.next
+            else:
+                return True
+        return False
 
+# 2nd solution
+# O(n) time | O(1) space
+class Solution:
+    def hasCycle(self, head: ListNode) -> bool:
         # Faster solution
         slow = fast = head
         while fast and fast.next:
