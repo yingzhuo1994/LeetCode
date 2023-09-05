@@ -7,9 +7,9 @@ class Node:
         self.random = random
 """
 
+# 1st solution
+# O(n) time | O(n) space
 class Solution:
-    # 1st solution
-    # O(n) time | O(n) space
     def copyRandomList(self, head: 'Node') -> 'Node':
         sentinel = Node(0)
         newHead = sentinel
@@ -27,9 +27,10 @@ class Solution:
                 index = originalNodeLst.index(node.random)
                 newNodeLst[i].random = newNodeLst[index]
         return sentinel.next
-    
-    # 2nd solution
-    # O(n) time | O(1) space
+
+# 2nd solution
+# O(n) time | O(1) space
+class Solution:
     def copyRandomList(self, head: 'Node') -> 'Node':
         if not head:
             return head
