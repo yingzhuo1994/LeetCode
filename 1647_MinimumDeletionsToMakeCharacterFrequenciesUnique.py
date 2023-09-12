@@ -25,3 +25,24 @@ class Solution:
                 else:
                     break
         return ans
+
+# 2nd solution
+# O(n) time | O(1) space
+class Solution:
+    def minDeletions(self, s: str) -> int:
+        count = Counter(s)
+        freqs = list(count.values())
+        freqs.sort()
+        freqs.reverse()
+        last = len(s) + 1
+        ans = 0
+
+        for freq in freqs:
+            if freq < last:
+                last = freq
+            else:
+                ans += freq - (last - 1)
+                last = last - 1
+            last = max(last, 1)
+        
+        return ans
