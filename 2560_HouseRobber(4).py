@@ -15,7 +15,7 @@ class Solution:
 
         return min(dp[k][1+2*(k-1):-1])
 
-# 2nd solution
+# 2nd solution, TLE
 # O(kn) time | O(kn) space
 class Solution:
     def minCapability(self, nums: List[int], k: int) -> int:
@@ -30,3 +30,24 @@ class Solution:
                 prev = dp[i][j]
         
         return dp[k][n]
+
+# 3rd solution
+# O(n log(D)) time | O(1) space
+class Solution:
+    def minCapability(self, nums: List[int], k: int) -> int:
+        l, r = min(nums), max(nums)
+        while l < r:
+            m = (l + r) // 2
+            last = take = 0
+            for a in nums:
+                if last:
+                    last = 0
+                    continue
+                if a <= m:
+                    take += 1
+                    last = 1
+            if take >= k:
+                r = m
+            else:
+                l = m + 1
+        return l
