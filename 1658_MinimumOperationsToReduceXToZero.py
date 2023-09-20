@@ -94,20 +94,22 @@ class Solution:
 # O(n) time | O(1) space
 class Solution:
     def minOperations(self, nums: List[int], x: int) -> int:
+        n = len(nums)
         total = sum(nums)
         target = total - x
         if target < 0:
             return -1
         if target == 0:
-            return len(nums)
+            return n
         start = 0
         curSum = 0
         length = -1
-        for end in range(len(nums)):
+        for end in range(n):
             curSum += nums[end]
-            while curSum >= target:
-                if curSum == target:
-                    length = max(length, end - start + 1)
+            while curSum > target:
                 curSum -= nums[start]
                 start += 1
-        return -1 if length == -1 else len(nums) - length
+            if curSum == target:
+                length = max(length, end - start + 1)
+
+        return -1 if length == -1 else n - length
