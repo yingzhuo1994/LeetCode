@@ -39,11 +39,11 @@ class Solution:
         while l < r:
             m = (l + r) // 2
             last = take = 0
-            for a in nums:
+            for num in nums:
                 if last:
                     last = 0
                     continue
-                if a <= m:
+                if num <= m:
                     take += 1
                     last = 1
             if take >= k:
