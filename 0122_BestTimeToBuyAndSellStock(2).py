@@ -1,7 +1,7 @@
+# 1st solution
+# O(n) time | O(1) space
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
-        # 1st solution
-        # O(n) time | O(1) space
         profit = 0
         start = prices[0]
         end = start
@@ -17,8 +17,10 @@ class Solution:
                 end = start
         return profit
 
-        # 2nd Solution
-        # O(n) time | O(1) space
+# 2nd Solution
+# O(n) time | O(1) space
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
         total = 0
         for i in range(len(prices) - 1):
             curProfit = prices[i + 1] - prices[i]
