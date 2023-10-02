@@ -21,3 +21,25 @@ class Solution:
             return False
         
         return dfs(colors, "A")
+
+# 2nd solution
+# O(n) time | O(1) space
+class Solution:
+    def winnerOfGame(self, colors: str) -> bool:
+        def countContinueColor(target):
+            count = 0
+            continueColor = 0
+            for color in colors:
+                if color == target:
+                    continueColor += 1
+                else:
+                    count += max(0, continueColor - 2)
+                    continueColor = 0
+            count += max(0, continueColor - 2)
+            return count
+        Alice = countContinueColor("A")
+        Bob = countContinueColor("B")
+
+        diff = Alice - Bob
+        return diff >= 1
+        
