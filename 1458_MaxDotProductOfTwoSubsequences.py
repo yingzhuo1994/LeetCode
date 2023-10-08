@@ -3,10 +3,25 @@ class Solution:
     def maxDotProduct(self, nums1: List[int], nums2: List[int]) -> int:
         n1, n2 = len(nums1), len(nums2)
 
+        minDic1 = {}
+        maxDic1 = {}
+        minDic2 = {}
+        maxDic2 = {}
+        def getMinMax(dicNum, l, r):
+            if dicNum == 1:
+                if (l, r) not in minDic1:
+                    minDic1[(l, r)], maxDic1[(l, r)] = min(nums1[l:r+1]), max(nums1[l:r+1])
+                return minDic1[(l, r)], maxDic1[(l, r)]
+            else:
+                if (l, r) not in minDic2:
+                    minDic2[(l, r)], maxDic2[(l, r)] = min(nums2[l:r+1]), max(nums2[l:r+1])
+                return minDic2[(l, r)], maxDic2[(l, r)]
+
+
         @cache
         def dp(l1, r1, l2, r2):
-            a, b = min(nums1[l1:r1+1]), max(nums1[l1:r1+1])
-            c, d = min(nums2[l2:r2+1]), max(nums2[l2:r2+1])
+            a, b = getMinMax(1, l1, r1)
+            c, d = getMinMax(2, l2, r2)
             
             return max(a * c, a * d, b * c, b * d)
         
