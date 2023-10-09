@@ -52,3 +52,23 @@ class Solution:
             return l if nums[l] == target else -1
 
         return [bisect_left(nums, target), bisect_right(nums, target)]
+
+# 3rd solution
+# O(log(n)) time | O(1) space
+class Solution:
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
+        def bisect_left(nums, target):
+            left, right = 0, len(nums)
+            while left < right:
+                mid = left + (right - left) // 2
+                if nums[mid] >= target:
+                    right = mid
+                else:
+                    left = mid + 1
+            return left
+        
+        left, right = bisect_left(nums, target), bisect_left(nums, target + 1) - 1
+        if left > right:
+            return [-1, -1]
+        
+        return [left, right]
