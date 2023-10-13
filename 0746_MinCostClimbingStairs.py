@@ -23,10 +23,8 @@ class Solution:
         n = len(cost)
         if n <= 2:
             return min(cost)
-        cost.append(0)
-        a, b = cost[0], cost[1]
         
-        for i in range(2, n + 1):
-            a, b = b, min(a, b) + cost[i]
-        
-        return b
+        first, second = 0, 0
+        for num in cost:
+            first, second = second, min(first, second) + num
+        return min(first, second)
