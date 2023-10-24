@@ -61,6 +61,7 @@ class Solution:
 # O(n) time | O(n) space
 class Solution:
     def avoidFlood(self, rains: List[int]) -> List[int]:
+        # nxt[i] means the index of next potential sunny day.
         nxt = list(range(len(rains) + 1))
         pre = {}
         res = [1] * len(rains)
