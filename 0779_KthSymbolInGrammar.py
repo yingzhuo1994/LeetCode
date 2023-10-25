@@ -14,4 +14,9 @@ class Solution:
         
         q, r = divmod(k + 1, 2)
         return g(self.kthGrammar(n - 1, q), r)
-    
+
+# 2nd solution
+# O(log(n)) time | O(log(n)) space
+class Solution:
+    def kthGrammar(self, n: int, k: int) -> int:
+        return bin(k - 1).count('1') & 1
