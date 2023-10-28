@@ -61,28 +61,28 @@ class Solution:
 # O(n) time | O(n) space
 class Solution:
     def avoidFlood(self, rains: List[int]) -> List[int]:
-        # nxt[i] means the index of next potential sunny day.
-        nxt = list(range(len(rains) + 1))
-        pre = {}
+        # nextDry[i] means the index of next potential sunny day.
+        nextDry = list(range(len(rains) + 1))
+        rainDic = {}
         res = [1] * len(rains)
 
-        def find(i):
-            j = i if nxt[i] == i else find(nxt[i])
-            nxt[i] = j + 1
+        def findNextDry(i):
+            j = i if nextDry[i] == i else findNextDry(nextDry[i])
+            nextDry[i] = j + 1
             return j
 
-        for i, a in enumerate(rains):
-            if a == 0:
+        for i, rain in enumerate(rains):
+            if rain == 0:
                 continue
 
-            nxt[i] = i + 1
-            if a in pre:
-                j = find(pre[a])
+            nextDry[i] = i + 1
+            if rain in rainDic:
+                j = findNextDry(rainDic[rain])
                 if j > i:
                     return []
-                res[j] = a
+                res[j] = rain
             
             res[i] = -1
-            pre[a] = i
+            rainDic[rain] = i
         
         return res
