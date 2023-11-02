@@ -78,3 +78,47 @@ class Solution:
             if self.flag: 
                 self.rst[self.modeSize] = v
             self.modeSize += 1
+
+# 3rd solution
+# O(n) time | O(1) space
+class Solution:
+    def findMode(self, root: Optional[TreeNode]) -> List[int]:
+        self.maxCount = 0
+        self.curCount = 0
+        self.curItem = None
+        self.rst = []
+
+        self.inorder(root)
+ 
+        return self.rst
+
+    def inorder(self, root):
+        node = root
+        while node:
+            if not node.left: 
+                self.handle(node.val)
+                node = node.right
+            else:
+                pre = node.left
+                while pre.right and pre.right != node: 
+                    pre = pre.right
+                
+                if not pre.right: 
+                    pre.right = node
+                    node = node.left
+                else: 
+                    self.handle(node.val)
+                    pre.right = None
+                    node = node.right
+
+    def handle(self, v):
+        if v != self.curItem: 
+            self.curItem = v
+            self.curCount = 0
+        self.curCount += 1
+        
+        if self.curCount > self.maxCount:
+            self.rst = [v]
+            self.maxCount = self.curCount
+        elif self.curCount == self.maxCount:
+            self.rst.append(v)
