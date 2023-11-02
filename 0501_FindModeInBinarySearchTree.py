@@ -30,30 +30,40 @@ class Solution:
 # O(n) time | O(1) space
 class Solution:
     def findMode(self, root: Optional[TreeNode]) -> List[int]:
-        self.flag, self.maxCount, self.curCount, self.curItem, self.modeSize = False, 0, 0, None, 0
+        self.flag = False
+        self.maxCount = 0
+        self.curCount = 0
+        self.curItem = None
+        self.modeSize = 0
+
         self.inorder(root)
         self.rst = [-1] * self.modeSize
-        self.flag, self.curCount, self.modeSize = True, 0, 0
+        self.flag = True
+        self.curCount = 0
+        self.modeSize = 0
+
         self.inorder(root)
+
         return self.rst
 
     def inorder(self, root):
-        while root:
-            if not root.left: 
-                self.handle(root.val)
-                root = root.right
+        node = root
+        while node:
+            if not node.left: 
+                self.handle(node.val)
+                node = node.right
             else:
-                pre = root.left
-                while pre.right and pre.right != root: 
+                pre = node.left
+                while pre.right and pre.right != node: 
                     pre = pre.right
                 
                 if not pre.right: 
-                    pre.right = root
-                    root = root.left
+                    pre.right = node
+                    node = node.left
                 else: 
-                    self.handle(root.val)
+                    self.handle(node.val)
                     pre.right = None
-                    root = root.right
+                    node = node.right
 
     def handle(self, v):
         if v != self.curItem: 
