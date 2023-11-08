@@ -16,3 +16,11 @@ class Solution:
                 one += 1
                 ans = max(ans, min(one, zero))
         return ans * 2
+
+# 2nd solution
+class Solution:
+    def findTheLongestBalancedSubstring(self, s: str) -> int:
+        tmp = '01'
+        while tmp in s:
+            tmp = '0' + tmp + '1'
+        return len(tmp) - 2
