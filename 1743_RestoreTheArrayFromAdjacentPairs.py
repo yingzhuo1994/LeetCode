@@ -12,15 +12,13 @@ class Solution:
             graph[b].append(a)
         
         ends = [node for node in graph if len(graph[node]) == 1]
-        def dfs(node, visited):
-            if node in visited:
-                return
+        def dfs(node, prev):
             ans.append(node)
-            visited.add(node)
             for neig in graph[node]:
-                dfs(neig, visited)
+                if neig == prev:
+                    continue
+                dfs(neig, node)
         
         ans = []
-        visited = set()
-        dfs(ends[0], visited)
+        dfs(ends[0], None)
         return ans
