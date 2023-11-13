@@ -22,3 +22,23 @@ class Solution:
             else:
                 stack.append(ch)
         return "".join(stack)
+
+# 2nd solution
+# O(n * log(n)) time | O(n) space
+class Solution:    
+    def sortVowels(self, s: str) -> str:
+        s = list(s)
+        vowels, positions = [], [] 
+        vowelSet = set(list("aeiouAEIOU"))
+    
+        for i, c in enumerate(s):
+            if c in vowelSet:
+                vowels.append(c)
+                positions.append(i)
+        
+        vowels.sort()
+
+        for i, c in zip(positions, vowels):
+            s[i] = c
+        
+        return ''.join(s)
