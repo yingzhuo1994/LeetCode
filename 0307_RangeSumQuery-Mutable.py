@@ -22,6 +22,7 @@ class BIT:
     def update(self, i, delta):
         while i < len(self.sums):
             self.sums[i] += delta
+            # i & -i is used to get the last one
             i += i & (-i)
     
     def query(self, i):
