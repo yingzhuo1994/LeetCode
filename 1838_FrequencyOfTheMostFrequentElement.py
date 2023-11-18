@@ -21,3 +21,16 @@ class Solution:
             if i == 0 and left == 0:
                 break
         return ans
+    
+# 2nd solution
+# O(n * log(n)) time | O(n) space
+class Solution:
+    def maxFrequency(self, nums: List[int], k: int) -> int:
+        i = 0
+        nums.sort()
+        for j in range(len(nums)):
+            k += nums[j]
+            if k < nums[j] * (j - i + 1):
+                k -= nums[i]
+                i += 1
+        return j - i + 1
