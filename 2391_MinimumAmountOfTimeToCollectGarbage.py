@@ -25,3 +25,22 @@ class Solution:
         last = {c: i for i, pgm in enumerate(garbage) for c in pgm}
         dis = list(accumulate(travel, initial = 0))
         return sum(map(len, garbage)) + sum(dis[last.get(c, 0)] for c in 'PGM')
+
+# 3rd solution
+# O(n) time | O(1) space
+class Solution:
+    def garbageCollection(self, garbage: List[str], travel: List[int]) -> int:
+        last = {c: i for i, pgm in enumerate(garbage) for c in pgm}
+        ans = sum(map(len, garbage))
+        idxOrder = sorted(last.values())
+        idx = 0
+        i = 0
+        dist = 0
+        while idx < len(idxOrder):
+            while i < idxOrder[idx]:
+                if i < len(travel):
+                    dist += travel[i]
+                i += 1
+            ans += dist
+            idx += 1
+        return  ans
