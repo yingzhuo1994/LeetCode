@@ -17,3 +17,11 @@ class Solution:
         for ch in "MPG":
             ans += collectGarbage(ch)
         return ans
+
+# 2nd solution
+# O(n) time | O(n) space
+class Solution:
+    def garbageCollection(self, garbage: List[str], travel: List[int]) -> int:
+        last = {c: i for i, pgm in enumerate(garbage) for c in pgm}
+        dis = list(accumulate(travel, initial = 0))
+        return sum(map(len, garbage)) + sum(dis[last.get(c, 0)] for c in 'PGM')
