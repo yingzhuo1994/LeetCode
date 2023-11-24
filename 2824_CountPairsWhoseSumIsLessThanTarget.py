@@ -23,3 +23,19 @@ class Solution:
             idx = bisect.bisect_left(nums, curTarget, hi=i)
             ans += idx
         return ans
+
+# 3rd solution
+# O(n * log(n)) time | O(n) space
+class Solution:
+    def countPairs(self, nums: List[int], target: int) -> int:
+        n = len(nums)
+        nums.sort()
+        ans = 0
+        left, right = 0, n - 1
+        while left < right:
+            if nums[left] + nums[right] < target:
+                ans += right - left
+                left += 1
+            else:
+                right -= 1
+        return ans
