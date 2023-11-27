@@ -63,3 +63,30 @@ class Solution:
             stack = new
         ans = sum(stack) % MOD
         return ans
+
+# 3rd solution
+# O(log(n)) time | O(1) space
+import numpy as np
+class Solution:
+    def knightDialer(self, n: int) -> int:
+        if n == 1:
+            return 10
+        MOD = 10**9 + 7
+        M = np.matrix([[0, 0, 0, 0, 1, 0, 1, 0, 0, 0],
+                       [0, 0, 0, 0, 0, 0, 1, 0, 1, 0],
+                       [0, 0, 0, 0, 0, 0, 0, 1, 0, 1],
+                       [0, 0, 0, 0, 1, 0, 0, 0, 1, 0],
+                       [1, 0, 0, 1, 0, 0, 0, 0, 0, 1],
+                       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                       [1, 1, 0, 0, 0, 0, 0, 1, 0, 0],
+                       [0, 0, 1, 0, 0, 0, 1, 0, 0, 0],
+                       [0, 1, 0, 1, 0, 0, 0, 0, 0, 0],
+                       [0, 0, 1, 0, 1, 0, 0, 0, 0, 0]])
+        res = 1
+        k = n - 1
+        while k:
+            if k % 2:
+                res = res * M % MOD
+            M = M * M % MOD
+            k //= 2
+        return int(np.sum(res)) % MOD
