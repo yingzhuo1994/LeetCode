@@ -31,13 +31,13 @@ class Solution:
 # O(n) time | O(1) space
 class Solution:
     def uniqueLetterString(self, s: str) -> int:
-        index = {c: [-1, -1] for c in string.ascii_uppercase}
+        index = {ch: [-1, -1] for ch in string.ascii_uppercase}
         res = 0
-        for i, c in enumerate(s):
-            k, j = index[c]
-            res += (i - j) * (j - k)
-            index[c] = [j, i]
-        for c in index:
-            k, j = index[c]
-            res += (len(s) - j) * (j - k)
+        for i, ch in enumerate(s):
+            left, right = index[ch]
+            res += (right - left) * (i - right)
+            index[ch] = [right, i]
+        for ch in index:
+            left, right = index[ch]
+            res += (right - left) * (len(s) - right)
         return res % (10**9 + 7)
