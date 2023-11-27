@@ -30,3 +30,36 @@ class Solution:
             ans += dfs(i, n - 1)
             ans %= MOD
         return ans
+
+# 2nd solution
+# O(n) time | O(1) space
+class Solution:
+    def knightDialer(self, n: int) -> int:
+        if n == 1:
+            return 10
+        MOD = 10**9 + 7
+        dic = {
+            0: [4, 6],
+            1: [6, 8],
+            2: [7, 9],
+            3: [4, 8],
+            4: [0, 3, 9],
+            6: [0, 1, 7],
+            7: [2, 6],
+            8: [1, 3],
+            9: [2, 4],
+        }
+
+        stack = [1 for _ in range(10)]
+        stack[5] = 0
+        
+        for _ in range(n - 1):
+            new = [0 for _ in range(10)]
+            for i in dic:
+                for neig in dic[i]:
+                    new[neig] += stack[i]
+                    new[neig] %= MOD
+            
+            stack = new
+        ans = sum(stack) % MOD
+        return ans
