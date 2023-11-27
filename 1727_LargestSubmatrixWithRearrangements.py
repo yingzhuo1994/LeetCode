@@ -6,10 +6,11 @@ class Solution:
         
         for j in range(n):
             for i in range(1, m):
-                matrix[i][j] += matrix[i-1][j] if matrix[i][j] else 0
+                if matrix[i][j]:
+                    matrix[i][j] += matrix[i-1][j]
                 
-        for i in range(m): 
-            matrix[i].sort(reverse=True)
-            for j in range(n):
-                ans = max(ans, (j+1)*matrix[i][j])
+        for row in matrix: 
+            row.sort(reverse=True)
+            for j, height in enumerate(row, 1):
+                ans = max(ans, j * height)
         return ans
