@@ -29,7 +29,7 @@ class Solution:
             return False
 
         # consecutive difference in arithmetic progression
-        diff = int((maxArr - minArr) / (len(arr) - 1))
+        diff = (maxArr - minArr) // (len(arr) - 1)
         if diff == 0:
             if arr != [arr[0]] * len(arr):
                 return False
