@@ -12,3 +12,9 @@ class Solution:
                 n //= 2
                 ans += n
         return ans
+
+# 2nd solution
+# O(1) time | O(1) space
+class Solution:
+    def numberOfMatches(self, n: int) -> int:
+        return n - 1
