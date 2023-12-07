@@ -15,9 +15,5 @@ class Solution:
     def minimumOneBitOperations(self, n: int) -> int:
         if n == 0:
             return 0
-        elif n == 1:
-            return 1
-        elif n == 2:
-            return 3
         d = len(bin(n)) - 2
-        return 2**d - 1 -  self.minimumOneBitOperations(n - 2**d)
+        return 2**d - 1 -  self.minimumOneBitOperations(n - (1 << (d - 1)))
