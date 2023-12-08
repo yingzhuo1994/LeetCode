@@ -29,3 +29,18 @@ class Solution:
             if i in groups:
                 f[i] = max(f[i], max(f[s] + t for s, t in groups[i]))
         return f[n]
+
+# 3rd solution
+# O(n + m) time | O(n + m) space
+class Solution:
+    def maxTaxiEarnings(self, n: int, rides: List[List[int]]) -> int:
+        groups = defaultdict(list)
+        for start, end, tip in rides:
+            groups[end].append((start, end - start + tip))
+
+        @cache
+        def dfs(i: int) -> int:
+            if i == 1:
+                return 0
+            return max(dfs(i - 1), max((dfs(s) + t for s, t in groups[i]), default=0))
+        return dfs(n)
