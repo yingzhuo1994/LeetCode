@@ -63,3 +63,33 @@ class Solution:
             if pre >= 2 and suf[i] >= 2:
                 mx = max(mx, pre + suf[i] - 1)  # 减去重复的 nums[i]
         return n - mx
+
+# 3rd solution
+    # O(n * log(n)) time | O(n) space
+class Solution:
+    def minimumMountainRemovals(self, nums: List[int]) -> int:
+        def get_LIS_count(start, end, dir):
+            ans = []
+            array = []
+            for i in range(start, end, dir):
+                idx = bisect.bisect_left(array, nums[i])
+                if idx == len(array):
+                    array.append(nums[i])
+                else:
+                    array[idx] = nums[i]
+                ans.append(idx + 1)
+           
+            return ans
+        
+        n = len(nums)
+        leftSide = get_LIS_count(0, n, 1)
+        rightSide = get_LIS_count(n - 1, -1, -1)[::-1]
+
+        maxLength = 0
+        for i in range(1, n - 1):
+            if leftSide[i] <= 1 or rightSide[i] <= 1:
+                continue
+            length = leftSide[i] + rightSide[i] - 1
+            maxLength = max(maxLength, length)
+
+        return n - maxLength
