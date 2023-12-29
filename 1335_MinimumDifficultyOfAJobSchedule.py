@@ -67,3 +67,21 @@ class Solution:
             return res
 
         return dfs(d - 1, n - 1)
+
+# 4th solution, Bottom-up DP
+# O(dn^2) time | O(dn) space
+class Solution:
+    def minDifficulty(self, a: List[int], d: int) -> int:
+        n = len(a)
+        if n < d:
+            return -1
+
+        f = [[inf] * n for _ in range(d)]
+        f[0] = list(accumulate(a, max))
+        for i in range(1, d):
+            for j in range(i, n):
+                mx = 0
+                for k in range(j, i - 1, -1):
+                    mx = max(mx, a[k])  # 从 a[k] 到 a[j] 的最大值
+                    f[i][j] = min(f[i][j], f[i - 1][k - 1] + mx)
+        return f[-1][-1]
