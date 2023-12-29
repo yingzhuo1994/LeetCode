@@ -5,13 +5,25 @@ class MyLinkedList:
         self.sentinel = Node()
         self.sentinel.next = self.sentinel
         self.sentinel.prev = self.sentinel
-        self.dic = {}
         self.size = 0
+    
+    def getNode(self, index):
+        if index >= self.size or index < 0:
+            return -1
+        if index + 1 <= self.size - index:
+            cur = self.sentinel
+            for _ in range(index + 1):
+                cur = cur.next
+        else:
+            cur = self.sentinel
+            for _ in range(self.size - index):
+                cur = cur.prev
+        return cur        
 
     def get(self, index: int) -> int:
-        if index >= self.size:
+        if index >= self.size or index < 0:
             return -1
-        node = self.dic[index]
+        node = self.getNode(index)
         return node.val
         
     def addAtHead(self, val: int) -> None:
@@ -21,17 +33,13 @@ class MyLinkedList:
         node.next.prev = node
         node.prev.next = node
         self.size += 1
-        for i in reversed(range(1, self.size)):
-            self.dic[i] = self.dic[i - 1]
-        self.dic[0] = node
 
     def addAtTail(self, val: int) -> None:
         node = Node(val)
         node.prev = self.sentinel.prev
         node.next = self.sentinel
         node.next.prev = node
-        node.prev.next = node
-        self.dic[self.size] = node        
+        node.prev.next = node   
         self.size += 1
 
     def addAtIndex(self, index: int, val: int) -> None:
@@ -41,27 +49,21 @@ class MyLinkedList:
             self.addAtTail(val)
             return
         node = Node(val)
-        nextNode = self.dic[index]
+        nextNode = self.getNode(index)
         node.prev = nextNode.prev
         node.next = nextNode
         node.next.prev = node
         node.prev.next = node
         self.size += 1
-        for i in reversed(range(index + 1, self.size)):
-            self.dic[i] = self.dic[i - 1]
-        self.dic[index] = node
         
     def deleteAtIndex(self, index: int) -> None:
         if index >= self.size or index < 0:
             return
-        node = self.dic[index]
+        node = self.getNode(index)
         node.prev.next = node.next
         node.next.prev = node.prev
         node.next = None
         node.prev = None
-        for i in range(index, self.size - 1):
-            self.dic[i] = self.dic[i + 1]
-        del self.dic[self.size - 1]
         self.size -= 1
         
 class Node:
