@@ -5,10 +5,7 @@ class Solution:
         last = 0
         ans = 0
         for row in bank:
-            count = 0
-            for ele in row:
-                if ele == "1":
-                    count += 1
+            count = row.count("1")
             if count > 0:
                 ans += last * count
                 last = count
