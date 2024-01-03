@@ -40,3 +40,15 @@ class Solution:
             else:
                 cur = cur.next
         return self.reverseList(head)
+
+# 3rd solution
+# O(n) time | O(n) space
+class Solution:
+    def removeNodes(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if head.next is None:
+            return head
+        node = self.removeNodes(head.next)  # 返回的链表头一定是最大的
+        if node.val > head.val:
+            return node  # 删除 head
+        head.next = node  # 不删除 head
+        return head
