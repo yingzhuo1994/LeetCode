@@ -8,3 +8,14 @@ class Solution:
             if ransomCount[ch] > magazineCount[ch]:
                 return False
         return True
+
+# 2nd solution
+# O(m + n) time | O(1) space
+class Solution:
+    def canConstruct(self, ransomNote: str, magazine: str) -> bool:
+        ransomCount = Counter(ransomNote)
+        magazineCount = Counter(magazine)
+        for ch in ransomCount:
+            if ransomCount[ch] > magazineCount[ch]:
+                return False
+        return True
