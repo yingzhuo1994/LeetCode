@@ -24,20 +24,20 @@ class Solution:
         smallerState = [1, nums[0]]
 
         for i in range(1, n):
-            newLargetState = largerState[:]
+            newLargerState = largerState[:]
             newSmallerState = smallerState[:]
 
             if nums[i] > smallerState[1]:
                 length = smallerState[0] + 1
                 if length > largerState[0] or (length == largerState[0] and nums[i] > largerState[1]):
-                    newLargetState = [length, nums[i]]
+                    newLargerState = [length, nums[i]]
             
             if nums[i] < largerState[1]:
                 length = largerState[0] + 1
                 if length > smallerState[0] or (length == smallerState[0] and nums[i] < smallerState[1]):
                     newSmallerState = [length, nums[i]]
             
-            largerState = newLargetState
+            largerState = newLargerState
             smallerState = newSmallerState
         
         ans = max(largerState[0], smallerState[0])
