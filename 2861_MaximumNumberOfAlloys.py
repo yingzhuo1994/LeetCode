@@ -14,7 +14,6 @@ class Solution:
         ans = 0
         mx = min(stock) + budget
         for comp in composition:
-
             left, right = ans, mx + 1
             while left + 1 < right:  # 开区间写法
                 mid = (left + right) // 2
