@@ -27,3 +27,17 @@ class Solution:
                 curMax = max(curMax, arr[i - j])
                 dp[i] = max(dp[i], dp[i - j] + curMax * j)
         return dp[n]
+
+# 3rd solution
+# O(kn) time | O(k) space
+class Solution:
+    def maxSumAfterPartitioning(self, arr: List[int], k: int) -> int:
+        n = len(arr)
+        dp = [0] * k
+        for i in range(1, n + 1):
+            best = curMax = 0
+            for j in range(1, min(k, i) + 1):
+                curMax = max(curMax, arr[i - j])
+                best = max(best, dp[(i - j) % k] + curMax * j)
+            dp[i % k] = best
+        return dp[n % k]
