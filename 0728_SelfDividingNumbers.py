@@ -1,3 +1,6 @@
+# 1st solution
+# O(n * log(right)) time | O(n) space
+# where n = right - left + 1
 class Solution:
     def selfDividingNumbers(self, left: int, right: int) -> List[int]:
         def isValid(number):
