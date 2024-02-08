@@ -4,14 +4,16 @@
 class MyCalendarTwo:
     def __init__(self):
         self.tree = {}
+        self.start = 0
+        self.end = 10**9
 
     def update(self, start: int, end: int, val: int, l: int, r: int, idx: int) -> None:
         if r < start or end < l:
             return
         if start <= l and r <= end:
             p = self.tree.get(idx, [0, 0])
-            p[0] += val
-            p[1] += val
+            p[0] += val # max value
+            p[1] += val # lazy value
             self.tree[idx] = p
             return
         mid = (l + r) // 2
@@ -22,8 +24,8 @@ class MyCalendarTwo:
         self.tree[idx] = p
 
     def book(self, start: int, end: int) -> bool:
-        self.update(start, end - 1, 1, 0, 10 ** 9, 1)
+        self.update(start, end - 1, 1, self.start, self.end, 1)
         if self.tree[1][0] > 2:
-            self.update(start, end - 1, -1, 0, 10 ** 9, 1)
+            self.update(start, end - 1, -1, self.start, self.end, 1)
             return False
         return True
