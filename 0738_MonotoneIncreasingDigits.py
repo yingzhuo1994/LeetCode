@@ -27,3 +27,15 @@ class Solution:
 
     
         return dfs(0, 0, True)
+
+# 2nd solution
+# O(d) time | O(d) space
+class Solution:
+    def monotoneIncreasingDigits(self, n: int) -> int:
+        ones = 111111111
+        result = 0
+        for _ in range(9):
+            while result + ones > n:
+                ones //= 10
+            result += ones
+        return result
