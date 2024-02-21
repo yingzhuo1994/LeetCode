@@ -72,7 +72,7 @@ class Solution:
                     if isInfected[x][y] == 1 and not vis[x][y]:
                         dfs(x, y)
                     elif isInfected[x][y] == 0:
-                        c[-1] += 1
+                        perimeter[-1] += 1
                         boundaries[-1].add((x, y))
 
         m, n = len(isInfected), len(isInfected[0])
@@ -80,7 +80,7 @@ class Solution:
         while 1:
             vis = [[False] * n for _ in range(m)]
             areas = []
-            c = []
+            perimeter = []
             boundaries = []
             for i, row in enumerate(isInfected):
                 for j, v in enumerate(row):
@@ -88,7 +88,7 @@ class Solution:
                     if v == 1 and not vis[i][j]:
                         areas.append([])
                         boundaries.append(set())
-                        c.append(0)
+                        perimeter.append(0)
                         dfs(i, j)
             if not areas:
                 break
@@ -96,7 +96,7 @@ class Solution:
             # 威胁最大的区域
             idx = boundaries.index(max(boundaries, key=len))
             # 累加防火墙
-            ans += c[idx]
+            ans += perimeter[idx]
             for k, area in enumerate(areas):
                 if k == idx:
                     # 此区域已成功堵住
