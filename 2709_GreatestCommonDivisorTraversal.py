@@ -1,17 +1,13 @@
 # 1st solution, TLE
 class Solution:
     def canTraverseAllPairs(self, nums: List[int]) -> bool:
-        numSet = set(nums)
-        if len(numSet) == 1:
-            if nums[0] == 1 and len(nums) > 1:
-                return False
+        if len(nums) == 1:
             return True
+        numSet = set(nums)
+        if 1 in numSet:
+            return False
 
         numToPrime = {}
-        for num in numSet:
-            if num == 1:
-                return False
-            numToPrime[num] = []
         
         n = max(nums)
         primes = [True for _ in range(n + 1)]
@@ -26,18 +22,27 @@ class Solution:
                 primeDict[i] = set()
         
         def getPrimes(num):
+            ans = []
             for prime in primeList:
                 if num % prime == 0:
-                    primeDict[prime].add(num)
-                    numToPrime[num].append(prime)
+                    ans.append(prime)
                 if prime > num:
                     break
+            return ans
         
         for num in numSet:
-            getPrimes(num)
+            lst = getPrimes(num)
+            product = 1
+            for v in lst:
+                product *= v
+            if product not in numToPrime:
+                numToPrime[product] = lst
+                for prime in lst:
+                    primeDict[prime].add(product)
         
-        visited = set([n])
-        level = set([n])
+        m = max(numToPrime)
+        visited = set([m])
+        level = set([m])
         while level:
             newLevel = set()
             for num in level:
@@ -47,7 +52,7 @@ class Solution:
                     visited |= new
             level = newLevel
         
-        return len(visited) == len(numSet)
+        return len(visited) == len(numToPrime)
 
 # 2nd solution
 # O(n^2 * log(m)) time | O(m) space
@@ -76,3 +81,49 @@ class Solution:
                 return False                      # <-- no match means no traversal 
 
         return True 
+
+
+# 3rd solution
+class Solution:
+    def dfs(self, index, visitedIndex, visitedPrime):
+        if visitedIndex[index]:
+            return
+        visitedIndex[index] = True
+
+        for prime in self.index2prime[index]:
+            if visitedPrime.get(prime, False):
+                continue
+            visitedPrime[prime] = True
+            for index1 in self.prime2index[prime]:
+                if visitedIndex[index1]:
+                    continue
+                self.dfs(index1, visitedIndex, visitedPrime)
+
+    def canTraverseAllPairs(self, nums: List[int]) -> bool:
+        # corner case 1
+        if len(nums) == 1:
+            return True
+        
+        # corner case 2
+        if 1 in nums: 
+            return False
+        
+        self.prime2index = {}
+        self.index2prime = {}
+        for i, num in enumerate(nums):
+            temp = num
+            for j in range(2, int(num ** 0.5) + 1):
+                if temp % j == 0:
+                    self.prime2index.setdefault(j, []).append(i)
+                    self.index2prime.setdefault(i, []).append(j)
+                    while temp % j == 0:
+                        temp //= j
+            if temp > 1:
+                self.prime2index.setdefault(temp, []).append(i)
+                self.index2prime.setdefault(i, []).append(temp)
+
+        visitedIndex = [False] * len(nums)
+        visitedPrime = {}
+        self.dfs(0, visitedIndex, visitedPrime)
+
+        return all(visitedIndex)
