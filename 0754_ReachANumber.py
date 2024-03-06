@@ -27,3 +27,14 @@ class Solution:
                 continue
             else:
                 return x
+
+# 3rd solution
+# O(1) time | O(1) space
+class Solution:
+    def reachNumber(self, target: int) -> int:
+        target = abs(target)
+        s = n = 0
+        while s < target or (s - target) % 2:  # 没有到达（越过）终点，或者相距奇数
+            n += 1
+            s += n
+        return n
