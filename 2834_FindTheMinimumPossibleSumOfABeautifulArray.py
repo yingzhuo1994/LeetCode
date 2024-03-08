@@ -14,3 +14,11 @@ class Solution:
         ans = (1 + mid) * mid // 2 + (2 * target + k - 1) * k // 2
         ans %= MOD
         return ans
+
+# 2nd solution
+# O(1) time | O(1) space
+class Solution:
+    def minimumPossibleSum(self, n: int, k: int) -> int:
+        MOD = 10**9 + 7
+        m = min(k // 2, n)
+        return (m * (m + 1) + (k * 2 + n - m - 1) * (n - m)) // 2 % MOD
