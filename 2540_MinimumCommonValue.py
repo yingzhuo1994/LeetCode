@@ -11,3 +11,9 @@ class Solution:
             else:
                 return nums1[i]
         return -1
+
+# 2nd solution
+# O(m + n) time | O(m + n) space
+class Solution:
+    def getCommon(self, nums1: List[int], nums2: List[int]) -> int:
+        return min(set(nums1) & set(nums2), default=-1)
