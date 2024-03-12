@@ -27,6 +27,7 @@ class Solution:
 
         return sentinel.next
 
+
 # 2nd solution
 # O(n) time | O(n) space
 class Solution:
@@ -42,4 +43,25 @@ class Solution:
                 seen.popitem()
             seen[prefix] = node
             node.next = cur = cur.next
+        return dummy.next
+
+
+# 3rd solution
+# O(n) time | O(n) space
+class Solution:
+    def removeZeroSumSublists(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        prefix = 0
+        seen = {}
+        seen[0] = dummy = ListNode(0)
+        dummy.next = head
+        while head:
+            prefix += head.val
+            seen[prefix] = head
+            head = head.next
+        head = dummy
+        prefix = 0
+        while head:
+            prefix += head.val
+            head.next = seen[prefix].next
+            head = head.next
         return dummy.next
