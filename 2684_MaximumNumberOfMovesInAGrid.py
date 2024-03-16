@@ -36,3 +36,21 @@ class Solution:
             level = newLevel
             step += 1
         return step
+
+# 3rd solution
+# O(mn) time | O(1) space
+class Solution:
+    def maxMoves(self, grid: List[List[int]]) -> int:
+        m, n = len(grid), len(grid[0])
+        for row in grid:
+            row[0] *= -1  # 入队标记
+        for j in range(n - 1):
+            for i, row in enumerate(grid):
+                if row[j] > 0:  # 不在队列中
+                    continue
+                for k in [i - 1, i, i + 1]:
+                    if 0 <= k < m and grid[k][j + 1] > -row[j]:
+                        grid[k][j + 1] *= -1  # 入队标记
+            if all(row[j + 1] > 0 for row in grid):  # 无法再往右走了
+                return j
+        return n - 1
