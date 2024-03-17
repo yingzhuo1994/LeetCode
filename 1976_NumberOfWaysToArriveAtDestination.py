@@ -37,10 +37,10 @@ class Solution:
 # O(m * log(m)) time | O(m) space
 class Solution:
     def countPaths(self, n: int, roads: List[List[int]]) -> int:
-        g = [[] for _ in range(n)]  # 邻接表
+        graph = [[] for _ in range(n)]  # 邻接表
         for x, y, d in roads:
-            g[x].append((y, d))
-            g[y].append((x, d))
+            graph[x].append((y, d))
+            graph[y].append((x, d))
 
         dis = [inf] * n
         dis[0] = 0
@@ -54,7 +54,7 @@ class Solution:
                 return f[-1]
             if dx > dis[x]:
                 continue
-            for y, d in g[x]:  # 尝试更新 x 的邻居的最短路
+            for y, d in graph[x]:  # 尝试更新 x 的邻居的最短路
                 new_dis = dx + d
                 if new_dis < dis[y]:
                     # 就目前来说，最短路必须经过 x
