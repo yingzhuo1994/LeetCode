@@ -2,10 +2,10 @@
 # O(n^2) time | O(n^2) space
 class Solution:
     def countPaths(self, n: int, roads: List[List[int]]) -> int:
-        g = [[float("inf") for _ in range(n)] for _ in range(n)]  # 邻接矩阵
+        graph = [[float("inf") for _ in range(n)] for _ in range(n)]  # 邻接矩阵
         for x, y, d in roads:
-            g[x][y] = d
-            g[y][x] = d
+            graph[x][y] = d
+            graph[y][x] = d
 
         dis = [float("inf")] * n
         dis[0] = 0
@@ -22,7 +22,7 @@ class Solution:
                 return f[-1]
             done[x] = True  # 最短路长度已确定（无法变得更小）
             dx = dis[x]
-            for y, d in enumerate(g[x]):  # 尝试更新 x 的邻居的最短路
+            for y, d in enumerate(graph[x]):  # 尝试更新 x 的邻居的最短路
                 new_dis = dx + d
                 if new_dis < dis[y]:
                     # 就目前来说，最短路必须经过 x
