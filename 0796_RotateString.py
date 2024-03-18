@@ -4,7 +4,8 @@ class Solution:
     def rotateString(self, s: str, goal: str) -> bool:
         return len(s) == len(goal) and s in (goal + goal)
 
-# 2nd solution
+
+# 2nd solution, Rolling Hash
 # O(n) time | O(n) space
 class Solution(object):
     def rotateString(self, A, B):
@@ -35,4 +36,36 @@ class Solution(object):
             ha %= MOD
             if ha == hb and A[i+1:] + A[:i+1] == B:
                 return True
+        return False
+
+
+# 3rd solution, KMP
+# O(n) time | O(n) space
+class Solution:
+    def rotateString(self, A, B):
+        N = len(A)
+        if N != len(B):
+            return False
+        if N == 0:
+            return True
+
+        #Compute shift table
+        shifts = [1] * (N+1)
+        left = -1
+        for right in range(N):
+            while left >= 0 and B[left] != B[right]:
+                left -= shifts[left]
+            shifts[right + 1] = right - left
+            left += 1
+
+        #Find match of B in A+A
+        match_len = 0
+        for char in A+A:
+            while match_len >= 0 and B[match_len] != char:
+                match_len -= shifts[match_len]
+
+            match_len += 1
+            if match_len == N:
+                return True
+
         return False
