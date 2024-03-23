@@ -13,3 +13,12 @@ class Solution:
                         visited.add(i)
             level = newLevel
         return len(visited)
+
+# 2nd solution
+# O(1) time | O(1) space
+class Solution:
+    def distinctIntegers(self, n: int) -> int:
+        if n == 1:
+            return 1
+        else:
+            return n - 1
