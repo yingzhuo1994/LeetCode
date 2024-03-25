@@ -16,7 +16,7 @@ class Solution:
             ans.append(word)
             return ans
         counts = {}
-        banned = set([w.lower() for w in banned])
+        banned = set(banned)
         for word in words:
             lst = getWord(word)
             for w in lst:
@@ -28,4 +28,23 @@ class Solution:
             if v > freq:
                 freq = v
                 ans = k
+        return ans
+
+# 2nd solution
+# O(n) time | O(n) space
+class Solution:
+    def mostCommonWord(self, paragraph: str, banned: List[str]) -> str:
+        ban = set(banned)
+        words = re.findall(r'\w+', paragraph.lower())
+        counts = {}
+        for word in words:
+            if word not in ban:
+                counts[word] = counts.get(word, 0) + 1
+
+        ans, freq = None, 0
+        for k, v in counts.items():
+            if v > freq:
+                freq = v
+                ans = k
+        
         return ans
