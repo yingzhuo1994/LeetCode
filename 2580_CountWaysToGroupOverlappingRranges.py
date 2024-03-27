@@ -9,7 +9,7 @@ class Solution:
         for start, end in ranges:
             if start > last:
                 count += 1
-                last = end
-            else:
-                last = max(last, end)
+
+            last = max(last, end)
+        
         return pow(2, count) % MOD
