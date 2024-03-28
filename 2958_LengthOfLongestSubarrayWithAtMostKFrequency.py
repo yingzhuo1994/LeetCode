@@ -7,9 +7,8 @@ class Solution:
         ans = 0
         for i, num in enumerate(nums):
             dic[num] = dic.get(num, 0) + 1
-            if dic[num] <= k:
-                ans = max(ans, i - start + 1)
             while dic[num] > k:
                 dic[nums[start]] -= 1
                 start += 1
+            ans = max(ans, i - start + 1)
         return ans
