@@ -28,3 +28,18 @@ class Solution:
             return ans
         return countHelper(0, len(nums), 1)
         
+# 2nd solution
+# O(n) time | O(1) space
+class Solution:
+    def countSubarrays(self, nums: List[int], k: int) -> int:
+        target = max(nums)
+        start = 0
+        count = 0
+        res = 0
+        for i in range(len(nums)):
+            count += nums[i] == target
+            while count >= k:
+                count -= nums[start] == target
+                start += 1
+            res += start
+        return res
