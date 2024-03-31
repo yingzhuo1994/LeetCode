@@ -19,7 +19,20 @@ class Solution:
         n = len(stones)
         s = list(accumulate(stones, initial=0))
         f = [0] * n
-        for i in range(n - 2, -1, -1):
+        for i in reversed(range(n - 1)):
             for j in range(i + 1, n):
                 f[j] = max(s[j + 1] - s[i + 1] - f[j], s[j] - s[i] - f[j - 1])
         return f[-1]
+
+
+# 3rd solution
+# O(n^2) time | O(n^2) space
+class Solution:
+    def stoneGameVII(self, stones: List[int]) -> int:
+        n = len(stones)
+        s = list(accumulate(stones, initial=0))
+        f = [[0] * n for _ in range(n)]
+        for i in reversed(range(n - 1)):
+            for j in range(i + 1, n):
+                f[i][j] = max(s[j + 1] - s[i + 1] - f[i + 1][j], s[j] - s[i] - f[i][j - 1])
+        return f[0][-1]
