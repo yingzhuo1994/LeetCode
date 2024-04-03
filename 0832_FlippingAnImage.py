@@ -1,5 +1,5 @@
 # 1st solution
-# O(mn) time | O(1) space
+# O(n^2) time | O(1) space
 class Solution:
     def flipAndInvertImage(self, image: List[List[int]]) -> List[List[int]]:
         for row in image:
@@ -14,3 +14,9 @@ class Solution:
                 else:
                     row[i] = 0
         return image
+
+# 2nd solution
+# O(n^2) time | O(n^2) space
+class Solution:
+    def flipAndInvertImage(self, image: List[List[int]]) -> List[List[int]]:
+        return [[1 ^ i for i in reversed(row)] for row in image]
