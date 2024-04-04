@@ -1,5 +1,5 @@
 # 1st solution
-# O(n * log(n)) time | O(n) space
+# O(VE + V^2 * log(V)) time | O(V^2) space
 class Solution:
     def getAncestors(self, n: int, edges: List[List[int]]) -> List[List[int]]:
         inCounts = [0 for _ in range(n)]
