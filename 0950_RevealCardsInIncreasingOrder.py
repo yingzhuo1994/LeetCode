@@ -39,3 +39,16 @@ class Solution:
             return ans
         
         return reorder(deck, True)
+
+# 2nd solution
+# O(n * log(n)) time | O(n) space
+class Solution:
+    def deckRevealedIncreasing(self, deck: List[int]) -> List[int]:
+        deck.sort(reverse=True)
+        queue = deque()
+        for num in deck:
+            queue.append(num)
+            if len(queue) == len(deck):
+                break
+            queue.append(queue.popleft())
+        return list(queue)[::-1]
