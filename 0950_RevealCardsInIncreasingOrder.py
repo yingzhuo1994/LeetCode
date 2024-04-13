@@ -52,3 +52,15 @@ class Solution:
                 break
             queue.append(queue.popleft())
         return list(queue)[::-1]
+
+# 3rd solution
+# O(n * log(n)) time | O(n) space
+class Solution:
+    def deckRevealedIncreasing(self, deck: List[int]) -> List[int]:
+        deck.sort(reverse=True)
+        stack = deque()
+        for num in deck:
+            if stack:
+                stack.appendleft(stack.pop())
+            stack.appendleft(num)
+        return list(stack)
