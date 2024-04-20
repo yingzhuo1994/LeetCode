@@ -3,19 +3,16 @@
 class Solution:
     def findFarmland(self, land: List[List[int]]) -> List[List[int]]:
         m, n = len(land), len(land[0])
-        visited = [[False for _ in range(n)] for _ in range(m)]
         def dfs(i, j, loc):
-            if visited[i][j]:
+            if land[i][j] <= 0:
                 return
-            visited[i][j] = True
-            if i < loc[0]:
-                loc[0] = i
-            if j < loc[1]:
-                loc[1] = j
-            if i > loc[2]:
-                loc[2] = i
-            if j > loc[3]:
-                loc[3] = j
+            land[i][j] = -1
+ 
+            loc[0] = min(loc[0], i)
+            loc[1] = min(loc[1], j)
+            loc[2] = max(loc[2], i)
+            loc[3] = max(loc[3], j)
+
             for dx, dy in [[-1, 0], [1, 0], [0, -1], [0, 1]]:
                 x = i + dx
                 y = j + dy
@@ -24,7 +21,7 @@ class Solution:
         ans = []
         for i in range(m):
             for j in range(n):
-                if visited[i][j]:
+                if land[i][j] <= 0:
                     continue
                 if land[i][j] == 1:
                     loc = [i, j, i, j]
