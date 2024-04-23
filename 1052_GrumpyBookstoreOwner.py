@@ -21,4 +21,24 @@ class Solution:
             ans = max(ans, t)
         
         return ans
-            
+
+# 2nd solution
+# O(n) time | O(1) space
+class Solution:
+    def maxSatisfied(self, customers: List[int], grumpy: List[int], minutes: int) -> int:
+        n = len(customers)
+        ans = 0
+        for i in range(n):
+            if grumpy[i] == 0:
+                ans += customers[i]
+                customers[i] = 0
+        
+        cur = 0
+        maxVal = 0
+        for i in range(n):
+            cur += customers[i]
+            if i >= minutes:
+                cur -= customers[i - minutes]
+            maxVal = max(maxVal, cur)
+        
+        return ans + maxVal
