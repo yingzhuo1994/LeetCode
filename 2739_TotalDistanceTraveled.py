@@ -21,3 +21,10 @@ class Solution:
 
         q, r = divmod(mainTank, 5)
         return q * 5 * 10 + self.distanceTraveled(r + min(q, additionalTank), max(0, additionalTank - q))
+
+
+# 3rd solution
+# O(1) time | O(1) space
+class Solution:
+    def distanceTraveled(self, mainTank: int, additionalTank: int) -> int:
+        return (mainTank + min((mainTank - 1) // 4, additionalTank)) * 10
