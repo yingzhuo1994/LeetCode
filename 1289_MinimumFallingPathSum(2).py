@@ -45,3 +45,44 @@ class Solution:
             for j, pre in enumerate(pre_row):  # 枚举上一行的状态
                 cur_row[j] += mn if pre != mn else mn2  # 不是最小就加上最小，否则加上次小
         return min(grid[-1])  # 第 n-1 行的最小值
+
+
+# 4th solution
+# O(n^2) time | O(1) space
+class Solution:
+    def minFallingPathSum(self, grid: List[List[int]]) -> int:
+        def getTwoSmallest(row):
+            mn, mn2 = float("inf"), float("inf")
+            idx, idx2 = -1, -1
+            for i, val in enumerate(row):
+                if val < mn:
+                    mn, mn2 = val, mn
+                    idx, idx2 = i, idx
+                elif val < mn2:
+                    mn2 = val
+                    idx2 = i
+            return mn, mn2, idx, idx2
+        
+        n = len(grid)
+        pre_row = grid[0]
+        m1, m2, idx, idx2 = getTwoSmallest(pre_row)
+        for i in range(1, n):
+            mn1, mn2 = float("inf"), float("inf")
+            col1, col2 = -1, -1
+            for j, val in enumerate(grid[i]):
+                if j != idx:
+                    if val + m1 < mn1:
+                        mn1, mn2 = val + m1, mn1
+                        col1, col2 = j, col1
+                    elif val + m1 < mn2:
+                        mn2 = val + m1
+                        col2 = j
+                elif j != idx2:
+                    if val + m2 < mn1:
+                        mn1, mn2 = val + m2, mn1
+                        col1, col2 = j, col1
+                    elif val + m2 < mn2:
+                        mn2 = val + m2
+                        col2 = j
+            m1, m2, idx, idx2 = mn1, mn2, col1, col2
+        return min(m1, m2)  # 第 n-1 行的最小值
