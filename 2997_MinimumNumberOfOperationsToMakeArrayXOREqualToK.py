@@ -13,3 +13,9 @@ class Solution:
             if a != b:
                 ans += 1
         return ans
+
+# 2nd solution
+# O(n) time | O(1) space
+class Solution:
+    def minOperations(self, nums: List[int], k: int) -> int:
+        return reduce(xor, nums, k).bit_count()
