@@ -31,3 +31,23 @@ class Solution:
             n //= 2
             k *= -1
         return ''.join(ans[::-1]) or '0'
+
+# 3rd solution
+# O(log(n)) time | O(log(n)) space
+class Solution:
+    def baseNeg2(self, n: int) -> str:
+        return self.baseAny(n, -2)
+
+    def baseAny(self, n, base):
+        if n == 0:
+            return "0"
+        ans = []
+        while n:
+            r = n % base   # 获取最低位
+            if r < 0:
+                r -= base  # 减去base不影响结果
+
+            ans.append(hex(r)[2])
+            n -= r
+            n //= base
+        return "".join(ans[::-1])
