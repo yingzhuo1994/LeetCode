@@ -12,3 +12,17 @@ class Solution:
                 water = capacity - plant
                 ans += (i + 1) * 2 - 1
         return ans
+
+
+# 2nd solution
+# O(n) time | O(1) space
+class Solution:
+    def wateringPlants(self, plants: List[int], capacity: int) -> int:
+        ans = len(plants)
+        water = capacity
+        for i, need in enumerate(plants):
+            if water < need:
+                ans += i * 2
+                water = capacity
+            water -= need
+        return ans
