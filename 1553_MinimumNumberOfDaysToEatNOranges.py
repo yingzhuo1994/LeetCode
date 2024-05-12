@@ -41,7 +41,7 @@ class Solution:
             level = newLevel
 
 # 3rd solution
-# O(n) time | O(n) space
+# O((log(n))^2) time | O((log(n))^2) space
 class Solution:
     def minDays(self, n: int) -> int:
         @cache
@@ -51,3 +51,22 @@ class Solution:
             day = 1 + min((k % 2) + f(k//2), (k % 3) + f(k//3)) 
             return day
         return f(n)
+
+# 4th solution, Dijkstra
+# O((log(n))^2 * log(log(n))) time | O((log(n))^2) space
+class Solution:
+    def minDays(self, n: int) -> int:
+        dis = defaultdict(lambda: inf)
+        h = [(0, n)]
+        while True:
+            dx, x = heappop(h)
+            if x <= 1:
+                return dx + x
+            if dx > dis[x]:
+                continue
+            for d in 2, 3:
+                y = x // d
+                dy = dx + x % d + 1
+                if dy < dis[y]:
+                    dis[y] = dy
+                    heappush(h, (dy, y))
