@@ -39,3 +39,15 @@ class Solution:
                 visited.add(new)
                 newLevel.add(new)
             level = newLevel
+
+# 3rd solution
+# O(n) time | O(n) space
+class Solution:
+    def minDays(self, n: int) -> int:
+        @cache
+        def f(k):
+            if k <= 1:
+                return k
+            day = 1 + min((k % 2) + f(k//2), (k % 3) + f(k//3)) 
+            return day
+        return f(n)
