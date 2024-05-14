@@ -39,3 +39,26 @@ class Solution:
             self.ans = max(self.ans, val)
         
         return self.ans
+
+
+# 2nd solution
+# O(mn) time | O(mn) space
+class Solution:
+    def getMaximumGold(self, grid: List[List[int]]) -> int:
+        def dfs(i, j, v):
+            seen.add((i, j))
+            dp[i][j] = max(dp[i][j], v)
+            for dx, dy in [[-1, 0], [1, 0], [0, 1], [0, -1]]:
+                x = i + dx
+                y = j + dy
+                if 0 <= x < m and 0 <= y < n and grid[x][y] and (x, y) not in seen:
+                    dfs(x, y, v + grid[x][y])
+            seen.discard((i, j))
+        m, n = len(grid), len(grid[0])
+        dp = [[0] * n for _ in range(m)]
+        for i in range(m):
+            for j in range(n):
+                if grid[i][j]:
+                    seen = set()
+                    dfs(i, j, grid[i][j])
+        return max(val for row in dp for val in row)
