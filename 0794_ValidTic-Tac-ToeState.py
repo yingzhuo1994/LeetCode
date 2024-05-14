@@ -20,12 +20,11 @@ class Solution:
                     return True
             k = len(board)
             return all(board[i][i] == player for i in range(k)) or all(board[i][k-1-i] == player for i in range(k))
+        
         if countX < countO or countX - countO > 1:
             return False
         if checkWinner("X"):
-            if checkWinner("O"):
-                return False
-            elif countO == countX:
+            if checkWinner("O") or countO == countX:
                 return False
         elif checkWinner("O"):
             if countX != countO:
