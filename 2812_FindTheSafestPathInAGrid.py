@@ -1,5 +1,5 @@
 # 1st solution
-# O(n^2 * log(n)) time | O(mn) space
+# O(n^2 * log(n)) time | O(n^2) space
 class Solution:
     def maximumSafenessFactor(self, grid: List[List[int]]) -> int:
         n = len(grid)
@@ -45,3 +45,45 @@ class Solution:
             else:
                 end = mid
         return ans
+
+
+# 2nd solution
+# O(n^2 * log(n)) time | O(n^2) space
+class Solution:
+    def maximumSafenessFactor(self, grid: List[List[int]]) -> int:
+        n = len(grid)
+        q = []
+        dis = [[-1] * n for _ in range(n)]
+        for i, row in enumerate(grid):
+            for j, x in enumerate(row):
+                if x:
+                    q.append((i, j))
+                    dis[i][j] = 0
+
+        groups = [q]
+        while q:  # 多源 BFS
+            tmp = q
+            q = []
+            for i, j in tmp:
+                for x, y in (i + 1, j), (i - 1, j), (i, j + 1), (i, j - 1):
+                    if 0 <= x < n and 0 <= y < n and dis[x][y] < 0:
+                        q.append((x, y))
+                        dis[x][y] = len(groups)
+            groups.append(q)  # 相同 dis 分组记录
+
+        # 并查集模板
+        fa = list(range(n * n))
+        def find(x: int) -> int:
+            if fa[x] != x:
+                fa[x] = find(fa[x])
+            return fa[x]
+        
+        # groups的最后一个q为空
+        for d in range(len(groups) - 2, 0, -1):
+            for i, j in groups[d]:
+                for x, y in (i + 1, j), (i - 1, j), (i, j + 1), (i, j - 1):
+                    if 0 <= x < n and 0 <= y < n and dis[x][y] >= dis[i][j]:
+                        fa[find(x * n + y)] = find(i * n + j)
+            if find(0) == find(n * n - 1):  # 写这里判断更快些
+                return d
+        return 0
