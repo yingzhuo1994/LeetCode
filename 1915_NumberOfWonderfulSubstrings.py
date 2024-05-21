@@ -20,11 +20,12 @@ class Solution:
 # O(n) time | O(1) space
 class Solution:
     def wonderfulSubstrings(self, word: str) -> int:
-        count = [1] + [0] * 1024
+        d = (ord("j") - ord("a")) + 1
+        count = [1] + [0] * (1 << d)
         res = cur = 0
         for ch in word:
             cur ^= 1 << (ord(ch) - ord('a'))
             res += count[cur]
-            res += sum(count[cur ^ (1 << i)] for i in range(10))
+            res += sum(count[cur ^ (1 << i)] for i in range(d))
             count[cur] += 1
         return res
