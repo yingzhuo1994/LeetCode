@@ -22,17 +22,39 @@ class Solution:
 class Solution:
     def beautifulSubsets(self, nums: List[int], k: int) -> int:
         count = [Counter() for i in range(k)]
-        for a in nums:
-            count[a % k][a] += 1
+        for num in nums:
+            count[num % k][num] += 1
         res = 1
         for i in range(k):
             prev, dp0, dp1 = 0, 1, 0
-            for a in sorted(count[i]):
-                v = pow(2, count[i][a])
-                if prev + k == a:
+            for num in sorted(count[i]):
+                v = pow(2, count[i][num])
+                if prev + k == num:
                     dp0, dp1 = dp0 + dp1, dp0 * (v - 1)
                 else:
                     dp0, dp1 = dp0 + dp1, (dp0 + dp1) * (v - 1)
-                prev = a
+                prev = num
             res *= dp0 + dp1
         return res - 1
+
+# 3rd solution
+# O(n * log(n) + k) time | O(n + k) space
+class Solution:
+    def beautifulSubsets(self, nums: List[int], k: int) -> int:
+        groups = defaultdict(Counter)
+        for x in nums:
+            groups[x % k][x] += 1
+        ans = 1
+        for cnt in groups.values():
+            g = sorted(cnt.items())
+            m = len(g)
+            f = [0] * (m + 1)
+            f[0] = 1
+            f[1] = 1 << g[0][1]
+            for i in range(1, m):
+                if g[i][0] - g[i - 1][0] == k:
+                    f[i + 1] = f[i] + f[i - 1] * ((1 << g[i][1]) - 1)
+                else:
+                    f[i + 1] = f[i] << g[i][1]
+            ans *= f[m]
+        return ans - 1  # -1 去掉空集
