@@ -3,12 +3,9 @@
 class Solution:
     def mostCompetitive(self, nums: List[int], k: int) -> List[int]:
         stack = []
-        n = len(nums)
-        for i in range(n):
-            while len(stack) > max(k - (n - i), 0) and stack[-1] > nums[i]:
+        for i, num in enumerate(nums):
+            while stack and num < stack[-1] and len(stack) + len(nums) - i > k:
                 stack.pop()
-            stack.append(nums[i])
-
-        while len(stack) > k:
-            stack.pop()
+            if len(stack) < k:
+                stack.append(num)
         return stack
