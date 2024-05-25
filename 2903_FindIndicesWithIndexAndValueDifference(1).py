@@ -1,0 +1,10 @@
+# 1st solution
+# O(n^2) time | O(1) space
+class Solution:
+    def findIndices(self, nums: List[int], indexDifference: int, valueDifference: int) -> List[int]:
+        n = len(nums)
+        for i in range(n):
+            for j in range(i + indexDifference, n):
+                if abs(nums[i] - nums[j]) >= valueDifference:
+                    return [i, j]
+        return [-1, -1]
