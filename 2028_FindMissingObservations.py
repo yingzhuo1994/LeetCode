@@ -1,5 +1,5 @@
 # 1st solution
-# O(n) time | O(n) space
+# O(m + n) time | O(n) space
 class Solution:
     def missingRolls(self, rolls: List[int], mean: int, n: int) -> List[int]:
         m = len(rolls)
@@ -19,3 +19,14 @@ class Solution:
                 target -= q * val
                 k -= q
         return ans
+
+
+# 2nd solution
+# O(m + n) time | O(n) space
+class Solution:
+    def missingRolls(self, rolls: List[int], mean: int, n: int) -> List[int]:
+        rem = mean * (n + len(rolls)) - sum(rolls)
+        if not n <= rem <= n * 6:
+            return []
+        avg, extra = divmod(rem, n)
+        return [avg + 1] * extra + [avg] * (n - extra)
