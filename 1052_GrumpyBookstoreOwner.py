@@ -33,12 +33,9 @@ class Solution:
                 ans += customers[i]
                 customers[i] = 0
         
-        cur = 0
-        maxVal = 0
-        for i in range(n):
-            cur += customers[i]
-            if i >= minutes:
-                cur -= customers[i - minutes]
+        maxVal = cur = sum(customers[:minutes])
+        for i in range(minutes, n):
+            cur += customers[i] - customers[i - minutes]
             maxVal = max(maxVal, cur)
         
         return ans + maxVal
