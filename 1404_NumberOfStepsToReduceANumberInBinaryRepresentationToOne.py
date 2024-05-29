@@ -13,3 +13,17 @@ class Solution:
                 num >>= 1
         return step
 
+# 2nd solution
+# O(n) time | O(1) space
+class Solution:
+    def numSteps(self, s: str) -> int:
+        ans = 0
+        carry = 0
+        n = len(s)
+        for i in range(n-1, 0, -1):  # Except first digit
+            if int(s[i]) + carry == 1:  # Odd number
+                carry = 1
+                ans += 2  # 2 operations: Add 1 and divide by two
+            else:
+                ans += 1  # 1 operation: Divide by 2
+        return ans + carry
