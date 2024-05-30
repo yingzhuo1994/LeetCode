@@ -57,3 +57,27 @@ class Solution:
                 if preXOR[k] == preXOR[i-1]:
                     count += k - i
         return count
+
+
+# 4th solution
+# O(n) time | O(n) space
+class Solution:
+    def countTriplets(self, arr: List[int]) -> int:
+        n = len(arr)
+        preXOR = [0 for _ in range(n)]
+        x = 0
+        for i, num in enumerate(arr):
+            x ^= num
+            preXOR[i] = x
+
+        dic = {0: [0, 1]}
+        count = 0
+        for i, val in enumerate(preXOR):
+            if val not in dic:
+                dic[val] = [i + 1, 1]
+            else:
+                count += dic[val][1] * i - dic[val][0]
+                dic[val][0] += i + 1
+                dic[val][1] += 1
+        
+        return count
