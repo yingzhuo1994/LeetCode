@@ -63,16 +63,12 @@ class Solution:
 # O(n) time | O(n) space
 class Solution:
     def countTriplets(self, arr: List[int]) -> int:
-        n = len(arr)
-        preXOR = [0 for _ in range(n)]
-        x = 0
-        for i, num in enumerate(arr):
-            x ^= num
-            preXOR[i] = x
-
-        dic = {0: [0, 1]}
+        val = 0
         count = 0
-        for i, val in enumerate(preXOR):
+        dic = {0: [0, 1]}
+        
+        for i, num in enumerate(arr):
+            val ^= num
             if val not in dic:
                 dic[val] = [i + 1, 1]
             else:
