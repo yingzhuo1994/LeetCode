@@ -19,3 +19,13 @@ class Solution:
                     break
 
         return [a, b]
+
+
+# 2nd solution
+# O(n^2) time | O(1) space
+class Solution:
+    def findMissingAndRepeatedValues(self, grid: List[List[int]]) -> List[int]:
+        m = len(grid) ** 2
+        d1 = sum(x for row in grid for x in row) - m * (m + 1) // 2
+        d2 = sum(x * x for row in grid for x in row) - m * (m + 1) * (m * 2 + 1) // 6
+        return [(d2 // d1 + d1) // 2, (d2 // d1 - d1) // 2]
