@@ -1,4 +1,5 @@
 # 1st solution
+# O(n^2) time | O(n) space
 class Solution:
     def countPairsOfConnectableServers(self, edges: List[List[int]], signalSpeed: int) -> List[int]:
         n = len(edges) + 1
