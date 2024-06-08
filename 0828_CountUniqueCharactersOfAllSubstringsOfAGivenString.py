@@ -41,3 +41,23 @@ class Solution:
             left, right = index[ch]
             res += (right - left) * (len(s) - right)
         return res % (10**9 + 7)
+
+# 3rd solution
+# O(n) time | O(1) space
+class Solution:
+    def uniqueLetterString(self, s: str) -> int:
+        ans = 0
+        letters = set(list(s))
+        for letter in letters:
+            lst = [-1]
+            for i, ch in enumerate(s):
+                if ch == letter:
+                    lst.append(i)
+                    if len(lst) >= 3:
+                        ans += (lst[1] - lst[0]) * (lst[2] - lst[1])
+                        lst.pop(0)
+            lst.append(len(s))
+            if len(lst) >= 3:
+                ans += (lst[1] - lst[0]) * (lst[2] - lst[1])
+                lst.pop(0)
+        return ans
