@@ -15,4 +15,11 @@ class Solution:
                 count = max(count, dfs(i + 1, j - 1, target) + 1)
             return count
         n = len(nums)
-        return max(dfs(2, n-1, nums[0] + nums[1]), dfs(1, n-2, nums[0] + nums[n-1]), dfs(0, n-3, nums[n-1] + nums[n-2])) + 1
+        res1 = dfs(2, n-1, nums[0] + nums[1])
+        if res1 >= n // 2:
+            return res1 + 1
+        res2 = dfs(1, n-2, nums[0] + nums[n-1])
+        if res2 >= n // 2:
+            return res2 + 1
+        res3 = dfs(0, n-3, nums[n-1] + nums[n-2])
+        return max(res1, res2, res3) + 1
