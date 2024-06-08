@@ -1,9 +1,9 @@
 # 1st solution
 import itertools
 class Solution:
-    lowercase = set('abcdefghijklmnopqrstuvwxyz')
-    uppercase = set('ABCDEFGHIJKLMNOPQRSTUFVWXYZ')
-    digit = set('0123456789')
+    lowercase = set(string.ascii_lowercase)
+    uppercase = set(string.ascii_uppercase)
+    digit = set(string.digits)
     
     def strongPasswordChecker(self, s: str) -> int:
         characters = set(s)
@@ -109,3 +109,42 @@ class Solution:
                     
             r_swaps = sum([elem // 3 for elem in reps])
             return max(c_swaps, r_swaps) + (n - 20)
+
+
+# 3rd solution
+class Solution:
+    def strongPasswordChecker(self, password: str) -> int:
+        missing_type = 3
+        if any('a' <= c <= 'z' for c in password): missing_type -= 1
+        if any('A' <= c <= 'Z' for c in password): missing_type -= 1
+        if any(c.isdigit() for c in password): missing_type -= 1
+        
+        n = len(password)
+        change = 0
+        one = two = 0
+        p = 2
+        while p < n:
+            if password[p] == password[p-1] == password[p-2]:
+                length = 2
+                while p < n and password[p] == password[p-1]:
+                    length += 1
+                    p += 1
+                    
+                change += length // 3
+                if length % 3 == 0: one += 1
+                elif length % 3 == 1: two += 1
+            else:
+                p += 1
+        
+        if n < 6:
+            return max(missing_type, 6 - n)
+        elif n <= 20:
+            return max(missing_type, change)
+        else:
+            delete = n - 20
+            
+            change -= min(delete, one)
+            change -= min(max(delete - one, 0), two * 2) // 2
+            change -= max(delete - one - 2 * two, 0) // 3
+                
+            return delete + max(missing_type, change)
