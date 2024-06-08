@@ -61,3 +61,17 @@ class Solution:
                 ans += (lst[1] - lst[0]) * (lst[2] - lst[1])
                 lst.pop(0)
         return ans
+
+
+# 4th solution
+# O(n) time | O(1) space
+class Solution:
+    def uniqueLetterString(self, s: str) -> int:
+        ans = total = 0
+        last0, last1 = {}, {}
+        for i, c in enumerate(s):
+            total += i - 2 * last0.get(c, -1) + last1.get(c, -1)
+            ans += total
+            last1[c] = last0.get(c, -1)
+            last0[c] = i
+        return ans
