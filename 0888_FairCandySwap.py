@@ -11,6 +11,7 @@ class Solution:
             if idx < len(B) and 2 *(A[i] - B[idx]) == target:
                 return [A[i], B[idx]]
 
+
 # 2nd solution
 # O((m + n) * log(n)) time | O(n) space
 class Solution:
@@ -30,3 +31,18 @@ class Solution:
                 i = bisect.bisect_left(A, B[j] + target // 2)
                 if i < len(A) and 2 * (A[i] - B[j]) == target:
                     return [A[i], B[j]]
+
+
+# 3rd solution
+# O(n) time | O(m) space
+# where m = len(aliceSizes), n = len(bobSizes)
+class Solution:
+    def fairCandySwap(self, aliceSizes: List[int], bobSizes: List[int]) -> List[int]:
+        A = aliceSizes
+        B = bobSizes
+        diff = (sum(A) - sum(B)) // 2
+        A = set(A)
+        for b in set(B):
+            a = b + diff
+            if a in A:
+                return [a, b]
