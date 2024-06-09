@@ -151,3 +151,27 @@ class Solution:
             answer.pop()
             
         return ''.join(str(digit) for digit in reversed(answer))
+
+
+# 4th solution
+# O(mn) time | O(m + n) space
+# where n and m are the number of elements in num1 and num2 strings.
+class Solution:
+    def multiply(self, num1: str, num2: str) -> str:
+        if num1 == "0" or num2 == "0":
+            return "0"
+        
+        n = len(num1)
+        m = len(num2)
+        res = [0] * (n + m)
+        for i in reversed(range(n)):
+            for j in reversed(range(m)):
+                a = int(num1[i])
+                b = int(num2[j])
+                r = a * b + res[i + j + 1]
+                res[i + j + 1] = r % 10
+                res[i + j] += r // 10
+        
+        start = 1 if res[0] == 0 else 0
+        
+        return "".join(str(res[i]) for i in range(start, len(res)))
