@@ -1,6 +1,6 @@
+# 1st solution
+# O(n^2) time | O(n) space
 class Solution:
-    # 1st solution
-    # O(n^2) time | O(n) space
     def nextGreaterElement(self, nums1: List[int], nums2: List[int]) -> List[int]:
         result = [-1 for _ in nums1]
         for i in range(len(nums1)):
@@ -13,8 +13,9 @@ class Solution:
                     break
         return result
 
-    # 2nd solution
-    # O(n) time | O(n) space
+# 2nd solution
+# O(n) time | O(n) space
+class Solution:
     def nextGreaterElement(self, nums1: List[int], nums2: List[int]):
         stack, dic = [], {}
         for num in nums2:
