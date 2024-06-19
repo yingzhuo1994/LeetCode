@@ -49,4 +49,33 @@ class DisjointSet:
     def getSize(self, x):
         px = self.getParent(x)
         return self.size[px]
-    
+
+
+# 2nd solution
+# O(n * log(n)) time | O(n) space
+class Solution:
+    def minDays(self, bloomDay: List[int], m: int, k: int) -> int:
+        def enough(target):
+            count = 0
+            flowers = 0
+            for day in bloomDay:
+                if day <= target:
+                    flowers += 1
+                else:
+                    count += flowers // k
+                    flowers = 0
+            count += flowers // k
+            return count >= m
+        start = 1
+        end = max(bloomDay)
+        ans = float("inf")
+        while start <= end:
+            mid = start + (end - start) // 2
+            if enough(mid):
+                ans = min(ans, mid)
+                end = mid - 1
+            else:
+                start = mid + 1
+        if ans == float("inf"):
+            return -1
+        return ans
