@@ -30,3 +30,24 @@ class Solution:
         ans += countFunc(start, len(nums) - 1)    
             
         return ans
+
+
+# 2nd solution
+# O(n) time | O(1) space
+class Solution:
+    def numSubarrayBoundedMax(self, nums: List[int], left: int, right: int) -> int:
+        ans = 0
+        start = 0
+        lastValidIdx = -1
+
+        for i in range(len(nums)):
+            if nums[i] > right:
+                start = i + 1
+                lastValidIdx = -1
+                continue
+            elif nums[i] >= left:
+                lastValidIdx = i
+
+            ans += max(lastValidIdx - start + 1, 0)
+            
+        return ans
