@@ -38,3 +38,10 @@ class Solution:
                 queue.append(node)
             queue.popleft()
         return queue[0]
+
+
+# 3rd solution
+# O(n) time | O(n) space
+class Solution:
+    def findTheWinner(self, n: int, k: int) -> int:
+        return 1 if n == 1 else (k + self.findTheWinner(n - 1, k) - 1) % n + 1
