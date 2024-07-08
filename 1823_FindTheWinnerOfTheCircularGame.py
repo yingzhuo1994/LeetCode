@@ -45,3 +45,13 @@ class Solution:
 class Solution:
     def findTheWinner(self, n: int, k: int) -> int:
         return 1 if n == 1 else (k + self.findTheWinner(n - 1, k) - 1) % n + 1
+    
+
+# 4th solution
+# O(n) time | O(1) space
+class Solution:
+    def findTheWinner(self, n: int, k: int) -> int:
+        winner = 1
+        for i in range(2, n + 1):
+            winner = (k + winner - 1) % i + 1
+        return winner
