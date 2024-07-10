@@ -44,11 +44,10 @@ class Solution:
 
         for i in range(n):
             if not prefix[i]:
-                continue
-            for j in range(i, n):
+                break
+            for j in reversed(range(i, n)):
                 if not suffix[j]:
-                    continue
-
+                    break
                 if i == 0 or j == n - 1:
                     ans += 1
                 else:
