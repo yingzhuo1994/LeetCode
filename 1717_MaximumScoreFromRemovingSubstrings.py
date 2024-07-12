@@ -24,3 +24,27 @@ class Solution:
         ans = val1 + val2
 
         return ans
+
+# 2nd solution
+# O(n) time | O(1) space
+class Solution:
+    def maximumGain(self, s: str, x: int, y: int) -> int:
+        a = 'a'
+        b = 'b'
+        if x < y:
+            x, y = y, x
+            a, b = b, a
+        seen = Counter()
+        ans = 0
+        for c in s + 'x':
+            if c in 'ab':
+                if c == b and seen[a] > 0:
+                    ans += x
+                    seen[a] -= 1
+                else:
+                    seen[c] += 1
+            else:
+                ans += y * min(seen[a], seen[b])
+                seen = Counter()
+
+        return ans
