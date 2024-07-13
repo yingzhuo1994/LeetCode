@@ -4,7 +4,7 @@ class Solution:
     def canSortArray(self, nums: List[int]) -> bool:
         start = 0
         for i, num in enumerate(nums):
-            if bin(num).count("1") != bin(nums[start]).cont(1):
+            if bin(num).count("1") != bin(nums[start]).count("1"):
                 nums[start:i] = sorted(nums[start:i])
                 start = i
         if start != len(nums) - 1:
