@@ -1,5 +1,5 @@
 # 1st solution
-# O(V^2) time | O((V+E) * log(V))
+# O(n + m * log(m)) time | O(n + m)
 class Solution:
     def minimumTime(self, n: int, edges: List[List[int]], disappear: List[int]) -> List[int]:
         graph = [[] for _ in range(n)]
