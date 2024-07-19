@@ -12,3 +12,19 @@ class Solution:
             if scores[i] > scores[-1] - scores[i]:
                 return i
         return -1
+
+
+# 2nd solution
+# O(n) time | O(1) space
+class Solution:
+    def minimumLevels(self, possible: List[int]) -> int:
+        total = sum([1 if val == 1 else -1 for val in possible])
+        score = 0
+        for i in range(len(possible) - 1):
+            if possible[i] == 1:
+                score += 1
+            else:
+                score -= 1
+            if score > total - score:
+                return i + 1
+        return -1
