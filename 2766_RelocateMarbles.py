@@ -14,7 +14,8 @@ class Solution:
         return ans
 
 # 2nd solution
-# O(n * log(n)) time | O(n) space
+# O(n * log(n) + m) time | O(n) space
+# where n = len(nums), m = len(moveFrom)
 class Solution:
     def relocateMarbles(self, nums: List[int], moveFrom: List[int], moveTo: List[int]) -> List[int]:
         locations = {}
