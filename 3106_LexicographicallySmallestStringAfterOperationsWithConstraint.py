@@ -1,5 +1,5 @@
 # 1st solution
-# O(13^n) time | O(n) space
+# O(n) time | O(n) space
 # where n = len(s)
 class Solution:
     def getSmallestString(self, s: str, k: int) -> str:
@@ -19,3 +19,18 @@ class Solution:
                 if cost <= t:
                     return ch + dfs(idx + 1, t-cost)
         return dfs(0, k)
+
+# 2nd solution
+# O(n) time | O(n) space
+# where n = len(s)
+class Solution:
+    def getSmallestString(self, s: str, k: int) -> str:
+        s = list(s)
+        for i, c in enumerate(map(ord, s)):
+            dis = min(c - ord('a'), ord('z') - c + 1)
+            if dis > k:
+                s[i] = chr(c - k)
+                break
+            s[i] = 'a'
+            k -= dis
+        return ''.join(s)
