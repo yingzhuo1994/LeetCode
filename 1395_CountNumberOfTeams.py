@@ -19,7 +19,9 @@ class Solution:
 class Solution:
     def numTeams(self, rating: List[int]) -> int:
         ans = 0
-        for i, val in enumerate(rating):
+        n = len(rating)
+        for i in range(1, n - 1):
+            val = rating[i]
             left_low = 0
             left_high = 0
             for j in range(i):
@@ -30,7 +32,7 @@ class Solution:
 
             right_low = 0
             right_high = 0
-            for j in range(i + 1, len(rating)):
+            for j in range(i + 1, n):
                 if rating[j] < val:
                     right_low += 1
                 elif rating[j] > val:
