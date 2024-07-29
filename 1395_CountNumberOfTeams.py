@@ -40,3 +40,68 @@ class Solution:
             ans += left_low * right_high + left_high * right_low
 
         return ans
+
+
+# 3rd solution
+# O(n * log(n)) time | O(n) space
+class Solution:
+    def numTeams(self, rating: List[int]) -> int:
+        n = len(rating)
+        self.maxN = n + 2
+        self.c = [0 for _ in range(self.maxN)]
+        self.disc = rating[:]
+        self.disc.append(-1)
+        self.disc.sort()
+        iLess = [0 for _ in range(n)]
+        iMore = [0 for _ in range(n)]
+        kLess = [0 for _ in range(n)]
+        kMore = [0 for _ in range(n)]
+
+        for i in range(n):
+            id = self.getId(rating[i])
+            iLess[i] = self.get(id)
+            iMore[i] = self.get(n + 1) - self.get(id)
+            self.add(id, 1)
+        
+
+        self.c = [0 for _ in range(self.maxN)]
+        for i in reversed(range(n)):
+            id = self.getId(rating[i])
+            kLess[i] = self.get(id)
+            kMore[i] = self.get(n + 1) - self.get(id)
+            self.add(id, 1)
+        
+        ans = 0
+        for i in range(n):
+            ans += iLess[i] * kMore[i] + iMore[i] * kLess[i]
+        
+
+        return ans
+    
+    def getId(self, target):
+        low = 0
+        high = len(self.disc) - 1
+        while low < high:
+            mid = (high - low) // 2 + low
+            if self.disc[mid] < target:
+                low = mid + 1
+            else:
+                high = mid
+
+        return low
+    
+
+    def get(self, p):
+        r = 0
+        while p > 0:
+            r += self.c[p]
+            p -= self.lowbit(p)
+        return r
+
+    def add(self, p, v):
+        while p < self.maxN:
+            self.c[p] += v
+            p += self.lowbit(p)
+
+    def lowbit(self, x):
+        return x & (-x)
