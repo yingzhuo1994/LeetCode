@@ -40,3 +40,18 @@ class Solution:
             count = dp_b[i - 1] + dp_a[n-1] - dp_a[i - 1]
             ans = min(ans, count)
         return ans
+
+# 2nd
+# O(n) time | O(1) space
+class Solution:
+    def minimumDeletions(self, s: str) -> int:
+        n = len(s)
+        a_total = s.count("a")
+        a_count = 0
+        ans = float("inf")
+        for i in range(n + 1):
+            if i > 0 and s[i - 1] == "a":
+                a_count += 1
+            count = i - a_count + a_total - a_count
+            ans = min(ans, count)
+        return ans
