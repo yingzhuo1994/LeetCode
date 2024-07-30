@@ -21,7 +21,7 @@ class Solution:
         dfs(0, "a", 0)
         return self.ans
 
-# 2nd
+# 2nd solution
 # O(n) time | O(n) space
 class Solution:
     def minimumDeletions(self, s: str) -> int:
@@ -41,7 +41,7 @@ class Solution:
             ans = min(ans, count)
         return ans
 
-# 2nd
+# 3rd solution
 # O(n) time | O(1) space
 class Solution:
     def minimumDeletions(self, s: str) -> int:
@@ -55,3 +55,13 @@ class Solution:
             count = i - a_count + a_total - a_count
             ans = min(ans, count)
         return ans
+
+# 4th solution
+# O(n) time | O(1) space
+class Solution:
+    def minimumDeletions(self, s: str) -> int:
+        f = cnt_b = 0
+        for c in s:
+            if c == 'b': cnt_b += 1  # f 值不变
+            else: f = min(f + 1, cnt_b)
+        return f
