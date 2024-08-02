@@ -29,3 +29,14 @@ class Solution:
                 count += max(len(lst_2) - 1, 0)
 
         return ans
+
+# 2nd solution
+# O(mn) time | O(n) space
+class Solution:
+    def numberOfRightTriangles(self, grid: List[List[int]]) -> int:
+        col_sum = [sum(col) - 1 for col in zip(*grid)]  # 提前减一
+        ans = 0
+        for row in grid:
+            row_sum = sum(row) - 1
+            ans += row_sum * sum(cs for x, cs in zip(row, col_sum) if x)
+        return ans
