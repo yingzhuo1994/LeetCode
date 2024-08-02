@@ -31,7 +31,6 @@ class Solution:
         if k <= 1:
             return 0
         n = len(nums)
-        ans = n
         count = 0
         for i in range(k):
             if nums[i] == 1:
