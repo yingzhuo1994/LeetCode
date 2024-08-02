@@ -22,3 +22,23 @@ class Solution:
             i = ones.popleft()
             ones.append(i + n)
         return ans
+
+# 2nd solution
+# O(n) time | O(1) space
+class Solution:
+    def minSwaps(self, nums: List[int]) -> int:
+        k = nums.count(1)
+        if k <= 1:
+            return 0
+        n = len(nums)
+        ans = n
+        count = 0
+        for i in range(k):
+            if nums[i] == 1:
+                count += 1
+        ans = k - count
+        for i in range(1, n):
+            count -= nums[i - 1] == 1
+            count += nums[(i + k - 1) % n] == 1
+            ans = min(ans, k - count)
+        return ans
