@@ -5,10 +5,7 @@ class Solution:
         cnt = Counter(word)
         keys = list(cnt.keys())
         keys.sort(key=lambda v: cnt[v], reverse=True)
-        dic = {}
-        for i, ch in enumerate(keys):
-            dic[ch] = i // 8 + 1
         ans = 0
-        for ch in keys:
-            ans += cnt[ch] * dic[ch]
+        for i, ch in enumerate(keys):
+            ans += (i // 8 + 1) * cnt[ch]
         return ans
