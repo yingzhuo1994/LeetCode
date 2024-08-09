@@ -35,3 +35,24 @@ class Solution:
             if all(cnt1[num-min2] >= cnt2[num] for num in cnt2):
                 ans = min(ans, min2 - min1)
         return ans
+
+# 3rd solution
+# O(n * log(n)) time | O(n) space 
+class Solution:
+    def minimumAddedInteger(self, nums1: List[int], nums2: List[int]) -> int:
+        nums1.sort()
+        nums2.sort()
+        # 枚举保留 nums1[2] 或者 nums1[1] 或者 nums1[0]
+        # 倒着枚举是因为 nums1[i] 越大答案越小，第一个满足的就是答案
+        for i in range(2, 0, -1):
+            x = nums2[0] - nums1[i]
+            # 在 {nums1[i] + x} 中找子序列 nums2
+            j = 0
+            for v in nums1[i:]:
+                if nums2[j] == v + x:
+                    j += 1
+                    # nums2 是 {nums1[i] + x} 的子序列
+                    if j == len(nums2):
+                        return x
+        # 题目保证答案一定存在
+        return nums2[0] - nums1[0]
