@@ -19,4 +19,19 @@ class Solution:
         return ans
 
 
-
+# 2nd solution
+# O(n * log(n)) time | O(n) space 
+class Solution:
+    def minimumAddedInteger(self, nums1: List[int], nums2: List[int]) -> int:
+        nums1.sort()
+        cnt2 = Counter(nums2)
+        min2 = min(cnt2.keys())
+        ans = float("inf")
+        for idx in range(3):
+            if idx > 0 and nums1[idx] == nums1[idx - 1]:
+                continue
+            min1 = nums1[idx]
+            cnt1 = Counter([nums1[i] - min1 for i in range(idx, len(nums1))])
+            if all(cnt1[num-min2] >= cnt2[num] for num in cnt2):
+                ans = min(ans, min2 - min1)
+        return ans
