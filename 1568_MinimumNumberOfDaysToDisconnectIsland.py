@@ -30,15 +30,21 @@ class Solution:
             return 0
         degree = [[idx, len(graph[idx])] for idx in graph]
         # degree.sort(key=lambda v: v[1])
-        visited = set()
-        def dfs2(idx):
+        def dfs2(idx, visited):
             if idx in visited:
                 return
             visited.add(idx)
             for neig in graph[idx]:
-                dfs2(neig)
-        dfs2(degree[0][0])
-        if len(visited) != land:
+                dfs2(neig, visited)
+        def is_connected(visited):
+            for idx in graph:
+                if idx in visited:
+                    continue
+                dfs2(idx, visited)
+                break
+            return len(visited) == land
+        visited = set()
+        if not is_connected(visited):
             return 0
         levels = {d: [] for d in range(5)}
         for idx, d in degree:
@@ -49,11 +55,6 @@ class Solution:
         for i in range(len(degree)):
             idx = degree[i][0]
             visited = set([idx])
-            if i + 1 < len(degree):
-                dfs2(degree[i+1][0])
-            else:
-                dfs2(degree[i-1][0])
-            if len(visited) != land:
+            if not is_connected(visited):
                 return 1
         return 2
-        
