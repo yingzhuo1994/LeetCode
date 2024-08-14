@@ -43,3 +43,26 @@ class Node:
         self.value = value
         self.left = left
         self.right = right
+
+
+# 2nd solution
+# O(n + k) time | (n) space
+# where n = len(nums)
+class Solution:
+    def isArraySpecial(self, nums: List[int], queries: List[List[int]]) -> List[bool]:
+        n = len(nums)
+        arr = [0] * n
+        for i in range(n - 1):
+            arr[i] = (nums[i] ^ nums[i + 1]) & 1
+        
+        preSum = [1]
+        for v in arr:
+            preSum.append(preSum[-1] + v)
+        
+        def query(start, end):
+            if preSum[end] - preSum[start] == end - start:
+                return True
+            else:
+                return False
+        
+        return [query(start, end) for start, end in queries]
