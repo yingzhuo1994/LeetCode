@@ -19,7 +19,7 @@ class Solution:
             return val
 
         start = 0
-        end = 1 << 63
+        end = pow(10, 18)
         ans = 0
         while start < end:
             mid = start + (end - start) // 2
