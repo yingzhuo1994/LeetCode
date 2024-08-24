@@ -3,7 +3,5 @@
 class Solution:
     def findPermutationDifference(self, s: str, t: str) -> int:
         dic = {ch: i for i, ch in enumerate(s)}
-        ans = 0
-        for i, ch in enumerate(t):
-            ans += abs(i - dic[ch])
+        ans = sum(abs(i - dic[ch]) for i, ch in enumerate(t))
         return ans
