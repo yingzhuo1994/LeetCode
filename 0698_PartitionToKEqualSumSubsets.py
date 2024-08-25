@@ -1,4 +1,4 @@
-# 1st solution
+# 1st solution, TLE
 # O(k*2^n) time | O(n) space
 class Solution:
     def canPartitionKSubsets(self, nums: List[int], k: int) -> bool:
@@ -48,3 +48,37 @@ class Solution:
 
         return dp[-1] == 0
 
+
+# 3rd solution
+# O((2^n)^k) time | O((2^n)^k) space
+class Solution:
+    def canPartitionKSubsets(self, nums: List[int], k: int) -> bool:
+        n = len(nums)
+        total = sum(nums)
+        if total % k != 0:
+            return False
+        nums.sort(reverse=True)
+        target = total // k
+        if nums[0] > target:
+            return False
+        @cache
+        def dfs(i, mask, val):
+            if i == k:
+                return True
+            
+            for idx in range(n):
+                if (mask >> idx) & 1:
+                    continue
+                new = val + nums[idx]
+                newMask = mask | (1 << idx)
+                if new > target:
+                    continue
+                elif new < target:
+                    if dfs(i, newMask, new):
+                        return True
+                else:
+                    if dfs(i + 1, newMask, 0):
+                        return True
+            return False
+                
+        return dfs(0, 0, 0)
