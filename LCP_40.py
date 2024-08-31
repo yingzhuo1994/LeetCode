@@ -1,7 +1,7 @@
 # 1st solution
 # O(n * log(n)) time | O(n) space
 class Solution:
-    def maxmiumScore(self, cards: List[int], cnt: int) -> int:
+    def maximumScore(self, cards: List[int], cnt: int) -> int:
         cards.sort(reverse=True)
         curVal = sum(cards[:cnt])
         if not (curVal & 1):
