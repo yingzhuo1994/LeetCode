@@ -27,3 +27,14 @@ class Solution:
             if idx > nums[idx - 1] and (idx == n or nums[idx] > idx):
                 ans += 1
         return ans
+
+# 3rd solution
+# O(n * log(n)) time | O(n) space
+class Solution:
+    def countWays(self, nums: List[int]) -> int:
+        nums.sort()
+        ans = nums[0] > 0  # 一个学生都不选
+        for i, (x, y) in enumerate(pairwise(nums), 1):
+            if x < i < y:
+                ans += 1
+        return ans + 1  # 一定可以都选
