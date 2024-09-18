@@ -31,3 +31,27 @@ class Solution:
             val = check(array, bus)
             ans = max(ans, val)
         return ans
+
+
+# 2nd solution
+# O(n * log(n) + m * log(m)) time | O(n + m) space
+class Solution:
+    def latestTimeCatchTheBus(self, buses: List[int], passengers: List[int], capacity: int) -> int:
+        buses.sort()
+        passengers.sort()
+
+        # 模拟乘客上车
+        j = 0
+        for t in buses:
+            c = capacity
+            while c and j < len(passengers) and passengers[j] <= t:
+                j += 1
+                c -= 1
+
+        # 寻找插队时机
+        j -= 1
+        ans = buses[-1] if c else passengers[j]
+        while j >= 0 and ans == passengers[j]:  # 往前找没人到达的时刻
+            ans -= 1
+            j -= 1
+        return ans
