@@ -1,5 +1,6 @@
 # 1st solution
-# O(n * D * 2^D) time | O(n * 2^D) space
+# O(m * D * 2^D) time | O(m * 2^D) space
+# where m = len(str(n)), D = 10
 class Solution:
     def countSpecialNumbers(self, n: int) -> int:
         n = min(n, 9876543210)
