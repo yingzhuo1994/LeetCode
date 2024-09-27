@@ -42,3 +42,52 @@ class Solution:
             else:
                 end = mid - 1
         return n - length
+
+# 2nd solution
+# O(n) time | O(n) space
+class Solution:
+    def takeCharacters(self, s: str, k: int) -> int:
+        if k == 0:
+            return 0
+        n = len(s)
+        a_dict = {0: -1}
+        b_dict = {0: -1}
+        c_dict = {0: -1}
+
+        a = b = c = 0
+
+        for i, ch in enumerate(s):
+            if ch == "a":
+                a += 1
+            elif ch =="b":
+                b += 1
+            else:
+                c += 1
+            if a not in a_dict:
+                a_dict[a] = i
+            if b not in b_dict:
+                b_dict[b] = i
+            if c not in c_dict:
+                c_dict[c] = i
+        if a < k or b < k or c < k:
+            return -1
+
+        a_target = a - k
+        b_target = b - k
+        c_target = c - k
+
+        a = b = c = 0
+        x = y = z = -1
+        length = 0
+        for i, ch in enumerate(s):
+            if ch == "a":
+                a += 1
+                x = a_dict.get(a - a_target, -1)
+            elif ch =="b":
+                b += 1
+                y = b_dict.get(b - b_target, -1)
+            else:
+                c += 1
+                z = c_dict.get(c - c_target, -1)
+            length = max(length, i - max(x, y, z))
+        return n - length
