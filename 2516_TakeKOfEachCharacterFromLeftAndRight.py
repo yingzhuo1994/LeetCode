@@ -91,3 +91,21 @@ class Solution:
                 z = c_dict.get(c - c_target, -1)
             length = max(length, i - max(x, y, z))
         return n - length
+
+
+# 3rd solution
+# O(n) time | O(n) space
+class Solution:
+    def takeCharacters(self, s: str, k: int) -> int:
+        cnt = Counter(s)  # 一开始，把所有字母都取走
+        if any(cnt[c] < k for c in "abc"):
+            return -1  # 字母个数不足 k
+
+        mx = left = 0
+        for right, c in enumerate(s):
+            cnt[c] -= 1  # 移入窗口，相当于不取走 c
+            while cnt[c] < k:  # 窗口之外的 c 不足 k
+                cnt[s[left]] += 1  # 移出窗口，相当于取走 s[left]
+                left += 1
+            mx = max(mx, right - left + 1)
+        return len(s) - mx
