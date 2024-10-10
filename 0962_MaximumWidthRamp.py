@@ -21,3 +21,21 @@ class Solution:
             else:
                 end = mid - 1
         return ans
+
+# 2nd solution
+# O(n) time | O(n) space
+class Solution:
+    def maxWidthRamp(self, nums: List[int]) -> int:
+        n = len(nums)
+        maxWidth = 0
+
+        stack = []
+        for i, num in enumerate(nums):
+            if not stack or nums[stack[-1]] > num:
+                stack.append(i)
+
+        for i in reversed(range(n)):
+            while stack and nums[stack[-1]] <= nums[i]:
+                pos = stack.pop()
+                maxWidth = max(maxWidth, i - pos)
+        return maxWidth
