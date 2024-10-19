@@ -1,5 +1,6 @@
 # 1st solution
 # O(mn) time | O(m + n) space
+# where m = max(cnt)
 class Solution:
     def numberOfPermutations(self, n: int, requirements: List[List[int]]) -> int:
         MOD = 1_000_000_007
