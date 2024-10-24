@@ -21,3 +21,20 @@ class Solution:
                 return winner[0]
             q.appendleft(winner)
             q.append(loser)
+
+# 2nd solution
+# O(n) time | O(1) space
+class Solution:
+    def findWinningPlayer(self, skills: List[int], k: int) -> int:
+        n = len(skills)
+        winner = 0
+        cnt = 0
+        for i in range(1, n):
+            if skills[winner] > skills[i]:
+                cnt += 1
+            else:
+                winner = i
+                cnt = 1
+            if cnt >= k:
+                return winner
+        return winner
