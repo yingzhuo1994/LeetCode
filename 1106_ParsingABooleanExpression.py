@@ -48,3 +48,33 @@ class Solution:
             
         
         return helper(0, len(expression) - 1)
+
+
+# 2nd solution
+# O(n) time | O(n) space
+class Solution:
+    def parseBoolExpr(self, s: str) -> bool:
+        def calc(a, b, op):
+            x, y = a == 't', b == 't'
+            ans = x | y if op == '|' else x & y
+            return 't' if ans else 'f'
+        nums, ops = [], []
+        for c in s:
+            if c == ',':
+                continue
+            if c == 't' or c == 'f':
+                nums.append(c)
+            if c == '|' or c == '&' or c == '!':
+                ops.append(c)
+            if c == '(':
+                nums.append('-')
+            if c == ')':
+                op, cur = ops.pop(), ' '
+                while nums and nums[-1] != '-':
+                    top = nums.pop()
+                    cur = top if cur == ' ' else calc(cur, top, op)
+                if op == '!':
+                    cur = 't' if cur == 'f' else 'f'
+                nums.pop()
+                nums.append(cur)
+        return nums[-1] == 't'
