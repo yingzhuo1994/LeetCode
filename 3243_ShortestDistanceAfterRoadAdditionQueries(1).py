@@ -49,3 +49,21 @@ class Solution:
                 q.append(y)
                 dist[y] = dist[x] + 1
         return dist[n - 1]
+
+
+# 3rd solution
+# O(k(n + k)) time | O(n + k) space
+# where k = len(queries)
+class Solution:
+    def shortestDistanceAfterQueries(self, n: int, queries: List[List[int]]) -> List[int]:
+        prev = [[i - 1] for i in range(n)]
+        prev[0] = []
+        dp = [i for i in range(n)]
+        res = []
+        for (x, y) in queries:
+            prev[y].append(x)
+            for v in range(y, n):
+                for u in prev[v]:
+                    dp[v] = min(dp[v], dp[u] + 1)
+            res.append(dp[-1])
+        return res
