@@ -34,3 +34,18 @@ class Node:
         self.val = val
         self.prev = prev
         self.next = next
+
+
+# 2nd solution
+# O(n + k) time | O(n) space
+class Solution:
+    def shortestDistanceAfterQueries(self, n: int, queries: List[List[int]]) -> List[int]:
+        ans = []
+        nxt = list(range(1, n))
+        cnt = n - 1
+        for i, r in queries:
+            while nxt[i] < r:
+                cnt -= 1
+                nxt[i], i = r, nxt[i]
+            ans.append(cnt)
+        return ans
