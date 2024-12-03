@@ -10,3 +10,10 @@ class Solution:
         if b & 1:
             ans = not ans
         return ans
+
+
+# 2st solution
+# O(1) time | O(1) space
+class Solution:
+    def checkTwoChessboards(self, s: str, t: str) -> bool:
+        return (ord(s[0]) + ord(s[1])) % 2 == (ord(t[0]) + ord(t[1])) % 2
