@@ -20,3 +20,12 @@ class Solution:
             if num in visited:
                 return num
             visited.add(num)
+
+# 3rd solution
+# O(n) time | O(1) space
+class Solution:
+    def repeatedNTimes(self, nums: List[int]) -> int:
+        for i in range(len(nums)):
+            if nums[i] == nums[i - 1] or nums[i] == nums[i - 2]:
+                return nums[i]
+        return nums[0]
