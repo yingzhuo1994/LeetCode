@@ -27,6 +27,9 @@ class Solution:
                             if len(ans) > 0:
                                 return ans
                             lst.pop()
+                            return []
+                        elif val > target:
+                            return []
             else:
                 for j in range(idx + 1, n + 1):
                     val = int(num[idx:j])
