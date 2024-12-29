@@ -7,7 +7,8 @@ class Solution:
         for vote in votes:
             for i, ch in enumerate(vote):
                 if ch not in scores:
-                    scores[ch] = [0 for _ in range(len(vote))]
+                    scores[ch] = [0 for _ in range(len(vote) + 1)]
+                    scores[ch][-1] = ord("Z") - ord(ch)
                 scores[ch][i] += 1
         def compare(a, b):
             for v1, v2 in zip(scores[a], scores[b]):
@@ -15,7 +16,7 @@ class Solution:
                     return -1
                 elif v1 < v2:
                     return 1
-            return -1 if a < b else 1
+            return 0
                 
         ranks = list(scores.keys())
         ranks.sort(key=cmp_to_key(compare))
