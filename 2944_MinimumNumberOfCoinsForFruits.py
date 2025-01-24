@@ -32,3 +32,28 @@ class Solution:
             dp[i] = cost
             heappush(minHeap, [cost, i])
         return dp[0]
+
+
+# 3rd solution
+# O(n) time | O(n) space
+class Solution:
+    def minimumCoins(self, prices: List[int]) -> int:
+        n = len(prices)
+        if n == 1:
+            return prices[0]
+        dp = [float("inf")] * (n + 1)
+        dp[-1] = 0
+        dp[n - 1] = prices[-1]
+        stack = deque([n - 1])
+        for i in reversed(range(n - 1)):
+            while stack and stack[0] > i + (i + 1):
+                stack.popleft()
+            if stack:
+                cost = prices[i] + min(dp[stack[0]], dp[min(i + i + 2, n)])
+            else:
+                cost = prices[i] + dp[min(i + i + 2, n)]
+            dp[i] = cost
+            while stack and cost <= dp[stack[-1]]:
+                stack.pop() 
+            stack.append(i)
+        return dp[0]
