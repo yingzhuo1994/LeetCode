@@ -24,3 +24,23 @@ class Solution:
             ans[i] = array1[j]
             i += 1
         return ans
+
+# 2nd solution
+# O(n * log(n)) time | O(n) space
+class Solution:
+    def advantageCount(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        nums1.sort()
+
+        n = len(nums1)
+        ids = sorted(range(n), key=lambda i: nums2[i])
+
+        ans = [0] * n
+        left, right = 0, n - 1
+        for x in nums1:
+            if x > nums2[ids[left]]:
+                ans[ids[left]] = x  # 用下等马比下等马
+                left += 1
+            else:
+                ans[ids[right]] = x  # 用下等马比上等马
+                right -= 1
+        return ans
