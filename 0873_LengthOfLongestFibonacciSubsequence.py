@@ -38,3 +38,25 @@ class Solution:
                 if cnt > 2:
                     ans = max(ans, cnt)
         return ans
+
+
+# 3rd solution
+# O(n^2) time | O(n^2) space
+class Solution:
+    def lenLongestFibSubseq(self, arr: List[int]) -> int:
+        n = len(arr)
+        ans = 0
+        index_map = {num: i for i, num in enumerate(arr)}
+        dp = defaultdict(lambda: defaultdict(int))
+        
+        for i in range(n):
+            for j in range(i - 1, -1, -1):
+                if arr[i] - arr[j] >= arr[j]:
+                    break
+                t = index_map.get(arr[i] - arr[j], -1)
+                if t == -1:
+                    continue
+                dp[i][j] = max(3, dp[j][t] + 1)
+                ans = max(ans, dp[i][j])
+        
+        return ans
