@@ -1,6 +1,3 @@
-from tracemalloc import start
-
-
 # 1st solution
 # O(n) time | O(1) space
 class Solution:
@@ -17,4 +14,4 @@ class Solution:
             if count <= 2:
                 nums[startIdx] = num
                 startIdx += 1
-        return nums
+        return startIdx
