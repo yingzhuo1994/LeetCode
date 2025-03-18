@@ -27,3 +27,19 @@ class Solution:
             else:
                 end = mid - 1
         return ans
+
+# 2nd solution
+# O(n) time | O(1) space
+class Solution:
+    def longestNiceSubarray(self, nums: List[int]) -> int:
+        mask = 0
+        start = 0
+        ans = 1
+        n = len(nums)
+        for i in range(n):
+            while mask & nums[i] > 0:
+                mask ^= nums[start]
+                start += 1
+            mask |= nums[i]
+            ans = max(ans, i - start + 1)
+        return ans
