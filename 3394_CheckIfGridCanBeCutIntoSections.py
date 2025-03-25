@@ -1,30 +1,24 @@
 # 1st solution
-# O(mn) time | O(mn) space
+# O(n * log(n)) time | O(n)
 class Solution:
-    def differenceOfDistinctValues(self, grid: List[List[int]]) -> List[List[int]]:
-        m, n = len(grid), len(grid[0])
-        topLeft = [[0 for _ in range(n)] for _ in range(m)]
-        bottomRight = [[0 for _ in range(n)] for _ in range(m)]
-        ans = [[0 for _ in range(n)] for _ in range(m)]
+    def checkValidCuts(self, n: int, rectangles: List[List[int]]) -> bool:
+        horizontals = []
+        verticals = []
+        for x1, y1, x2, y2 in rectangles:
+            horizontals.append([x1, x2])
+            verticals.append([y1, y2])
+        horizontals.sort(key=lambda v: [v[0], -v[1]])
+        verticals.sort(key=lambda v: [v[0], -v[1]])
 
-        for d in range(-n, m):
-            values = set()
-            for i in reversed(range(m)):
-                j = i - d
-                if 0 <= j < n:
-                    topLeft[i][j] = len(values)
-                    values.add(grid[i][j])
-
-        for d in range(-n, m):
-            values = set()
-            for i in range(m):
-                j = i - d
-                if 0 <= j < n:
-                    bottomRight[i][j] = len(values)  
-                    values.add(grid[i][j])
+        def check(intervals):
+            cnt = 0
+            last = intervals[0][1]
+            for a, b in intervals:
+                if a >= last:
+                    cnt += 1
+                    last = b
+                elif b >= last:
+                    last = b
+            return cnt >= 2
         
-        for i in range(m):
-            for j in range(n):
-                ans[i][j] = abs(topLeft[i][j] - bottomRight[i][j])
-        
-        return ans
+        return check(horizontals) or check(verticals)
