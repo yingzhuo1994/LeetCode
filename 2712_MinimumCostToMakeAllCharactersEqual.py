@@ -45,3 +45,15 @@ class Solution:
                 val1 = left1[i-1] + right1[i+1]
                 ans = min(ans, val0, val1)
         return ans
+
+
+# 2nd solution
+# O(n) time | O(1) space
+class Solution:
+    def minimumCost(self, s: str) -> int:
+        n = len(s)
+        ans = 0
+        for i in range(1, n):
+            if s[i - 1] != s[i]:
+                ans += min(i, n - i)
+        return ans
