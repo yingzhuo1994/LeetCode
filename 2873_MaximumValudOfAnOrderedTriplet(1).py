@@ -28,3 +28,14 @@ class Solution:
             val = (val1[i - 1] - nums[i]) * val3[i + 1]
             ans = max(ans, val)
         return ans
+    
+# 3rd solution
+# O(n) time | O(1) space
+class Solution:
+    def maximumTripletValue(self, nums: List[int]) -> int:
+        res = maxa = maxab = 0
+        for a in nums:
+            res = max(res, maxab * a)
+            maxab = max(maxab, maxa - a)
+            maxa = max(maxa, a)
+        return res
