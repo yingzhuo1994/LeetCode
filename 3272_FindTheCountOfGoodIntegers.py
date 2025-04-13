@@ -1,5 +1,6 @@
 # 1st solution
 # O(10^m * n * log(n)) time | O(10^m * n) space
+# where m = (n - 1) // 2
 class Solution:
     def countGoodIntegers(self, n: int, k: int) -> int:
         fac = [factorial(i) for i in range(n + 1)]
