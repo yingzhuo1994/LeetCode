@@ -9,3 +9,9 @@ class Solution:
                 if not self.divisorGame(val):
                     return True
         return False
+
+# 2nd solution
+# O(1) time | O(1) space
+class Solution:
+    def divisorGame(self, n: int) -> bool:
+        return n % 2 == 0
