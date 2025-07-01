@@ -2,18 +2,13 @@
 # O(n) time | O(1) space
 class Solution:
     def possibleStringCount(self, word: str) -> int:
-        ans = 0
+        ans = len(word)
         last = word[0]
-        cnt = 0
         for ch in word:
-            if ch == last:
-                cnt += 1
-            else:
-                ans += cnt - 1
-                cnt = 1
+            if ch != last:
+                ans -= 1
                 last = ch
-        ans += cnt - 1
-        return ans + 1
+        return ans
 
 
 # 2nd solution
