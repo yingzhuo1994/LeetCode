@@ -14,3 +14,10 @@ class Solution:
                 last = ch
         ans += cnt - 1
         return ans + 1
+
+
+# 2nd solution
+# O(n) time | O(1) space
+class Solution:
+    def possibleStringCount(self, s: str) -> int:
+        return len(s) - len(list(groupby(s))) + 1
