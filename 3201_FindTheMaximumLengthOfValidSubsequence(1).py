@@ -45,3 +45,16 @@ class Solution:
                 even += 1
         ans = max(ans, odd, even)
         return ans
+
+# 2nd solution
+# O(n) time | O(1) space
+class Solution:
+    def maximumLength(self, nums: List[int]) -> int:
+        ans = 0
+        for m in range(2):
+            f = [0, 0]
+            for x in nums:
+                x %= 2
+                f[x] = f[m - x] + 1
+            ans = max(ans, max(f))
+        return ans
