@@ -12,17 +12,17 @@ class Solution:
         dp = [[] for _ in range(n)]
 
         for i in range(n - L + 1):
-            word = s[i:i+L]
+            word = s[i : i + L]
             if word in wordDic:
                 dp[i].extend(wordDic[word])
-        
+
         ans = []
         for i in range(n):
             visited = [False] * len(words)
             if self.dfs(words, dp, i, visited):
                 ans.append(i)
         return ans
-    
+
     def dfs(self, words, dp, idx, visited):
         k = len(words)
         L = len(words[0])
@@ -39,6 +39,7 @@ class Solution:
             visited[i] = False
         return False
 
+
 # 2nd solution
 # O(n) time | O(n) space
 class Solution:
@@ -48,10 +49,10 @@ class Solution:
         if n < L:
             return []
         wordDic = collections.Counter(words)
-        dp = ['' for _ in range(n)]
+        dp = ["" for _ in range(n)]
 
         for i in range(n - L + 1):
-            word = s[i:i+L]
+            word = s[i : i + L]
             if word in wordDic:
                 dp[i] = word
         k = len(words)
@@ -82,7 +83,3 @@ class Solution:
                 start += L
                 end += L
         return ans
-
-            
-                        
-            
